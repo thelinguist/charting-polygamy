@@ -2,11 +2,11 @@ import {FileTypes} from './types'
 import {createKnowledgeTree} from './steps/createKnowledgeTree'
 import {createTimeline} from './steps/createTimeline'
 import {chart} from './steps/chart'
-import {createDB} from './steps/createDB'
+import {getFacts} from './steps/createDB'
 import {checkIfPolygamous} from './steps/checkIfPolygamous'
 
-export const runProgram = (inputFile: string, fileFormat: FileTypes|string, patriarchName?: string, debugMode?: boolean) => {
-    const families = createDB(inputFile, fileFormat, patriarchName)
+export const runProgram = (fileContents: string, fileFormat: FileTypes, patriarchName?: string, debugMode?: boolean) => {
+    const families = getFacts(fileContents, fileFormat, patriarchName)
     // console.log(UserIntervention.getIssues())
     let counter = 0
     for (const family of families) {

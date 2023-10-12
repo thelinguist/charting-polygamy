@@ -1,13 +1,11 @@
 import {PatriarchalFamily, FactRecord, GedcomTree} from '../../types'
-import fs from 'fs'
 import {parse} from 'parse-gedcom'
 import {mapDatabase} from './database'
 import {dedupeFacts} from '../dedupe'
 import {getFamilies} from './getFamilies'
 
-export const parseGedcom = (fileName: string, patriarchToFind?: string): PatriarchalFamily[] => {
-    const file = fs.readFileSync(fileName)
-    const records = parse(file.toString()) as GedcomTree
+export const parseGedcom = (fileContents: string, patriarchToFind?: string): PatriarchalFamily[] => {
+    const records = parse(fileContents) as GedcomTree
     const database = mapDatabase(records.children)
     // const database = pl.DataFrame(records.children)
     // database.describe()

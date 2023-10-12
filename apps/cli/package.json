@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev:csv": "ts-node src/cli.ts facts/brigham-young.csv -n 'Brigham Young'",
-    "dev:one": "ts-node src/cli.ts ./Family\\ Tree.ged -n 'Brigham Young'",
-    "dev:localTree": "ts-node src/cli.ts ../../Family\\ Tree.ged",
+    "dev:csv": "ts-node src/main.ts facts/brigham-young.csv -n 'Brigham Young'",
+    "dev:one": "ts-node src/main.ts ./Family\\ Tree.ged -n 'Brigham Young'",
+    "dev:localTree": "ts-node src/main.ts ../../Family\\ Tree.ged",
     "build": "echo 'Add build script here'",
     "test": "vitest",
     "lint": "echo 'Add lint script here'"
@@ -13,15 +13,16 @@
   "dependencies": {
     "commander": "^11.0.0",
     "figlet": "^1.6.0",
-    "lib": "workspace:*"
+    "lib": "workspace:*",
+    "papaparse": "^5.4.0"
   },
   "devDependencies": {
-    "@vitest/coverage-c8": "^0.31.4",
     "@types/node": "^18.14.6",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.2.2",
-    "vitest": "^0.34.6",
+    "@vitest/coverage-c8": "^0.31.4",
     "eslint-config-custom": "workspace:*",
-    "tsconfig": "workspace:*"
+    "ts-node": "^10.9.1",
+    "tsconfig": "workspace:*",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
   }
 }

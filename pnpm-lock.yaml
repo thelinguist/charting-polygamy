@@ -32,6 +32,9 @@ importers:
       lib:
         specifier: workspace:*
         version: link:../../packages/lib
+      papaparse:
+        specifier: ^5.4.0
+        version: 5.4.1
     devDependencies:
       '@types/node':
         specifier: ^18.14.6
@@ -103,9 +106,6 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
-      ui:
-        specifier: workspace:*
-        version: link:../../packages/ui
     devDependencies:
       '@next/eslint-plugin-next':
         specifier: ^13.4.19

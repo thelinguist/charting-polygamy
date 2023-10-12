@@ -1,9 +1,18 @@
 #!/usr/bin/env ts-node
 
 import {Command} from 'commander'
-import packageJson from '../package.json'
-import {splash} from './splash'
 import {runProgram} from 'lib'
+import packageJson from '../package.json'
+import {splash} from './utils/splash'
+import {parseFile} from './utils/processFile'
+import {determineFormat} from './utils/determineFormat'
+
+interface CommandOpts {
+    factsFile: string
+    name: string
+    fileFormat: string
+    debug: boolean
+}
 
 
 const program = new Command()
@@ -16,8 +25,12 @@ program
     .option("-d, --debug", "print the chart output to the console instead")
     .parse(process.argv)
 
-const options = program.opts()
+const options = program.opts<CommandOpts>()
 
 splash()
 
-runProgram(program.args[0], options.factsFile, options.name, options.debug)
+const [file] = program.args
+const fileContents = parseFile(file)
+const fileFormat = determineFormat(options.fileFormat, file)
+
+runProgram(fileContents, fileFormat, options.name, options.debug)
