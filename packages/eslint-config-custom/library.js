@@ -30,5 +30,8 @@ module.exports = {
       },
     },
   },
+  rules: {
+      "@typescript-eslint/ban-ts-ignore": "off"
+  },
   ignorePatterns: ["node_modules/", "dist/"],
 };

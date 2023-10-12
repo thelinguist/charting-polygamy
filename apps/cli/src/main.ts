@@ -1,11 +1,14 @@
 #!/usr/bin/env ts-node
 
 import {Command} from 'commander'
-import {runProgram} from 'lib'
+import {getTimelinesForMermaid} from 'lib'
 import packageJson from '../package.json'
 import {splash} from './utils/splash'
 import {parseFile} from './utils/processFile'
 import {determineFormat} from './utils/determineFormat'
+import {getFactoids} from 'lib/src/util'
+import {saveToFile} from './utils/saveToFile'
+import {stdout} from './utils/stdout'
 
 interface CommandOpts {
     factsFile: string
@@ -33,4 +36,13 @@ const [file] = program.args
 const fileContents = parseFile(file)
 const fileFormat = determineFormat(options.fileFormat, file)
 
-runProgram(fileContents, fileFormat, options.name, options.debug)
+const timelines = getTimelinesForMermaid(fileContents, fileFormat, options.name)
+
+for (const patriarch in timelines) {
+    if (!options.debug) {
+        const filename = `${patriarch}.md`
+        saveToFile(timelines[patriarch], filename, getFactoids())
+    } else {
+        stdout(timelines[patriarch])
+    }
+}
