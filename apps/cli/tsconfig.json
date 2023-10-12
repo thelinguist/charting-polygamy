@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "lib": ["DOM", "DOM.Iterable", "es2022"],
+    "outDir": "dist",
+    "strict": true,
+    "target": "es2022",
+    "module": "commonjs",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "resolveJsonModule": true,
+    "jsx": "react-jsx"
+  },
+  "exclude": ["charting-polygamy","output","facts","coverage"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
