@@ -1,0 +1,32 @@
+.markdown h1, .markdown h2, .markdown p {
+  margin: 1em 0;
+}
+
+.markdown ol {
+  margin-left: 2em;
+}
+
+.markdown h1 {
+  margin: 0.5em 0;
+  font-size: 32pt;
+}
+
+.markdown a {
+  color:rgb(var(--color-primary-100));
+  text-decoration: underline;
+  font-size: 15pt;
+  padding: .5em;
+  margin: 1em;
+  border-radius: var(--border-radius);
+  background: rgba(var(--card-rgb), 0);
+  border: 1px solid rgba(var(--card-border-rgb), 0);
+  transition: background 200ms, border 200ms;
+}
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .markdown a:hover {
+    background: rgba(var(--card-rgb), 0.1);
+    border: 1px solid rgba(var(--card-border-rgb), 0.15);
+  }
+}

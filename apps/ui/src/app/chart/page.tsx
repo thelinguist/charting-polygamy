@@ -1,13 +1,12 @@
-import styles from '../page.module.css'
-
 export default function Chart() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <h1>
-          Intro
-        </h1>
-      </div>
-    </main>
-  )
+    return (
+        <div>
+            <h1>Overview</h1>
+            <ol>
+                <li>Intro</li>
+                <li>Upload</li>
+                <li></li>
+            </ol>
+        </div>
+    )
 }
