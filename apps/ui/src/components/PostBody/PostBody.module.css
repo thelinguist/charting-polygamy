@@ -23,6 +23,13 @@
   transition: background 200ms, border 200ms;
 }
 
+@media (prefers-color-scheme: light) {
+  .markdown a {
+    color: rgb(var(--color-surface-mixed-100));
+    background: rgb(var(--color-primary-500));
+  }
+}
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .markdown a:hover {
