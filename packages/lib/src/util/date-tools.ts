@@ -1,7 +1,7 @@
-import {format, parse} from 'date-fns'
-import {UserIntervention} from './user-intervention'
-import {FactRecord} from '../types'
-import assumptions from '../assumptions'
+import { format, parse } from "date-fns"
+import { UserIntervention } from "./user-intervention"
+import { FactRecord } from "../types"
+import assumptions from "../assumptions"
 
 const danishMay = /[Mm]aj /
 const altSeptember = /[Ss]ept /
@@ -21,20 +21,24 @@ const monthFirstMatcher = /\w{3,9} \d{1,2} \d{4}/
  * @param locale
  * @param existingFact
  */
-export const parseTextDate = (text: string, existingFact: Partial<FactRecord>, locale?: string): Date => {
-    if (locale && locale !== 'en-US') {
+export const parseTextDate = (
+    text: string,
+    existingFact: Partial<FactRecord>,
+    locale?: string,
+): Date => {
+    if (locale && locale !== "en-US") {
         throw new Error(`${locale} not implemented`)
     }
 
-    text = text.replaceAll(/[,.]/g,'').toLowerCase()
+    text = text.replaceAll(/[,.]/g, "").toLowerCase()
 
     if (yearOnly.test(text)) {
         text = `1 jan ${text}`
         UserIntervention.addIssue({
             canMakeAssumption: true,
             fact: existingFact,
-            issueWith: 'Date',
-            reason: `only year specified. assuming ${text}`
+            issueWith: "Date",
+            reason: `only year specified. assuming ${text}`,
         })
     }
 
@@ -44,8 +48,8 @@ export const parseTextDate = (text: string, existingFact: Partial<FactRecord>, l
         UserIntervention.addIssue({
             canMakeAssumption: true,
             fact: existingFact,
-            issueWith: 'Date',
-            reason: `approximate year specified. assuming ${text}`
+            issueWith: "Date",
+            reason: `approximate year specified. assuming ${text}`,
         })
     }
     if (missingDate.test(text)) {
@@ -53,8 +57,8 @@ export const parseTextDate = (text: string, existingFact: Partial<FactRecord>, l
         UserIntervention.addIssue({
             canMakeAssumption: true,
             fact: existingFact,
-            issueWith: 'Date',
-            reason: `no date specified. assuming ${text}`
+            issueWith: "Date",
+            reason: `no date specified. assuming ${text}`,
         })
     }
     if (multiDate.test(text)) {
@@ -63,8 +67,8 @@ export const parseTextDate = (text: string, existingFact: Partial<FactRecord>, l
         UserIntervention.addIssue({
             canMakeAssumption: true,
             fact: existingFact,
-            issueWith: 'Date',
-            reason: `many dates specified: ${oldText}. assuming first one: ${text}`
+            issueWith: "Date",
+            reason: `many dates specified: ${oldText}. assuming first one: ${text}`,
         })
     }
     if (altDate.test(text)) {
@@ -73,25 +77,24 @@ export const parseTextDate = (text: string, existingFact: Partial<FactRecord>, l
         UserIntervention.addIssue({
             canMakeAssumption: true,
             fact: existingFact,
-            issueWith: 'Date',
-            reason: `alternative date specified: ${oldText}. assuming first one: ${text}`
+            issueWith: "Date",
+            reason: `alternative date specified: ${oldText}. assuming first one: ${text}`,
         })
     }
 
     if (danishMay.test(text)) {
-        text = text.replace(danishMay, 'may ')
-    }
-    else if (altSeptember.test(text)) {
-        text = text.replace(altSeptember, 'sep ')
+        text = text.replace(danishMay, "may ")
+    } else if (altSeptember.test(text)) {
+        text = text.replace(altSeptember, "sep ")
     }
 
     if (dateFirstMatcher.test(text)) {
-        return parse(text, 'd MMMM yyyy', new Date())
+        return parse(text, "d MMMM yyyy", new Date())
     } else if (monthFirstMatcher.test(text)) {
-        return parse(text, 'MMMM d yyyy', new Date())
+        return parse(text, "MMMM d yyyy", new Date())
     } else {
         throw new Error(`unrecognizable date format ${text}`)
     }
 }
 
-export const dateToMMDDYYYY = (date: Date) => format(date, 'MM/dd/yyyy')
+export const dateToMMDDYYYY = (date: Date) => format(date, "MM/dd/yyyy")

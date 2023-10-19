@@ -1,22 +1,29 @@
-import {FactRecord, GedcomFamilyRelationFact, GedcomIndividual, GedcomType, LifeEventEnum} from '../../types'
 import {
-    GedcomDatabase
-} from './database'
-import {gatherFacts} from './individual'
-import {UserIntervention} from '../user-intervention'
+    FactRecord,
+    GedcomFamilyRelationFact,
+    GedcomIndividual,
+    GedcomType,
+    LifeEventEnum,
+} from "../../types"
+import { GedcomDatabase } from "./database"
+import { gatherFacts } from "./individual"
+import { UserIntervention } from "../user-intervention"
 import {
     getIndividualName,
     getMatriarchFromFamily,
     getPatriarchFromFamily,
-    identifyMultiPartnerPatriarchs
-} from './queries'
+    identifyMultiPartnerPatriarchs,
+} from "./queries"
 
 interface PatriarchData {
-    patriarch: GedcomIndividual,
+    patriarch: GedcomIndividual
     families: FactRecord[][]
 }
 
-export const getFamilies = (database: GedcomDatabase, patriarchToFind?: string): Record<string, PatriarchData> => {
+export const getFamilies = (
+    database: GedcomDatabase,
+    patriarchToFind?: string,
+): Record<string, PatriarchData> => {
     const patriarchData: Record<string, PatriarchData> = {}
     const familyIds = getCandidatesFamilyIds(database)
     for (const id of familyIds) {
@@ -34,19 +41,24 @@ export const getFamilies = (database: GedcomDatabase, patriarchToFind?: string):
             console.warn(`the family ${id} has no name for husband, skipping`)
             continue
         }
-        if (patriarchToFind && patriarchName.toLowerCase() !== patriarchToFind.toLowerCase()) {
+        if (
+            patriarchToFind &&
+            patriarchName.toLowerCase() !== patriarchToFind.toLowerCase()
+        ) {
             continue
         }
 
         const matriarch = getMatriarchFromFamily(database, family)
         if (!matriarch) {
-            console.warn(`the family of ${patriarchName}, ${id}, has no wife, skipping`)
+            console.warn(
+                `the family of ${patriarchName}, ${id}, has no wife, skipping`,
+            )
             continue
         }
         if (patriarchName && !patriarchData[patriarchName]) {
             patriarchData[patriarchName] = {
                 patriarch,
-                families: []
+                families: [],
             }
         }
         const matriarchName = getIndividualName(matriarch)
@@ -57,18 +69,46 @@ export const getFamilies = (database: GedcomDatabase, patriarchToFind?: string):
 
         const factsAboutFamily: FactRecord[] = []
 
-        factsAboutFamily.push(...gatherFacts(patriarch, patriarchName, matriarchName, family, true))
-        factsAboutFamily.push(...processOtherFamilies(matriarch, matriarchName, database, id))
-        factsAboutFamily.push(...gatherFacts(matriarch, matriarchName, patriarchName, family, false))
+        factsAboutFamily.push(
+            ...gatherFacts(
+                patriarch,
+                patriarchName,
+                matriarchName,
+                family,
+                true,
+            ),
+        )
+        factsAboutFamily.push(
+            ...processOtherFamilies(matriarch, matriarchName, database, id),
+        )
+        factsAboutFamily.push(
+            ...gatherFacts(
+                matriarch,
+                matriarchName,
+                patriarchName,
+                family,
+                false,
+            ),
+        )
 
-        const marriageRecordMissing = !factsAboutFamily.find(fact =>
-            fact.Event === LifeEventEnum.Marriage
-            && fact.Name === patriarchName
-            && fact['Second Party'] === matriarchName)
+        const marriageRecordMissing = !factsAboutFamily.find(
+            (fact) =>
+                fact.Event === LifeEventEnum.Marriage &&
+                fact.Name === patriarchName &&
+                fact["Second Party"] === matriarchName,
+        )
 
         if (marriageRecordMissing) {
-            UserIntervention.addIssue({ fact: {}, issueWith: 'Event', reason: `no marriage data found for ${patriarchName} & ${matriarchName}. This marriage will be skipped in the output` })
-            factsAboutFamily.push({ Name: patriarchName, 'Second Party': matriarchName, Event: LifeEventEnum.Marriage })
+            UserIntervention.addIssue({
+                fact: {},
+                issueWith: "Event",
+                reason: `no marriage data found for ${patriarchName} & ${matriarchName}. This marriage will be skipped in the output`,
+            })
+            factsAboutFamily.push({
+                Name: patriarchName,
+                "Second Party": matriarchName,
+                Event: LifeEventEnum.Marriage,
+            })
         }
 
         patriarchData[patriarchName].families.push(factsAboutFamily)
@@ -81,37 +121,65 @@ export const getFamilies = (database: GedcomDatabase, patriarchToFind?: string):
  * @param database
  */
 const getCandidatesFamilyIds = (database: GedcomDatabase) => {
-    const multiPartnerPatriarchs = Object.values(database.individual).filter(identifyMultiPartnerPatriarchs)
-    return multiPartnerPatriarchs.map(individual => individual.children
-        .filter(fact => fact.type === GedcomType.FamilySpouseRelation)
-        .map((fact) => (fact as unknown as GedcomFamilyRelationFact).data.pointer)).flat()
+    const multiPartnerPatriarchs = Object.values(database.individual).filter(
+        identifyMultiPartnerPatriarchs,
+    )
+    return multiPartnerPatriarchs
+        .map((individual) =>
+            individual.children
+                .filter((fact) => fact.type === GedcomType.FamilySpouseRelation)
+                .map(
+                    (fact) =>
+                        (fact as unknown as GedcomFamilyRelationFact).data
+                            .pointer,
+                ),
+        )
+        .flat()
 }
 
-const processOtherFamilies = (matriarch: GedcomIndividual, matriarchName: string, database, familyId: string): FactRecord[] => {
-    const matriarchUnions = matriarch.children.filter(fact => fact.type === GedcomType.FamilySpouseRelation)
+const processOtherFamilies = (
+    matriarch: GedcomIndividual,
+    matriarchName: string,
+    database,
+    familyId: string,
+): FactRecord[] => {
+    const matriarchUnions = matriarch.children.filter(
+        (fact) => fact.type === GedcomType.FamilySpouseRelation,
+    )
     if (matriarchUnions.length > 1) {
         const otherFamiliesFacts: FactRecord[] = []
 
         for (const union of matriarchUnions) {
             const otherFamilyId = union.data.pointer
             if (otherFamilyId && otherFamilyId !== familyId) {
-
                 const otherFamily = database.families[otherFamilyId]
                 if (!otherFamily) {
                     break
                 }
                 const patriarch = getPatriarchFromFamily(database, otherFamily)
                 if (!patriarch) {
-                    console.warn(`the family ${otherFamilyId} has no husband, skipping`)
+                    console.warn(
+                        `the family ${otherFamilyId} has no husband, skipping`,
+                    )
                     break
                 }
                 const patriarchName = getIndividualName(patriarch)
                 if (!patriarchName) {
-                    console.warn(`the family ${otherFamilyId} has no name for husband, skipping`)
+                    console.warn(
+                        `the family ${otherFamilyId} has no name for husband, skipping`,
+                    )
                     break
                 }
 
-                otherFamiliesFacts.push(...gatherFacts(patriarch, patriarchName, matriarchName, otherFamily, true))
+                otherFamiliesFacts.push(
+                    ...gatherFacts(
+                        patriarch,
+                        patriarchName,
+                        matriarchName,
+                        otherFamily,
+                        true,
+                    ),
+                )
             }
         }
         return otherFamiliesFacts

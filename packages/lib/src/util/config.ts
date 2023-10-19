@@ -5,7 +5,7 @@ export interface Config {
 
 let config: Config = {
     debugMode: false,
-    allowFemaleConcurrentMarriages: false
+    allowFemaleConcurrentMarriages: false,
 }
 
 export const getConfig = () => config

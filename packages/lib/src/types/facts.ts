@@ -1,8 +1,8 @@
 export enum LifeEventEnum {
-    Birth= 'Birth',
-    Death = 'Death',
-    Marriage = 'Marriage',
-    Divorce = 'Divorce'
+    Birth = "Birth",
+    Death = "Death",
+    Marriage = "Marriage",
+    Divorce = "Divorce",
 }
 
 export interface LifeEventRecord {
@@ -20,7 +20,7 @@ export interface FactRecord {
      * in format YYYY-MM-DD
      */
     Date?: string
-    'Second Party'?: string
+    "Second Party"?: string
     Note?: string
 }
 
@@ -30,8 +30,8 @@ export interface PersonDetails {
     name: string
     birth?: LifeEventRecord
     death?: LifeEventRecord
-    marriages: Record<string,RelationshipEvent>
-    divorces: Record<string,RelationshipEvent>
+    marriages: Record<string, RelationshipEvent>
+    divorces: Record<string, RelationshipEvent>
 }
 
 export interface MarriageDetails {

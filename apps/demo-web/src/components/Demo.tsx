@@ -1,7 +1,7 @@
-import React, {ChangeEventHandler, useState} from 'react'
-import {Mermaid} from './Mermaid.tsx'
-import {getTimelinesForMermaid} from 'lib'
-import {FileTypes} from 'lib/src/types'
+import React, { ChangeEventHandler, useState } from "react"
+import { Mermaid } from "./Mermaid.tsx"
+import { getTimelinesForMermaid } from "lib"
+import { FileTypes } from "lib/src/types"
 
 const parseFile = async (fileRef, onprogress): Promise<string> => {
     const reader = new FileReader()
@@ -17,7 +17,8 @@ const parseFile = async (fileRef, onprogress): Promise<string> => {
         reader.onerror = (e) => reject(e)
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        reader.onprogress = e => onprogress(e.target?.loaded / e.target?.total)
+        reader.onprogress = (e) =>
+            onprogress(e.target?.loaded / e.target?.total)
     })
 }
 
@@ -31,20 +32,25 @@ export const Demo = () => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const fileContents = await parseFile(e.target.files[0], console.info)
-        const newTimelines = getTimelinesForMermaid({fileContents, fileFormat: FileTypes.ged })
+        const newTimelines = getTimelinesForMermaid({
+            fileContents,
+            fileFormat: FileTypes.ged,
+        })
         setTimelines(newTimelines)
     }
     return (
-        <div className={'form'}>
-            <div className={'formGroup chart'}>
+        <div className={"form"}>
+            <div className={"formGroup chart"}>
                 <label>upload a gedcom file</label>
-                <input type={'file'} onChange={onChange}/>
+                <input type={"file"} onChange={onChange} />
             </div>
             <div>
                 graphs here
-                {Object.keys(timelines).map(name => <div className="chart">
-                    <Mermaid key={name} chart={timelines[name]}/>
-                </div>)}
+                {Object.keys(timelines).map((name) => (
+                    <div className="chart">
+                        <Mermaid key={name} chart={timelines[name]} />
+                    </div>
+                ))}
             </div>
         </div>
     )

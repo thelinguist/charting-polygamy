@@ -1,10 +1,10 @@
-import {FileTypes} from './types'
-import {createKnowledgeTree} from './steps/createKnowledgeTree'
-import {createTimeline} from './steps/createTimeline'
-import {charting} from './util'
-import {getFacts} from './steps/createDB'
-import {checkIfPolygamous} from './steps/checkIfPolygamous'
-import {setConfig} from './util/config'
+import { FileTypes } from "./types"
+import { createKnowledgeTree } from "./steps/createKnowledgeTree"
+import { createTimeline } from "./steps/createTimeline"
+import { charting } from "./util"
+import { getFacts } from "./steps/createDB"
+import { checkIfPolygamous } from "./steps/checkIfPolygamous"
+import { setConfig } from "./util/config"
 
 interface Props {
     fileContents: string
@@ -14,11 +14,11 @@ interface Props {
     debugMode?: boolean
 }
 export const getTimelinesForMermaid = ({
-   fileContents,
-   fileFormat,
-   patriarchName,
-   allowFemaleConcurrentMarriages,
-   debugMode
+    fileContents,
+    fileFormat,
+    patriarchName,
+    allowFemaleConcurrentMarriages,
+    debugMode,
 }: Props) => {
     setConfig({ debugMode, allowFemaleConcurrentMarriages })
     const charts: Record<string, string> = {}
@@ -35,7 +35,9 @@ export const getTimelinesForMermaid = ({
                 charts[family.patriarchName] = charting.createChart(timelines)
             }
         } catch (e) {
-            console.error(`could not complete chart for ${family.patriarchName}`)
+            console.error(
+                `could not complete chart for ${family.patriarchName}`,
+            )
             console.error(e)
         }
     }

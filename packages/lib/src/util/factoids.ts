@@ -1,4 +1,3 @@
-
 const factoids = {}
 
 export const addFactoid = (name, event, fact) => {

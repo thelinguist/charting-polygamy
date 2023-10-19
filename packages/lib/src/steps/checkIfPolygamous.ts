@@ -1,4 +1,4 @@
-import {Timeline} from '../types'
+import { Timeline } from "../types"
 
 // TODO allow for posthumous polygamy
 /**

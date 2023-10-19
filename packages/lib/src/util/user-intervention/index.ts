@@ -1,4 +1,4 @@
-import {FactRecord} from '../../types'
+import { FactRecord } from "../../types"
 
 export interface MissingFact {
     fact: Partial<FactRecord>

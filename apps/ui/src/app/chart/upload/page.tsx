@@ -1,4 +1,4 @@
-import { TimelineRendering } from './components/TimelineRendering'
+import { TimelineRendering } from "./components/TimelineRendering"
 export default function Upload() {
-    return <TimelineRendering/>
+    return <TimelineRendering />
 }

@@ -1,4 +1,4 @@
-import {getConfig} from './config'
+import { getConfig } from "./config"
 
 function checkIfKeysExistAndDiffer<T = object>(deduped: T, fact: T) {
     let isDifferent = false
@@ -41,7 +41,9 @@ export const dedupeFacts = <T = object>(facts: T[]): T[] => {
         }
     }
     if (getConfig().debugMode && facts.length !== cleaned.length) {
-        console.info(`deduped. before: ${facts.length}, after: ${cleaned.length}`)
+        console.info(
+            `deduped. before: ${facts.length}, after: ${cleaned.length}`,
+        )
     }
     return cleaned
 }
