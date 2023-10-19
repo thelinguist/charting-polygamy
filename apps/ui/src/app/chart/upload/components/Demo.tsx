@@ -4,45 +4,36 @@ import React, {ChangeEventHandler, useState} from 'react'
 import {Mermaid} from './Mermaid'
 import {getTimelinesForMermaid} from 'lib'
 import {FileTypes} from 'lib/src/types'
-
-const parseFile = async (fileRef, onprogress): Promise<string> => {
-    const reader = new FileReader()
-    return await new Promise((resolve, reject) => {
-        reader.onload = (e) => {
-            if (!e.target?.result) {
-                reject()
-            } else {
-                resolve(e.target.result as string)
-            }
-        }
-        reader.readAsText(fileRef)
-        reader.onerror = (e) => reject(e)
-        // @ts-expect-error basically any
-        reader.onprogress = e => onprogress(e.target?.loaded / e.target?.total)
-    })
-}
+import {parseFile} from '../../../../lib/parseFile'
+import styles from './Demo.module.css'
+import classNames from '../../../../lib/classNames'
 
 export const Demo = () => {
     const [timelines, setTimelines] = useState<Record<string, string>>({})
 
-    const onChange: ChangeEventHandler = async (e) => {
+    const onChange: ChangeEventHandler<HTMLInputElement> = async (e) => {
         e.preventDefault()
-        // @ts-expect-error basically any
-        const fileContents = await parseFile(e.target.files[0], console.info)
-        const newTimelines = getTimelinesForMermaid(fileContents, FileTypes.ged)
-        setTimelines(newTimelines)
+        if (e.target.files) {
+            const fileContents = await parseFile(e.target.files[0], console.info)
+            const newTimelines = getTimelinesForMermaid(fileContents, FileTypes.ged)
+            setTimelines(newTimelines)
+        }
     }
     return (
-        <div className={'form'}>
-            <div className={'formGroup chart'}>
+        <div className="form">
+            <div className={classNames('formGroup', styles.chart)}>
                 <label>upload a gedcom file</label>
-                <input type={'file'} onChange={onChange}/>
+                {' '}
+                <input type="file" onChange={onChange}/>
             </div>
             <div>
-                graphs here
-                {Object.keys(timelines).map(name => <div className="chart">
-                    <Mermaid key={name} chart={timelines[name]}/>
-                </div>)}
+                {!Object.keys(timelines).length && <div className={classNames(styles.chart, styles.placeholder)}>graphs will go here</div>}
+                {Object.keys(timelines).map(name => (
+                    <div key={name} className={styles.chart}>
+                        <h2>{name}</h2>
+                        <Mermaid chart={timelines[name]} title={name}/>
+                    </div>
+                ))}
             </div>
         </div>
     )

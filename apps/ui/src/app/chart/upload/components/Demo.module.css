@@ -1,0 +1,22 @@
+.chart {
+  width: 75vw;
+  background: rgba(255,255,255,0.8);
+  border-radius: 2rem/6rem;
+  padding: 2rem;
+  margin: 1rem;
+}
+
+.chart-list {
+  margin: 2rem;
+}
+
+.placeholder {
+  width: 75vw;
+  height: 30rem;
+  background: rgba(255,255,255,0.8);
+  border-radius: 2rem/6rem;
+  padding: 2rem;
+  margin: 1rem;
+  display: grid;
+  place-items: center;
+}
