@@ -1,5 +1,4 @@
-export *from './create-chart'
-export * from './save-to-md'
+export * from './create-chart'
 
 export const pipe = (chart) => {
     console.clear()

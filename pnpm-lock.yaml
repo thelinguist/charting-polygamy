@@ -109,6 +109,12 @@ importers:
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
+      lib:
+        specifier: workspace:*
+        version: link:../../packages/lib
+      mermaid:
+        specifier: ^10.5.0
+        version: 10.5.0
       next:
         specifier: 13.5.4
         version: 13.5.4(react-dom@18.2.0)(react@18.2.0)
