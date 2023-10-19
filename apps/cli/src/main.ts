@@ -14,6 +14,7 @@ interface CommandOpts {
     factsFile: string
     name: string
     fileFormat: string
+    allowFemaleConcurrentMarriages: boolean
     debug: boolean
 }
 
@@ -25,6 +26,7 @@ program
     .argument('<inputFile>', 'the input file (csv or gedcom)')
     .option("-f, --file-format  [value]", "file format. valid options are 'csv' and 'ged'. The program automatically detects format, but you can override it")
     .option("-n, --name  [value]", "name of a patriarch to find. Required for csv. this skips the detection step and just reports that patriarch")
+    .option("-a, --allow-female-concurrent-marriages", "set to true to allow women to also have concurrent marriages (ex, \"sealed to one\" and living with another")
     .option("-d, --debug", "print the chart output to the console instead")
     .parse(process.argv)
 
@@ -36,7 +38,7 @@ const [file] = program.args
 const fileContents = parseFile(file)
 const fileFormat = determineFormat(options.fileFormat, file)
 
-const timelines = getTimelinesForMermaid(fileContents, fileFormat, options.name)
+const timelines = getTimelinesForMermaid({fileContents, fileFormat, allowFemaleConcurrentMarriages: options.allowFemaleConcurrentMarriages, patriarchName: options.name})
 
 for (const patriarch in timelines) {
     if (!options.debug) {

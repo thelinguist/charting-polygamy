@@ -1,8 +1,4 @@
-import { Demo } from './components/Demo'
+import { TimelineRendering } from './components/TimelineRendering'
 export default function Upload() {
-    return (
-        <div>
-            <Demo/>
-        </div>
-    )
+    return <TimelineRendering/>
 }

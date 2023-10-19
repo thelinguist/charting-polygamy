@@ -1,9 +1,11 @@
 export interface Config {
     debugMode: boolean
+    allowFemaleConcurrentMarriages: boolean
 }
 
 let config: Config = {
-    debugMode: false
+    debugMode: false,
+    allowFemaleConcurrentMarriages: false
 }
 
 export const getConfig = () => config

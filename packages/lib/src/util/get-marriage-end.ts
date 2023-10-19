@@ -1,9 +1,10 @@
 import {KnowledgeTree, LifeEventEnum} from '../types'
 import {isAfter, isBefore, isSameDay} from 'date-fns'
 import {UserIntervention} from './user-intervention'
+import {getConfig} from './config'
 
 // TODO write tests for when no divorce, when husband dies, and when she leaves one man and marries another then another before the man she left dies
-export const getMarriageEnd = (tree: KnowledgeTree, wife: string, spouse: string, allowConcurrentMarriages?: boolean) => {
+export const getMarriageEnd = (tree: KnowledgeTree, wife: string, spouse: string) => {
     const wifesDeath = tree[wife].death?.date
     if (!wifesDeath) {
         console.error(`missing ${wife} death info, skipping`)
@@ -24,9 +25,7 @@ export const getMarriageEnd = (tree: KnowledgeTree, wife: string, spouse: string
             if (marriage.person !== spouse) {
                 continue
             }
-            const subsequentMarriage = sortedMarriages[i + 1]
             const husband = marriage.person
-            const husbandDeath = tree[husband].death?.date
 
             // ends if there is a divorce
             if (tree[wife].divorces[husband]?.date) {
@@ -34,6 +33,8 @@ export const getMarriageEnd = (tree: KnowledgeTree, wife: string, spouse: string
             }
 
             // if last marriage, pick the death date
+            const subsequentMarriage = sortedMarriages[i + 1]
+            const husbandDeath = tree[husband].death?.date
             if (!subsequentMarriage) {
                 if (!wifesDeath && husbandDeath) {
                     return husbandDeath
@@ -53,7 +54,7 @@ export const getMarriageEnd = (tree: KnowledgeTree, wife: string, spouse: string
             }
 
             // if concurrent marriages are allowed, use the soonest death in the relationship
-            if (allowConcurrentMarriages) {
+            if (getConfig().allowFemaleConcurrentMarriages) {
                 if (!wifesDeath && husbandDeath) {
                     return husbandDeath
                 }

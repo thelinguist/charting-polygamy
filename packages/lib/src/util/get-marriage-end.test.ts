@@ -2,6 +2,7 @@ import {describe, expect, it} from 'vitest'
 import {KnowledgeTree} from '../types'
 import {getMarriageEnd} from './get-marriage-end'
 import {addYears} from 'date-fns'
+import {setConfig} from './config'
 
 const manSheLeft = "Taylor Swift's ex"
 const manSheSwooned = "Mr. Handsome"
@@ -98,7 +99,8 @@ describe('getMarriageEnd', () => {
     })
 
     it('allows for subsequent marriages', () => {
+        setConfig({ allowFemaleConcurrentMarriages: true })
         // in the tree he dies well after she marries again
-        expect(getMarriageEnd(tree, wife, manSheSwooned, true)).toEqual(new Date(manSheSwoonedDeath))
+        expect(getMarriageEnd(tree, wife, manSheSwooned)).toEqual(new Date(manSheSwoonedDeath))
     })
 })

@@ -1,6 +1,6 @@
 export const example3Wives = `
 gantt
-    title Pioneer and his wives
+    title Patriarch and his wives
     todayMarker off
     dateFormat YYYY-MM-DD
     axisFormat %Y

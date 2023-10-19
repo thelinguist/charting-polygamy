@@ -6,8 +6,21 @@ import {getFacts} from './steps/createDB'
 import {checkIfPolygamous} from './steps/checkIfPolygamous'
 import {setConfig} from './util/config'
 
-export const getTimelinesForMermaid = (fileContents: string, fileFormat: FileTypes, patriarchName?: string, debugMode?: boolean) => {
-    setConfig({ debugMode })
+interface Props {
+    fileContents: string
+    fileFormat: FileTypes
+    patriarchName?: string
+    allowFemaleConcurrentMarriages?: boolean
+    debugMode?: boolean
+}
+export const getTimelinesForMermaid = ({
+   fileContents,
+   fileFormat,
+   patriarchName,
+   allowFemaleConcurrentMarriages,
+   debugMode
+}: Props) => {
+    setConfig({ debugMode, allowFemaleConcurrentMarriages })
     const charts: Record<string, string> = {}
     const families = getFacts(fileContents, fileFormat, patriarchName)
     // console.log(UserIntervention.getIssues())

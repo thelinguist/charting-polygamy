@@ -31,7 +31,7 @@ export const Demo = () => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const fileContents = await parseFile(e.target.files[0], console.info)
-        const newTimelines = getTimelinesForMermaid(fileContents, FileTypes.ged)
+        const newTimelines = getTimelinesForMermaid({fileContents, fileFormat: FileTypes.ged })
         setTimelines(newTimelines)
     }
     return (
