@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev:csv": "ts-node src/main.ts facts/brigham-young.csv -n 'Brigham Young'",
-    "dev:one": "ts-node src/main.ts ./Family\\ Tree.ged -n 'Brigham Young'",
+    "dev:csv": "ts-node src/main.ts facts/joseph-smith.csv -n 'Joseph Smith Jr'",
+    "dev:one": "ts-node src/main.ts ../../Family\\ Tree.ged -n 'Hans Jorgen Munk'",
     "dev:localTree": "ts-node src/main.ts ../../Family\\ Tree.ged",
     "build": "echo 'Add build script here'",
     "test": "vitest",
