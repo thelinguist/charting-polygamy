@@ -10,7 +10,7 @@ export function generateStaticParams() {
 }
 
 
-export async function fetchPost(slug) {
+async function fetchPost(slug) {
     const post = getPostBySlug(slug, [
         'title',
         'content',

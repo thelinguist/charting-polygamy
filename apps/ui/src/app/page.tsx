@@ -36,12 +36,11 @@ export default function Home() {
 
                 </a>
 
-                <Link href="/instructions" className={styles.card}>
+                <Link href="/chart/faq" className={styles.card}>
                     <h2>
                         Project FAQ <span>-&gt;</span>
                     </h2>
                     <p>More info on this project and how to support it</p>
-                    <span>github icon</span>
                 </Link>
             </div>
         </>
