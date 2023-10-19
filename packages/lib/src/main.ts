@@ -4,8 +4,10 @@ import {createTimeline} from './steps/createTimeline'
 import {charting} from './util'
 import {getFacts} from './steps/createDB'
 import {checkIfPolygamous} from './steps/checkIfPolygamous'
+import {setConfig} from './util/config'
 
 export const getTimelinesForMermaid = (fileContents: string, fileFormat: FileTypes, patriarchName?: string, debugMode?: boolean) => {
+    setConfig({ debugMode })
     const charts: Record<string, string> = {}
     const families = getFacts(fileContents, fileFormat, patriarchName)
     // console.log(UserIntervention.getIssues())
