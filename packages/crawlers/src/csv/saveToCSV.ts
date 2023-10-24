@@ -7,7 +7,7 @@ export const saveToCSV = async (data: Factoid[], fileName: string) => {
 
   try {
     const existingFile = await fs.promises.readFile(fileName)
-    existingRecords = csv.parse(existingFile.toString(), { header: true }).data
+    existingRecords = csv.parse<Factoid>(existingFile.toString(), { header: true }).data
   } catch (e) {
   }
   const newRecords = selectUnique(existingRecords, data)

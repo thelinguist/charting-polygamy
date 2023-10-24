@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "lib": "workspace:*",
+    "@types/papaparse": "^5.3.10",
     "@types/node": "^18.14.6",
     "@vitest/coverage-v8": "^0.34.6",
     "eslint-config-custom": "workspace:*",

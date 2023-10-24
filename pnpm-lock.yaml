@@ -137,6 +137,9 @@ importers:
       '@types/node':
         specifier: ^18.14.6
         version: 18.18.4
+      '@types/papaparse':
+        specifier: ^5.3.10
+        version: 5.3.10
       '@vitest/coverage-v8':
         specifier: ^0.34.6
         version: 0.34.6(vitest@0.34.6)
@@ -186,9 +189,6 @@ importers:
       '@types/node':
         specifier: ^18.14.6
         version: 18.18.4
-      '@types/papaparse':
-        specifier: 5.3.10
-        version: 5.3.10
       '@vitest/coverage-v8':
         specifier: ^0.34.6
         version: 0.34.6(vitest@0.34.6)
