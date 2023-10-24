@@ -10,7 +10,8 @@ const parseFacts = (rawHtmlString: string): Factoid[] => {
   const document = parse(rawHtmlString)
   const rows = [...document.querySelectorAll(".VITALS")]
   const facts = rows.map(item => item.textContent.trim())
-  const person = evenlySpace(facts[0])
+  let person = evenlySpace(facts[0])
+  // TODO fix wives names (remove "young")
   const parsedFacts: Factoid[] = []
   for (let i = 0; i < facts.length; i++) {
     const fact = facts[i]
@@ -28,8 +29,8 @@ const parseFacts = (rawHtmlString: string): Factoid[] => {
         Link: undefined
       })
     }
-    if (/^Husband\sof\s/i.test(fact)) {
-      const [secondParty, rest] = fact.replace(/husband\sof\s/i, '').split(/—\smarried\s/)
+    if (/^(husband)|(wife)\sof\s/i.test(fact)) {
+      const [secondParty, rest] = fact.replace(/((husband)|(wife))\sof\s/i, '').split(/—\smarried\s/)
       const [date, place] = rest.replace(' [location unknown]', '').split(/\sin\s/i)
       parsedFacts.push({
         Name: person,
@@ -49,7 +50,7 @@ const parseFacts = (rawHtmlString: string): Factoid[] => {
  * @param slug the URL where this person can be found. Ex "Young-93"
  * @param factset
  */
-const getPatriarchAndWives = async (slug: string, factset = {}) => {
+const getPatriarchAndWives = async (slug: string, factset = {}, isPatriarch?: boolean) => {
   const url = `https://wikitree.com/wiki/${slug}`
   const rawHtml = await fetchHTMLWithCache(url, slug, {
     headers: {
@@ -58,12 +59,14 @@ const getPatriarchAndWives = async (slug: string, factset = {}) => {
   })
   const facts = parseFacts(rawHtml)
   factset[facts[0].Name] = facts
-  const marriages = facts.filter(fact => fact.Event === LifeEventEnum.Marriage)
+  if (isPatriarch) {
+    const marriages = facts.filter(fact => fact.Event === LifeEventEnum.Marriage)
     for (const marriage of marriages) {
       if (marriage.Link) {
         await getPatriarchAndWives(marriage.Link, factset)
       }
     }
+  }
   return factset
 }
 

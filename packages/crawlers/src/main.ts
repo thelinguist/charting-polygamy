@@ -9,7 +9,8 @@ const famousPolygamists = {
 const factsFile = 'facts.csv'
 
 export const main = async () => {
-    const data = await wikiTree.getPatriarchAndWives(famousPolygamists['BrighamYoung'])
-    await saveToCSV(Object.values(data).flat() as Factoid[], factsFile)
+    const data = await wikiTree.getPatriarchAndWives(famousPolygamists['BrighamYoung'], {}, true)
+    const facts = Object.values(data).flat() as Factoid[]
+    await saveToCSV(facts, factsFile)
 }
 main()
