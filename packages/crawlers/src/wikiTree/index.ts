@@ -41,6 +41,17 @@ const parseFacts = (rawHtmlString: string): Factoid[] => {
         Link: rows[i].querySelector('a')?.attributes.href?.replace('/wiki/', '')
       })
     }
+    if (/^died /i.test(fact)) {
+      const [date, _, place] = fact.replace(/^died /i, '').split(/\sat\sage\s\d+(\sin\s)?/)
+      parsedFacts.push({
+        Name: person,
+        Event: LifeEventEnum.Death,
+        Date: date && evenlySpace(date),
+        Place: place && evenlySpace(place),
+        "Second Party": undefined,
+        Link: undefined,
+      })
+    }
   }
   return parsedFacts
 }

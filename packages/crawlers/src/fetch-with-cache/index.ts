@@ -1,11 +1,12 @@
 import * as fs from "fs"
 
-const ONE_HOUR = 60 * 60 * 1000
+const ONE_DAY = 24 * 60 * 60 * 1000
 const ENCODING = 'utf-8'
 const existsInCache = async (cachePath: fs.PathLike) => {
   try {
     const stat = await fs.promises.stat(cachePath)
-    return stat && stat.ctimeMs <= (new Date().getTime() + ONE_HOUR)
+    const aDayAgo = new Date().getTime() - ONE_DAY
+    return stat && stat.ctimeMs > aDayAgo
   } catch (e) {
     return false
   }
