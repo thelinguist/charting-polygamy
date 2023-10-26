@@ -1,5 +1,5 @@
 import { FactRecord, KnowledgeTree, LifeEventEnum, PersonDetails } from "../types"
-import { addFactoid } from "../util"
+import { addFactoid, parseTextDate } from "../util"
 
 /**
  * @param {Object[]} facts
@@ -15,7 +15,12 @@ export const createKnowledgeTree = (facts: FactRecord[]) => {
         const person = fact.Name
         const event = fact.Event
         const dateString = fact.Date
-        const date = dateString ? new Date(dateString) : undefined
+        let date
+        try {
+            date = dateString ? parseTextDate(dateString, fact) : undefined
+        } catch (e) {
+
+        }
         const secondPerson = fact["Second Party"]
         const note = fact.Note
         if (!tree[person]) {

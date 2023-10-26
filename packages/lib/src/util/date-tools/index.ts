@@ -1,19 +1,19 @@
 import { format, parse } from "date-fns"
-import { UserIntervention } from "./user-intervention"
-import { FactRecord } from "../types"
-import assumptions from "../assumptions"
-
-const danishMay = /[Mm]aj /
-const altSeptember = /[Ss]ept /
-const missingDate = /^\w+ \d{4}$/
-const multiDate = /.+;.+/
-const altDate = /.+\(.+\)\s*/
-const yearOnly = /^\d{4}$/
-const approxYear = /abo?u?t\.? \d{4}/i
-
-// format matchers
-const dateFirstMatcher = /\d{1,2} \w{3,9} \d{4}/
-const monthFirstMatcher = /\w{3,9} \d{1,2} \d{4}/
+import { UserIntervention } from "../user-intervention"
+import { FactRecord } from "../../types"
+import assumptions from "../../assumptions"
+import {
+    altDate,
+    altSeptember,
+    beforeMatcher,
+    danishMay,
+    dateFirstMatcher,
+    missingDate,
+    monthFirstMatcher,
+    multiDate,
+    yearOnly,
+} from "./regex"
+import { handleBeforeDate } from "./handleBeforeDate"
 
 /**
  * TODO guess locale of dateText if not English, given a prioritized list of locales
@@ -27,27 +27,32 @@ export const parseTextDate = (text: string, existingFact: Partial<FactRecord>, l
     }
 
     text = text.replaceAll(/[,.]/g, "").toLowerCase()
-    text = text.replace(/ab(ou)?t?\.?\s+/i, '')
+    text = text.replace(/ab(ou)?t?\.?\s+/i, "")
 
     if (yearOnly.test(text)) {
-        text = `1 jan ${text}`
         UserIntervention.addIssue({
             canMakeAssumption: true,
             fact: existingFact,
             issueWith: "Date",
-            reason: `only year specified. assuming ${text}`,
+            reason: `only year specified. assuming jan 1 ${text}`,
         })
+        return parse(text, "yyyy", new Date())
+    }
+
+    if (beforeMatcher.test(text)) {
+        return handleBeforeDate(text, existingFact)
     }
 
     if (missingDate.test(text)) {
-        text = assumptions.convertMonthYearOnlyDate(text)
         UserIntervention.addIssue({
             canMakeAssumption: true,
             fact: existingFact,
             issueWith: "Date",
-            reason: `no date specified. assuming ${text}`,
+            reason: `no date specified. assuming 1 ${text}`,
         })
+        return parse(text, "MMMM yyyy", new Date())
     }
+
     if (multiDate.test(text)) {
         const oldText = text
         text = assumptions.assumeFirstDate(text)
@@ -57,8 +62,7 @@ export const parseTextDate = (text: string, existingFact: Partial<FactRecord>, l
             issueWith: "Date",
             reason: `many dates specified: ${oldText}. assuming first one: ${text}`,
         })
-    }
-    if (altDate.test(text)) {
+    } else if (altDate.test(text)) {
         const oldText = text
         text = assumptions.assumeOrigDate(text)
         UserIntervention.addIssue({

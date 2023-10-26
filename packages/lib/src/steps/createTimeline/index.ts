@@ -1,19 +1,8 @@
-import { KnowledgeTree, OtherMarriage, PatriarchTimeline, PersonDetails, Timeline } from "../types"
+import { KnowledgeTree, OtherMarriage, PatriarchTimeline, PersonDetails, Timeline } from "../../types"
 
 import { differenceInYears } from "date-fns"
-import { getMarriageEnd } from "../util/get-marriage-end"
-
-const validateLifeFacts = (tree, person) => {
-    if (!tree[person] || !tree[person].birth?.date) {
-        console.error(`${person} does not have a birthdate, skipping`)
-        return false
-    }
-    if (!tree[person] || !tree[person].death?.date) {
-        console.error(`${person} does not have a death date, skipping`)
-        return false
-    }
-    return true
-}
+import { getMarriageEnd } from "../../util/get-marriage-end"
+import { validateLifeFacts } from "./validateLifeFacts"
 
 const getMarriageAgeGap = (person: PersonDetails, spouse: PersonDetails) => {
     const marriage = person.marriages[spouse.name]
@@ -60,10 +49,10 @@ const getWives = (tree: KnowledgeTree, patriarch: string): Timeline[] => {
         }
         const timeline = {
             name: wife,
-            birth: tree[wife].birth!.date!,
-            death: tree[wife].death!.date!,
+            birth: tree[wife].birth!.date,
+            death: tree[wife].death!.date,
             linkedMarriage: {
-                start: tree[patriarch].marriages[wife].date!,
+                start: tree[patriarch].marriages[wife].date,
                 end: undefined,
             },
         } as Timeline
@@ -87,16 +76,19 @@ const getWives = (tree: KnowledgeTree, patriarch: string): Timeline[] => {
 
 export const createTimeline = (
     tree: KnowledgeTree,
-    patriarch
+    patriarch: string
 ): { rootTimeline: PatriarchTimeline; wives: Timeline[] } => {
     if (!validateLifeFacts(tree, patriarch)) {
         throw new Error(`could not validate facts for ${patriarch}`)
     }
+
     const birth = tree[patriarch].birth!.date!
+    const death = tree[patriarch].death!.date!
+
     const rootTimeline: PatriarchTimeline = {
         name: tree[patriarch].name,
         birth,
-        death: tree[patriarch].death!.date!,
+        death,
         marriages: Object.values(tree[patriarch].marriages)
             .map(marriage => getMarriageAgeGap(tree[patriarch], tree[marriage.person]))
             .sort((marriageA, marriageB) => {
@@ -112,6 +104,8 @@ export const createTimeline = (
                 return marriageA.age - marriageB.age
             }),
     }
+
+    // sort them for collision detection
     const wives = getWives(tree, patriarch).sort((wifeA, wifeB) => {
         if (!wifeA.linkedMarriage.start && !wifeB.linkedMarriage.start) {
             return 0
