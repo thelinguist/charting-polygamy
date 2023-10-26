@@ -9,7 +9,7 @@ const missingDate = /^\w+ \d{4}$/
 const multiDate = /.+;.+/
 const altDate = /.+\(.+\)\s*/
 const yearOnly = /^\d{4}$/
-const approxYear = /[Aa][Bb][Oo]?[Uu]?[Tt]\.? \d{4}/
+const approxYear = /abo?u?t\.? \d{4}/i
 
 // format matchers
 const dateFirstMatcher = /\d{1,2} \w{3,9} \d{4}/
@@ -27,6 +27,7 @@ export const parseTextDate = (text: string, existingFact: Partial<FactRecord>, l
     }
 
     text = text.replaceAll(/[,.]/g, "").toLowerCase()
+    text = text.replace(/ab(ou)?t?\.?\s+/i, '')
 
     if (yearOnly.test(text)) {
         text = `1 jan ${text}`
@@ -38,16 +39,6 @@ export const parseTextDate = (text: string, existingFact: Partial<FactRecord>, l
         })
     }
 
-    if (approxYear.test(text)) {
-        const [matches] = [...text.matchAll(/\d{4}/g)]
-        text = `1 jan ${matches}`
-        UserIntervention.addIssue({
-            canMakeAssumption: true,
-            fact: existingFact,
-            issueWith: "Date",
-            reason: `approximate year specified. assuming ${text}`,
-        })
-    }
     if (missingDate.test(text)) {
         text = assumptions.convertMonthYearOnlyDate(text)
         UserIntervention.addIssue({

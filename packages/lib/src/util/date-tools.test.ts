@@ -9,6 +9,8 @@ describe("dateTools", function () {
         ${"01 September 1831"} | ${"09/01/1831"}
         ${"1 September 1831"}  | ${"09/01/1831"}
         ${"Aug 30. 1871"}      | ${"08/30/1871"}
+        ${"about jun 1843"}    | ${"06/01/1843"}
+        ${"abt. 1842"}         | ${"01/01/1842"}
     `(`parses unformatted date $dateString}`, ({ dateString, ddMMyyyy }) => {
         expect(parseTextDate(dateString, {})).toStrictEqual(new Date(ddMMyyyy))
     })
