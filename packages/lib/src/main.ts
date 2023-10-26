@@ -35,9 +35,7 @@ export const getTimelinesForMermaid = ({
                 charts[family.patriarchName] = charting.createChart(timelines)
             }
         } catch (e) {
-            console.error(
-                `could not complete chart for ${family.patriarchName}`,
-            )
+            console.error(`could not complete chart for ${family.patriarchName}`)
             console.error(e)
         }
     }

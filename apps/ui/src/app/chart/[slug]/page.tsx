@@ -4,7 +4,7 @@ import markdownToHtml from "../../../lib/markdownToHTML"
 
 export function generateStaticParams() {
     const posts = getPostSlugs()
-    return posts.map((post) => ({
+    return posts.map(post => ({
         slug: post,
     }))
 }

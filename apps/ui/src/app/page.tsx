@@ -28,10 +28,7 @@ export default function Home() {
                     <h2>
                         about polygamy <span>-&gt;</span>
                     </h2>
-                    <p>
-                        Set in the context of polygamy during the Joseph Smith
-                        Movement{" "}
-                    </p>
+                    <p>Set in the context of polygamy during the Joseph Smith Movement </p>
                     <span>wiki icon</span>
                 </a>
 

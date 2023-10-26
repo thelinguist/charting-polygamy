@@ -1,10 +1,4 @@
-import {
-    FamilyRecord,
-    GedcomIndividual,
-    GedcomSource,
-    GedcomTree,
-    GedcomType,
-} from "../../types"
+import { FamilyRecord, GedcomIndividual, GedcomSource, GedcomTree, GedcomType } from "../../types"
 
 export interface GedcomDatabase {
     families: Record<string, FamilyRecord>
@@ -19,10 +13,7 @@ export const mapDatabase = (tree: GedcomTree["children"]): GedcomDatabase => {
     }
     for (const record of tree) {
         if (!record.data.xref_id) {
-            if (
-                record.type !== GedcomType.Head &&
-                record.type !== GedcomType.Trailer
-            ) {
+            if (record.type !== GedcomType.Head && record.type !== GedcomType.Trailer) {
                 console.warn("found a record without an xref_id")
             }
             continue

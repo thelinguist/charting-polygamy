@@ -17,7 +17,7 @@ export const Mermaid: React.FunctionComponent<{
     useEffect(() => {
         if (isVisible) {
             mermaid.contentLoaded()
-            mermaid.setParseErrorHandler((err) => {
+            mermaid.setParseErrorHandler(err => {
                 console.error(title, err)
                 // sometimes it still renders sometimes it doesn't
                 // setError(true)

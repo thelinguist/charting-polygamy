@@ -1,9 +1,4 @@
-import {
-    FactRecord,
-    KnowledgeTree,
-    LifeEventEnum,
-    PersonDetails,
-} from "../types"
+import { FactRecord, KnowledgeTree, LifeEventEnum, PersonDetails } from "../types"
 import { addFactoid } from "../util"
 
 /**
@@ -43,9 +38,7 @@ export const createKnowledgeTree = (facts: FactRecord[]) => {
         switch (event) {
             case LifeEventEnum.Divorce:
                 if (!secondPerson) {
-                    throw new Error(
-                        `found a divorce but only one party, ${person}`,
-                    )
+                    throw new Error(`found a divorce but only one party, ${person}`)
                 }
                 tree[person].divorces[secondPerson] = {
                     date,
@@ -60,9 +53,7 @@ export const createKnowledgeTree = (facts: FactRecord[]) => {
                 break
             case LifeEventEnum.Marriage:
                 if (!secondPerson) {
-                    throw new Error(
-                        `found a marriage but only one party, ${person}`,
-                    )
+                    throw new Error(`found a marriage but only one party, ${person}`)
                 }
                 tree[person].marriages[secondPerson] = {
                     date,

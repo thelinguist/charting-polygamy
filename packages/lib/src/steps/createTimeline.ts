@@ -1,10 +1,4 @@
-import {
-    KnowledgeTree,
-    OtherMarriage,
-    PatriarchTimeline,
-    PersonDetails,
-    Timeline,
-} from "../types"
+import { KnowledgeTree, OtherMarriage, PatriarchTimeline, PersonDetails, Timeline } from "../types"
 
 import { differenceInYears } from "date-fns"
 import { getMarriageEnd } from "../util/get-marriage-end"
@@ -26,9 +20,7 @@ const getMarriageAgeGap = (person: PersonDetails, spouse: PersonDetails) => {
     const birth = person.birth?.date
     const spouseBirth = spouse.birth?.date
     if (!birth || !spouseBirth || !marriage?.date) {
-        console.warn(
-            `${person.name} is missing dates for marriage with ${spouse.name}`,
-        )
+        console.warn(`${person.name} is missing dates for marriage with ${spouse.name}`)
         return {}
     }
     const age = differenceInYears(marriage?.date, birth)
@@ -40,11 +32,7 @@ const getMarriageAgeGap = (person: PersonDetails, spouse: PersonDetails) => {
     }
 }
 
-const getOtherMarriages = (
-    tree: KnowledgeTree,
-    wife: string,
-    rootNode,
-): OtherMarriage[] => {
+const getOtherMarriages = (tree: KnowledgeTree, wife: string, rootNode): OtherMarriage[] => {
     const otherMarriages: OtherMarriage[] = []
     for (const otherHusband in tree[wife].marriages) {
         if (otherHusband !== rootNode) {
@@ -55,9 +43,7 @@ const getOtherMarriages = (
                 end: getMarriageEnd(tree, wife, otherHusband),
             } as OtherMarriage
             if (!otherMarriage.end) {
-                console.error(
-                    `missing end date for ${wife}->${otherHusband}. marking end date as start date`,
-                )
+                console.error(`missing end date for ${wife}->${otherHusband}. marking end date as start date`)
                 otherMarriage.end = start!
             }
             otherMarriages.push(otherMarriage)
@@ -83,9 +69,7 @@ const getWives = (tree: KnowledgeTree, patriarch: string): Timeline[] => {
         } as Timeline
         timeline.linkedMarriage.end = getMarriageEnd(tree, wife, patriarch)
         if (!timeline.linkedMarriage.end) {
-            console.error(
-                `${wife} does not have an end date for their marriage, skipping`,
-            )
+            console.error(`${wife} does not have an end date for their marriage, skipping`)
             continue
         }
 
@@ -94,8 +78,7 @@ const getWives = (tree: KnowledgeTree, patriarch: string): Timeline[] => {
         timeline.gap = gap
 
         timeline.otherMarriages = getOtherMarriages(tree, wife, patriarch).sort(
-            (marriageA, marriageB) =>
-                marriageA.start.getTime() - marriageB.start.getTime(),
+            (marriageA, marriageB) => marriageA.start.getTime() - marriageB.start.getTime()
         )
         timelines.push(timeline)
     }
@@ -104,7 +87,7 @@ const getWives = (tree: KnowledgeTree, patriarch: string): Timeline[] => {
 
 export const createTimeline = (
     tree: KnowledgeTree,
-    patriarch,
+    patriarch
 ): { rootTimeline: PatriarchTimeline; wives: Timeline[] } => {
     if (!validateLifeFacts(tree, patriarch)) {
         throw new Error(`could not validate facts for ${patriarch}`)
@@ -115,9 +98,7 @@ export const createTimeline = (
         birth,
         death: tree[patriarch].death!.date!,
         marriages: Object.values(tree[patriarch].marriages)
-            .map((marriage) =>
-                getMarriageAgeGap(tree[patriarch], tree[marriage.person]),
-            )
+            .map(marriage => getMarriageAgeGap(tree[patriarch], tree[marriage.person]))
             .sort((marriageA, marriageB) => {
                 if (!marriageA.age && !marriageB.age) {
                     return 0
@@ -141,10 +122,7 @@ export const createTimeline = (
         if (!wifeB.linkedMarriage.start) {
             return -1
         }
-        return (
-            wifeA.linkedMarriage.start.getTime() -
-            wifeB.linkedMarriage.start.getTime()
-        )
+        return wifeA.linkedMarriage.start.getTime() - wifeB.linkedMarriage.start.getTime()
     })
 
     return { rootTimeline, wives }

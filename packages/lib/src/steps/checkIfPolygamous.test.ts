@@ -13,7 +13,7 @@ describe("checkIfPolygamous", () => {
                         end: addYears(new Date(), 20),
                     },
                 } as Timeline,
-            ]),
+            ])
         ).toBeFalsy()
     })
 
@@ -30,7 +30,7 @@ describe("checkIfPolygamous", () => {
                         end: new Date(),
                     },
                 } as Timeline,
-            ]),
+            ])
         ).toBeFalsy()
     })
 
@@ -55,7 +55,7 @@ describe("checkIfPolygamous", () => {
                         end: addYears(new Date(), -5),
                     },
                 } as Timeline,
-            ]),
+            ])
         ).toBeFalsy()
     })
 
@@ -80,7 +80,7 @@ describe("checkIfPolygamous", () => {
                         end: addYears(new Date(), -5),
                     },
                 } as Timeline,
-            ]),
+            ])
         ).toBeTruthy()
     })
 
@@ -105,7 +105,7 @@ describe("checkIfPolygamous", () => {
                         end: addYears(new Date(), -5),
                     },
                 } as Timeline,
-            ]),
+            ])
         ).toBeTruthy()
     })
 })

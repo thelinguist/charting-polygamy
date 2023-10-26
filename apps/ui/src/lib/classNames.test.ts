@@ -13,23 +13,16 @@ describe("classNames", function () {
                 working: true,
                 failure: false,
                 happiness: true,
-            }),
+            })
         ).toBe("working happiness")
-        expect(
-            classNames(
-                { working: true, failure: false, happiness: true },
-                { something: true, else: true },
-            ),
-        ).toBe("working happiness something else")
+        expect(classNames({ working: true, failure: false, happiness: true }, { something: true, else: true })).toBe(
+            "working happiness something else"
+        )
     })
 
     it("accepts both", () => {
         expect(
-            classNames(
-                { working: true, failure: false, happiness: true },
-                { something: true, else: true },
-                "things",
-            ),
+            classNames({ working: true, failure: false, happiness: true }, { something: true, else: true }, "things")
         ).toBe("working happiness something else things")
     })
 })

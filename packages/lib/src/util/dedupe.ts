@@ -41,9 +41,7 @@ export const dedupeFacts = <T = object>(facts: T[]): T[] => {
         }
     }
     if (getConfig().debugMode && facts.length !== cleaned.length) {
-        console.info(
-            `deduped. before: ${facts.length}, after: ${cleaned.length}`,
-        )
+        console.info(`deduped. before: ${facts.length}, after: ${cleaned.length}`)
     }
     return cleaned
 }

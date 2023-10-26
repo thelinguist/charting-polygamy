@@ -12,13 +12,10 @@ import { example3Wives } from "../constants/sample"
 export const TimelineRendering = () => {
     const [timelines, setTimelines] = useState<Record<string, string>>({})
 
-    const onChange: ChangeEventHandler<HTMLInputElement> = async (e) => {
+    const onChange: ChangeEventHandler<HTMLInputElement> = async e => {
         e.preventDefault()
         if (e.target.files) {
-            const fileContents = await parseFile(
-                e.target.files[0],
-                console.info,
-            )
+            const fileContents = await parseFile(e.target.files[0], console.info)
             const newTimelines = getTimelinesForMermaid({
                 fileContents,
                 fileFormat: FileTypes.ged,
@@ -34,8 +31,7 @@ export const TimelineRendering = () => {
     return (
         <div className="form">
             <div className={classNames("formGroup", styles.chart)}>
-                <label>upload a gedcom file</label>{" "}
-                <input type="file" onChange={onChange} />
+                <label>upload a gedcom file</label> <input type="file" onChange={onChange} />
                 <br />
                 Or
                 <br />
@@ -43,13 +39,9 @@ export const TimelineRendering = () => {
             </div>
             <div>
                 {!Object.keys(timelines).length && (
-                    <div
-                        className={classNames(styles.chart, styles.placeholder)}
-                    >
-                        graphs will go here
-                    </div>
+                    <div className={classNames(styles.chart, styles.placeholder)}>graphs will go here</div>
                 )}
-                {Object.keys(timelines).map((name) => (
+                {Object.keys(timelines).map(name => (
                     <div key={name} className={styles.chart}>
                         <h2>{name}</h2>
                         <Mermaid chart={timelines[name]} title={name} />

@@ -5,14 +5,14 @@ function getFacts(factoids) {
 ## Notes
 ${Object.keys(factoids)
     .map(
-        (name) => `### ${name}
+        name => `### ${name}
 ${factoids[name]
     .map(
-        (fact) => `
-- ${fact}`,
+        fact => `
+- ${fact}`
     )
     .join("")}
-`,
+`
     )
     .join("")}`
 }
@@ -30,6 +30,6 @@ export const saveToFile = (mermaidCode, fileName, factoids) => {
 \`\`\`
 
 ${getFacts(factoids)}
-`,
+`
     )
 }

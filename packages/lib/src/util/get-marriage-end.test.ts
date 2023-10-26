@@ -74,9 +74,7 @@ const tree: KnowledgeTree = {
 
 describe("getMarriageEnd", () => {
     it("marriage ended when other marriage began", () => {
-        expect(getMarriageEnd(tree, wife, manSheLeft)).toEqual(
-            new Date(newMarriageDate),
-        )
+        expect(getMarriageEnd(tree, wife, manSheLeft)).toEqual(new Date(newMarriageDate))
     })
 
     it("marriage ended when HE passed away", () => {
@@ -84,13 +82,8 @@ describe("getMarriageEnd", () => {
             ...tree,
             [silverFoxSheMarried]: { ...tree[silverFoxSheMarried] },
         }
-        newTree[silverFoxSheMarried].death!.date = addYears(
-            tree[wife].death!.date!,
-            -1,
-        )
-        expect(getMarriageEnd(newTree, wife, silverFoxSheMarried)).toEqual(
-            tree[silverFoxSheMarried].death!.date,
-        )
+        newTree[silverFoxSheMarried].death!.date = addYears(tree[wife].death!.date!, -1)
+        expect(getMarriageEnd(newTree, wife, silverFoxSheMarried)).toEqual(tree[silverFoxSheMarried].death!.date)
     })
 
     it("marriage ended when she passed away", () => {
@@ -98,13 +91,8 @@ describe("getMarriageEnd", () => {
             ...tree,
             [silverFoxSheMarried]: { ...tree[silverFoxSheMarried] },
         }
-        newTree[silverFoxSheMarried].death!.date = addYears(
-            tree[wife].death!.date!,
-            1,
-        )
-        expect(getMarriageEnd(tree, wife, silverFoxSheMarried)).toEqual(
-            new Date(wifeDeath),
-        )
+        newTree[silverFoxSheMarried].death!.date = addYears(tree[wife].death!.date!, 1)
+        expect(getMarriageEnd(tree, wife, silverFoxSheMarried)).toEqual(new Date(wifeDeath))
     })
 
     it("marriage ended when divorce happened", () => {
@@ -112,10 +100,7 @@ describe("getMarriageEnd", () => {
             ...tree,
             [silverFoxSheMarried]: { ...tree[silverFoxSheMarried] },
         }
-        const divorce = addYears(
-            newTree[wife].marriages[silverFoxSheMarried].date,
-            1,
-        )
+        const divorce = addYears(newTree[wife].marriages[silverFoxSheMarried].date, 1)
         newTree[wife].divorces[silverFoxSheMarried] = {
             date: divorce,
         }
@@ -125,8 +110,6 @@ describe("getMarriageEnd", () => {
     it("allows for subsequent marriages", () => {
         setConfig({ allowFemaleConcurrentMarriages: true })
         // in the tree he dies well after she marries again
-        expect(getMarriageEnd(tree, wife, manSheSwooned)).toEqual(
-            new Date(manSheSwoonedDeath),
-        )
+        expect(getMarriageEnd(tree, wife, manSheSwooned)).toEqual(new Date(manSheSwoonedDeath))
     })
 })

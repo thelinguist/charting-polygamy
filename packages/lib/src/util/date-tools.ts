@@ -21,11 +21,7 @@ const monthFirstMatcher = /\w{3,9} \d{1,2} \d{4}/
  * @param locale
  * @param existingFact
  */
-export const parseTextDate = (
-    text: string,
-    existingFact: Partial<FactRecord>,
-    locale?: string,
-): Date => {
+export const parseTextDate = (text: string, existingFact: Partial<FactRecord>, locale?: string): Date => {
     if (locale && locale !== "en-US") {
         throw new Error(`${locale} not implemented`)
     }

@@ -1,18 +1,9 @@
-import {
-    FactRecord,
-    GedcomEntity,
-    GedcomIndividual,
-    GedcomType,
-    LifeEventEnum,
-} from "../../types"
+import { FactRecord, GedcomEntity, GedcomIndividual, GedcomType, LifeEventEnum } from "../../types"
 import { dateToMMDDYYYY, parseTextDate } from "../date-tools"
 import { UserIntervention } from "../user-intervention"
 import { getIndividualEvent } from "./queries"
 
-export const getBirthdate = (
-    individual: GedcomIndividual,
-    name,
-): FactRecord | undefined => {
+export const getBirthdate = (individual: GedcomIndividual, name): FactRecord | undefined => {
     const unformattedBirthday = getIndividualEvent(individual, GedcomType.Birth)
     let fact: Partial<FactRecord> = {
         Event: LifeEventEnum.Birth,
@@ -36,17 +27,12 @@ export const getBirthdate = (
             issueWith: "Date",
             reason: (e as Error).message,
         })
-        console.error(
-            `could not parse birthday ${unformattedBirthday} for ${fact.Name}`,
-        )
+        console.error(`could not parse birthday ${unformattedBirthday} for ${fact.Name}`)
         console.error(e)
     }
 }
 
-export const getDeathFact = (
-    individual: GedcomIndividual,
-    name,
-): FactRecord | undefined => {
+export const getDeathFact = (individual: GedcomIndividual, name): FactRecord | undefined => {
     const unformattedDeath = getIndividualEvent(individual, GedcomType.Death)
     let fact: Partial<FactRecord> = {
         Event: LifeEventEnum.Death,
@@ -71,9 +57,7 @@ export const getDeathFact = (
             issueWith: "Date",
             reason: (e as Error).message,
         })
-        console.error(
-            `could not parse death date ${unformattedDeath} for ${fact.Name}`,
-        )
+        console.error(`could not parse death date ${unformattedDeath} for ${fact.Name}`)
         console.error(e)
     }
 }
@@ -107,18 +91,13 @@ const getMarriageStart = (family, patriarchName, matriarchName) => {
             issueWith: "Date",
             reason: (e as Error).message,
         })
-        console.error(
-            `could not parse marriage date: ${unformattedMarriageDate} for ${fact.Name}`,
-        )
+        console.error(`could not parse marriage date: ${unformattedMarriageDate} for ${fact.Name}`)
         console.error(e)
     }
 }
 
 const getDivorce = (family, patriarchName, matriarchName) => {
-    const unformattedDivorceDate = getIndividualEvent(
-        family,
-        GedcomType.Divorce,
-    )
+    const unformattedDivorceDate = getIndividualEvent(family, GedcomType.Divorce)
 
     if (!unformattedDivorceDate) {
         return
@@ -188,7 +167,7 @@ export const gatherFacts = (
     name: string,
     spouseName: string,
     family: GedcomEntity,
-    gatherMarriageDetails: boolean,
+    gatherMarriageDetails: boolean
 ) => {
     const facts: FactRecord[] = []
     if (!individual) {
