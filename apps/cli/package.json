@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev:csv": "ts-node src/main.ts ../../packages/crawlers/facts.csv -n \"Brigham Young\"",
+    "dev:csv": "ts-node src/main.ts facts/parley-p-pratt.csv -n \"Parley Parker Pratt Sr\"",
     "dev:one": "ts-node src/main.ts ../../Family\\ Tree.ged -n 'Hans Jorgen Munk'",
     "dev:localTree": "ts-node src/main.ts ../../Family\\ Tree.ged",
     "build": "echo 'Add build script here'",
