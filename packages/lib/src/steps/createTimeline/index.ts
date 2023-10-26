@@ -26,6 +26,9 @@ const getOtherMarriages = (tree: KnowledgeTree, wife: string, rootNode): OtherMa
     for (const otherHusband in tree[wife].marriages) {
         if (otherHusband !== rootNode) {
             const start = tree[wife].marriages[otherHusband].date
+            if (!start) {
+                continue
+            }
             const otherMarriage = {
                 start,
                 spouse: otherHusband,
