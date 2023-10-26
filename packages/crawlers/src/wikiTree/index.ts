@@ -11,7 +11,7 @@ const getName = (document: HTMLElement, facts: string[]) => {
     return evenlySpace(name ?? facts[0])
 }
 
-const parseFacts = (rawHtmlString: string): Factoid[] => {
+const parseFacts = (rawHtmlString: string, personToExclude?: string): Factoid[] => {
     const document = parse(rawHtmlString)
     const rows = [...document.querySelectorAll(".VITALS")]
     const facts = rows.map(item => item.textContent.trim())
@@ -36,14 +36,17 @@ const parseFacts = (rawHtmlString: string): Factoid[] => {
         if (/^(husband)|(wife)\sof\s/i.test(fact)) {
             const [secondParty, rest] = fact.replace(/((husband)|(wife))\sof\s/i, "").split(/—\smarried\s/)
             const [date, place] = rest.replace(" [location unknown]", "").split(/\sin\s/i)
-            parsedFacts.push({
-                Name: person,
-                Event: LifeEventEnum.Marriage,
-                Date: date && evenlySpace(date),
-                Place: place && evenlySpace(place),
-                "Second Party": secondParty && evenlySpace(secondParty),
-                Link: rows[i].querySelector("a")?.attributes.href?.replace("/wiki/", ""),
-            })
+            const cleanedSecondParty = evenlySpace(secondParty)
+            if (!personToExclude || personToExclude !== cleanedSecondParty) {
+                parsedFacts.push({
+                    Name: person,
+                    Event: LifeEventEnum.Marriage,
+                    Date: date && evenlySpace(date),
+                    Place: place && evenlySpace(place),
+                    "Second Party": cleanedSecondParty,
+                    Link: rows[i].querySelector("a")?.attributes.href?.replace("/wiki/", ""),
+                })
+            }
         }
         if (/^died\s/i.test(fact)) {
             const [date, place] = fact
@@ -68,21 +71,22 @@ const parseFacts = (rawHtmlString: string): Factoid[] => {
  *
  * @param slug the URL where this person can be found. Ex "Young-93"
  * @param factset
+ * @param personToExclude such as an already discovered patriarch
  */
-const getPatriarchAndWives = async (slug: string, factset = {}, isPatriarch?: boolean) => {
+const getPatriarchAndWives = async (slug: string, factset = {}, personToExclude?: string) => {
     const url = `https://wikitree.com/wiki/${slug}`
     const rawHtml = await fetchHTMLWithCache(url, slug, {
         headers: {
             "user-agent": COMMON_USER_AGENT,
         },
     })
-    const facts = parseFacts(rawHtml)
+    const facts = parseFacts(rawHtml, personToExclude)
     factset[facts[0].Name] = facts
-    if (isPatriarch) {
+    if (!personToExclude) {
         const marriages = facts.filter(fact => fact.Event === LifeEventEnum.Marriage)
         for (const marriage of marriages) {
             if (marriage.Link) {
-                await getPatriarchAndWives(marriage.Link, factset)
+                await getPatriarchAndWives(marriage.Link, factset, marriage.Name)
             }
         }
     }
