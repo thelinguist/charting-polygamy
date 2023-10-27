@@ -1,12 +1,16 @@
-import { getPostBySlug, getPostSlugs } from "../../../lib/getAllPosts"
+// this goes in chart/[slug]/page.tsx but it's not working, see the issue:
+// https://github.com/vercel/next.js/issues/54393
+import { getPostBySlug, getPostTitles } from "../../../lib/getAllPosts"
 import PostBody from "../../../components/PostBody/PostBody"
 import markdownToHtml from "../../../lib/markdownToHTML"
 
-export function generateStaticParams() {
-    const posts = getPostSlugs()
-    return posts.map(post => ({
-        slug: post,
-    }))
+export async function generateStaticParams() {
+    const titles = getPostTitles()
+    return titles.map((post) => {
+        return {
+            slug: post.split('.')[0]
+        }
+    })
 }
 
 async function fetchPost(slug) {

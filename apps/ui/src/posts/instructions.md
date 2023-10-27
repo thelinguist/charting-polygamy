@@ -10,8 +10,9 @@ It will gather your family history details (but will not send the data anywhere)
 
 Here is an example of the results:
 
-| TODO |
-| ---- |
+|                                                                                                                                                                  ![Parley P Pratt](/parley-p-pratt.svg)                                                                                                                                                                  |
+|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| In the Pratt family there were 12 total wives. Notice that **Eleanor Jane McComb McLean** had a husband before ([this has historic value](https://encyclopediaofarkansas.net/entries/parley-p-pratt-7638/)). You can see that Mr. Pratt's first wife is 10 years older (she has a gap of +10 years). Whereas **Martha Monk** was 18 years younger than her husband (-18) |
 
 # How it works
 

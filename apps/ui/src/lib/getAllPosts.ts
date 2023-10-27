@@ -4,7 +4,7 @@ import matter from "gray-matter"
 
 const postsDirectory = join(process.cwd(), "src/posts")
 
-export function getPostSlugs() {
+export function getPostTitles() {
     return fs.readdirSync(postsDirectory)
 }
 
@@ -33,7 +33,7 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
 }
 
 export function getAllPosts(fields: string[] = []) {
-    const slugs = getPostSlugs()
+    const slugs = getPostTitles()
     const posts = slugs.map(slug => getPostBySlug(slug, fields))
     return posts
 }
