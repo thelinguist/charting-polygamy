@@ -14,6 +14,7 @@ describe("dateTools", function () {
          ${"abt. 1842"}         | ${"01/01/1842"}
          ${"before 1900"}       | ${"01/01/1899"}
          ${"before jan 1848"}   | ${"12/01/1847"}
+         ${"08/17/1830"}        | ${"08/17/1830"}
     `(`parses unformatted date $dateString}`, ({ dateString, ddMMyyyy }) => {
         expect(parseTextDate(dateString, {})).toStrictEqual(new Date(ddMMyyyy))
     })

@@ -83,9 +83,12 @@ export const parseTextDate = (text: string, existingFact: Partial<FactRecord>, l
         return parse(text, "d MMMM yyyy", new Date())
     } else if (monthFirstMatcher.test(text)) {
         return parse(text, "MMMM d yyyy", new Date())
-    } else {
+    }
+    const attemptedRead = new Date(text)
+    if (isNaN(attemptedRead.getTime())) {
         throw new Error(`unrecognizable date format ${text}`)
     }
+    return attemptedRead
 }
 
 export const dateToMMDDYYYY = (date: Date) => format(date, "MM/dd/yyyy")
