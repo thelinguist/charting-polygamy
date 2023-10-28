@@ -47,5 +47,6 @@
     "turbo": "latest"
   },
   "packageManager": "pnpm@8.6.10",
-  "name": "charting-polygamy"
+  "name": "charting-polygamy",
+  "version": "1.0.0"
 }
