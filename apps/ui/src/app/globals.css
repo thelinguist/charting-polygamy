@@ -125,9 +125,32 @@ a {
   text-decoration: none;
 }
 
+.reader {
+  display: grid;
+  place-items: center;
+}
+
+.reader > * {
+  max-width: 800px;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
+
+  button {
+    color: rgb(var(--color-primary-100));
+    background: rgba(var(--card-rgb), 0);
+    border: 2px solid rgb(var(--card-border-rgb));
+  }
 }
 
+  button {
+    text-decoration: underline;
+    font-size: 15pt;
+    padding: .5em;
+    margin: 1em;
+    border-radius: var(--border-radius);
+    transition: background 200ms, border 200ms;
+  }

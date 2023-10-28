@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 6rem;
-  min-height: calc(100vh - 2rem - 2em);
+  min-height: calc(100vh - 2rem - 86px - 5px);
 }
 
 .description {
@@ -98,6 +98,9 @@
 
 /* Mobile */
 @media (max-width: 700px) {
+  .main {
+    padding: 2rem;
+  }
   .content {
     padding: 4rem;
   }
