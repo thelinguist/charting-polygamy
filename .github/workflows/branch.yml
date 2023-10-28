@@ -16,9 +16,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: pnpm/action-setup@v2
         with:
-          node-version: 20.x
+          version: 8
 #          cache: 'pnpm' TODO
 #          cache-dependency-path: ./pnpm-lock.yaml
       - run: pnpm ci
