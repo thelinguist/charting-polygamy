@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    transpilePackages: ['lib'],
-    output: "export" // TODO this isn't working with the md files
+    transpilePackages: ["lib"],
+    output: "export",
+    basePath: "/charting-polygamy",
 }
 
 module.exports = nextConfig
