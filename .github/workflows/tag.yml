@@ -2,7 +2,7 @@ name: Tag Actions - Deploy Pages
 on:
   push:
     tags:
-      - '*' # tags are triggered by semantic release
+      - 'not-used' # tags are triggered by semantic release. TODO: make these jobs run on a tag not on master
 
 permissions:
   contents: read # for checkout
