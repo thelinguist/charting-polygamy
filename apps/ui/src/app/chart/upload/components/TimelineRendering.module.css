@@ -1,0 +1,30 @@
+.chart {
+  color: black;
+  width: 75vw;
+  background: rgb(var(--color-surface-mixed-600));
+  border-radius: 2rem/6rem;
+  padding: 2rem;
+  margin: 1rem;
+}
+
+.uploadInfo > button {
+  color: rgb(var(--color-surface-mixed-100));
+  background: rgb(var(--color-primary-100));
+  border: 2px solid rgb(var(--color-surface-mixed-100));
+}
+
+.uploadInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-list {
+  margin: 2rem;
+}
+
+.placeholder {
+  height: 30rem;
+  display: grid;
+  place-items: center;
+}

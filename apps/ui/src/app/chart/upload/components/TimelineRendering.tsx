@@ -5,7 +5,7 @@ import { Mermaid } from "./Mermaid"
 import { getTimelinesForMermaid } from "lib"
 import { FileTypes } from "lib/src/types"
 import { parseFile } from "../../../../lib/parseFile"
-import styles from "./Demo.module.css"
+import styles from "./TimelineRendering.module.css"
 import classNames from "../../../../lib/classNames"
 import { example3Wives } from "../constants/sample"
 
@@ -29,12 +29,17 @@ export const TimelineRendering = () => {
     }
 
     return (
-        <div className="form">
-            <div className={classNames("formGroup", styles.chart)}>
-                <label>upload a gedcom file</label> <input type="file" onChange={onChange} />
-                <br />
+        <div>
+            <div className={classNames(styles.chart, styles.uploadInfo)}>
+                <button>
+                     <label htmlFor="upload" role={"button"} title={"upload files"}>
+                    <a>
+                        upload a gedcom file
+                    </a>
+                </label>
+                <input id="upload" type="file" onChange={onChange} hidden />
+                </button>
                 Or
-                <br />
                 <button onClick={runDemo}>try the demo</button>
             </div>
             <div>
