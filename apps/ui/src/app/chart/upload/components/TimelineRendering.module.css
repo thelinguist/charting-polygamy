@@ -1,3 +1,4 @@
+
 .chart {
   color: black;
   width: 75vw;
@@ -19,6 +20,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media all and (orientation: portrait) {
+  .timelines::before {
+    content: "These graphs are best viewed in landscape orientation";
+    display: block;
+    color: black;
+    width: 75vw;
+    background: rgb(var(--color-surface-mixed-600));
+    border-radius: 2rem/6rem;
+    padding: 2rem;
+    margin: 1rem;
+  }
 }
 
 .chart-list {

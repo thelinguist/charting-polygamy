@@ -9,11 +9,9 @@ import styles from "./TimelineRendering.module.css"
 import classNames from "../../../../lib/classNames"
 import { example3Wives } from "../constants/sample"
 import { UploadButton } from "../../../../components/UploadButton"
-import { useIsPortrait } from "../../../../hooks/useIsPortrait"
 
 export const TimelineRendering = () => {
     const [timelines, setTimelines] = useState<Record<string, string>>({})
-    const isPortrait = useIsPortrait()
     const onChange: ChangeEventHandler<HTMLInputElement> = async e => {
         e.preventDefault()
         if (e.target.files) {
@@ -31,8 +29,7 @@ export const TimelineRendering = () => {
     }
 
     return (
-        <div>
-            {isPortrait && <div className={classNames(styles.chart, styles.uploadInfo)}>These graphs are best viewed in landscape orientation</div>}
+        <div className={styles.timelines}>
             <div className={classNames(styles.chart, styles.uploadInfo)}>
                 <UploadButton title="upload files" text="upload a gedcom file" onChange={onChange} />
                 Or
