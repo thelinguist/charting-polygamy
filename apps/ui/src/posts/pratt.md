@@ -2,8 +2,8 @@
 title: "Parley P Pratt Line"
 ---
 
-| ![Parley P Pratt](/parley-p-pratt.svg) |
-|:--------------------------------------:|
+| ![Parley P Pratt](/charting-polygamy/parley-p-pratt.svg) |
+|:--------------------------------------------------------:|
 
 In the Pratt family there were 12 total wives. Notice that **Eleanor Jane McComb McLean** had a husband before ([this
 fact has historic value](https://encyclopediaofarkansas.net/entries/parley-p-pratt-7638/)). She divorced and shortly
