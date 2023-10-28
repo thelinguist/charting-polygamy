@@ -44,7 +44,7 @@ jobs:
       - name: Test
         run: pnpm test
   build:
-    needs: release
+    needs: test
     name: test-build
     runs-on: ubuntu-latest
     steps:
