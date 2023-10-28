@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/thelinguist/charting-polygamy/compare/v1.1.1...v1.1.2) (2023-10-28)
+
+
+### Bug Fixes
+
+* pipeline should additionally deploy pages ([3e7a9c2](https://github.com/thelinguist/charting-polygamy/commit/3e7a9c2ad7c087383d409994ab040d35358a0db6))
+
 ## [1.1.1](https://github.com/thelinguist/charting-polygamy/compare/v1.1.0...v1.1.1) (2023-10-28)
 
 
