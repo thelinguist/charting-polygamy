@@ -1,3 +1,10 @@
+## [1.1.8](https://github.com/thelinguist/charting-polygamy/compare/v1.1.7...v1.1.8) (2023-10-28)
+
+
+### Bug Fixes
+
+* report portrait mode ([064a037](https://github.com/thelinguist/charting-polygamy/commit/064a0372902decfc9d253074dce2883c32b706bb))
+
 ## [1.1.7](https://github.com/thelinguist/charting-polygamy/compare/v1.1.6...v1.1.7) (2023-10-28)
 
 
