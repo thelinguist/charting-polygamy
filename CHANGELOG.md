@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/thelinguist/charting-polygamy/compare/v1.0.0...v1.1.0) (2023-10-28)
+
+
+### Features
+
+* deploy to pages ([051b337](https://github.com/thelinguist/charting-polygamy/commit/051b337d4b0ca41420af939076bbc3a34cb14006))
+
 # 1.0.0 (2023-10-28)
 
 
