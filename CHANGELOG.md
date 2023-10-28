@@ -1,3 +1,11 @@
+## [1.1.7](https://github.com/thelinguist/charting-polygamy/compare/v1.1.6...v1.1.7) (2023-10-28)
+
+
+### Bug Fixes
+
+* light mode & mobile are rendered better ([ebeb3d3](https://github.com/thelinguist/charting-polygamy/commit/ebeb3d3b86a80c15f420bfb0075e6cd3abbbfec3))
+* light mode & mobile are rendered better ([9f64446](https://github.com/thelinguist/charting-polygamy/commit/9f64446266a92182571fcd2f88ffc9531611fad4))
+
 ## [1.1.6](https://github.com/thelinguist/charting-polygamy/compare/v1.1.5...v1.1.6) (2023-10-28)
 
 
