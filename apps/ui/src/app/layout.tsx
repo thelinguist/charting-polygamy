@@ -8,7 +8,9 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
     title: "Charting Polygamy",
-    description: "intro",
+    description: "A tool that generates graphs for plural family ancestry",
+    authors: [{ name: "Bryce Shelley" }],
+    keywords: ["polygamy","mormonism","mormon","genealogy","lds church","flds","mermaid.js","plural family","plural families"]
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
