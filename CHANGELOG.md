@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/thelinguist/charting-polygamy/compare/v1.1.4...v1.1.5) (2023-10-28)
+
+
+### Bug Fixes
+
+* base-path ([3f6eccd](https://github.com/thelinguist/charting-polygamy/commit/3f6eccd83910c6106c5db3cf22dcc84b44ce247e))
+
 ## [1.1.4](https://github.com/thelinguist/charting-polygamy/compare/v1.1.3...v1.1.4) (2023-10-28)
 
 
