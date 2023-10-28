@@ -53,7 +53,7 @@ jobs:
 
   # Build job
   build:
-    name: Release
+    name: Build
     runs-on: ubuntu-latest
     permissions:
       contents: write # to be able to publish a GitHub release
@@ -90,7 +90,7 @@ jobs:
       - name: build
         working-directory: ./apps/ui
         run: pnpm build
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-pages-artifact@v2
         if: always()
         with:
           name: github-pages
