@@ -53,6 +53,7 @@ jobs:
 
   # Build job
   build:
+    needs: release
     name: Build
     runs-on: ubuntu-latest
     permissions:
@@ -94,8 +95,7 @@ jobs:
         if: always()
         with:
           name: github-pages
-          path: |
-            apps/ui/out/
+          path: apps/ui/out/
           retention-days: 30
 
   deploy:
