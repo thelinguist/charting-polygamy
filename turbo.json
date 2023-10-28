@@ -6,6 +6,11 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
+    "test": {
+      "outputs": ["coverage/**"],
+      "dependsOn": [],
+      "outputMode": "full"
+    },
     "lint": {},
     "dev": {
       "cache": false,
