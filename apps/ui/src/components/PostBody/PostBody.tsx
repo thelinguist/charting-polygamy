@@ -4,9 +4,5 @@ type Props = {
     content: string
 }
 export default function PostBody({ content }: Props) {
-    return (
-        <div className="reader">
-            <div className={markdownStyles.markdown} dangerouslySetInnerHTML={{ __html: content }} />
-        </div>
-    )
+    return <div className={markdownStyles.markdown} dangerouslySetInnerHTML={{ __html: content }} />
 }

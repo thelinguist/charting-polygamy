@@ -105,12 +105,10 @@ a {
 }
 
 .reader {
-  display: grid;
-  place-items: center;
-}
-
-.reader > * {
+  /*display: grid;*/
+  /*place-items: center;*/
   max-width: 800px;
+  width: 100%;
 }
 
 @media (prefers-color-scheme: dark) {
