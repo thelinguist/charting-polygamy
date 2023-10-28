@@ -36,7 +36,14 @@ export default function Home() {
                     <h2>
                         Project FAQ <span>-&gt;</span>
                     </h2>
-                    <p>More info on this project and how to support it</p>
+                    <p>More info on this project</p>
+                </Link>
+
+                <Link href="/chart/about" className={styles.card}>
+                    <h2>
+                        About Me <span>-&gt;</span>
+                    </h2>
+                    <p>about me and how to support this project</p>
                 </Link>
             </div>
         </>

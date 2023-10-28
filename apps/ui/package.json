@@ -6,11 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "mockProd": "npx serve@latest out",
+    "mockProd": "next build && npx serve@latest out",
     "lint": "next lint",
     "test": "vitest"
   },
   "dependencies": {
+    "@uidotdev/usehooks": "^2.4.1",
     "gray-matter": "^4.0.3",
     "lib": "workspace:*",
     "mermaid": "^10.5.0",
@@ -29,6 +30,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.0.0",
     "jsdom": "^22.1.0",
+    "serve": "14.2.1",
     "tsconfig": "workspace:*",
     "typescript": "^5",
     "vitest": "^0.34.6"

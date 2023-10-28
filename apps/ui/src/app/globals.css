@@ -111,6 +111,19 @@ a {
   width: 100%;
 }
 
+button {
+  text-decoration: underline;
+  font-size: 15pt;
+  padding: .5em;
+  margin: 1em;
+  border-radius: var(--border-radius);
+  transition: background 200ms, border 200ms;
+}
+
+th img {
+  background-color: rgb(var(--color-surface-mixed-100));
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
@@ -121,13 +134,9 @@ a {
     background: rgba(var(--card-rgb), 0);
     border: 2px solid rgb(var(--card-border-rgb));
   }
+
+  th img {
+    background-color: unset;
+  }
 }
 
-  button {
-    text-decoration: underline;
-    font-size: 15pt;
-    padding: .5em;
-    margin: 1em;
-    border-radius: var(--border-radius);
-    transition: background 200ms, border 200ms;
-  }
