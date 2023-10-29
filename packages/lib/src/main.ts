@@ -1,10 +1,9 @@
 import { FileTypes } from "./types"
 import { createKnowledgeTree } from "./steps/createKnowledgeTree"
 import { createTimeline } from "./steps/createTimeline"
-import { charting } from "./util"
+import { charting, setConfig } from "./util"
 import { getFacts } from "./steps/createDB"
 import { checkIfPolygamous } from "./steps/checkIfPolygamous"
-import { setConfig } from "./util/config"
 
 interface Props {
     fileContents: string

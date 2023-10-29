@@ -16,6 +16,10 @@
   font-size: 32pt;
 }
 
+.markdown ul li {
+  margin-left: 1em;
+}
+
 .markdown a {
   color:rgb(var(--color-primary-100));
   text-decoration: underline;

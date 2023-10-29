@@ -1,6 +1,7 @@
 "use client"
 
 import React, { ChangeEventHandler, useState } from "react"
+import Link from "next/link"
 import { Mermaid } from "./Mermaid"
 import { getTimelinesForMermaid } from "lib"
 import { FileTypes } from "lib/src/types"
@@ -41,8 +42,25 @@ export const TimelineRendering = () => {
 
     return (
         <div className={styles.timelines}>
+            <div className={styles.chart}>
+                <p>In order to render a chart you will need either:</p>
+                <ul>
+                    <li>a gedcom file (which you can export from ancestry.com)</li>
+                    <li>
+                        a csv file, formatted{" "}
+                        <Link href="/data/parley-p-pratt.csv" target="_blank" rel="noopener noreferrer">
+                            like the one here
+                        </Link>
+                    </li>
+                </ul>
+            </div>
             <div className={classNames(styles.chart, styles.uploadInfo)}>
-                <UploadButton title="upload files" text="upload a gedcom or csv file" accept=".ged,.csv" onChange={onChange} />
+                <UploadButton
+                    title="upload files"
+                    text="upload a gedcom or csv file"
+                    accept=".ged,.csv"
+                    onChange={onChange}
+                />
                 Or
                 <button onClick={runDemo}>try the demo</button>
             </div>
@@ -51,7 +69,7 @@ export const TimelineRendering = () => {
                     <div className={classNames(styles.chart, styles.placeholder)}>graphs will go here</div>
                 )}
                 {Object.keys(timelines).map(name => (
-                    <div key={name} className={styles.chart}>
+                    <div key={name} className={classNames(styles.chart, styles.timeline)}>
                         <h2>{name}</h2>
                         <Mermaid chart={timelines[name]} title={name} />
                     </div>

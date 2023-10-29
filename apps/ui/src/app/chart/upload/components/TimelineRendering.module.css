@@ -2,11 +2,26 @@
 .chart {
   color: black;
   width: 75vw;
-  min-height: 400px;
   background: rgb(var(--color-surface-mixed-600));
   border-radius: 2rem/6rem;
   padding: 2rem;
   margin: 1rem;
+}
+
+.chart ul li {
+  margin-left: 1rem;
+}
+
+.chart a {
+  color:rgb(var(--color-primary-100));
+  text-decoration: underline;
+  background: rgba(var(--card-rgb), 0);
+  border: 1px solid rgba(var(--card-border-rgb), 0);
+  transition: background 200ms, border 200ms;
+}
+
+.timeline {
+  min-height: 400px;
 }
 
 .uploadInfo > button {
@@ -16,7 +31,6 @@
 }
 
 .uploadInfo {
-  min-height: unset;
   display: flex;
   justify-content: center;
   align-items: center;
