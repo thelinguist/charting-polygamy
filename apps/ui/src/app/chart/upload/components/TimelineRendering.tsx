@@ -10,15 +10,26 @@ import classNames from "../../../../lib/classNames"
 import { example3Wives } from "../constants/sample"
 import { UploadButton } from "../../../../components/UploadButton"
 
+const getFileFormat = (file: File): FileTypes => {
+    const ext = file.name.split(".").at(-1)
+    if (ext === "ged") return FileTypes.ged
+    if (ext === "csv") return FileTypes.csv
+    const message = `invalid file type ${ext}, expected ged or csv`
+    alert(message)
+    throw Error(message)
+}
+
 export const TimelineRendering = () => {
     const [timelines, setTimelines] = useState<Record<string, string>>({})
     const onChange: ChangeEventHandler<HTMLInputElement> = async e => {
         e.preventDefault()
         if (e.target.files) {
-            const fileContents = await parseFile(e.target.files[0], console.info)
+            const file = e.target.files[0]
+            const fileContents = await parseFile(file, console.info)
+            const fileFormat = getFileFormat(file)
             const newTimelines = getTimelinesForMermaid({
                 fileContents,
-                fileFormat: FileTypes.ged,
+                fileFormat,
             })
             setTimelines(newTimelines)
         }
@@ -31,7 +42,7 @@ export const TimelineRendering = () => {
     return (
         <div className={styles.timelines}>
             <div className={classNames(styles.chart, styles.uploadInfo)}>
-                <UploadButton title="upload files" text="upload a gedcom file" onChange={onChange} />
+                <UploadButton title="upload files" text="upload a gedcom or csv file" accept=".ged,.csv" onChange={onChange} />
                 Or
                 <button onClick={runDemo}>try the demo</button>
             </div>
