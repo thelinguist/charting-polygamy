@@ -1,6 +1,6 @@
 import React from "react"
 
-export const UploadButton = ({ text, title, onChange }) => {
+export const UploadButton = ({ text, title, onChange, accept }) => {
     return (
         <button>
             <label htmlFor="upload" role="button" title={title}>
@@ -8,7 +8,7 @@ export const UploadButton = ({ text, title, onChange }) => {
                     {text}
                 </a>
             </label>
-            <input id="upload" type="file" onChange={onChange} hidden />
+            <input id="upload" type="file" accept={accept} onChange={onChange} hidden />
         </button>
     )
 }
