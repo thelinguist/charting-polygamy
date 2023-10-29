@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/thelinguist/charting-polygamy/compare/v1.0.0...v1.1.0) (2023-10-29)
+
+
+### Features
+
+* allow csv to be uploaded ([#6](https://github.com/thelinguist/charting-polygamy/issues/6)) ([dbd1717](https://github.com/thelinguist/charting-polygamy/commit/dbd1717a0391a4fc161b360a7db17c94b8c30edf))
+
 # 1.0.0 (2023-10-28)
 
 
