@@ -3,6 +3,16 @@ import { PatriarchTimeline, Timeline } from "../../types"
 
 const dateFmt = "yyyy-MM-dd"
 
+const calcGap = (gap: number | undefined) => {
+    if (!gap) {
+        return ""
+    }
+    if (gap < 0) {
+        return `${Math.abs(gap)} years younger`
+    }
+    return `${gap} years older`
+}
+
 export const createChart = ({ rootTimeline, wives }: { rootTimeline: PatriarchTimeline; wives: Timeline[] }) => `
 gantt
     title ${rootTimeline.name} and his wives
@@ -15,7 +25,7 @@ gantt
 ${rootTimeline.marriages
     .map(
         marriage => `
-    age ${marriage.age ?? ""} | gap ${marriage.gap ?? ""}: ${plotMarriage(marriage, true)}`
+    age ${marriage.age ?? ""} | ${calcGap(marriage.gap)}: ${plotMarriage(marriage, true)}`
     )
     .join("")}${wives.map(plotWife).join("\n")}`
 
@@ -25,7 +35,7 @@ const plotWife = (wife: Timeline) => {
     section ${wife.name}
     life: ${format(wife.birth!, dateFmt)}, ${format(wife.death!, dateFmt)}
     marriage: ${plotMarriage(wife.linkedMarriage, true)}
-    age ${wife.age ?? ""} | gap ${wife.gap ?? ""}: ${plotMarriage(
+    age ${wife.age ?? ""} | ${calcGap(wife.gap)}: ${plotMarriage(
         wife.linkedMarriage,
         false,
         true
