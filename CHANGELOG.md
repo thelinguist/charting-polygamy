@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/thelinguist/charting-polygamy/compare/v1.1.1...v1.2.0) (2023-11-27)
+
+
+### Features
+
+* better age gap text ([#7](https://github.com/thelinguist/charting-polygamy/issues/7)) ([ec21b07](https://github.com/thelinguist/charting-polygamy/commit/ec21b071363024bc7a2fb5e5b226e98a90827b15))
+
 ## [1.1.1](https://github.com/thelinguist/charting-polygamy/compare/v1.1.0...v1.1.1) (2023-10-29)
 
 
