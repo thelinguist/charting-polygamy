@@ -32,9 +32,10 @@ practice. So to put it simply, many Mormon families had one husband and multiple
 
 ## Are you against polygamy?
 
-This is hard to answer. I do not practice it or know anyone personally who does. I am just seeking to understand my
-family history around it and offer the opportunity to others. Women are equal to men, and I condemn ideologies and
-practices to the contrary.
+This is hard to answer because, while I'm only familiar with polygamy during the Mormon movement, [it exists all over
+the world](https://www.pewresearch.org/short-reads/2020/12/07/polygamy-is-rare-around-the-world-and-mostly-confined-to-a-few-regions/).
+I do not practice it or know anyone personally who does. I am just seeking to understand my family history around it and
+offer the opportunity to others. Women are equal to men, and I condemn ideologies and practices to the contrary.
 
 ## Who is your audience then?
 
@@ -43,9 +44,9 @@ using this tool, from members of the LDS Church, to plural-family fundamentalist
 
 ## I am offended by your project
 
-I'm treading pretty carefully here, so I apologize if my amateur historicity isn't up to par. I am trying to stay
+I'm treading pretty carefully here, so I apologize if my amateur historicity accepted by everyone. I am trying to stay
 neutral on such an interesting and provoking topic, so help me out if I am not meeting my goal. People should be able to
-understand this part of Mormon (an American) culture in the full light of day.
+understand this part of Mormon (and American) culture in the full light of day.
 
 ## How do timelines reveal what life was like for plural families?
 
@@ -60,3 +61,7 @@ between husbands, wives, and step-families.
 -   Not all women stayed with their polygamous husband until their deaths. This has led me to journals and family
     stories about how this practice challenged the women who participated. This has been a very fascinating aspect to
     this project
+
+## I want to hear more about you and your experience with this project
+
+see [the about page](about)
