@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/thelinguist/charting-polygamy/compare/v1.2.0...v1.3.0) (2023-11-30)
+
+
+### Features
+
+* statistics & counts on plural fams ([#8](https://github.com/thelinguist/charting-polygamy/issues/8)) ([0dc624b](https://github.com/thelinguist/charting-polygamy/commit/0dc624bf30e53c38c75b3fa0ff9557924326b568))
+
 # [1.2.0](https://github.com/thelinguist/charting-polygamy/compare/v1.1.1...v1.2.0) (2023-11-27)
 
 
