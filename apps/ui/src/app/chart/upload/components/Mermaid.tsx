@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react"
 import mermaid from "mermaid"
 import useOnScreen from "../../../../hooks/useOnScreen"
 
-mermaid.initialize({ startOnLoad: true })
+mermaid.initialize({ startOnLoad: true, securityLevel: "antiscript" }) // allow html tags, clicking, but not scripting
 
 export const Mermaid: React.FunctionComponent<{
     chart: string
