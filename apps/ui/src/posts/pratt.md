@@ -13,6 +13,6 @@ You can see that Mr. Pratt's first wife is 10 years older (she has a gap of +10 
 years younger than her husband (-18)
 
 While Mary Ann Frost did marry Joseph Smith, in this case she was allowed to remain with her existing husband, Parley P
-Pratt. Therefore the marriage wasn't terminated, until she got divorced in 1853. This highlights the fact that during
+Pratt. Therefore, the marriage wasn't terminated, until she got divorced in 1853. This highlights the fact that during
 the Nauvoo period of the Mormon movement, plural marriages sometimes meant that the wife would still live with her
 current husband.
