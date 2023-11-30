@@ -1,6 +1,7 @@
-import { getPostBySlug, getPostTitles, classNames, markdownToHTML } from "../../../lib"
+import { classNames, markdownToHTML } from "../../../lib"
 import PostBody from "../../../components/PostBody/PostBody"
 import styles from './page.module.css'
+import { getPostBySlug, getPostTitles } from "./getAllPosts"
 
 export async function generateStaticParams() {
     const titles = getPostTitles()

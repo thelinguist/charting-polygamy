@@ -25,7 +25,7 @@ Here is an example of the results:
 You can jump in at one of these points:
 
 1. ~~grant access for this app to log into familySearch or ancestry.com~~ (work in progress)
-2. upload a file: Gedcom or ~~CSV~~
+2. upload a file: Gedcom or CSV
 3. build a chart
 
 The app will scan the info you provide and identify which men practiced polygamy. It will then generate a chart for each
