@@ -46,18 +46,20 @@ const [file] = program.args
 const fileContents = parseFile(file)
 const fileFormat = determineFormat(options.fileFormat, file)
 
-const timelines = getTimelinesForMermaid({
+const { charts, stats } = getTimelinesForMermaid({
     fileContents,
     fileFormat,
     allowFemaleConcurrentMarriages: options.allowFemaleConcurrentMarriages,
     patriarchName: options.name,
 })
 
-for (const patriarch in timelines) {
+for (const patriarch in charts) {
     if (!options.debug) {
         const filename = `${patriarch}.md`
-        saveToFile(timelines[patriarch], filename, getFactoids())
+        saveToFile(charts[patriarch], filename, getFactoids())
     } else {
-        stdout(timelines[patriarch])
+        stdout(charts[patriarch])
     }
 }
+
+console.log(getFactoids())

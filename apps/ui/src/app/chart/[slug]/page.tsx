@@ -1,8 +1,7 @@
-import { getPostBySlug, getPostTitles } from "../../../lib/getAllPosts"
+import { classNames, markdownToHTML } from "../../../lib"
 import PostBody from "../../../components/PostBody/PostBody"
-import markdownToHtml from "../../../lib/markdownToHTML"
 import styles from './page.module.css'
-import classNames from "../../../lib/classNames"
+import { getPostBySlug, getPostTitles } from "./getAllPosts"
 
 export async function generateStaticParams() {
     const titles = getPostTitles()
@@ -16,7 +15,7 @@ export async function generateStaticParams() {
 async function fetchPost(slug) {
     const post = getPostBySlug(slug, ["title", "content"])
 
-    const content = await markdownToHtml(post.content || "")
+    const content = await markdownToHTML(post.content || "")
 
     return {
         title: post.title,
