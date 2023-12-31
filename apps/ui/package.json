@@ -14,7 +14,7 @@
     "gray-matter": "^4.0.3",
     "lib": "workspace:*",
     "mermaid": "^10.5.0",
-    "next": "14.0.0",
+    "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
     "remark": "^15.0.1",
@@ -32,6 +32,6 @@
     "serve": "14.2.1",
     "tsconfig": "workspace:*",
     "typescript": "^5",
-    "vitest": "^0.34.6"
+    "vitest": "1.1.1"
   }
 }
