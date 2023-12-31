@@ -5,7 +5,7 @@
   "main": "src/main.ts",
   "scripts": {
     "lint": "eslint .",
-    "test": "vitest",
+    "test": "TZ=UTC vitest",
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {

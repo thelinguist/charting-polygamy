@@ -1,7 +1,7 @@
 import { FileTypes, Statistics } from "./types"
 import { createKnowledgeTree } from "./steps/createKnowledgeTree"
 import { createTimeline } from "./steps/createTimeline"
-import { charting, setConfig } from "./util"
+import { charting, setConfig, UserIntervention } from "./util"
 import { getFacts } from "./steps/createDB"
 import { checkIfPolygamous } from "./steps/checkIfPolygamous"
 import {
@@ -25,7 +25,8 @@ interface Output {
     charts: {
         [patriarchName: string]: string
     }
-    stats: Statistics
+    stats: Statistics,
+    errors: any
 }
 export const getTimelinesForMermaid = ({
     fileContents,
@@ -37,7 +38,6 @@ export const getTimelinesForMermaid = ({
     setConfig({ debugMode, allowFemaleConcurrentMarriages })
     const charts: Record<string, string> = {}
     const families = getFacts(fileContents, fileFormat, patriarchName)
-    // console.log(UserIntervention.getIssues())
     for (const family of families) {
         try {
             // TODO createKnowledgeTree should determine the marriage end (and reason). then checkIfPolygamous should be done earlier
@@ -68,5 +68,5 @@ export const getTimelinesForMermaid = ({
     if (debugMode && !patriarchName) {
         console.log(`\nfound ${Object.keys(charts).length} polygamous families`)
     }
-    return { charts, stats: reportStats() }
+    return { charts, stats: reportStats(), errors: UserIntervention.getIssues() }
 }
