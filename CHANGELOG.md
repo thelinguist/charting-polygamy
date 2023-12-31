@@ -1,3 +1,11 @@
+## [1.3.1](https://github.com/thelinguist/charting-polygamy/compare/v1.3.0...v1.3.1) (2023-12-31)
+
+
+### Bug Fixes
+
+* ignore mod. vuln. & update vitest ([#11](https://github.com/thelinguist/charting-polygamy/issues/11)) ([98adcd7](https://github.com/thelinguist/charting-polygamy/commit/98adcd70658e0007a637e1e6c17c61d69e028ef1))
+* render patriarchs with bad marriage data ([#10](https://github.com/thelinguist/charting-polygamy/issues/10)) ([12f4518](https://github.com/thelinguist/charting-polygamy/commit/12f4518b42dbfbf24cc69950d37b91d70e6e85c4))
+
 # [1.3.0](https://github.com/thelinguist/charting-polygamy/compare/v1.2.0...v1.3.0) (2023-11-30)
 
 

@@ -47,5 +47,5 @@
   },
   "packageManager": "pnpm@8.6.10",
   "name": "charting-polygamy",
-  "version": "1.3.0"
+  "version": "1.3.1"
 }
