@@ -8,6 +8,16 @@
   margin: 1rem;
 }
 
+.chart .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chart .header .actions {
+
+}
+
 .chart ul li {
   margin-left: 1rem;
 }

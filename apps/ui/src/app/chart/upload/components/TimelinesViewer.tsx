@@ -2,13 +2,13 @@
 
 import React, { ChangeEventHandler, useState } from "react"
 import Link from "next/link"
-import { Mermaid } from "./Mermaid"
 import { getTimelinesForMermaid } from "lib"
 import { FileTypes, Statistics } from "lib/src/types"
 import { parseFile, classNames } from "../../../../lib"
 import styles from "./TimelineRendering.module.css"
 import { example3Wives } from "../constants/sample"
 import { UploadButton } from "../../../../components/UploadButton"
+import { Timelines } from "./Timelines"
 
 const getFileFormat = (file: File): FileTypes => {
     const ext = file.name.split(".").at(-1)
@@ -19,7 +19,7 @@ const getFileFormat = (file: File): FileTypes => {
     throw Error(message)
 }
 
-export const TimelineRendering = () => {
+export const TimelinesViewer = () => {
     const [timelines, setTimelines] = useState<Record<string, string>>({})
     const [stats, setStats] = useState<Statistics>()
     const onChange: ChangeEventHandler<HTMLInputElement> = async e => {
@@ -65,28 +65,7 @@ export const TimelineRendering = () => {
                 Or
                 <button onClick={runDemo}>try the demo</button>
             </div>
-            <div>
-                {!Object.keys(timelines).length && (
-                    <div className={classNames(styles.chart, styles.placeholder)}>graphs will go here</div>
-                )}
-                {Object.keys(timelines).map(name => (
-                    <div key={name} className={classNames(styles.chart, styles.timeline)}>
-                        <h2>{name}</h2>
-                        <Mermaid chart={timelines[name]} title={name} />
-                    </div>
-                ))}
-                {stats ? (
-                    <div className={classNames(styles.chart, styles.timeline)}>
-                        <h2>Statistics</h2>
-                        <pre>{JSON.stringify(stats, null, 2)}</pre>
-                        <p>Number of polygamous families: {stats.polygamousFamilies}</p>
-                        <p>
-                            Percent of eligible men who practiced polygamy:{" "}
-                            {Math.round((stats.polygamousFamilies / stats.eligiblePatriarchs) * 100)}%
-                        </p>
-                    </div>
-                ) : null}
-            </div>
+            <Timelines timelines={timelines} stats={stats} />
         </div>
     )
 }

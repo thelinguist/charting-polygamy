@@ -9,7 +9,8 @@ mermaid.initialize({ startOnLoad: true, securityLevel: "antiscript" }) // allow 
 export const Mermaid: React.FunctionComponent<{
     chart: string
     title: string
-}> = ({ chart, title }) => {
+    id?: string
+}> = ({ chart, title, id }) => {
     const chartDiv = useRef<HTMLDivElement>(null)
     const isVisible = useOnScreen(chartDiv)
     const [error, setError] = useState(false)
@@ -27,7 +28,7 @@ export const Mermaid: React.FunctionComponent<{
 
     if (error) return <div>could not render graph for {title}</div>
     return (
-        <div ref={chartDiv} className="mermaid">
+        <div ref={chartDiv} id={id} className="mermaid">
             {chart}
         </div>
     )
