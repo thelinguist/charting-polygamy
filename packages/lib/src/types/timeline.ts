@@ -6,6 +6,7 @@ export interface PatriarchTimeline {
         age?: number
         gap?: number
         start?: Date
+        end?: Date // if omitted, marriage ended at death. TODO does not include living marriage
     }[] // patriarch only
 }
 export interface OtherMarriage {
@@ -20,7 +21,7 @@ export interface Timeline extends Omit<PatriarchTimeline, "marriages"> {
      */
     linkedMarriage: {
         start: Date
-        end?: Date
+        end?: Date // if omitted, marriage ended at 1st death. TODO does not include living marriage
     }
     otherMarriages: OtherMarriage[]
     age?: number
