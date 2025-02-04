@@ -1,29 +1,40 @@
 import AreaClosed from "@visx/shape/lib/shapes/AreaClosed"
 import { PatriarchTimeline, Timeline } from "lib/src/types"
-import { spouseColor, spouseMarriedColor, strokeColor, strokeWidth } from "./constants.ts"
+import { barWidth, spouseColor, spouseMarriedColor, strokeColor, strokeWidth } from "./constants.ts"
+import { PositionScale } from "@visx/shape/lib/types"
 
 interface Props {
     patriarchTimeline: PatriarchTimeline
     timeline: Timeline
-    scaleHeight: number
-    yScale: any
-    scale: any
+    yScale: PositionScale
+    yOffset: number
+    xScale: (date: Date) => number
 }
-export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, scale, scaleHeight, yScale }) => {
+export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, yOffset, yScale }) => {
     const end = Math.min(
         timeline.death.getTime(),
         timeline.linkedMarriage.end?.getTime() || Infinity,
         patriarchTimeline.death.getTime()
     )
+
+    const lifeBounds = [
+        { x: xScale(timeline.birth), y: yOffset },
+        { x: xScale(timeline.death), y: yOffset },
+        { x: xScale(timeline.death), y: yOffset + barWidth },
+        { x: xScale(timeline.birth), y: yOffset + barWidth },
+    ]
+    const marriageBounds = [
+        { x: xScale(timeline.linkedMarriage.start), y: yOffset },
+        { x: xScale(new Date(end)), y: yOffset },
+        { x: xScale(new Date(end)), y: yOffset + barWidth },
+        { x: xScale(timeline.linkedMarriage.start), y: yOffset + barWidth },
+    ]
+
     return (
         <>
             <AreaClosed
-                data={[
-                    { x: scale(timeline.birth), y: scaleHeight },
-                    { x: scale(timeline.death), y: scaleHeight },
-                    { x: scale(timeline.death), y: scaleHeight / 2 },
-                    { x: scale(timeline.birth), y: scaleHeight / 2 },
-                ]}
+                id={`spouse-${timeline.name}`}
+                data={lifeBounds}
                 x={d => d.x}
                 y={d => d.y}
                 stroke={strokeColor}
@@ -32,12 +43,7 @@ export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, scale, sc
                 fill={spouseColor}
             />
             <AreaClosed
-                data={[
-                    { x: scale(timeline.linkedMarriage.start), y: scaleHeight },
-                    { x: scale(end), y: scaleHeight },
-                    { x: scale(end), y: scaleHeight / 2 },
-                    { x: scale(timeline.linkedMarriage.start), y: scaleHeight / 2 },
-                ]}
+                data={marriageBounds}
                 x={d => d.x}
                 y={d => d.y}
                 stroke={strokeColor}

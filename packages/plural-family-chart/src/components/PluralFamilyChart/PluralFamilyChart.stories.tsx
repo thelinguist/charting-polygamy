@@ -1,10 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react"
 // import { fn } from "@storybook/test"
+import ParentSize from "@visx/responsive/lib/components/ParentSize"
 
 import { PluralFamilyChart } from "."
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
     title: "PluralFamilyChart",
+    // component: () => <ParentSize>{({ width, height }) => <PluralFamilyChart width={width} height={height} />}</ParentSize>,
     component: PluralFamilyChart,
     parameters: {
         // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
@@ -28,8 +30,6 @@ type Story = StoryObj<typeof meta>
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Monogamous: Story = {
     args: {
-        width: 800,
-        height: 600,
         patriarchTimeline: {
             name: "John Doe",
             birth: new Date("1870-09-12"),
@@ -56,8 +56,6 @@ export const Monogamous: Story = {
 
 export const Polygamous: Story = {
     args: {
-        width: 800,
-        height: 600,
         patriarchTimeline: {
             name: "John Doe",
             birth: new Date("1870-09-12"),

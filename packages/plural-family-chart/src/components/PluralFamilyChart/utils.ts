@@ -1,4 +1,5 @@
 import { PatriarchTimeline, Timeline } from "lib/src/types"
+import { patriarchColor } from "./constants.ts"
 
 export const getChartStartDate = (patriarch: PatriarchTimeline, timelines: Timeline[]): Date => {
     const births = [patriarch.birth, ...timelines.map(timeline => timeline.birth)]
@@ -19,4 +20,53 @@ export const checkPersonDetails = (patriarch: PatriarchTimeline): string | undef
     if (!patriarch?.death) {
         return "Patriarch is missing death date"
     }
+}
+
+interface TimelineData {
+    name: string
+    values: {
+        start?: Date
+        end?: Date
+        color?: string
+    }[]
+}
+
+export const convertTimelinesToData = (patriarchTimeline: PatriarchTimeline, timelines: Timeline[]): TimelineData[] => {
+    const patriarchData = {
+        name: patriarchTimeline.name,
+        values: [
+            {
+                start: patriarchTimeline.birth,
+                end: patriarchTimeline.death,
+                color: patriarchColor,
+            },
+            ...patriarchTimeline.marriages.map(marriage => ({
+                start: marriage.start,
+                end: marriage.end || patriarchTimeline.death,
+                color: "purple",
+            })),
+        ],
+    }
+    const spousesData = timelines.map(timeline => ({
+        name: timeline.name,
+        values: [
+            {
+                start: timeline.birth,
+                end: timeline.death,
+                color: "grey",
+            },
+            {
+                start: timeline.linkedMarriage.start,
+                end: new Date(Math.min(
+                    timeline.linkedMarriage.end?.getTime() || Infinity,
+                    patriarchTimeline.death.getTime(),
+                    timeline.death.getTime()
+                )),
+            },
+        ],
+    }))
+    return [
+        patriarchData,
+        ...spousesData
+    ]
 }

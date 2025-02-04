@@ -1,139 +1,98 @@
-import React from "react"
-import { coerceNumber, scaleLinear, scaleUtc } from "@visx/scale"
-import { Axis, AxisScale, Orientation, SharedAxisProps } from "@visx/axis"
-import { GridRows } from "@visx/grid"
-import { AnimatedAxis, AnimatedGridRows } from "@visx/react-spring"
-import { timeFormat } from "@visx/vendor/d3-time-format"
-import { GridRowsProps } from "@visx/grid/lib/grids/GridRows"
 import { PatriarchTimeline, Timeline } from "lib/src/types"
-import { Background } from "./Background.tsx"
-import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion.ts"
-import { Patriarch } from "./Patriarch.tsx"
-import { listDecades } from "../../utils.ts"
-import { BadData } from "./BadData.tsx"
+import { Group } from "@visx/group"
+import { AxisLeft, AxisTop, Orientation } from "@visx/axis"
+import { axisColor, barWidth, tickLabelProps } from "./constants.ts"
+import { scaleLinear, scaleOrdinal, scaleUtc } from "@visx/scale"
+import { getMinMax, listDecades } from "../../utils.ts"
 import { checkPersonDetails, getChartEndDate, getChartStartDate } from "./utils.ts"
+import React from "react"
+import { timeFormat } from "@visx/vendor/d3-time-format"
+import { Patriarch } from "./Patriarch.tsx"
 import { Spouse } from "./Spouse.tsx"
+import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion.ts"
+import { BadData } from "./BadData.tsx"
+import { TooSmall } from "./TooSmall.tsx"
 
-export const backgroundColor = "#f3d3ff"
-const axisColor = "#000"
-const tickLabelColor = "#000"
-
-const margin = {
-    top: 40,
-    right: 150,
-    bottom: 20,
-    left: 50,
-}
-
-const tickLabelProps = {
-    fill: tickLabelColor,
-    fontSize: 12,
-    fontFamily: "sans-serif",
-    textAnchor: "middle",
-} as const
-
-const getMinMax = (vals: (number | { valueOf(): number })[]) => {
-    const numericVals = vals.map(coerceNumber)
-    return [Math.min(...numericVals), Math.max(...numericVals)]
-}
-
-export type Props = {
-    width: number
-    height: number
+interface Props {
+    width?: number
+    height?: number
     patriarchTimeline: PatriarchTimeline
     timelines: Timeline[]
+    margin?: { top: number; right: number; bottom: number; left: number }
 }
 
-type AnimationTrajectory = "outside" | "center" | "min" | "max" | undefined
-
-type AxisComponentType = React.FC<
-    SharedAxisProps<AxisScale> & {
-        animationTrajectory: AnimationTrajectory
-    }
->
-type GridRowsComponentType = React.FC<
-    GridRowsProps<AxisScale> & {
-        animationTrajectory: AnimationTrajectory
-    }
->
+const defaultMargin = { top: 40, left: 70, right: 40, bottom: 100 }
+export const background = "#eaedff"
 
 export const PluralFamilyChart: React.FC<Props> = ({
-    width: outerWidth = 800,
-    height: outerHeight = 800,
+    width = 800,
+    height = 600,
     patriarchTimeline,
     timelines,
+    margin = defaultMargin,
 }) => {
     const useAnimatedComponents = usePrefersReducedMotion()
     const dataErrors = checkPersonDetails(patriarchTimeline)
     if (dataErrors) return <BadData />
 
-    // in svg, margin is subtracted from total width/height
-    const width = outerWidth - margin.left - margin.right
-    const height = outerHeight - margin.top - margin.bottom
-    const animationTrajectory = "min"
-
-    const AxisComponent: AxisComponentType = !useAnimatedComponents ? AnimatedAxis : Axis
-    const GridRowsComponent: GridRowsComponentType = useAnimatedComponents ? AnimatedGridRows : GridRows
-
+    const chartWidth = width - margin.left - margin.right
+    if (chartWidth < 200) return <TooSmall />
+    const chartHeight = height - margin.top - margin.bottom // todo make this adaptive if more than 6 rows of timelines
     const timeValues = [getChartStartDate(patriarchTimeline, timelines), getChartEndDate(patriarchTimeline, timelines)]
 
-    const scale = scaleUtc({
+    const xScale = scaleUtc({
         domain: getMinMax(timeValues),
-        range: [0, width],
+        range: [0, chartWidth],
     })
-    const tickFormat = (v: Date, i: number) => (width > 400 || i % 2 === 0 ? timeFormat("%Y")(v) : "")
+    const tickFormat = (v: Date, i: number) => (chartWidth > 400 || i % 2 === 0 ? timeFormat("%Y")(v) : "")
 
-    if (width < 10) return null
-
+    // const scaleHeight = 50
     const scalePadding = 40
-    const scaleHeight = height / 4 - scalePadding
+    const scaleHeight = chartHeight - scalePadding
 
-    const yScale = scaleLinear({
-        domain: [100, 0],
-        range: [scaleHeight, 0],
+    // const yScale = scaleLinear({
+    //     domain: [100, 0],
+    //     range: [scaleHeight, 0], // flipped range to start graph at top
+    // })
+    const yScale = scaleOrdinal({
+        domain: timelines.map(timeline => timeline.name),
+        range: [barWidth * (timelines.length + 1), 0],
     })
+    const xTickValues = listDecades(timeValues[0], timeValues[1])
 
-    const tickValues = listDecades(timeValues[0], timeValues[1])
-
+    const yTickValues = [patriarchTimeline.name, ...timelines.map(timeline => timeline.name)]
     return (
-        <svg width={outerWidth} height={outerHeight}>
-            <Background backgroundColor={backgroundColor} outerWidth={outerWidth} outerHeight={outerHeight} />
-            <g transform={`translate(${margin.left},${margin.top})`}>
-                <GridRowsComponent
-                    scale={yScale}
-                    width={width}
-                    numTicks={4}
-                    animationTrajectory={animationTrajectory}
-                />
-                <AxisComponent
-                    orientation={Orientation.top}
-                    top={0}
-                    scale={scale}
+        <svg width={width} height={height}>
+            <rect width={width} height={height} fill={background} rx={14} />
+            <Group top={margin.top} left={margin.left}>
+                <AxisTop
+                    scale={xScale}
                     tickFormat={tickFormat}
                     stroke={axisColor}
                     tickStroke={axisColor}
                     tickLabelProps={tickLabelProps}
-                    tickValues={tickValues}
-                    animationTrajectory={animationTrajectory}
+                    tickValues={xTickValues}
+                    // animationTrajectory={animationTrajectory}
                 />
-                <Patriarch
-                    timelines={timelines}
-                    patriarchTimeline={patriarchTimeline}
-                    scaleHeight={scaleHeight}
-                    yScale={yScale}
-                    scale={scale}
+                <AxisLeft
+                    scale={yScale}
+                    stroke={axisColor}
+                    tickStroke={axisColor}
+                    tickValues={yTickValues}
+                    // animationTrajectory={animationTrajectory}
                 />
-                {timelines.map(timeline => (
+                <Patriarch patriarchTimeline={patriarchTimeline} yScale={yScale} xScale={xScale} />
+                {timelines.map((timeline, i) => (
                     <Spouse
-                        key={timeline.name}
+                        key={i}
                         patriarchTimeline={patriarchTimeline}
                         timeline={timeline}
                         yScale={yScale}
-                        scale={scale}
-                        scaleHeight={scaleHeight}
+                        xScale={xScale}
+                        yOffset={40*(i+1)}
                     />
                 ))}
-            </g>
+            </Group>
         </svg>
     )
 }

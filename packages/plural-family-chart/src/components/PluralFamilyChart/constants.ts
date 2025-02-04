@@ -1,7 +1,20 @@
 export const patriarchColor = "#4db7ff"
+export const patriarchMarriedColor = "#5c0be8"
 export const strokeColor = "#000"
 export const strokeWidth = 1
 
 export const spouseColor = "#cfcfcf"
 
 export const spouseMarriedColor = "#ff67f7"
+
+export const axisColor = strokeColor
+export const tickLabelColor = strokeColor
+
+export const tickLabelProps = {
+    fill: tickLabelColor,
+    fontSize: 12,
+    fontFamily: "sans-serif",
+    textAnchor: "middle",
+} as const
+
+export const barWidth = 40

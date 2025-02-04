@@ -1,3 +1,5 @@
+import { coerceNumber } from "@visx/scale"
+
 /**
  * given a start and end date, return a list of the beginning of each decade between them
  * @param start
@@ -13,4 +15,9 @@ export const listDecades = (start: Date, end: Date): Date[] => {
         }
     }
     return decades
+}
+
+export const getMinMax = (vals: (number | { valueOf(): number })[]) => {
+    const numericVals = vals.map(coerceNumber)
+    return [Math.min(...numericVals), Math.max(...numericVals)]
 }

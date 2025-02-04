@@ -1,29 +1,33 @@
 import AreaClosed from "@visx/shape/lib/shapes/AreaClosed"
 import { PatriarchTimeline, Timeline } from "lib/src/types"
-import { patriarchColor, strokeColor, strokeWidth } from "./constants.ts"
+import { barWidth, patriarchColor, patriarchMarriedColor, strokeColor, strokeWidth } from "./constants.ts"
 import React from "react"
+import { PositionScale } from "@visx/shape/lib/types"
+import { scaleLinear } from "@visx/scale"
 
 interface Props {
     patriarchTimeline: PatriarchTimeline
-    timelines: Timeline[]
-    scaleHeight: number
-    yScale: any
-    scale: any
+    // timelines: Timeline[]
+    yScale: PositionScale
+    xScale: (date: Date) => number
 }
-export const Patriarch: React.FC<Props> = ({ patriarchTimeline, scaleHeight, yScale, scale }) => {
+export const Patriarch: React.FC<Props> = ({ patriarchTimeline, yScale, xScale }) => {
     const start = patriarchTimeline.birth
     const end = patriarchTimeline.death
-    const height = scaleHeight / 2
-    const marriageColors = ["#431abc"] // todo do gradient from patriarchColor to this dark purple with steps based on number of marriages
 
+    const sizeColorScale = scaleLinear({
+        domain: [0, patriarchTimeline.marriages.length],
+        range: [patriarchColor, patriarchMarriedColor],
+    })
     return (
-        <>
+        <g>
             <AreaClosed
+                id={`patriarch-${patriarchTimeline.name}`}
                 data={[
-                    { x: scale(start), y: 0 },
-                    { x: scale(end), y: 0 },
-                    { x: scale(end), y: height },
-                    { x: scale(start), y: height },
+                    { x: xScale(start), y: 0 },
+                    { x: xScale(end), y: 0 },
+                    { x: xScale(end), y: barWidth },
+                    { x: xScale(start), y: barWidth },
                 ]}
                 x={d => d.x}
                 y={d => d.y}
@@ -32,20 +36,27 @@ export const Patriarch: React.FC<Props> = ({ patriarchTimeline, scaleHeight, ySc
                 stroke={strokeColor}
                 strokeWidth={strokeWidth}
             />
-            <AreaClosed
-                data={[
-                    { x: scale(patriarchTimeline.marriages[0].start), y: 0 },
-                    { x: scale(end), y: 0 },
-                    { x: scale(end), y: height },
-                    { x: scale(patriarchTimeline.marriages[0].start), y: height },
-                ]}
-                x={d => d.x}
-                y={d => d.y}
-                yScale={yScale}
-                fill={marriageColors[0]}
-                stroke={strokeColor}
-                strokeWidth={strokeWidth}
-            />
-        </>
+            {patriarchTimeline.marriages.map((marriage, i) => {
+                const color = sizeColorScale(i + 1)
+                return (
+                    <AreaClosed
+                        key={marriage.start?.getTime()}
+                        id={`patriarch-marriage-${patriarchTimeline.name}`}
+                        data={[
+                            { x: xScale(marriage.start!), y: 0 },
+                            { x: xScale(end), y: 0 },
+                            { x: xScale(end), y: barWidth },
+                            { x: xScale(marriage.start!), y: barWidth },
+                        ]}
+                        x={d => d.x}
+                        y={d => d.y}
+                        yScale={yScale}
+                        fill={color}
+                        stroke={strokeColor}
+                        strokeWidth={strokeWidth}
+                    />
+                )
+            })}
+        </g>
     )
 }
