@@ -3,7 +3,6 @@ import AreaClosed from "@visx/shape/lib/shapes/AreaClosed"
 import { PatriarchTimeline, Timeline } from "lib/src/types"
 import {
     barWidth,
-    labelMarginStart,
     patriarchColor,
     patriarchMarriedColor,
     strokeColor,
@@ -81,7 +80,7 @@ export const Patriarch: React.FC<Props> = ({ patriarchTimeline, yScale, xScale }
                             strokeWidth={strokeWidth}
                         />
                         <MarriageLabel
-                            xStart={xScale(marriage.start!) + labelMarginStart}
+                            xStart={xScale(marriage.start!)}
                             yStart={0}
                             year={marriage.start!.getFullYear()}
                             age={marriage.age || marriage.start!.getFullYear() - patriarchTimeline.birth.getFullYear()}

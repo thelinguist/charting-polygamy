@@ -68,7 +68,7 @@ export const PluralFamilyChart: React.FC<Props> = ({
                     hideAxisLine
                     tickValues={names}
                     tickLabelProps={{
-                        verticalAnchor: "start",
+                        verticalAnchor: "middle",
                         fontSize: 14,
                     }}
                     // animationTrajectory={animationTrajectory}
