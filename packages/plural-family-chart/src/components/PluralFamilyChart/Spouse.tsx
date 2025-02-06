@@ -1,7 +1,7 @@
-import AreaClosed from "@visx/shape/lib/shapes/AreaClosed"
 import { PatriarchTimeline, Timeline } from "lib/src/types"
 import { barWidth, spouseColor, spouseMarriedColor, strokeColor, strokeWidth } from "./constants.ts"
 import { PositionScale } from "@visx/shape/lib/types"
+import { Area } from "@visx/shape"
 
 interface Props {
     patriarchTimeline: PatriarchTimeline
@@ -32,23 +32,23 @@ export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, y
 
     return (
         <>
-            <AreaClosed
+            <Area
                 id={`spouse-${timeline.name}`}
                 data={lifeBounds}
-                x={d => d.x}
+                x0={lifeBounds[0].x}
+                x1={lifeBounds[1].x}
                 y={d => d.y}
                 stroke={strokeColor}
                 strokeWidth={strokeWidth}
-                yScale={yScale}
                 fill={spouseColor}
             />
-            <AreaClosed
+            <Area
                 data={marriageBounds}
-                x={d => d.x}
+                x0={marriageBounds[0].x}
+                x1={marriageBounds[1].x}
                 y={d => d.y}
                 stroke={strokeColor}
                 strokeWidth={strokeWidth}
-                yScale={yScale}
                 fill={spouseMarriedColor}
             />
         </>
