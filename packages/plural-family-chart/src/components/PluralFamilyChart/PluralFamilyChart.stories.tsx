@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react"
 // import { fn } from "@storybook/test"
-import ParentSize from "@visx/responsive/lib/components/ParentSize"
+// import ParentSize from "@visx/responsive/lib/components/ParentSize"
 
 import { PluralFamilyChart } from "."
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -115,7 +115,7 @@ export const spouseWhoIsOlder: Story = {
                 otherMarriages: [],
             },
         ],
-    }
+    },
 }
 
 export const Remarriage: Story = {
@@ -140,11 +140,13 @@ export const Remarriage: Story = {
                     start: new Date("1890-09-12"),
                     end: new Date("1908-09-12"),
                 },
-                otherMarriages: [{
-                    start: new Date("1910-09-12"),
-                    end: new Date("1920-09-12"),
-                    spouse: "Harry Housen"
-                }],
+                otherMarriages: [
+                    {
+                        start: new Date("1910-09-12"),
+                        end: new Date("1920-09-12"),
+                        spouse: "Harry Housen",
+                    },
+                ],
             },
         ],
     },

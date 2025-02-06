@@ -1,17 +1,17 @@
 import { PatriarchTimeline, Timeline } from "lib/src/types"
 import { Group } from "@visx/group"
-import { AxisLeft, AxisTop, Orientation } from "@visx/axis"
-import { axisColor, barWidth, tickLabelProps } from "./constants.ts"
-import { scaleLinear, scaleOrdinal, scaleUtc } from "@visx/scale"
-import { getMinMax, listDecades } from "../../utils.ts"
-import { checkPersonDetails, getChartEndDate, getChartStartDate } from "./utils.ts"
+import { AxisLeft } from "@visx/axis"
+import { axisColor, barWidth } from "./constants"
+import { scaleOrdinal, scaleUtc } from "@visx/scale"
+import { getMinMax } from "../../utils"
+import { checkPersonDetails, getChartEndDate, getChartStartDate } from "./utils"
 import React from "react"
-import { timeFormat } from "@visx/vendor/d3-time-format"
-import { Patriarch } from "./Patriarch.tsx"
-import { Spouse } from "./Spouse.tsx"
-import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion.ts"
-import { BadData } from "./BadData.tsx"
-import { TooSmall } from "./TooSmall.tsx"
+import { Patriarch } from "./Patriarch"
+import { Spouse } from "./Spouse"
+// import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion"
+import { BadData } from "./BadData"
+import { TooSmall } from "./TooSmall"
+import { TimelineAxis } from "./TimelineAxis"
 
 interface Props {
     width?: number
@@ -21,7 +21,7 @@ interface Props {
     margin?: { top: number; right: number; bottom: number; left: number }
 }
 
-const defaultMargin = { top: 40, left: 70, right: 40, bottom: 100 }
+const defaultMargin = { top: 40, left: 100, right: 40, bottom: 100 }
 export const background = "#eaedff"
 
 export const PluralFamilyChart: React.FC<Props> = ({
@@ -31,21 +31,19 @@ export const PluralFamilyChart: React.FC<Props> = ({
     timelines,
     margin = defaultMargin,
 }) => {
-    const useAnimatedComponents = usePrefersReducedMotion()
+    // const useAnimatedComponents = usePrefersReducedMotion()
     const dataErrors = checkPersonDetails(patriarchTimeline)
     if (dataErrors) return <BadData />
 
     const chartWidth = width - margin.left - margin.right
     if (chartWidth < 200) return <TooSmall />
-    const chartHeight = height - margin.top - margin.bottom // todo make this adaptive if more than 6 rows of timelines
+    // const chartHeight = height - margin.top - margin.bottom // todo make this adaptive if more than 6 rows of timelines
     const timeValues = [getChartStartDate(patriarchTimeline, timelines), getChartEndDate(patriarchTimeline, timelines)]
 
     const xScale = scaleUtc({
         domain: getMinMax(timeValues),
         range: [0, chartWidth],
     })
-    const tickFormat = (v: Date, i: number) => (chartWidth > 400 || i % 2 === 0 ? timeFormat("%Y")(v) : "")
-
     // const scaleHeight = 50
     // const scalePadding = 40
     // const scaleHeight = chartHeight - scalePadding
@@ -57,21 +55,11 @@ export const PluralFamilyChart: React.FC<Props> = ({
         range: ranges,
     })
 
-    const xTickValues = listDecades(timeValues[0], timeValues[1])
-
     return (
         <svg width={width} height={height}>
             <rect width={width} height={height} fill={background} rx={14} />
             <Group top={margin.top} left={margin.left}>
-                <AxisTop
-                    scale={xScale}
-                    tickFormat={tickFormat}
-                    stroke={axisColor}
-                    tickStroke={axisColor}
-                    tickLabelProps={tickLabelProps}
-                    tickValues={xTickValues}
-                    // animationTrajectory={animationTrajectory}
-                />
+                <TimelineAxis xScale={xScale} chartWidth={chartWidth} timeValues={timeValues as [Date, Date]} />
                 <AxisLeft
                     scale={yScale}
                     stroke={axisColor}
@@ -79,13 +67,19 @@ export const PluralFamilyChart: React.FC<Props> = ({
                     tickValues={names}
                     tickLabelProps={{
                         verticalAnchor: "start",
+                        fontSize: 14,
                     }}
                     // animationTrajectory={animationTrajectory}
                 />
-                <Patriarch patriarchTimeline={patriarchTimeline} yScale={yScale} xScale={xScale} />
-                {timelines.map((timeline, i) => (
+                <Patriarch
+                    patriarchTimeline={patriarchTimeline}
+                    timelines={timelines}
+                    yScale={yScale}
+                    xScale={xScale}
+                />
+                {timelines.map(timeline => (
                     <Spouse
-                        key={i}
+                        key={timeline.name}
                         patriarchTimeline={patriarchTimeline}
                         timeline={timeline}
                         yScale={yScale}

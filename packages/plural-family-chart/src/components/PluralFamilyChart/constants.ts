@@ -14,9 +14,17 @@ export const tickLabelColor = strokeColor
 
 export const tickLabelProps = {
     fill: tickLabelColor,
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: "sans-serif",
     textAnchor: "middle",
 } as const
 
-export const barWidth = 40
+export const timelineAnnotationProps = {
+    fontSize: 14,
+    fontFamily: "sans-serif",
+    textAnchor: "start",
+    verticalAnchor: "middle",
+}
+export const barWidth = 50
+
+export const labelMarginStart = 5

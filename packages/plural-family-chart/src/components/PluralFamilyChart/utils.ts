@@ -57,16 +57,15 @@ export const convertTimelinesToData = (patriarchTimeline: PatriarchTimeline, tim
             },
             {
                 start: timeline.linkedMarriage.start,
-                end: new Date(Math.min(
-                    timeline.linkedMarriage.end?.getTime() || Infinity,
-                    patriarchTimeline.death.getTime(),
-                    timeline.death.getTime()
-                )),
+                end: new Date(
+                    Math.min(
+                        timeline.linkedMarriage.end?.getTime() || Infinity,
+                        patriarchTimeline.death.getTime(),
+                        timeline.death.getTime()
+                    )
+                ),
             },
         ],
     }))
-    return [
-        patriarchData,
-        ...spousesData
-    ]
+    return [patriarchData, ...spousesData]
 }
