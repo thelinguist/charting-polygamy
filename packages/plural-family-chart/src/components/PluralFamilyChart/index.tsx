@@ -15,22 +15,23 @@ import { TimelineAxis } from "./TimelineAxis"
 
 interface Props {
     width?: number
-    height?: number
+    minHeight?: number
     patriarchTimeline: PatriarchTimeline
     timelines: Timeline[]
     margin?: { top: number; right: number; bottom: number; left: number }
 }
 
-const defaultMargin = { top: 40, left: 100, right: 40, bottom: 100 }
+const defaultMargin = { top: 40, left: 125, right: 40, bottom: 100 }
 export const background = "#eaedff"
 
 export const PluralFamilyChart: React.FC<Props> = ({
     width = 800,
-    height = 600,
+    minHeight = 600,
     patriarchTimeline,
     timelines,
     margin = defaultMargin,
 }) => {
+    const actualHeight = Math.max(timelines.length * barWidth + margin.top + margin.bottom, minHeight)
     // const useAnimatedComponents = usePrefersReducedMotion()
     const dataErrors = checkPersonDetails(patriarchTimeline)
     if (dataErrors) return <BadData />
@@ -56,8 +57,8 @@ export const PluralFamilyChart: React.FC<Props> = ({
     })
 
     return (
-        <svg width={width} height={height}>
-            <rect width={width} height={height} fill={background} rx={14} />
+        <svg width={width} height={actualHeight}>
+            <rect width={width} height={actualHeight} fill={background} rx={14} />
             <Group top={margin.top} left={margin.left}>
                 <TimelineAxis xScale={xScale} chartWidth={chartWidth} timeValues={timeValues as [Date, Date]} />
                 <AxisLeft
