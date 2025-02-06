@@ -5,7 +5,9 @@ export const strokeWidth = 1
 
 export const spouseColor = "#cfcfcf"
 
-export const spouseMarriedColor = "#ff67f7"
+export const spouseMarriedColor = "#f065c5"
+
+export const otherMarriageColor = "#e895ce"
 
 export const axisColor = strokeColor
 export const tickLabelColor = strokeColor

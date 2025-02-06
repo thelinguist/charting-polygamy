@@ -91,3 +91,61 @@ export const Polygamous: Story = {
         ],
     },
 }
+
+export const spouseWhoIsOlder: Story = {
+    args: {
+        patriarchTimeline: {
+            name: "John Doe",
+            birth: new Date("1870-09-12"),
+            death: new Date("1950-11-01"),
+            marriages: [
+                {
+                    start: new Date("1890-09-12"),
+                },
+            ],
+        },
+        timelines: [
+            {
+                name: "Jane Doe",
+                birth: new Date("1860-09-12"),
+                death: new Date("1952-11-01"),
+                linkedMarriage: {
+                    start: new Date("1890-09-12"),
+                },
+                otherMarriages: [],
+            },
+        ],
+    }
+}
+
+export const Remarriage: Story = {
+    args: {
+        patriarchTimeline: {
+            name: "John Doe",
+            birth: new Date("1870-09-12"),
+            death: new Date("1950-11-01"),
+            marriages: [
+                {
+                    start: new Date("1890-09-12"),
+                    end: new Date("1908-09-12"),
+                },
+            ],
+        },
+        timelines: [
+            {
+                name: "Jane Doe",
+                birth: new Date("1868-01-12"),
+                death: new Date("1952-11-01"),
+                linkedMarriage: {
+                    start: new Date("1890-09-12"),
+                    end: new Date("1908-09-12"),
+                },
+                otherMarriages: [{
+                    start: new Date("1910-09-12"),
+                    end: new Date("1920-09-12"),
+                    spouse: "Harry Housen"
+                }],
+            },
+        ],
+    },
+}
