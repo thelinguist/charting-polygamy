@@ -14,6 +14,7 @@
     "dependencies": {
         "@visx/annotation": "^3.12.0",
         "@visx/axis": "^3.12.0",
+        "@visx/bounds": "^3.12.0",
         "@visx/curve": "^3.12.0",
         "@visx/gradient": "^3.12.0",
         "@visx/grid": "^3.12.0",

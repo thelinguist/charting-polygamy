@@ -31,25 +31,25 @@ export const PluralFamilyChart: React.FC<Props> = ({
     timelines,
     margin = defaultMargin,
 }) => {
-    const actualHeight = Math.max(timelines.length * barWidth + margin.top + margin.bottom, minHeight)
     // const useAnimatedComponents = usePrefersReducedMotion()
     const dataErrors = checkPersonDetails(patriarchTimeline)
     if (dataErrors) return <BadData />
 
-    const chartWidth = width - margin.left - margin.right
+    const names = [patriarchTimeline.name, ...timelines.map(timeline => timeline.name)]
+
+    const largestName = names.reduce((acc, name) => (name.length > acc ? name.length : acc), 0)
+    const marginLeft = largestName * 9 // todo I should find a way to get the div width (i vs w)
+
+    const chartWidth = width - marginLeft - margin.right
     if (chartWidth < 200) return <TooSmall />
-    // const chartHeight = height - margin.top - margin.bottom // todo make this adaptive if more than 6 rows of timelines
+    const actualHeight = Math.max(timelines.length * barWidth + margin.top + margin.bottom, minHeight)
     const timeValues = [getChartStartDate(patriarchTimeline, timelines), getChartEndDate(patriarchTimeline, timelines)]
 
     const xScale = scaleUtc({
         domain: getMinMax(timeValues),
         range: [0, chartWidth],
     })
-    // const scaleHeight = 50
-    // const scalePadding = 40
-    // const scaleHeight = chartHeight - scalePadding
 
-    const names = [patriarchTimeline.name, ...timelines.map(timeline => timeline.name)]
     const ranges = names.map((_name, i) => i * barWidth)
     const yScale = scaleOrdinal({
         domain: names,
@@ -59,7 +59,7 @@ export const PluralFamilyChart: React.FC<Props> = ({
     return (
         <svg width={width} height={actualHeight}>
             <rect width={width} height={actualHeight} fill={background} rx={14} />
-            <Group top={margin.top} left={margin.left}>
+            <Group top={margin.top} left={marginLeft}>
                 <TimelineAxis xScale={xScale} chartWidth={chartWidth} timeValues={timeValues as [Date, Date]} />
                 <AxisLeft
                     scale={yScale}
