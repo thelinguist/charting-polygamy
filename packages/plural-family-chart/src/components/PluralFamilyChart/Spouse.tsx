@@ -7,27 +7,27 @@ interface Props {
     patriarchTimeline: PatriarchTimeline
     timeline: Timeline
     yScale: PositionScale
-    yOffset: number
     xScale: (date: Date) => number
 }
-export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, yOffset, yScale }) => {
+export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, yScale }) => {
     const end = Math.min(
         timeline.death.getTime(),
         timeline.linkedMarriage.end?.getTime() || Infinity,
         patriarchTimeline.death.getTime()
     )
+    const yStart = yScale(timeline.name)!
 
     const lifeBounds = [
-        { x: xScale(timeline.birth), y: yOffset },
-        { x: xScale(timeline.death), y: yOffset },
-        { x: xScale(timeline.death), y: yOffset + barWidth },
-        { x: xScale(timeline.birth), y: yOffset + barWidth },
+        { x: xScale(timeline.birth), y: yStart },
+        { x: xScale(timeline.death), y: yStart },
+        { x: xScale(timeline.death), y: yStart + barWidth },
+        { x: xScale(timeline.birth), y: yStart + barWidth },
     ]
     const marriageBounds = [
-        { x: xScale(timeline.linkedMarriage.start), y: yOffset },
-        { x: xScale(new Date(end)), y: yOffset },
-        { x: xScale(new Date(end)), y: yOffset + barWidth },
-        { x: xScale(timeline.linkedMarriage.start), y: yOffset + barWidth },
+        { x: xScale(timeline.linkedMarriage.start), y: yStart },
+        { x: xScale(new Date(end)), y: yStart },
+        { x: xScale(new Date(end)), y: yStart + barWidth },
+        { x: xScale(timeline.linkedMarriage.start), y: yStart + barWidth },
     ]
 
     return (

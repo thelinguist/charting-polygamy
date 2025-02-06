@@ -47,20 +47,18 @@ export const PluralFamilyChart: React.FC<Props> = ({
     const tickFormat = (v: Date, i: number) => (chartWidth > 400 || i % 2 === 0 ? timeFormat("%Y")(v) : "")
 
     // const scaleHeight = 50
-    const scalePadding = 40
-    const scaleHeight = chartHeight - scalePadding
+    // const scalePadding = 40
+    // const scaleHeight = chartHeight - scalePadding
 
-    // const yScale = scaleLinear({
-    //     domain: [100, 0],
-    //     range: [scaleHeight, 0], // flipped range to start graph at top
-    // })
+    const names = [patriarchTimeline.name, ...timelines.map(timeline => timeline.name)]
+    const ranges = names.map((_name, i) => i * barWidth)
     const yScale = scaleOrdinal({
-        domain: timelines.map(timeline => timeline.name),
-        range: [barWidth * (timelines.length + 1), 0],
+        domain: names,
+        range: ranges,
     })
+
     const xTickValues = listDecades(timeValues[0], timeValues[1])
 
-    const yTickValues = [patriarchTimeline.name, ...timelines.map(timeline => timeline.name)]
     return (
         <svg width={width} height={height}>
             <rect width={width} height={height} fill={background} rx={14} />
@@ -78,7 +76,10 @@ export const PluralFamilyChart: React.FC<Props> = ({
                     scale={yScale}
                     stroke={axisColor}
                     tickStroke={axisColor}
-                    tickValues={yTickValues}
+                    tickValues={names}
+                    tickLabelProps={{
+                        verticalAnchor: "start",
+                    }}
                     // animationTrajectory={animationTrajectory}
                 />
                 <Patriarch patriarchTimeline={patriarchTimeline} yScale={yScale} xScale={xScale} />
@@ -89,7 +90,6 @@ export const PluralFamilyChart: React.FC<Props> = ({
                         timeline={timeline}
                         yScale={yScale}
                         xScale={xScale}
-                        yOffset={40*(i+1)}
                     />
                 ))}
             </Group>
