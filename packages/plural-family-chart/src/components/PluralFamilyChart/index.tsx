@@ -1,7 +1,7 @@
 import { PatriarchTimeline, Timeline } from "lib/src/types"
 import { Group } from "@visx/group"
 import { AxisLeft } from "@visx/axis"
-import { axisColor, barWidth } from "./constants"
+import { barWidth } from "./constants"
 import { scaleOrdinal, scaleUtc } from "@visx/scale"
 import { getMinMax } from "../../utils"
 import { checkPersonDetails, getChartEndDate, getChartStartDate } from "./utils"
@@ -62,8 +62,9 @@ export const PluralFamilyChart: React.FC<Props> = ({
                 <TimelineAxis xScale={xScale} chartWidth={chartWidth} timeValues={timeValues as [Date, Date]} />
                 <AxisLeft
                     scale={yScale}
-                    stroke={axisColor}
-                    tickStroke={axisColor}
+                    hideTicks
+                    tickTransform={`translate(0,${barWidth / 2})`}
+                    hideAxisLine
                     tickValues={names}
                     tickLabelProps={{
                         verticalAnchor: "start",
