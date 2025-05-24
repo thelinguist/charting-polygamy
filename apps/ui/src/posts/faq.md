@@ -44,7 +44,7 @@ using this tool, from members of the LDS Church, to plural-family fundamentalist
 
 ## I am offended by your project
 
-I'm treading pretty carefully here, so I apologize if my amateur historicity accepted by everyone. I am trying to stay
+I'm treading pretty carefully here, so I apologize if my amateur historicity isn't accepted by everyone. I am trying to stay
 neutral on such an interesting and provoking topic, so help me out if I am not meeting my goal. People should be able to
 understand this part of Mormon (and American) culture in the full light of day.
 

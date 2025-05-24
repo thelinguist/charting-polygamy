@@ -1,0 +1,63 @@
+{
+    "name": "plural-family-chart",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc -b && vite build",
+        "lint": "eslint .",
+        "preview": "vite preview",
+        "storybook": "storybook dev -p 6006",
+        "build-storybook": "storybook build"
+    },
+    "dependencies": {
+        "@visx/annotation": "^3.12.0",
+        "@visx/axis": "^3.12.0",
+        "@visx/bounds": "^3.12.0",
+        "@visx/curve": "^3.12.0",
+        "@visx/gradient": "^3.12.0",
+        "@visx/grid": "^3.12.0",
+        "@visx/group": "^3.12.0",
+        "@visx/mock-data": "^3.12.0",
+        "@visx/react-spring": "^3.12.0",
+        "@visx/responsive": "^3.12.0",
+        "@visx/scale": "^3.12.0",
+        "@visx/shape": "^3.12.0",
+        "@visx/text": "^3.12.0",
+        "@visx/tooltip": "^3.12.0",
+        "@visx/vendor": "^3.12.0",
+        "lib": "workspace:*",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1"
+    },
+    "devDependencies": {
+        "@chromatic-com/storybook": "^3.2.4",
+        "@eslint/js": "^9.17.0",
+        "@storybook/addon-essentials": "^8.5.3",
+        "@storybook/addon-interactions": "^8.5.3",
+        "@storybook/addon-onboarding": "^8.5.3",
+        "@storybook/blocks": "^8.5.3",
+        "@storybook/react": "^8.5.3",
+        "@storybook/react-vite": "^8.5.3",
+        "@storybook/test": "^8.5.3",
+        "@types/react": "^18.3.18",
+        "@types/react-dom": "^18.3.5",
+        "@vitejs/plugin-react": "^4.3.4",
+        "eslint": "^9.17.0",
+        "eslint-plugin-react-hooks": "^5.0.0",
+        "eslint-plugin-react-refresh": "^0.4.16",
+        "eslint-plugin-storybook": "^0.11.2",
+        "globals": "^15.14.0",
+        "storybook": "^8.5.3",
+        "typescript": "~5.6.2",
+        "typescript-eslint": "^8.18.2",
+        "vite": "^6.0.5",
+        "vite-plugin-dts": "^4.5.0"
+    },
+    "eslintConfig": {
+        "extends": [
+            "plugin:storybook/recommended"
+        ]
+    }
+}
