@@ -1,10 +1,10 @@
 import { PatriarchTimeline, Timeline } from "lib/src/types"
-import { barWidth, otherMarriageColor, spouseColor, spouseMarriedColor, strokeColor, strokeWidth } from "./constants"
+import { barWidth, spouseColor, spouseMarriedColor, strokeColor, strokeWidth } from "./constants"
 import { Area } from "@visx/shape"
 import React from "react"
 import { MarriageLabel } from "./MarriageLabel"
-import { OtherMarriageLabel } from "./OtherMarriageLabel"
 import { BirthLabel } from "./BirthLabel"
+import { OtherMarriage } from "./OtherMarriage"
 
 interface Props {
     patriarchTimeline: PatriarchTimeline
@@ -13,7 +13,7 @@ interface Props {
     xScale: (date: Date) => number
 }
 export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, yScale }) => {
-    const end = Math.min(
+    const marriageEnd = Math.min(
         timeline.death.getTime(),
         timeline.linkedMarriage.end?.getTime() || Infinity,
         patriarchTimeline.death.getTime()
@@ -29,8 +29,8 @@ export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, y
 
     const marriageBounds = [
         { x: xScale(timeline.linkedMarriage.start), y: yStart },
-        { x: xScale(new Date(end)), y: yStart },
-        { x: xScale(new Date(end)), y: yStart + barWidth },
+        { x: xScale(new Date(marriageEnd)), y: yStart },
+        { x: xScale(new Date(marriageEnd)), y: yStart + barWidth },
         { x: xScale(timeline.linkedMarriage.start), y: yStart + barWidth },
     ]
 
@@ -67,29 +67,18 @@ export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, y
             />
             <MarriageLabel
                 xStart={xScale(timeline.linkedMarriage.start)}
+                xEnd={xScale(new Date(marriageEnd))}
                 yStart={yStart}
                 year={timeline.linkedMarriage.start.getFullYear()}
                 age={timeline.linkedMarriage.start.getFullYear() - timeline.birth.getFullYear()} // get actual age
             />
             {otherMarriageBounds.map((bounds, i) => (
-                <>
-                    <Area
-                        key={i}
-                        data={bounds}
-                        x0={bounds[0].x}
-                        x1={bounds[1].x}
-                        y={d => d.y}
-                        stroke={strokeColor}
-                        strokeWidth={strokeWidth}
-                        fill={otherMarriageColor}
-                    />
-                    <OtherMarriageLabel
-                        xStart={bounds[0].x}
-                        yStart={yStart}
-                        year={timeline.otherMarriages[i].start.getFullYear()}
-                        name={timeline.otherMarriages[i].spouse}
-                    />
-                </>
+                <OtherMarriage
+                    key={timeline.otherMarriages[i].spouse || i}
+                    otherMarriage={timeline.otherMarriages[i]}
+                    bounds={bounds}
+                    yStart={yStart}
+                />
             ))}
         </>
     )

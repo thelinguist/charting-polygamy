@@ -1,18 +1,12 @@
 import AreaClosed from "@visx/shape/lib/shapes/AreaClosed"
 
 import { PatriarchTimeline, Timeline } from "lib/src/types"
-import {
-    barWidth,
-    patriarchColor,
-    patriarchMarriedColor,
-    strokeColor,
-    strokeWidth,
-} from "./constants"
+import { barWidth, patriarchColor, patriarchMarriedColor, strokeColor, strokeWidth } from "./constants"
 import React from "react"
 import { PositionScale } from "@visx/shape/lib/types"
 import { scaleLinear } from "@visx/scale"
 import { MarriageLabel } from "./MarriageLabel"
-import { BirthLabel } from "./BirthLabel"
+import { ClippedText } from "./ClippedText"
 
 interface Props {
     patriarchTimeline: PatriarchTimeline
@@ -53,11 +47,13 @@ export const Patriarch: React.FC<Props> = ({ patriarchTimeline, yScale, xScale }
                 stroke={strokeColor}
                 strokeWidth={strokeWidth}
             />
-            <BirthLabel
+            <ClippedText
                 xStart={xScale(patriarchTimeline.birth)}
-                yStart={0}
-                year={patriarchTimeline.birth.getFullYear()}
-            />
+                xEnd={xScale(patriarchTimeline.death)}
+                y={barWidth / 2}
+            >
+                {patriarchTimeline.birth.getFullYear()}
+            </ClippedText>
             {patriarchTimeline.marriages.map((marriage, i) => {
                 const color = sizeColorScale(i + 1)
                 const end = Math.min(marriage.end?.getTime() || Infinity, patriarchTimeline.death.getTime())

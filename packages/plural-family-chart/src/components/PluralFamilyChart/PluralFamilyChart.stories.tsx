@@ -144,7 +144,7 @@ export const Remarriage: Story = {
                     {
                         start: new Date("1910-09-12"),
                         end: new Date("1920-09-12"),
-                        spouse: "Harry Housen",
+                        spouse: "Harry Housen McChallenging",
                     },
                 ],
             },
