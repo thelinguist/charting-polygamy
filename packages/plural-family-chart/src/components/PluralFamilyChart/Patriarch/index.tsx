@@ -5,9 +5,8 @@ import { barHeight, patriarchColor, patriarchMarriedColor, strokeColor, strokeWi
 import React from "react"
 import { PositionScale } from "@visx/shape/lib/types"
 import { scaleLinear } from "@visx/scale"
-import { MarriageLabel } from "../MarriageLabel.tsx"
-import { ClippedText } from "../ClippedText.tsx"
-import { PatriarchMarriage } from "./PatriarchMarriage.tsx"
+import { ClippedText } from "../ClippedText"
+import { PatriarchMarriage } from "./PatriarchMarriage"
 
 interface Props {
     patriarchTimeline: PatriarchTimeline
