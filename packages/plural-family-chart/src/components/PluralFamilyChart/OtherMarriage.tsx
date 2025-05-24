@@ -16,7 +16,7 @@ export const OtherMarriage = ({ bounds, yStart, otherMarriage }) => {
                 data={bounds}
                 x0={xStart}
                 x1={xEnd}
-                y={d => d.y}
+                y={d => (d as any).y}
                 stroke={strokeColor}
                 strokeWidth={strokeWidth}
                 fill={otherMarriageColor}

@@ -1,1 +1,1 @@
-export { PluralFamilyChart } from "./components/PluralFamilyChart/PluralFamilyChart"
+export { PluralFamilyChart } from "./components/PluralFamilyChart"
