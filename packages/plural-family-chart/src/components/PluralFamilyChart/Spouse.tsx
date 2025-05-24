@@ -1,5 +1,5 @@
 import { PatriarchTimeline, Timeline } from "lib/src/types"
-import { barWidth, spouseColor, spouseMarriedColor, strokeColor, strokeWidth } from "./constants"
+import { barHeight, spouseColor, spouseMarriedColor, strokeColor, strokeWidth } from "./constants"
 import { Area } from "@visx/shape"
 import React from "react"
 import { MarriageLabel } from "./MarriageLabel"
@@ -23,23 +23,23 @@ export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, y
     const lifeBounds = [
         { x: xScale(timeline.birth), y: yStart },
         { x: xScale(timeline.death), y: yStart },
-        { x: xScale(timeline.death), y: yStart + barWidth },
-        { x: xScale(timeline.birth), y: yStart + barWidth },
+        { x: xScale(timeline.death), y: yStart + barHeight },
+        { x: xScale(timeline.birth), y: yStart + barHeight },
     ]
 
     const marriageBounds = [
         { x: xScale(timeline.linkedMarriage.start), y: yStart },
         { x: xScale(new Date(marriageEnd)), y: yStart },
-        { x: xScale(new Date(marriageEnd)), y: yStart + barWidth },
-        { x: xScale(timeline.linkedMarriage.start), y: yStart + barWidth },
+        { x: xScale(new Date(marriageEnd)), y: yStart + barHeight },
+        { x: xScale(timeline.linkedMarriage.start), y: yStart + barHeight },
     ]
 
     const otherMarriageBounds = timeline.otherMarriages.map(marriage => {
         return [
             { x: xScale(marriage.start), y: yStart },
             { x: xScale(marriage.end), y: yStart },
-            { x: xScale(marriage.end), y: yStart + barWidth },
-            { x: xScale(marriage.start), y: yStart + barWidth },
+            { x: xScale(marriage.end), y: yStart + barHeight },
+            { x: xScale(marriage.start), y: yStart + barHeight },
         ]
     })
 

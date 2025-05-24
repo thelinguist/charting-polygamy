@@ -1,5 +1,4 @@
-import { Text, TextProps } from "@visx/text"
-import { barWidth, labelMarginStart, timelineAnnotationProps } from "./constants.ts"
+import { barHeight, labelMarginStart } from "./constants.ts"
 import { ClippedText } from "./ClippedText.tsx"
 
 interface Props {
@@ -15,14 +14,14 @@ export const MarriageLabel: React.FC<Props> = ({ xStart, xEnd, yStart, year, age
             <ClippedText
                 xStart={xStart + labelMarginStart}
                 xEnd={xEnd}
-                y={yStart + barWidth / 3}
+                y={yStart + barHeight / 3}
             >
                 {year}
             </ClippedText>
             <ClippedText
                 xStart={xStart + labelMarginStart}
                 xEnd={xEnd}
-                y={yStart + (barWidth * 2) / 3}
+                y={yStart + (barHeight * 2) / 3}
             >
                 {`${age.toString()} years old`}
             </ClippedText>

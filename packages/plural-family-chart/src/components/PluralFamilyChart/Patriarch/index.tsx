@@ -1,12 +1,13 @@
 import AreaClosed from "@visx/shape/lib/shapes/AreaClosed"
 
 import { PatriarchTimeline, Timeline } from "lib/src/types"
-import { barWidth, patriarchColor, patriarchMarriedColor, strokeColor, strokeWidth } from "./constants"
+import { barHeight, patriarchColor, patriarchMarriedColor, strokeColor, strokeWidth } from "../constants.ts"
 import React from "react"
 import { PositionScale } from "@visx/shape/lib/types"
 import { scaleLinear } from "@visx/scale"
-import { MarriageLabel } from "./MarriageLabel"
-import { ClippedText } from "./ClippedText"
+import { MarriageLabel } from "../MarriageLabel.tsx"
+import { ClippedText } from "../ClippedText.tsx"
+import { PatriarchMarriage } from "./PatriarchMarriage.tsx"
 
 interface Props {
     patriarchTimeline: PatriarchTimeline
@@ -37,8 +38,8 @@ export const Patriarch: React.FC<Props> = ({ patriarchTimeline, yScale, xScale }
                 data={[
                     { x: xScale(patriarchTimeline.birth), y: 0 },
                     { x: xScale(patriarchTimeline.death), y: 0 },
-                    { x: xScale(patriarchTimeline.death), y: barWidth },
-                    { x: xScale(patriarchTimeline.birth), y: barWidth },
+                    { x: xScale(patriarchTimeline.death), y: barHeight },
+                    { x: xScale(patriarchTimeline.birth), y: barHeight },
                 ]}
                 x={d => d.x}
                 y={d => d.y}
@@ -50,40 +51,23 @@ export const Patriarch: React.FC<Props> = ({ patriarchTimeline, yScale, xScale }
             <ClippedText
                 xStart={xScale(patriarchTimeline.birth)}
                 xEnd={xScale(patriarchTimeline.death)}
-                y={barWidth / 2}
+                y={barHeight / 2}
             >
                 {patriarchTimeline.birth.getFullYear()}
             </ClippedText>
-            {patriarchTimeline.marriages.map((marriage, i) => {
-                const color = sizeColorScale(i + 1)
-                const end = Math.min(marriage.end?.getTime() || Infinity, patriarchTimeline.death.getTime())
-                return (
-                    <>
-                        <AreaClosed
-                            key={marriage.start?.getTime()}
-                            id={`patriarch-marriage-${patriarchTimeline.name}`}
-                            data={[
-                                { x: xScale(marriage.start!), y: 0 },
-                                { x: xScale(new Date(end)), y: 0 },
-                                { x: xScale(new Date(end)), y: barWidth },
-                                { x: xScale(marriage.start!), y: barWidth },
-                            ]}
-                            x={d => d.x}
-                            y={d => d.y}
-                            yScale={yScale}
-                            fill={color}
-                            stroke={strokeColor}
-                            strokeWidth={strokeWidth}
-                        />
-                        <MarriageLabel
-                            xStart={xScale(marriage.start!)}
-                            yStart={0}
-                            year={marriage.start!.getFullYear()}
-                            age={marriage.age || marriage.start!.getFullYear() - patriarchTimeline.birth.getFullYear()}
-                        />
-                    </>
-                )
-            })}
+            {patriarchTimeline.marriages.map((marriage, i) => (
+                <PatriarchMarriage
+                    key={i}
+                    marriage={marriage}
+                    color={sizeColorScale(i + 1)}
+                    id={`patriarch-marriage-${patriarchTimeline.name}-${i}`}
+                    nextMarriage={patriarchTimeline.marriages[i + 1]}
+                    death={patriarchTimeline.death}
+                    birth={patriarchTimeline.birth}
+                    yScale={yScale}
+                    xScale={xScale}
+                />
+            ))}
         </g>
     )
 }

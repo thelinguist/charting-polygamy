@@ -1,7 +1,7 @@
 import { PatriarchTimeline, Timeline } from "lib/src/types"
 import { Group } from "@visx/group"
 import { AxisLeft } from "@visx/axis"
-import { barWidth } from "./constants"
+import { barHeight } from "./constants"
 import { scaleOrdinal, scaleUtc } from "@visx/scale"
 import { getMinMax } from "../../utils"
 import { checkPersonDetails, getChartEndDate, getChartStartDate } from "./utils"
@@ -42,7 +42,7 @@ export const PluralFamilyChart: React.FC<Props> = ({
 
     const chartWidth = width - marginLeft - margin.right
     if (chartWidth < 200) return <TooSmall />
-    const actualHeight = Math.max(timelines.length * barWidth + margin.top + margin.bottom, minHeight)
+    const actualHeight = Math.max(timelines.length * barHeight + margin.top + margin.bottom, minHeight)
     const timeValues = [getChartStartDate(patriarchTimeline, timelines), getChartEndDate(patriarchTimeline, timelines)]
 
     const xScale = scaleUtc({
@@ -50,7 +50,7 @@ export const PluralFamilyChart: React.FC<Props> = ({
         range: [0, chartWidth],
     })
 
-    const ranges = names.map((_name, i) => i * barWidth)
+    const ranges = names.map((_name, i) => i * barHeight)
     const yScale = scaleOrdinal({
         domain: names,
         range: ranges,
@@ -64,7 +64,7 @@ export const PluralFamilyChart: React.FC<Props> = ({
                 <AxisLeft
                     scale={yScale}
                     hideTicks
-                    tickTransform={`translate(0,${barWidth / 2})`}
+                    tickTransform={`translate(0,${barHeight / 2})`}
                     hideAxisLine
                     tickValues={names}
                     tickLabelProps={{

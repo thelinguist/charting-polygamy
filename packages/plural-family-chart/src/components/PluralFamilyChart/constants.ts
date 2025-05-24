@@ -25,6 +25,6 @@ export const timelineAnnotationProps = {
     textAnchor: "start",
     verticalAnchor: "middle",
 }
-export const barWidth = 50
+export const barHeight = 50
 
 export const labelMarginStart = 5
