@@ -28,8 +28,8 @@
         "@visx/tooltip": "^3.12.0",
         "@visx/vendor": "^3.12.0",
         "lib": "workspace:*",
-        "react": "^19.1.0",
-        "react-dom": "^19.1.0"
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0"
     },
     "devDependencies": {
         "@chromatic-com/storybook": "^3.2.4",

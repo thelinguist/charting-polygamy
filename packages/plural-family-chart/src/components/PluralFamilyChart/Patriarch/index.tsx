@@ -5,8 +5,9 @@ import { barHeight, patriarchColor, patriarchMarriedColor, strokeColor, strokeWi
 import React from "react"
 import { PositionScale } from "@visx/shape/lib/types"
 import { scaleLinear } from "@visx/scale"
-import { ClippedText } from "../ClippedText"
 import { PatriarchMarriage } from "./PatriarchMarriage"
+import { HoverContextProvider } from "../../../hooks/HoverContext.tsx"
+import { BirthLabel } from "../BirthLabel.tsx"
 
 interface Props {
     patriarchTimeline: PatriarchTimeline
@@ -31,42 +32,38 @@ export const Patriarch: React.FC<Props> = ({ patriarchTimeline, yScale, xScale }
     })
 
     return (
-        <g>
-            <AreaClosed
-                id={`patriarch-${patriarchTimeline.name}`}
-                data={[
-                    { x: xScale(patriarchTimeline.birth), y: 0 },
-                    { x: xScale(patriarchTimeline.death), y: 0 },
-                    { x: xScale(patriarchTimeline.death), y: barHeight },
-                    { x: xScale(patriarchTimeline.birth), y: barHeight },
-                ]}
-                x={d => d.x}
-                y={d => d.y}
-                yScale={yScale}
-                fill={patriarchColor}
-                stroke={strokeColor}
-                strokeWidth={strokeWidth}
-            />
-            <ClippedText
-                xStart={xScale(patriarchTimeline.birth)}
-                xEnd={xScale(patriarchTimeline.death)}
-                y={barHeight / 2}
-            >
-                {patriarchTimeline.birth.getFullYear()}
-            </ClippedText>
-            {patriarchTimeline.marriages.map((marriage, i) => (
-                <PatriarchMarriage
-                    key={i}
-                    marriage={marriage}
-                    color={sizeColorScale(i + 1)}
-                    id={`patriarch-marriage-${patriarchTimeline.name}-${i}`}
-                    nextMarriage={patriarchTimeline.marriages[i + 1]}
-                    death={patriarchTimeline.death}
-                    birth={patriarchTimeline.birth}
+        <HoverContextProvider>
+            <g>
+                <AreaClosed
+                    id={`patriarch-${patriarchTimeline.name}`}
+                    data={[
+                        { x: xScale(patriarchTimeline.birth), y: 0 },
+                        { x: xScale(patriarchTimeline.death), y: 0 },
+                        { x: xScale(patriarchTimeline.death), y: barHeight },
+                        { x: xScale(patriarchTimeline.birth), y: barHeight },
+                    ]}
+                    x={d => d.x}
+                    y={d => d.y}
                     yScale={yScale}
-                    xScale={xScale}
+                    fill={patriarchColor}
+                    stroke={strokeColor}
+                    strokeWidth={strokeWidth}
                 />
-            ))}
-        </g>
+                <BirthLabel
+                    xStart={xScale(patriarchTimeline.birth)}
+                    yStart={0}
+                    year={patriarchTimeline.birth.getFullYear()}
+                />
+                {patriarchTimeline.marriages.map((marriage, i) => (
+                    <PatriarchMarriage
+                        key={i}
+                        xScale={xScale}
+                        fillColor={sizeColorScale(i + 1)}
+                        patriarchTimeline={patriarchTimeline}
+                        marriage={marriage}
+                    />
+                ))}
+            </g>
+        </HoverContextProvider>
     )
 }

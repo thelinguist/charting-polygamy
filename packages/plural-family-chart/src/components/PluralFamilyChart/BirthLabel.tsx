@@ -1,5 +1,5 @@
 import { Text, TextProps } from "@visx/text"
-import { barHeight, labelMarginStart, timelineAnnotationProps } from "../constants"
+import { barHeight, labelMarginStart, timelineAnnotationProps } from "./constants.ts"
 
 interface Props {
     xStart: number

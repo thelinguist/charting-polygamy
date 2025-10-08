@@ -1,10 +1,10 @@
 import { PatriarchTimeline, Timeline } from "lib/src/types"
-import { barHeight, spouseColor, spouseMarriedColor, strokeColor, strokeWidth } from "../constants"
+import { barHeight, otherMarriageColor, spouseColor, spouseMarriedColor, strokeColor, strokeWidth } from "../constants"
 import { Area } from "@visx/shape"
 import React from "react"
-import { MarriageLabel } from "../MarriageLabel"
-import { BirthLabel } from "./BirthLabel"
-import { OtherMarriage } from "./OtherMarriage"
+import { BirthLabel } from "../BirthLabel.tsx"
+import { Marriage } from "../Marriage"
+import { HoverContextProvider } from "../../../hooks/HoverContext"
 
 interface Props {
     patriarchTimeline: PatriarchTimeline
@@ -43,8 +43,12 @@ export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, y
         ]
     })
 
+    const marriageAge = `${(
+        timeline.linkedMarriage.start.getFullYear() - timeline.birth.getFullYear()
+    ).toString()} years old`
+
     return (
-        <>
+        <HoverContextProvider>
             <Area
                 id={`spouse-${timeline.name}`}
                 data={lifeBounds}
@@ -56,30 +60,21 @@ export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, y
                 fill={spouseColor}
             />
             <BirthLabel xStart={xScale(timeline.birth)} yStart={yStart} year={timeline.birth.getFullYear()} />
-            <Area
-                data={marriageBounds}
-                x0={marriageBounds[0].x}
-                x1={marriageBounds[1].x}
-                y={d => d.y}
-                stroke={strokeColor}
-                strokeWidth={strokeWidth}
-                fill={spouseMarriedColor}
-            />
-            <MarriageLabel
-                xStart={xScale(timeline.linkedMarriage.start)}
-                xEnd={xScale(new Date(marriageEnd))}
-                yStart={yStart}
-                year={timeline.linkedMarriage.start.getFullYear()}
-                age={timeline.linkedMarriage.start.getFullYear() - timeline.birth.getFullYear()} // get actual age
+            <Marriage
+                bounds={marriageBounds}
+                fillColor={spouseMarriedColor}
+                text1={timeline.linkedMarriage.start.getFullYear()}
+                text2={marriageAge}
             />
             {otherMarriageBounds.map((bounds, i) => (
-                <OtherMarriage
+                <Marriage
                     key={timeline.otherMarriages[i].spouse || i}
-                    otherMarriage={timeline.otherMarriages[i]}
                     bounds={bounds}
-                    yStart={yStart}
+                    fillColor={otherMarriageColor}
+                    text1={timeline.otherMarriages[i].start.getFullYear()}
+                    text2={timeline.otherMarriages[i].spouse}
                 />
             ))}
-        </>
+        </HoverContextProvider>
     )
 }
