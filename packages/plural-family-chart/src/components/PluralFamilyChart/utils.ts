@@ -1,5 +1,5 @@
 import { PatriarchTimeline, Timeline } from "lib/src/types"
-import { patriarchColor } from "./constants.ts"
+import { patriarchColor } from "./constants"
 
 export const getChartStartDate = (patriarch: PatriarchTimeline, timelines: Timeline[]): Date => {
     const births = [patriarch.birth, ...timelines.map(timeline => timeline.birth)]

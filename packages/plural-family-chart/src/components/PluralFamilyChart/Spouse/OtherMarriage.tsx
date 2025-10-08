@@ -1,6 +1,6 @@
 import { Area } from "@visx/shape"
-import { otherMarriageColor, strokeColor, strokeWidth } from "../constants.ts"
-import { OtherMarriageLabel } from "./OtherMarriageLabel.tsx"
+import { otherMarriageColor, strokeColor, strokeWidth } from "../constants"
+import { OtherMarriageLabel } from "./OtherMarriageLabel"
 
 export const OtherMarriage = ({ bounds, yStart, otherMarriage }) => {
     // TODO this should become a component, calculate the width and clip the Text element (expand if hovering or tapped)

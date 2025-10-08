@@ -1,4 +1,4 @@
-import { axisColor, tickLabelProps } from "./constants.ts"
+import { axisColor, tickLabelProps } from "./constants"
 import { AxisScale, AxisTop } from "@visx/axis"
 import React from "react"
 import { listDecades } from "../../utils"
