@@ -1,13 +1,10 @@
-import AreaClosed from "@visx/shape/lib/shapes/AreaClosed"
-
 import { PatriarchTimeline, Timeline } from "lib/src/types"
-import { barHeight, patriarchColor, patriarchMarriedColor, strokeColor, strokeWidth } from "../constants.ts"
+import { patriarchColor, patriarchMarriedColor } from "../constants"
 import React from "react"
 import { PositionScale } from "@visx/shape/lib/types"
 import { scaleLinear } from "@visx/scale"
 import { PatriarchMarriage } from "./PatriarchMarriage"
-import { HoverContextProvider } from "../../../hooks/HoverContext.tsx"
-import { BirthLabel } from "../BirthLabel.tsx"
+import { PersonTimeline } from "../PersonTimeline"
 
 interface Props {
     patriarchTimeline: PatriarchTimeline
@@ -32,38 +29,23 @@ export const Patriarch: React.FC<Props> = ({ patriarchTimeline, yScale, xScale }
     })
 
     return (
-        <HoverContextProvider>
-            <g>
-                <AreaClosed
-                    id={`patriarch-${patriarchTimeline.name}`}
-                    data={[
-                        { x: xScale(patriarchTimeline.birth), y: 0 },
-                        { x: xScale(patriarchTimeline.death), y: 0 },
-                        { x: xScale(patriarchTimeline.death), y: barHeight },
-                        { x: xScale(patriarchTimeline.birth), y: barHeight },
-                    ]}
-                    x={d => d.x}
-                    y={d => d.y}
-                    yScale={yScale}
-                    fill={patriarchColor}
-                    stroke={strokeColor}
-                    strokeWidth={strokeWidth}
+        <PersonTimeline
+            name={patriarchTimeline.name}
+            birth={patriarchTimeline.birth}
+            death={patriarchTimeline.death}
+            xScale={xScale}
+            yScale={yScale}
+            isPatriarch
+        >
+            {patriarchTimeline.marriages.map((marriage, i) => (
+                <PatriarchMarriage
+                    key={i}
+                    xScale={xScale}
+                    fillColor={sizeColorScale(i + 1)}
+                    patriarchTimeline={patriarchTimeline}
+                    marriage={marriage}
                 />
-                <BirthLabel
-                    xStart={xScale(patriarchTimeline.birth)}
-                    yStart={0}
-                    year={patriarchTimeline.birth.getFullYear()}
-                />
-                {patriarchTimeline.marriages.map((marriage, i) => (
-                    <PatriarchMarriage
-                        key={i}
-                        xScale={xScale}
-                        fillColor={sizeColorScale(i + 1)}
-                        patriarchTimeline={patriarchTimeline}
-                        marriage={marriage}
-                    />
-                ))}
-            </g>
-        </HoverContextProvider>
+            ))}
+        </PersonTimeline>
     )
 }
