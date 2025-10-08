@@ -1,5 +1,5 @@
-import { barHeight, labelMarginStart } from "./constants.ts"
-import { ClippedText } from "./ClippedText.tsx"
+import { barHeight, labelMarginStart } from "./constants"
+import { ClippedText } from "./ClippedText"
 
 interface Props {
     xStart: number

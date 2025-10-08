@@ -1,10 +1,10 @@
 import { PatriarchTimeline, Timeline } from "lib/src/types"
-import { barHeight, spouseColor, spouseMarriedColor, strokeColor, strokeWidth } from "./constants"
+import { barHeight, spouseColor, spouseMarriedColor, strokeColor, strokeWidth } from "../constants.ts"
 import { Area } from "@visx/shape"
 import React from "react"
-import { MarriageLabel } from "./MarriageLabel"
-import { BirthLabel } from "./BirthLabel"
-import { OtherMarriage } from "./OtherMarriage"
+import { MarriageLabel } from "../MarriageLabel.tsx"
+import { BirthLabel } from "./BirthLabel.tsx"
+import { OtherMarriage } from "./OtherMarriage.tsx"
 
 interface Props {
     patriarchTimeline: PatriarchTimeline

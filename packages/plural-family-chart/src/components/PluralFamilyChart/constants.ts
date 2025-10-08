@@ -27,4 +27,4 @@ export const timelineAnnotationProps = {
 }
 export const barHeight = 50
 
-export const labelMarginStart = 5
+export const labelMarginStart = 2

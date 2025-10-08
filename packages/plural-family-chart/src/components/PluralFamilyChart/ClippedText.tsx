@@ -2,16 +2,15 @@ import { Text, TextProps } from "@visx/text"
 import { labelMarginStart, timelineAnnotationProps } from "./constants"
 import React from "react"
 import { Group } from "@visx/group"
-import { useOnHoverOrTap } from "../../hooks/useOnHoverOrTap"
 
 interface Props {
     xStart: number
     xEnd: number
     y: number
+    disableClip?: boolean
 }
 
-export const ClippedText: React.FC<TextProps & Props> = ({ xStart, xEnd, y, children, ...rest }) => {
-    const { handlers, isActive } = useOnHoverOrTap()
+export const ClippedText: React.FC<TextProps & Props> = ({ xStart, xEnd, y, children, disableClip, ...rest }) => {
     const textX = xStart + labelMarginStart
     const availableWidthForText = xEnd - textX
     const clipRectWidth = Math.max(0, availableWidthForText)
@@ -20,7 +19,6 @@ export const ClippedText: React.FC<TextProps & Props> = ({ xStart, xEnd, y, chil
 
     return (
         <Group
-            {...handlers}
             style={{ cursor: "pointer" }}
         >
             <defs>
@@ -40,7 +38,7 @@ export const ClippedText: React.FC<TextProps & Props> = ({ xStart, xEnd, y, chil
                 verticalAnchor="start"
                 textAnchor="start"
                 {...rest}
-                clipPath={isActive ? undefined : `url(#${clipPathId})`}
+                clipPath={disableClip ? undefined :`url(#${clipPathId})`}
             >
                 {children}
             </Text>

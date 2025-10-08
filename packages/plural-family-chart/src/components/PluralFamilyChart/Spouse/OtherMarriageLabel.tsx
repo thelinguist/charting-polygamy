@@ -1,7 +1,7 @@
-import { barHeight } from "./constants.ts"
+import { barHeight } from "../constants.ts"
 import { Group } from "@visx/group"
 import React from "react"
-import { ClippedText } from "./ClippedText.tsx"
+import { ClippedText } from "../ClippedText.tsx"
 
 interface Props {
     xStart: number
