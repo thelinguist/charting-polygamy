@@ -25,7 +25,7 @@ importers:
         version: link:packages/tsconfig
       turbo:
         specifier: latest
-        version: 1.10.15
+        version: 2.5.3
 
   apps/cli:
     dependencies:
@@ -224,46 +224,46 @@ importers:
     dependencies:
       '@visx/annotation':
         specifier: ^3.12.0
-        version: 3.12.0(react-dom@19.1.0)(react@19.1.0)
+        version: 3.12.0(react-dom@19.2.0)(react@19.2.0)
       '@visx/axis':
         specifier: ^3.12.0
-        version: 3.12.0(react@19.1.0)
+        version: 3.12.0(react@19.2.0)
       '@visx/bounds':
         specifier: ^3.12.0
-        version: 3.12.0(react-dom@19.1.0)(react@19.1.0)
+        version: 3.12.0(react-dom@19.2.0)(react@19.2.0)
       '@visx/curve':
         specifier: ^3.12.0
         version: 3.12.0
       '@visx/gradient':
         specifier: ^3.12.0
-        version: 3.12.0(react@19.1.0)
+        version: 3.12.0(react@19.2.0)
       '@visx/grid':
         specifier: ^3.12.0
-        version: 3.12.0(react@19.1.0)
+        version: 3.12.0(react@19.2.0)
       '@visx/group':
         specifier: ^3.12.0
-        version: 3.12.0(react@19.1.0)
+        version: 3.12.0(react@19.2.0)
       '@visx/mock-data':
         specifier: ^3.12.0
         version: 3.12.0
       '@visx/react-spring':
         specifier: ^3.12.0
-        version: 3.12.0(@react-spring/web@9.7.5)(react@19.1.0)
+        version: 3.12.0(@react-spring/web@9.7.5)(react@19.2.0)
       '@visx/responsive':
         specifier: ^3.12.0
-        version: 3.12.0(react@19.1.0)
+        version: 3.12.0(react@19.2.0)
       '@visx/scale':
         specifier: ^3.12.0
         version: 3.12.0
       '@visx/shape':
         specifier: ^3.12.0
-        version: 3.12.0(react@19.1.0)
+        version: 3.12.0(react@19.2.0)
       '@visx/text':
         specifier: ^3.12.0
-        version: 3.12.0(react@19.1.0)
+        version: 3.12.0(react@19.2.0)
       '@visx/tooltip':
         specifier: ^3.12.0
-        version: 3.12.0(react-dom@19.1.0)(react@19.1.0)
+        version: 3.12.0(react-dom@19.2.0)(react@19.2.0)
       '@visx/vendor':
         specifier: ^3.12.0
         version: 3.12.0
@@ -271,15 +271,15 @@ importers:
         specifier: workspace:*
         version: link:../lib
       react:
-        specifier: ^19.1.0
-        version: 19.1.0
+        specifier: ^19.2.0
+        version: 19.2.0
       react-dom:
-        specifier: ^19.1.0
-        version: 19.1.0(react@19.1.0)
+        specifier: ^19.2.0
+        version: 19.2.0(react@19.2.0)
     devDependencies:
       '@chromatic-com/storybook':
         specifier: ^3.2.4
-        version: 3.2.4(react@19.1.0)(storybook@8.6.14)
+        version: 3.2.4(react@19.2.0)(storybook@8.6.14)
       '@eslint/js':
         specifier: ^9.17.0
         version: 9.19.0
@@ -294,13 +294,13 @@ importers:
         version: 8.6.14(storybook@8.6.14)
       '@storybook/blocks':
         specifier: ^8.6.14
-        version: 8.6.14(react-dom@19.1.0)(react@19.1.0)(storybook@8.6.14)
+        version: 8.6.14(react-dom@19.2.0)(react@19.2.0)(storybook@8.6.14)
       '@storybook/react':
         specifier: ^8.6.14
-        version: 8.6.14(@storybook/test@8.6.14)(react-dom@19.1.0)(react@19.1.0)(storybook@8.6.14)(typescript@5.6.3)
+        version: 8.6.14(@storybook/test@8.6.14)(react-dom@19.2.0)(react@19.2.0)(storybook@8.6.14)(typescript@5.6.3)
       '@storybook/react-vite':
         specifier: ^8.6.14
-        version: 8.6.14(@storybook/test@8.6.14)(react-dom@19.1.0)(react@19.1.0)(storybook@8.6.14)(typescript@5.6.3)(vite@6.3.5)
+        version: 8.6.14(@storybook/test@8.6.14)(react-dom@19.2.0)(react@19.2.0)(storybook@8.6.14)(typescript@5.6.3)(vite@6.3.5)
       '@storybook/test':
         specifier: ^8.6.14
         version: 8.6.14(storybook@8.6.14)
@@ -892,7 +892,7 @@ packages:
     resolution: {integrity: sha512-s3jaWicZd0pkP0jf5ysyHUI/RE7MHos6qlToFcGWXVp+ykHOy77OUMrfbgJ9it2C5bow7OIQwYYaHjk9XlBQ2A==}
     dev: false
 
-  /@chromatic-com/storybook@3.2.4(react@19.1.0)(storybook@8.6.14):
+  /@chromatic-com/storybook@3.2.4(react@19.2.0)(storybook@8.6.14):
     resolution: {integrity: sha512-5/bOOYxfwZ2BktXeqcCpOVAoR6UCoeART5t9FVy22hoo8F291zOuX4y3SDgm10B1GVU/ZTtJWPT2X9wZFlxYLg==}
     engines: {node: '>=16.0.0', yarn: '>=1.22.18'}
     peerDependencies:
@@ -901,7 +901,7 @@ packages:
       chromatic: 11.25.2
       filesize: 10.1.6
       jsonfile: 6.1.0
-      react-confetti: 6.2.2(react@19.1.0)
+      react-confetti: 6.2.2(react@19.2.0)
       storybook: 8.6.14(prettier@3.0.3)
       strip-ansi: 7.1.0
     transitivePeerDependencies:
@@ -1606,7 +1606,7 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@mdx-js/react@3.1.0(@types/react@18.3.18)(react@19.1.0):
+  /@mdx-js/react@3.1.0(@types/react@18.3.18)(react@19.2.0):
     resolution: {integrity: sha512-QjHtSaoameoalGnKDT3FoIl4+9RwyTmo9ZJGBdLOks/YOiWHoRDI3PUwEzOE7kEmGcV3AFcp9K6dYu9rEuKLAQ==}
     peerDependencies:
       '@types/react': '>=16'
@@ -1614,7 +1614,7 @@ packages:
     dependencies:
       '@types/mdx': 2.0.13
       '@types/react': 18.3.18
-      react: 19.1.0
+      react: 19.2.0
     dev: true
 
   /@microsoft/api-extractor-model@7.30.6:
@@ -1931,57 +1931,57 @@ packages:
       config-chain: 1.1.13
     dev: true
 
-  /@react-spring/animated@9.7.5(react@19.1.0):
+  /@react-spring/animated@9.7.5(react@19.2.0):
     resolution: {integrity: sha512-Tqrwz7pIlsSDITzxoLS3n/v/YCUHQdOIKtOJf4yL6kYVSDTSmVK1LI1Q3M/uu2Sx4X3pIWF3xLUhlsA6SPNTNg==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@react-spring/shared': 9.7.5(react@19.1.0)
+      '@react-spring/shared': 9.7.5(react@19.2.0)
       '@react-spring/types': 9.7.5
-      react: 19.1.0
+      react: 19.2.0
     dev: false
 
-  /@react-spring/core@9.7.5(react@19.1.0):
+  /@react-spring/core@9.7.5(react@19.2.0):
     resolution: {integrity: sha512-rmEqcxRcu7dWh7MnCcMXLvrf6/SDlSokLaLTxiPlAYi11nN3B5oiCUAblO72o+9z/87j2uzxa2Inm8UbLjXA+w==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@react-spring/animated': 9.7.5(react@19.1.0)
-      '@react-spring/shared': 9.7.5(react@19.1.0)
+      '@react-spring/animated': 9.7.5(react@19.2.0)
+      '@react-spring/shared': 9.7.5(react@19.2.0)
       '@react-spring/types': 9.7.5
-      react: 19.1.0
+      react: 19.2.0
     dev: false
 
   /@react-spring/rafz@9.7.5:
     resolution: {integrity: sha512-5ZenDQMC48wjUzPAm1EtwQ5Ot3bLIAwwqP2w2owG5KoNdNHpEJV263nGhCeKKmuA3vG2zLLOdu3or6kuDjA6Aw==}
     dev: false
 
-  /@react-spring/shared@9.7.5(react@19.1.0):
+  /@react-spring/shared@9.7.5(react@19.2.0):
     resolution: {integrity: sha512-wdtoJrhUeeyD/PP/zo+np2s1Z820Ohr/BbuVYv+3dVLW7WctoiN7std8rISoYoHpUXtbkpesSKuPIw/6U1w1Pw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@react-spring/rafz': 9.7.5
       '@react-spring/types': 9.7.5
-      react: 19.1.0
+      react: 19.2.0
     dev: false
 
   /@react-spring/types@9.7.5:
     resolution: {integrity: sha512-HVj7LrZ4ReHWBimBvu2SKND3cDVUPWKLqRTmWe/fNY6o1owGOX0cAHbdPDTMelgBlVbrTKrre6lFkhqGZErK/g==}
     dev: false
 
-  /@react-spring/web@9.7.5(react-dom@19.1.0)(react@19.1.0):
+  /@react-spring/web@9.7.5(react-dom@19.2.0)(react@19.2.0):
     resolution: {integrity: sha512-lmvqGwpe+CSttsWNZVr+Dg62adtKhauGwLyGE/RRyZ8AAMLgb9x3NDMA5RMElXo+IMyTkPp7nxTB8ZQlmhb6JQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@react-spring/animated': 9.7.5(react@19.1.0)
-      '@react-spring/core': 9.7.5(react@19.1.0)
-      '@react-spring/shared': 9.7.5(react@19.1.0)
+      '@react-spring/animated': 9.7.5(react@19.2.0)
+      '@react-spring/core': 9.7.5(react@19.2.0)
+      '@react-spring/shared': 9.7.5(react@19.2.0)
       '@react-spring/types': 9.7.5
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
     dev: false
 
   /@rollup/pluginutils@5.1.4:
@@ -2493,12 +2493,12 @@ packages:
     peerDependencies:
       storybook: ^8.6.14
     dependencies:
-      '@mdx-js/react': 3.1.0(@types/react@18.3.18)(react@19.1.0)
-      '@storybook/blocks': 8.6.14(react-dom@19.1.0)(react@19.1.0)(storybook@8.6.14)
+      '@mdx-js/react': 3.1.0(@types/react@18.3.18)(react@19.2.0)
+      '@storybook/blocks': 8.6.14(react-dom@19.2.0)(react@19.2.0)(storybook@8.6.14)
       '@storybook/csf-plugin': 8.6.14(storybook@8.6.14)
-      '@storybook/react-dom-shim': 8.6.14(react-dom@19.1.0)(react@19.1.0)(storybook@8.6.14)
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
+      '@storybook/react-dom-shim': 8.6.14(react-dom@19.2.0)(react@19.2.0)(storybook@8.6.14)
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
       storybook: 8.6.14(prettier@3.0.3)
       ts-dedent: 2.2.0
     transitivePeerDependencies:
@@ -2592,7 +2592,7 @@ packages:
       storybook: 8.6.14(prettier@3.0.3)
     dev: true
 
-  /@storybook/blocks@8.6.14(react-dom@19.1.0)(react@19.1.0)(storybook@8.6.14):
+  /@storybook/blocks@8.6.14(react-dom@19.2.0)(react@19.2.0)(storybook@8.6.14):
     resolution: {integrity: sha512-rBMHAfA39AGHgkrDze4RmsnQTMw1ND5fGWobr9pDcJdnDKWQWNRD7Nrlxj0gFlN3n4D9lEZhWGdFrCbku7FVAQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -2604,9 +2604,9 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      '@storybook/icons': 1.3.2(react-dom@19.1.0)(react@19.1.0)
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
+      '@storybook/icons': 1.3.2(react-dom@19.2.0)(react@19.2.0)
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
       storybook: 8.6.14(prettier@3.0.3)
       ts-dedent: 2.2.0
     dev: true
@@ -2678,15 +2678,15 @@ packages:
     resolution: {integrity: sha512-FcOqPAXACP0I3oJ/ws6/rrPT9WGhu915Cg8D02a9YxLo0DE9zI+a9A5gRGvmQ09fiWPukqI8ZAEoQEdWUKMQdQ==}
     dev: true
 
-  /@storybook/icons@1.3.2(react-dom@19.1.0)(react@19.1.0):
+  /@storybook/icons@1.3.2(react-dom@19.2.0)(react@19.2.0):
     resolution: {integrity: sha512-t3xcbCKkPvqyef8urBM0j/nP6sKtnlRkVgC+8JTbTAZQjaTmOjes3byEgzs89p4B/K6cJsg9wLW2k3SknLtYJw==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
     dependencies:
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
     dev: true
 
   /@storybook/instrumenter@8.6.14(storybook@8.6.14):
@@ -2715,19 +2715,19 @@ packages:
       storybook: 8.6.14(prettier@3.0.3)
     dev: true
 
-  /@storybook/react-dom-shim@8.6.14(react-dom@19.1.0)(react@19.1.0)(storybook@8.6.14):
+  /@storybook/react-dom-shim@8.6.14(react-dom@19.2.0)(react@19.2.0)(storybook@8.6.14):
     resolution: {integrity: sha512-0hixr3dOy3f3M+HBofp3jtMQMS+sqzjKNgl7Arfuj3fvjmyXOks/yGjDImySR4imPtEllvPZfhiQNlejheaInw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
       storybook: ^8.6.14
     dependencies:
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
       storybook: 8.6.14(prettier@3.0.3)
     dev: true
 
-  /@storybook/react-vite@8.6.14(@storybook/test@8.6.14)(react-dom@19.1.0)(react@19.1.0)(storybook@8.6.14)(typescript@5.6.3)(vite@6.3.5):
+  /@storybook/react-vite@8.6.14(@storybook/test@8.6.14)(react-dom@19.2.0)(react@19.2.0)(storybook@8.6.14)(typescript@5.6.3)(vite@6.3.5):
     resolution: {integrity: sha512-FZU0xMPxa4/TO87FgcWwappOxLBHZV5HSRK5K+2bJD7rFJAoNorbHvB4Q1zvIAk7eCMjkr2GPCPHx9PRB9vJFg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
@@ -2743,13 +2743,13 @@ packages:
       '@joshwooding/vite-plugin-react-docgen-typescript': 0.5.0(typescript@5.6.3)(vite@6.3.5)
       '@rollup/pluginutils': 5.1.4
       '@storybook/builder-vite': 8.6.14(storybook@8.6.14)(vite@6.3.5)
-      '@storybook/react': 8.6.14(@storybook/test@8.6.14)(react-dom@19.1.0)(react@19.1.0)(storybook@8.6.14)(typescript@5.6.3)
+      '@storybook/react': 8.6.14(@storybook/test@8.6.14)(react-dom@19.2.0)(react@19.2.0)(storybook@8.6.14)(typescript@5.6.3)
       '@storybook/test': 8.6.14(storybook@8.6.14)
       find-up: 5.0.0
       magic-string: 0.30.17
-      react: 19.1.0
+      react: 19.2.0
       react-docgen: 7.1.1
-      react-dom: 19.1.0(react@19.1.0)
+      react-dom: 19.2.0(react@19.2.0)
       resolve: 1.22.10
       storybook: 8.6.14(prettier@3.0.3)
       tsconfig-paths: 4.2.0
@@ -2760,7 +2760,7 @@ packages:
       - typescript
     dev: true
 
-  /@storybook/react@8.6.14(@storybook/test@8.6.14)(react-dom@19.1.0)(react@19.1.0)(storybook@8.6.14)(typescript@5.6.3):
+  /@storybook/react@8.6.14(@storybook/test@8.6.14)(react-dom@19.2.0)(react@19.2.0)(storybook@8.6.14)(typescript@5.6.3):
     resolution: {integrity: sha512-BOepx5bBFwl/CPI+F+LnmMmsG1wQYmrX/UQXgUbHQUU9Tj7E2ndTnNbpIuSLc8IrM03ru+DfwSg1Co3cxWtT+g==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
@@ -2779,11 +2779,11 @@ packages:
       '@storybook/global': 5.0.0
       '@storybook/manager-api': 8.6.14(storybook@8.6.14)
       '@storybook/preview-api': 8.6.14(storybook@8.6.14)
-      '@storybook/react-dom-shim': 8.6.14(react-dom@19.1.0)(react@19.1.0)(storybook@8.6.14)
+      '@storybook/react-dom-shim': 8.6.14(react-dom@19.2.0)(react@19.2.0)(storybook@8.6.14)
       '@storybook/test': 8.6.14(storybook@8.6.14)
       '@storybook/theming': 8.6.14(storybook@8.6.14)
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
       storybook: 8.6.14(prettier@3.0.3)
       typescript: 5.6.3
     dev: true
@@ -3584,40 +3584,40 @@ packages:
       - supports-color
     dev: true
 
-  /@visx/annotation@3.12.0(react-dom@19.1.0)(react@19.1.0):
+  /@visx/annotation@3.12.0(react-dom@19.2.0)(react@19.2.0):
     resolution: {integrity: sha512-ZH6Y4jfrb47iEUV9O2itU9TATE5IPzhs5qvP6J7vmv26qkqwDcuE7xN3S3l9R70WjyEKGbpO8js4EijA3FJWkA==}
     peerDependencies:
       react: ^16.0.0-0 || ^17.0.0-0 || ^18.0.0-0
     dependencies:
       '@types/react': 18.3.18
-      '@visx/drag': 3.12.0(react@19.1.0)
-      '@visx/group': 3.12.0(react@19.1.0)
-      '@visx/text': 3.12.0(react@19.1.0)
+      '@visx/drag': 3.12.0(react@19.2.0)
+      '@visx/group': 3.12.0(react@19.2.0)
+      '@visx/text': 3.12.0(react@19.2.0)
       classnames: 2.5.1
       prop-types: 15.8.1
-      react: 19.1.0
-      react-use-measure: 2.1.7(react-dom@19.1.0)(react@19.1.0)
+      react: 19.2.0
+      react-use-measure: 2.1.7(react-dom@19.2.0)(react@19.2.0)
     transitivePeerDependencies:
       - react-dom
     dev: false
 
-  /@visx/axis@3.12.0(react@19.1.0):
+  /@visx/axis@3.12.0(react@19.2.0):
     resolution: {integrity: sha512-8MoWpfuaJkhm2Yg+HwyytK8nk+zDugCqTT/tRmQX7gW4LYrHYLXFUXOzbDyyBakCVaUbUaAhVFxpMASJiQKf7A==}
     peerDependencies:
       react: ^16.3.0-0 || ^17.0.0-0 || ^18.0.0-0
     dependencies:
       '@types/react': 18.3.18
-      '@visx/group': 3.12.0(react@19.1.0)
+      '@visx/group': 3.12.0(react@19.2.0)
       '@visx/point': 3.12.0
       '@visx/scale': 3.12.0
-      '@visx/shape': 3.12.0(react@19.1.0)
-      '@visx/text': 3.12.0(react@19.1.0)
+      '@visx/shape': 3.12.0(react@19.2.0)
+      '@visx/text': 3.12.0(react@19.2.0)
       classnames: 2.5.1
       prop-types: 15.8.1
-      react: 19.1.0
+      react: 19.2.0
     dev: false
 
-  /@visx/bounds@3.12.0(react-dom@19.1.0)(react@19.1.0):
+  /@visx/bounds@3.12.0(react-dom@19.2.0)(react@19.2.0):
     resolution: {integrity: sha512-peAlNCUbYaaZ0IO6c1lDdEAnZv2iGPDiLIM8a6gu7CaMhtXZJkqrTh+AjidNcIqITktrICpGxJE/Qo9D099dvQ==}
     peerDependencies:
       react: ^16.0.0-0 || ^17.0.0-0 || ^18.0.0-0
@@ -3626,8 +3626,8 @@ packages:
       '@types/react': 18.3.18
       '@types/react-dom': 18.3.5(@types/react@18.3.18)
       prop-types: 15.8.1
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
     dev: false
 
   /@visx/curve@3.12.0:
@@ -3637,7 +3637,7 @@ packages:
       d3-shape: 1.3.7
     dev: false
 
-  /@visx/drag@3.12.0(react@19.1.0):
+  /@visx/drag@3.12.0(react@19.2.0):
     resolution: {integrity: sha512-LXOoPVw//YPjpYhDJYBsCYDuv1QimsXjDV98duH0aCy4V94ediXMQpe2wHq4pnlDobLEB71FjOZMFrbFmqtERg==}
     peerDependencies:
       react: ^16.8.0-0 || ^17.0.0-0 || ^18.0.0-0
@@ -3646,7 +3646,7 @@ packages:
       '@visx/event': 3.12.0
       '@visx/point': 3.12.0
       prop-types: 15.8.1
-      react: 19.1.0
+      react: 19.2.0
     dev: false
 
   /@visx/event@3.12.0:
@@ -3656,33 +3656,33 @@ packages:
       '@visx/point': 3.12.0
     dev: false
 
-  /@visx/gradient@3.12.0(react@19.1.0):
+  /@visx/gradient@3.12.0(react@19.2.0):
     resolution: {integrity: sha512-QRatjjdUEPbcp4pqRca1JlChpAnmmIAO3r3ZscLK7D1xEIANlIjzjl3uNgrmseYmBAYyPCcJH8Zru07R97ovOg==}
     peerDependencies:
       react: ^16.0.0-0 || ^17.0.0-0 || ^18.0.0-0
     dependencies:
       '@types/react': 18.3.18
       prop-types: 15.8.1
-      react: 19.1.0
+      react: 19.2.0
     dev: false
 
-  /@visx/grid@3.12.0(react@19.1.0):
+  /@visx/grid@3.12.0(react@19.2.0):
     resolution: {integrity: sha512-L4ex2ooSYhwNIxJ3XFIKRhoSvEGjPc2Y3YCrtNB4TV5Ofdj4q0UMOsxfrH23Pr8HSHuQhb6VGMgYoK0LuWqDmQ==}
     peerDependencies:
       react: ^16.0.0-0 || ^17.0.0-0 || ^18.0.0-0
     dependencies:
       '@types/react': 18.3.18
       '@visx/curve': 3.12.0
-      '@visx/group': 3.12.0(react@19.1.0)
+      '@visx/group': 3.12.0(react@19.2.0)
       '@visx/point': 3.12.0
       '@visx/scale': 3.12.0
-      '@visx/shape': 3.12.0(react@19.1.0)
+      '@visx/shape': 3.12.0(react@19.2.0)
       classnames: 2.5.1
       prop-types: 15.8.1
-      react: 19.1.0
+      react: 19.2.0
     dev: false
 
-  /@visx/group@3.12.0(react@19.1.0):
+  /@visx/group@3.12.0(react@19.2.0):
     resolution: {integrity: sha512-Dye8iS1alVXPv7nj/7M37gJe6sSKqJLH7x6sEWAsRQ9clI0kFvjbKcKgF+U3aAVQr0NCohheFV+DtR8trfK/Ag==}
     peerDependencies:
       react: ^16.0.0-0 || ^17.0.0-0 || ^18.0.0-0
@@ -3690,7 +3690,7 @@ packages:
       '@types/react': 18.3.18
       classnames: 2.5.1
       prop-types: 15.8.1
-      react: 19.1.0
+      react: 19.2.0
     dev: false
 
   /@visx/mock-data@3.12.0:
@@ -3704,24 +3704,24 @@ packages:
     resolution: {integrity: sha512-I6UrHoJAEVbx3RORQNupgTiX5EzjuZpiwLPxn8L2mI5nfERotPKi1Yus12Cq2WtXqEBR/WgqTnoImlqOXBykcA==}
     dev: false
 
-  /@visx/react-spring@3.12.0(@react-spring/web@9.7.5)(react@19.1.0):
+  /@visx/react-spring@3.12.0(@react-spring/web@9.7.5)(react@19.2.0):
     resolution: {integrity: sha512-ehtmjFrUQx3g0mZ684M4LgI9UfQ84ZWD/m9tKfvXhEm1Vl8D4AjaZ4af1tTOg9S7vk2VlpxvVOVN7+t5pu0nSA==}
     peerDependencies:
       '@react-spring/web': ^9.4.5
       react: ^16.3.0-0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@react-spring/web': 9.7.5(react-dom@19.1.0)(react@19.1.0)
+      '@react-spring/web': 9.7.5(react-dom@19.2.0)(react@19.2.0)
       '@types/react': 18.3.18
-      '@visx/axis': 3.12.0(react@19.1.0)
-      '@visx/grid': 3.12.0(react@19.1.0)
+      '@visx/axis': 3.12.0(react@19.2.0)
+      '@visx/grid': 3.12.0(react@19.2.0)
       '@visx/scale': 3.12.0
-      '@visx/text': 3.12.0(react@19.1.0)
+      '@visx/text': 3.12.0(react@19.2.0)
       classnames: 2.5.1
       prop-types: 15.8.1
-      react: 19.1.0
+      react: 19.2.0
     dev: false
 
-  /@visx/responsive@3.12.0(react@19.1.0):
+  /@visx/responsive@3.12.0(react@19.2.0):
     resolution: {integrity: sha512-GV1BTYwAGlk/K5c9vH8lS2syPnTuIqEacI7L6LRPbsuaLscXMNi+i9fZyzo0BWvAdtRV8v6Urzglo++lvAXT1Q==}
     peerDependencies:
       react: ^16.0.0-0 || ^17.0.0-0 || ^18.0.0-0
@@ -3730,7 +3730,7 @@ packages:
       '@types/react': 18.3.18
       lodash: 4.17.21
       prop-types: 15.8.1
-      react: 19.1.0
+      react: 19.2.0
     dev: false
 
   /@visx/scale@3.12.0:
@@ -3739,7 +3739,7 @@ packages:
       '@visx/vendor': 3.12.0
     dev: false
 
-  /@visx/shape@3.12.0(react@19.1.0):
+  /@visx/shape@3.12.0(react@19.2.0):
     resolution: {integrity: sha512-/1l0lrpX9tPic6SJEalryBKWjP/ilDRnQA+BGJTI1tj7i23mJ/J0t4nJHyA1GrL4QA/bM/qTJ35eyz5dEhJc4g==}
     peerDependencies:
       react: ^16.3.0-0 || ^17.0.0-0 || ^18.0.0-0
@@ -3749,17 +3749,17 @@ packages:
       '@types/lodash': 4.17.15
       '@types/react': 18.3.18
       '@visx/curve': 3.12.0
-      '@visx/group': 3.12.0(react@19.1.0)
+      '@visx/group': 3.12.0(react@19.2.0)
       '@visx/scale': 3.12.0
       classnames: 2.5.1
       d3-path: 1.0.9
       d3-shape: 1.3.7
       lodash: 4.17.21
       prop-types: 15.8.1
-      react: 19.1.0
+      react: 19.2.0
     dev: false
 
-  /@visx/text@3.12.0(react@19.1.0):
+  /@visx/text@3.12.0(react@19.2.0):
     resolution: {integrity: sha512-0rbDYQlbuKPhBqXkkGYKFec1gQo05YxV45DORzr6hCyaizdJk1G+n9VkuKSHKBy1vVQhBA0W3u/WXd7tiODQPA==}
     peerDependencies:
       react: ^16.3.0-0 || ^17.0.0-0 || ^18.0.0-0
@@ -3769,23 +3769,23 @@ packages:
       classnames: 2.5.1
       lodash: 4.17.21
       prop-types: 15.8.1
-      react: 19.1.0
+      react: 19.2.0
       reduce-css-calc: 1.3.0
     dev: false
 
-  /@visx/tooltip@3.12.0(react-dom@19.1.0)(react@19.1.0):
+  /@visx/tooltip@3.12.0(react-dom@19.2.0)(react@19.2.0):
     resolution: {integrity: sha512-pWhsYhgl0Shbeqf80qy4QCB6zpq6tQtMQQxKlh3UiKxzkkfl+Metaf9p0/S0HexNi4vewOPOo89xWx93hBeh3A==}
     peerDependencies:
       react: ^16.8.0-0 || ^17.0.0-0 || ^18.0.0-0
       react-dom: ^16.8.0-0 || ^17.0.0-0 || ^18.0.0-0
     dependencies:
       '@types/react': 18.3.18
-      '@visx/bounds': 3.12.0(react-dom@19.1.0)(react@19.1.0)
+      '@visx/bounds': 3.12.0(react-dom@19.2.0)(react@19.2.0)
       classnames: 2.5.1
       prop-types: 15.8.1
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
-      react-use-measure: 2.1.7(react-dom@19.1.0)(react@19.1.0)
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+      react-use-measure: 2.1.7(react-dom@19.2.0)(react@19.2.0)
     dev: false
 
   /@visx/vendor@3.12.0:
@@ -10152,13 +10152,13 @@ packages:
       strip-json-comments: 2.0.1
     dev: true
 
-  /react-confetti@6.2.2(react@19.1.0):
+  /react-confetti@6.2.2(react@19.2.0):
     resolution: {integrity: sha512-K+kTyOPgX+ZujMZ+Rmb7pZdHBvg+DzinG/w4Eh52WOB8/pfO38efnnrtEZNJmjTvLxc16RBYO+tPM68Fg8viBA==}
     engines: {node: '>=16'}
     peerDependencies:
       react: ^16.3.0 || ^17.0.1 || ^18.0.0 || ^19.0.0
     dependencies:
-      react: 19.1.0
+      react: 19.2.0
       tween-functions: 1.2.0
     dev: true
 
@@ -10197,13 +10197,13 @@ packages:
       react: 18.2.0
       scheduler: 0.23.0
 
-  /react-dom@19.1.0(react@19.1.0):
-    resolution: {integrity: sha512-Xs1hdnE+DyKgeHJeJznQmYMIBG3TKIHJJT95Q58nHLSrElKlGQqDTR2HQ9fx5CN/Gk6Vh/kupBTDLU11/nDk/g==}
+  /react-dom@19.2.0(react@19.2.0):
+    resolution: {integrity: sha512-UlbRu4cAiGaIewkPyiRGJk0imDN2T3JjieT6spoL2UeSf5od4n5LB/mQ4ejmxhCFT1tYe8IvaFulzynWovsEFQ==}
     peerDependencies:
-      react: ^19.1.0
+      react: ^19.2.0
     dependencies:
-      react: 19.1.0
-      scheduler: 0.26.0
+      react: 19.2.0
+      scheduler: 0.27.0
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -10226,7 +10226,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /react-use-measure@2.1.7(react-dom@19.1.0)(react@19.1.0):
+  /react-use-measure@2.1.7(react-dom@19.2.0)(react@19.2.0):
     resolution: {integrity: sha512-KrvcAo13I/60HpwGO5jpW7E9DfusKyLPLvuHlUyP5zqnmAPhNc6qTRjUQrdTADl0lpPpDVU2/Gg51UlOGHXbdg==}
     peerDependencies:
       react: '>=16.13'
@@ -10235,8 +10235,8 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
     dev: false
 
   /react@18.2.0:
@@ -10245,8 +10245,8 @@ packages:
     dependencies:
       loose-envify: 1.4.0
 
-  /react@19.1.0:
-    resolution: {integrity: sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==}
+  /react@19.2.0:
+    resolution: {integrity: sha512-tmbWg6W31tQLeB5cdIBOicJDJRR2KzXsV7uSK9iNfLWQ5bIZfxuPEHp7M8wiHyHnn0DD1i7w3Zmin0FtkrwoCQ==}
     engines: {node: '>=0.10.0'}
 
   /read-pkg-up@10.1.0:
@@ -10658,8 +10658,8 @@ packages:
     dependencies:
       loose-envify: 1.4.0
 
-  /scheduler@0.26.0:
-    resolution: {integrity: sha512-NlHwttCI/l5gCPR3D1nNXtWABUmBwvZpEQiD4IXSbIDq8BzLIK/7Ir5gTFSGZDUu37K5cMNp0hFtzO38sC7gWA==}
+  /scheduler@0.27.0:
+    resolution: {integrity: sha512-eNv+WrVbKu1f3vbYJT/xtiF5syA5HPIMtf9IgY/nKg0sWqzAUEvqY/xm7OcZc/qafLx/iO9FgOmeSAp4v5ti/Q==}
 
   /section-matter@1.0.0:
     resolution: {integrity: sha512-vfD3pmTzGpufjScBh50YHKzEu2lxBWhVEHsNGoEXmCmn2hKGfeNLYMzCJpe8cD7gqX7TJluOVpBkAequ6dgMmA==}
@@ -11429,64 +11429,64 @@ packages:
       typescript: 5.3.3
     dev: true
 
-  /turbo-darwin-64@1.10.15:
-    resolution: {integrity: sha512-Sik5uogjkRTe1XVP9TC2GryEMOJCaKE2pM/O9uLn4koQDnWKGcLQv+mDU+H+9DXvKLnJnKCD18OVRkwK5tdpoA==}
+  /turbo-darwin-64@2.5.3:
+    resolution: {integrity: sha512-YSItEVBUIvAGPUDpAB9etEmSqZI3T6BHrkBkeSErvICXn3dfqXUfeLx35LfptLDEbrzFUdwYFNmt8QXOwe9yaw==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-darwin-arm64@1.10.15:
-    resolution: {integrity: sha512-xwqyFDYUcl2xwXyGPmHkmgnNm4Cy0oNzMpMOBGRr5x64SErS7QQLR4VHb0ubiR+VAb8M+ECPklU6vD1Gm+wekg==}
+  /turbo-darwin-arm64@2.5.3:
+    resolution: {integrity: sha512-5PefrwHd42UiZX7YA9m1LPW6x9YJBDErXmsegCkVp+GjmWrADfEOxpFrGQNonH3ZMj77WZB2PVE5Aw3gA+IOhg==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-64@1.10.15:
-    resolution: {integrity: sha512-dM07SiO3RMAJ09Z+uB2LNUSkPp3I1IMF8goH5eLj+d8Kkwoxd/+qbUZOj9RvInyxU/IhlnO9w3PGd3Hp14m/nA==}
+  /turbo-linux-64@2.5.3:
+    resolution: {integrity: sha512-M9xigFgawn5ofTmRzvjjLj3Lqc05O8VHKuOlWNUlnHPUltFquyEeSkpQNkE/vpPdOR14AzxqHbhhxtfS4qvb1w==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-arm64@1.10.15:
-    resolution: {integrity: sha512-MkzKLkKYKyrz4lwfjNXH8aTny5+Hmiu4SFBZbx+5C0vOlyp6fV5jZANDBvLXWiDDL4DSEAuCEK/2cmN6FVH1ow==}
+  /turbo-linux-arm64@2.5.3:
+    resolution: {integrity: sha512-auJRbYZ8SGJVqvzTikpg1bsRAsiI9Tk0/SDkA5Xgg0GdiHDH/BOzv1ZjDE2mjmlrO/obr19Dw+39OlMhwLffrw==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-64@1.10.15:
-    resolution: {integrity: sha512-3TdVU+WEH9ThvQGwV3ieX/XHebtYNHv9HARHauPwmVj3kakoALkpGxLclkHFBLdLKkqDvmHmXtcsfs6cXXRHJg==}
+  /turbo-windows-64@2.5.3:
+    resolution: {integrity: sha512-arLQYohuHtIEKkmQSCU9vtrKUg+/1TTstWB9VYRSsz+khvg81eX6LYHtXJfH/dK7Ho6ck+JaEh5G+QrE1jEmCQ==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-arm64@1.10.15:
-    resolution: {integrity: sha512-l+7UOBCbfadvPMYsX08hyLD+UIoAkg6ojfH+E8aud3gcA1padpjCJTh9gMpm3QdMbKwZteT5uUM+wyi6Rbbyww==}
+  /turbo-windows-arm64@2.5.3:
+    resolution: {integrity: sha512-3JPn66HAynJ0gtr6H+hjY4VHpu1RPKcEwGATvGUTmLmYSYBQieVlnGDRMMoYN066YfyPqnNGCfhYbXfH92Cm0g==}
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo@1.10.15:
-    resolution: {integrity: sha512-mKKkqsuDAQy1wCCIjCdG+jOCwUflhckDMSRoeBPcIL/CnCl7c5yRDFe7SyaXloUUkt4tUR0rvNIhVCcT7YeQpg==}
+  /turbo@2.5.3:
+    resolution: {integrity: sha512-iHuaNcq5GZZnr3XDZNuu2LSyCzAOPwDuo5Qt+q64DfsTP1i3T2bKfxJhni2ZQxsvAoxRbuUK5QetJki4qc5aYA==}
     hasBin: true
     optionalDependencies:
-      turbo-darwin-64: 1.10.15
-      turbo-darwin-arm64: 1.10.15
-      turbo-linux-64: 1.10.15
-      turbo-linux-arm64: 1.10.15
-      turbo-windows-64: 1.10.15
-      turbo-windows-arm64: 1.10.15
+      turbo-darwin-64: 2.5.3
+      turbo-darwin-arm64: 2.5.3
+      turbo-linux-64: 2.5.3
+      turbo-linux-arm64: 2.5.3
+      turbo-windows-64: 2.5.3
+      turbo-windows-arm64: 2.5.3
     dev: true
 
   /tween-functions@1.2.0:
