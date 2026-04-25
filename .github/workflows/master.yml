@@ -18,16 +18,15 @@ jobs:
       id-token: write # to enable use of OIDC for npm provenance
     steps:
       - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v5
+        name: Install pnpm
+        with:
+          run_install: false
+
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
           node-version: "lts/*"
-
-      - uses: pnpm/action-setup@v5
-        name: Install pnpm
-        with:
-          
-          run_install: false
 
       - name: Get pnpm store directory
         shell: bash
@@ -63,16 +62,15 @@ jobs:
       id-token: write # to enable use of OIDC for npm provenance
     steps:
       - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v5
+        name: Install pnpm
+        with:
+          run_install: false
+
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
           node-version: "lts/*"
-
-      - uses: pnpm/action-setup@v5
-        name: Install pnpm
-        with:
-          
-          run_install: false
 
       - name: Get pnpm store directory
         shell: bash
