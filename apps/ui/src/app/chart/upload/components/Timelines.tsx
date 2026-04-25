@@ -3,13 +3,14 @@
 import { classNames } from "../../../../lib"
 import styles from "./TimelineRendering.module.css"
 import React from "react"
-import { PatriarchTimeline, Statistics, Timeline as TimelineType } from "lib/src/types"
+import { PatriarchData } from "lib"
+import { Statistics } from "lib/src/types"
 import { Timeline } from "./Timeline"
 import { Timeline2 } from "./Timeline2"
 
 interface Props {
     timelines: Record<string, string>
-    chartData?: Record<string, { patriarchTimeline: PatriarchTimeline; timelines: TimelineType[] }>
+    chartData?: Record<string, PatriarchData>
     stats?: Statistics
 }
 export const Timelines = ({ timelines, chartData, stats }: Props) => {

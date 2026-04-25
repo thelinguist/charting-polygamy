@@ -13,7 +13,7 @@ import {
 } from "./steps/stats"
 import { patriarchIsEligible } from "./steps/patriarchIsEligible"
 
-interface Props {
+interface GetTimelinesProps {
     fileContents: string
     fileFormat: FileTypes
     patriarchName?: string
@@ -21,32 +21,30 @@ interface Props {
     debugMode?: boolean
 }
 
-interface Output {
-    charts: {
-        [patriarchName: string]: string
-    }
-    chartData: {
-        [patriarchName: string]: { patriarchTimeline: PatriarchTimeline; timelines: Timeline[] }
-    }
+export interface PatriarchData {
+    patriarchTimeline: PatriarchTimeline
+    timelines: Timeline[]
+}
+
+export interface TimelinesOutput {
+    chartData: Record<string, PatriarchData>
     stats: Statistics
     errors: any
 }
-export const getTimelinesForMermaid = ({
+
+export const getTimelines = ({
     fileContents,
     fileFormat,
     patriarchName,
     allowFemaleConcurrentMarriages,
     debugMode,
-}: Props): Output => {
+}: GetTimelinesProps): TimelinesOutput => {
     setConfig({ debugMode, allowFemaleConcurrentMarriages })
-    const charts: Record<string, string> = {}
-    const chartData: Record<string, { patriarchTimeline: PatriarchTimeline; timelines: Timeline[] }> = {}
+    const chartData: Record<string, PatriarchData> = {}
     const families = getFacts(fileContents, fileFormat, patriarchName)
     for (const family of families) {
         try {
-            // TODO createKnowledgeTree should determine the marriage end (and reason). then checkIfPolygamous should be done earlier
             const patriarchDB = createKnowledgeTree(family.facts)
-
             const timelines = createTimeline(patriarchDB, family.patriarchName)
 
             let counted = false
@@ -61,8 +59,10 @@ export const getTimelinesForMermaid = ({
                     console.log("This patriarch married illegally:", family.patriarchName)
                 }
                 incrementPolygamousCount()
-                charts[family.patriarchName] = charting.createChart(timelines)
-                chartData[family.patriarchName] = { patriarchTimeline: timelines.rootTimeline, timelines: timelines.wives }
+                chartData[family.patriarchName] = {
+                    patriarchTimeline: timelines.rootTimeline,
+                    timelines: timelines.wives,
+                }
             }
             incrementPatriarchCount()
         } catch (e) {
@@ -71,7 +71,15 @@ export const getTimelinesForMermaid = ({
         }
     }
     if (debugMode && !patriarchName) {
-        console.log(`\nfound ${Object.keys(charts).length} polygamous families`)
+        console.log(`\nfound ${Object.keys(chartData).length} polygamous families`)
     }
-    return { charts, chartData, stats: reportStats(), errors: UserIntervention.getIssues() }
+    return { chartData, stats: reportStats(), errors: UserIntervention.getIssues() }
+}
+
+export const timelinesToMermaid = (chartData: Record<string, PatriarchData>): Record<string, string> => {
+    const charts: Record<string, string> = {}
+    for (const [name, data] of Object.entries(chartData)) {
+        charts[name] = charting.createChart({ rootTimeline: data.patriarchTimeline, wives: data.timelines })
+    }
+    return charts
 }

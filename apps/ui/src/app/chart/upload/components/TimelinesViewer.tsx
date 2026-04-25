@@ -2,8 +2,8 @@
 
 import React, { ChangeEventHandler, useState } from "react"
 import Link from "next/link"
-import { getTimelinesForMermaid } from "lib"
-import { FileTypes, PatriarchTimeline, Statistics, Timeline } from "lib/src/types"
+import { getTimelines, timelinesToMermaid, PatriarchData } from "lib"
+import { FileTypes, Statistics } from "lib/src/types"
 import { parseFile, classNames } from "../../../../lib"
 import styles from "./TimelineRendering.module.css"
 import { example3Wives } from "../constants/sample"
@@ -21,7 +21,7 @@ const getFileFormat = (file: File): FileTypes => {
 
 export const TimelinesViewer = () => {
     const [timelines, setTimelines] = useState<Record<string, string>>({})
-    const [chartData, setChartData] = useState<Record<string, { patriarchTimeline: PatriarchTimeline; timelines: Timeline[] }>>({})
+    const [chartData, setChartData] = useState<Record<string, PatriarchData>>({})
     const [stats, setStats] = useState<Statistics>()
     const onChange: ChangeEventHandler<HTMLInputElement> = async e => {
         e.preventDefault()
@@ -29,12 +29,9 @@ export const TimelinesViewer = () => {
             const file = e.target.files[0]
             const fileContents = await parseFile(file, console.info)
             const fileFormat = getFileFormat(file)
-            const { charts: newTimelines, chartData: newChartData, stats: newStats } = getTimelinesForMermaid({
-                fileContents,
-                fileFormat,
-            })
+            const { chartData: newChartData, stats: newStats } = getTimelines({ fileContents, fileFormat })
             setStats(newStats)
-            setTimelines(newTimelines)
+            setTimelines(timelinesToMermaid(newChartData))
             setChartData(newChartData)
         }
     }

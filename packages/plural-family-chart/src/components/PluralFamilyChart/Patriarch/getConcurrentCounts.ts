@@ -10,7 +10,7 @@ export const getConcurrentCounts = (patriarchTimeline: PatriarchTimeline, timeli
             const spouseEnd = Math.min(
                 timeline.linkedMarriage.end?.getTime() ?? Infinity,
                 timeline.death?.getTime() ?? Infinity,
-                patriarchTimeline.death?.getTime() ?? Infinity,
+                patriarchTimeline.death?.getTime() ?? Infinity
             )
             return spouseStart <= mStart && spouseEnd >= mStart
         }).length

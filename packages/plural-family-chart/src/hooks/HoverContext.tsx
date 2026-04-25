@@ -2,7 +2,7 @@ import { createContext } from "react"
 import { HoverHandlers } from "./useOnHoverOrTap"
 
 interface HoverContextType {
-    activeX: number
+    activeX: number | undefined
     handlers: HoverHandlers
 }
 
