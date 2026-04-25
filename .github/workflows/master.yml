@@ -89,7 +89,7 @@ jobs:
       - name: build
         working-directory: ./apps/ui
         run: pnpm build
-      - uses: actions/upload-pages-artifact@v2
+      - uses: actions/upload-pages-artifact@v5
         if: always()
         with:
           name: github-pages
