@@ -9,9 +9,9 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "noImplicitAny": false,
+    "skipLibCheck": true,
     "resolveJsonModule": true,
     "jsx": "react-jsx"
   },
-  "exclude": ["charting-polygamy","output","facts","coverage"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "exclude": ["charting-polygamy","output","facts","coverage"]
 }

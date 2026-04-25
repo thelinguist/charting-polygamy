@@ -23,7 +23,7 @@ export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, y
     const marriageEnd = Math.min(
         timeline.death?.getTime() ?? Infinity,
         timeline.linkedMarriage.end?.getTime() ?? Infinity,
-        patriarchTimeline.death?.getTime() ?? Infinity,
+        patriarchTimeline.death?.getTime() ?? Infinity
     )
     // @ts-expect-error idk what the type should be for ordinal scales
     const yStart: number = yScale(timeline.name) ?? 0

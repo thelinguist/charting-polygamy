@@ -1,7 +1,7 @@
 #!/usr/bin/env ts-node
 
 import { Command } from "commander"
-import { getTimelinesForMermaid } from "lib"
+import { getTimelines, timelinesToMermaid } from "lib"
 import packageJson from "../package.json"
 import { splash } from "./utils/splash"
 import { parseFile } from "./utils/processFile"
@@ -46,12 +46,13 @@ const [file] = program.args
 const fileContents = parseFile(file)
 const fileFormat = determineFormat(options.fileFormat, file)
 
-const { charts, stats } = getTimelinesForMermaid({
+const { chartData, stats } = getTimelines({
     fileContents,
     fileFormat,
     allowFemaleConcurrentMarriages: options.allowFemaleConcurrentMarriages,
     patriarchName: options.name,
 })
+const charts = timelinesToMermaid(chartData)
 
 for (const patriarch in charts) {
     if (!options.debug) {

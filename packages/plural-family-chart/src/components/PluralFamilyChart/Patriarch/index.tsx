@@ -34,7 +34,8 @@ export const Patriarch: React.FC<Props> = ({ patriarchTimeline, timelines, yScal
         Math.min(marriage.end?.getTime() ?? Infinity, patriarchTimeline.death?.getTime() ?? Infinity)
 
     const getMarriageAge = (marriage: PatriarchMarriage) =>
-        marriage.age || (marriage.start && patriarchTimeline.birth
+        marriage.age ||
+        (marriage.start && patriarchTimeline.birth
             ? marriage.start.getFullYear() - patriarchTimeline.birth.getFullYear()
             : 0)
 
