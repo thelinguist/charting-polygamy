@@ -1,4 +1,3 @@
-
 /**
  * for example "4 Jul 1999;4 Jul 2000"
  * @param text

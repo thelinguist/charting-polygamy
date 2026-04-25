@@ -67,10 +67,7 @@ const plotMarriage = (marriage, showStartOnly = false) => {
     if (marriage.end && !marriage.start) {
         return `marriage: milestone,done, ${format(marriage.end, dateFmt)}, 1d`
     }
-    return `marriage: crit,${format(marriage.start, dateFmt)}, ${format(
-        marriage.end!,
-        dateFmt
-    )}`
+    return `marriage: crit,${format(marriage.start, dateFmt)}, ${format(marriage.end!, dateFmt)}`
 }
 
 const plotMilestone = marriage => {

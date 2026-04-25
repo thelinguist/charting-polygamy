@@ -18,9 +18,7 @@ export const createKnowledgeTree = (facts: FactRecord[]) => {
         let date
         try {
             date = dateString ? parseTextDate(dateString, fact) : undefined
-        } catch (e) {
-
-        }
+        } catch (e) {}
         const secondPerson = fact["Second Party"]
         const note = fact.Note
         if (!tree[person]) {

@@ -7,7 +7,7 @@ export const getFacts = (fileContent: string, format: FileTypes, patriarchName?:
     } else if (format === FileTypes.csv) {
         const facts = parseCsv(fileContent)
         if (!patriarchName) {
-            console.info('No patriarch specified, assuming first record in CSV is the patriarch.')
+            console.info("No patriarch specified, assuming first record in CSV is the patriarch.")
             patriarchName ??= facts[0].Name
         }
         return [

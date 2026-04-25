@@ -1,7 +1,6 @@
 import { addFactoid } from "../util"
 import { Statistics } from "../types"
 
-
 const stats: Statistics = {
     eligiblePatriarchs: 0,
     illegallyMarriedPatriarchs: 0,
@@ -30,6 +29,10 @@ export const reportStats = () => {
     addFactoid("Statistics", "patriarchs", stats.patriarchCount)
     addFactoid("Statistics", "polygamous families", stats.polygamousFamilies)
     addFactoid("Statistics", "illegal marriages", stats.illegallyMarriedPatriarchs)
-    addFactoid("Statistics", "percent of eligible patriarchs who practiced polygamy", `${Math.round(stats.polygamousFamilies / stats.eligiblePatriarchs * 100)}%`)
+    // addFactoid(
+    //     "Statistics",
+    //     "percent of eligible patriarchs who practiced polygamy",
+    //     `${Math.round((stats.polygamousFamilies / stats.eligiblePatriarchs) * 100)}%`
+    // )
     return stats
 }
