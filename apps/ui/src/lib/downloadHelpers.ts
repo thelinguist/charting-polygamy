@@ -32,10 +32,7 @@ interface DownloadOptions {
     transparent?: boolean
 }
 
-export const downloadSVGFromDOM = async (
-    id: string,
-    options: DownloadOptions
-) => {
+export const downloadSVGFromDOM = async (id: string, options: DownloadOptions) => {
     const svg = document.querySelector(`#${id} svg`)
     if (svg) {
         const svgStyles = svg.getAttribute("style")

@@ -21,11 +21,11 @@ interface Props {
     isPatriarch?: boolean
     yScale?: PositionScale // actually ordinal scale
     xScale: (date: Date) => number
-    children?: JSX.Element | JSX.Element[]
+    children?: React.ReactElement | React.ReactElement[]
 }
 export const PersonTimeline: React.FC<Props> = ({ birth, death, name, isPatriarch, yScale, xScale, children }) => {
     // @ts-expect-error idk what the type should be for ordinal scales
-    const yStart = yScale(name)
+    const yStart: number = yScale(name) ?? 0
     const yEnd = yStart + barHeight
     const lifeBounds = [
         { x: xScale(birth), y: yStart },
@@ -42,7 +42,7 @@ export const PersonTimeline: React.FC<Props> = ({ birth, death, name, isPatriarc
                         data={lifeBounds}
                         x={d => d.x}
                         y={d => d.y}
-                        yScale={yScale}
+                        yScale={yScale!}
                         fill={patriarchColor}
                         stroke={strokeColor}
                         strokeWidth={strokeWidth}

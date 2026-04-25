@@ -6,4 +6,4 @@ interface HoverContextType {
     handlers: HoverHandlers
 }
 
-export const HoverContext = createContext<HoverContextType>(undefined)
+export const HoverContext = createContext<HoverContextType | undefined>(undefined)

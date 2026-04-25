@@ -1,4 +1,4 @@
-import { FileTypes, Statistics } from "./types"
+import { FileTypes, PatriarchTimeline, Statistics, Timeline } from "./types"
 import { createKnowledgeTree } from "./steps/createKnowledgeTree"
 import { createTimeline } from "./steps/createTimeline"
 import { charting, setConfig, UserIntervention } from "./util"
@@ -25,7 +25,10 @@ interface Output {
     charts: {
         [patriarchName: string]: string
     }
-    stats: Statistics,
+    chartData: {
+        [patriarchName: string]: { patriarchTimeline: PatriarchTimeline; timelines: Timeline[] }
+    }
+    stats: Statistics
     errors: any
 }
 export const getTimelinesForMermaid = ({
@@ -37,6 +40,7 @@ export const getTimelinesForMermaid = ({
 }: Props): Output => {
     setConfig({ debugMode, allowFemaleConcurrentMarriages })
     const charts: Record<string, string> = {}
+    const chartData: Record<string, { patriarchTimeline: PatriarchTimeline; timelines: Timeline[] }> = {}
     const families = getFacts(fileContents, fileFormat, patriarchName)
     for (const family of families) {
         try {
@@ -58,6 +62,7 @@ export const getTimelinesForMermaid = ({
                 }
                 incrementPolygamousCount()
                 charts[family.patriarchName] = charting.createChart(timelines)
+                chartData[family.patriarchName] = { patriarchTimeline: timelines.rootTimeline, timelines: timelines.wives }
             }
             incrementPatriarchCount()
         } catch (e) {
@@ -68,5 +73,5 @@ export const getTimelinesForMermaid = ({
     if (debugMode && !patriarchName) {
         console.log(`\nfound ${Object.keys(charts).length} polygamous families`)
     }
-    return { charts, stats: reportStats(), errors: UserIntervention.getIssues() }
+    return { charts, chartData, stats: reportStats(), errors: UserIntervention.getIssues() }
 }

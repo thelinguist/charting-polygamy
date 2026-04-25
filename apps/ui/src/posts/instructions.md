@@ -11,12 +11,13 @@ It will gather your family history details (but will not send the data anywhere)
 Here is an example of the results:
 
 | ![Plural Family Example](/charting-polygamy/plural-family.svg) |
-|:--------------------------------------------:|
+| :------------------------------------------------------------: |
 
 ## How to read
-- The red line indicates the duration of one marriage.
-- The start of each marriage is marked with the age and gap. A negative indicates that person was X years younger than their partner
-- Blue lines indicates a marriage outside the plural family being displayed.[^1]
+
+-   The red line indicates the duration of one marriage.
+-   The start of each marriage is marked with the age and gap. A negative indicates that person was X years younger than their partner
+-   Blue lines indicates a marriage outside the plural family being displayed.[^1]
 
 [see an actual example of Parley P Pratt](pratt)
 
@@ -66,4 +67,5 @@ That's hard to say. Really, the main motivation is to understand the societal pi
 In my lines, it's evident that men could choose who they married, and sometimes did so before their existing wives' gave consent. My lines show that 40% of eligible men did practice polygamy. I'm curious if this is because my family is composed of very important men within the movement, or if it was more normalized than people claim today.
 
 # Footnotes
+
 [^1]: Note that some assumptions are made on the marriage end, namely, when one starts the other terminates. For a select group of people around (and including) Joseph Smith, this assumption is invalid, as women in plural marriages could continue to be married to their original partner. This fact is ignored in the web version of this tool.

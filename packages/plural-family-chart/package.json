@@ -3,11 +3,13 @@
     "private": true,
     "version": "0.0.0",
     "type": "module",
+    "main": "src/index.ts",
     "scripts": {
         "dev": "vite",
         "build": "tsc -b && vite build",
         "lint": "eslint .",
         "preview": "vite preview",
+        "test": "vitest",
         "storybook": "storybook dev -p 6006",
         "build-storybook": "storybook build"
     },
@@ -27,12 +29,14 @@
         "@visx/text": "^3.12.0",
         "@visx/tooltip": "^3.12.0",
         "@visx/vendor": "^3.12.0",
-        "lib": "workspace:*",
-        "react": "^19.2.0",
-        "react-dom": "^19.2.0"
+        "lib": "workspace:*"
+    },
+    "peerDependencies": {
+        "react": ">=19",
+        "react-dom": ">=19"
     },
     "devDependencies": {
-        "@chromatic-com/storybook": "^5.1.2",
+        "@testing-library/react": "^16.0.0",
         "@eslint/js": "^9.17.0",
         "@storybook/addon-a11y": "^10.3.5",
         "@storybook/addon-docs": "^10.3.5",
@@ -40,8 +44,8 @@
         "@storybook/addon-onboarding": "^10.3.5",
         "@storybook/addon-vitest": "^10.3.5",
         "@storybook/react-vite": "^10.3.5",
-        "@types/react": "^18.3.18",
-        "@types/react-dom": "^18.3.5",
+        "@types/react": "^19.2.14",
+        "@types/react-dom": "^19.2.3",
         "@vitejs/plugin-react": "^4.3.4",
         "eslint": "^9.17.0",
         "eslint-plugin-react-hooks": "^5.2.0",
@@ -51,12 +55,9 @@
         "storybook": "^10.3.5",
         "typescript": "~5.6.2",
         "typescript-eslint": "^8.18.2",
-        "vite": "^6.3.5",
-        "vite-plugin-dts": "^4.5.4"
-    },
-    "eslintConfig": {
-        "extends": [
-            "plugin:storybook/recommended"
-        ]
+        "vite": "7.3.2",
+        "jsdom": "^25.0.0",
+        "vite-plugin-dts": "^4.5.4",
+        "vitest": "^4.1.5"
     }
 }

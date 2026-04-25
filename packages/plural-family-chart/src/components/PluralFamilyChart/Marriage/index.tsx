@@ -32,7 +32,7 @@ export const Marriage: React.FC<Props> = ({
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             style={{ cursor: "pointer" }}
-            id={bounds[0].x}
+            id={bounds[0].x.toString()}
         >
             <Area
                 data={bounds}

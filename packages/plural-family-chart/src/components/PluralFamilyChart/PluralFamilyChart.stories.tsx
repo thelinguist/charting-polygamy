@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 // import { fn } from "@storybook/test"
 // import ParentSize from "@visx/responsive/lib/components/ParentSize"
 
@@ -92,7 +92,7 @@ export const Polygamous: Story = {
     },
 }
 
-export const spouseWhoIsOlder: Story = {
+export const SpouseWhoIsOlder: Story = {
     args: {
         patriarchTimeline: {
             name: "John Doe",

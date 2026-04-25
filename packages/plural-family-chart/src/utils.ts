@@ -6,7 +6,7 @@ import { coerceNumber } from "@visx/scale"
  * @param end
  */
 export const listDecades = (start: Date, end: Date): Date[] => {
-    const decades = []
+    const decades: Date[] = []
     const currentYear = start.getFullYear()
     const endYear = end.getFullYear()
     for (let year = currentYear; year <= endYear; year += 1) {

@@ -10,7 +10,17 @@ export const metadata: Metadata = {
     title: "Charting Polygamy",
     description: "A tool that generates graphs for plural family ancestry",
     authors: [{ name: "Bryce Shelley" }],
-    keywords: ["polygamy","mormonism","mormon","genealogy","lds church","flds","mermaid.js","plural family","plural families"]
+    keywords: [
+        "polygamy",
+        "mormonism",
+        "mormon",
+        "genealogy",
+        "lds church",
+        "flds",
+        "mermaid.js",
+        "plural family",
+        "plural families",
+    ],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -1,38 +1,39 @@
 {
-  "name": "ui",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "mockProd": "next build && npx serve@latest out",
-    "lint": "next lint",
-    "test": "vitest"
-  },
-  "dependencies": {
-    "gray-matter": "^4.0.3",
-    "lib": "workspace:*",
-    "mermaid": "^10.5.0",
-    "next": "14.0.4",
-    "react": "^18",
-    "react-dom": "^18",
-    "remark": "^15.0.1",
-    "remark-gfm": "^4.0.0",
-    "remark-html": "^16.0.1"
-  },
-  "devDependencies": {
-    "@testing-library/react": "^14.1.2",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "@vitejs/plugin-react": "^4.2.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.0",
-    "jsdom": "^22.1.0",
-    "serve": "14.2.1",
-    "tsconfig": "workspace:*",
-    "typescript": "^5",
-    "vitest": "1.1.1"
-  }
+    "name": "ui",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "mockProd": "next build && npx serve@latest out",
+        "lint": "next lint",
+        "test": "vitest"
+    },
+    "dependencies": {
+        "gray-matter": "^4.0.3",
+        "lib": "workspace:*",
+        "plural-family-chart": "workspace:*",
+        "mermaid": "^10.5.0",
+        "next": "15.5.15",
+        "react": "^19.2.5",
+        "react-dom": "^19.2.5",
+        "remark": "^15.0.1",
+        "remark-gfm": "^4.0.0",
+        "remark-html": "^16.0.1"
+    },
+    "devDependencies": {
+        "@testing-library/react": "^15.0.7",
+        "@types/node": "^20",
+        "@types/react": "^19.2.14",
+        "@types/react-dom": "^19.2.3",
+        "@vitejs/plugin-react": "^4.7.0",
+        "eslint": "^8",
+        "eslint-config-next": "14.0.0",
+        "jsdom": "^22.1.0",
+        "serve": "14.2.1",
+        "tsconfig": "workspace:*",
+        "typescript": "^5",
+        "vitest": "2.1.9"
+    }
 }

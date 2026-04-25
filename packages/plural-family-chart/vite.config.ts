@@ -1,4 +1,4 @@
-import { defineConfig } from "vite"
+import { defineConfig } from "vitest/config"
 import react from "@vitejs/plugin-react"
 import dts from "vite-plugin-dts"
 
@@ -11,5 +11,10 @@ export default defineConfig({
             name: "PluralFamilyChart",
             formats: ["es", "cjs", "umd"],
         },
+    },
+    test: {
+        environment: "jsdom",
+        globals: true,
+        setupFiles: [".storybook/vitest.setup.ts"],
     },
 })

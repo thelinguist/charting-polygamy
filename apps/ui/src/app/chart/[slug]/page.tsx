@@ -1,13 +1,13 @@
 import { classNames, markdownToHTML } from "../../../lib"
 import PostBody from "../../../components/PostBody/PostBody"
-import styles from './page.module.css'
+import styles from "./page.module.css"
 import { getPostBySlug, getPostTitles } from "./getAllPosts"
 
 export async function generateStaticParams() {
     const titles = getPostTitles()
-    return titles.map((post) => {
+    return titles.map(post => {
         return {
-            slug: post.split('.')[0]
+            slug: post.split(".")[0],
         }
     })
 }
