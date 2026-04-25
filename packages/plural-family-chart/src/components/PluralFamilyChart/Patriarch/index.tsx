@@ -14,10 +14,12 @@ interface Props {
     xScale: (date: Date) => number
 }
 export const Patriarch: React.FC<Props> = ({ patriarchTimeline, timelines, yScale, xScale }) => {
-    const [expandedIndex, setExpandedIndex] = React.useState<number | null>(null)
+    const [pinnedIndex, setPinnedIndex] = React.useState<number | null>(null)
+    const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null)
+    const expandedIndex = hoveredIndex ?? pinnedIndex
 
     const handleClick = (index: number) => {
-        setExpandedIndex(prev => (prev === index ? null : index))
+        setPinnedIndex(prev => (prev === index ? null : index))
     }
 
     const concurrentCounts = patriarchTimeline.marriages.map(marriage => {
@@ -68,6 +70,8 @@ export const Patriarch: React.FC<Props> = ({ patriarchTimeline, timelines, yScal
                         patriarchTimeline={patriarchTimeline}
                         marriage={marriage}
                         onClick={() => handleClick(i)}
+                        onMouseEnter={() => setHoveredIndex(i)}
+                        onMouseLeave={() => setHoveredIndex(null)}
                     />
                 ))}
                 {expandedIndex !== null && (
@@ -81,6 +85,8 @@ export const Patriarch: React.FC<Props> = ({ patriarchTimeline, timelines, yScal
                         expandedXEnd={expandedXEnd!}
                         fillOpacity={0.85}
                         onClick={() => handleClick(expandedIndex)}
+                        onMouseEnter={() => setHoveredIndex(expandedIndex)}
+                        onMouseLeave={() => setHoveredIndex(null)}
                     />
                 )}
             </>

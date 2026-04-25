@@ -15,6 +15,8 @@ interface Props {
     fillColor: string
     xScale: (date: Date) => number
     onClick?: () => void
+    onMouseEnter?: () => void
+    onMouseLeave?: () => void
     isHiding?: boolean
     isExpanded?: boolean
     labelOnly?: boolean
@@ -22,7 +24,7 @@ interface Props {
     fillOpacity?: number
 }
 
-export const PatriarchMarriage: React.FC<Props> = ({ onClick, isHiding, isExpanded, labelOnly, expandedXEnd, fillOpacity, marriage, patriarchTimeline, xScale, fillColor }) => {
+export const PatriarchMarriage: React.FC<Props> = ({ onClick, onMouseEnter, onMouseLeave, isHiding, isExpanded, labelOnly, expandedXEnd, fillOpacity, marriage, patriarchTimeline, xScale, fillColor }) => {
     const x0 = xScale(marriage.start!)
     const patriarchEnd = Math.min(marriage.end?.getTime() || Infinity, patriarchTimeline.death.getTime())
     const marriageAge = marriage.age || marriage.start!.getFullYear() - patriarchTimeline.birth.getFullYear()
@@ -41,6 +43,8 @@ export const PatriarchMarriage: React.FC<Props> = ({ onClick, isHiding, isExpand
             labelOnly={labelOnly}
             fillOpacity={fillOpacity}
             onClick={onClick}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
             bounds={bounds}
             fillColor={fillColor}
             text1={marriage.start!.getFullYear()}

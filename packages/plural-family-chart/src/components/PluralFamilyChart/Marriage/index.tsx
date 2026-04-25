@@ -5,6 +5,8 @@ import { Label } from "./Label"
 
 interface Props {
     onClick?: () => void
+    onMouseEnter?: () => void
+    onMouseLeave?: () => void
     isHiding?: boolean
     isExpanded?: boolean
     labelOnly?: boolean
@@ -15,9 +17,9 @@ interface Props {
     text2: string
 }
 
-export const Marriage: React.FC<Props> = ({ isHiding, isExpanded, labelOnly, fillOpacity, onClick, bounds, fillColor, text1, text2 }) => {
+export const Marriage: React.FC<Props> = ({ isHiding, isExpanded, labelOnly, fillOpacity, onClick, onMouseEnter, onMouseLeave, bounds, fillColor, text1, text2 }) => {
     return (
-        <Group onClick={onClick} style={{ cursor: onClick ? "pointer" : undefined }} id={bounds[0].x}>
+        <Group onClick={onClick} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} style={{ cursor: "pointer" }} id={bounds[0].x}>
             {!labelOnly && (
                 <Area
                     data={bounds}

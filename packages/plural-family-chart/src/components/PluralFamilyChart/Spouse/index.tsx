@@ -12,10 +12,12 @@ interface Props {
     xScale: (date: Date) => number
 }
 export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, yScale }) => {
-    const [expandedIndex, setExpandedIndex] = React.useState<number | null>(null)
+    const [pinnedIndex, setPinnedIndex] = React.useState<number | null>(null)
+    const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null)
+    const expandedIndex = hoveredIndex ?? pinnedIndex
 
     const handleClick = (index: number) => {
-        setExpandedIndex(prev => (prev === index ? null : index))
+        setPinnedIndex(prev => (prev === index ? null : index))
     }
     const marriageEnd = Math.min(
         timeline.death.getTime(),
@@ -106,6 +108,8 @@ export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, y
                     text1={timeline.linkedMarriage.start.getFullYear().toString()}
                     text2={marriageAge}
                     onClick={() => handleClick(0)}
+                    onMouseEnter={() => setHoveredIndex(0)}
+                    onMouseLeave={() => setHoveredIndex(null)}
                 />
                 {otherMarriageBounds.map((bounds, i) => (
                     <Marriage
@@ -115,6 +119,8 @@ export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, y
                         text1={timeline.otherMarriages[i].start.getFullYear().toString()}
                         text2={timeline.otherMarriages[i].spouse}
                         onClick={() => handleClick(i + 1)}
+                        onMouseEnter={() => setHoveredIndex(i + 1)}
+                        onMouseLeave={() => setHoveredIndex(null)}
                     />
                 ))}
                 {overlayProps && (
@@ -127,6 +133,8 @@ export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, y
                         isExpanded
                         fillOpacity={0.85}
                         onClick={() => handleClick(expandedIndex!)}
+                        onMouseEnter={() => setHoveredIndex(expandedIndex!)}
+                        onMouseLeave={() => setHoveredIndex(null)}
                     />
                 )}
             </>
