@@ -10,7 +10,7 @@ import {
 } from "../constants"
 import React from "react"
 import { PositionScale } from "@visx/shape/lib/types"
-import { HoverContextProvider } from "../../../hooks/HoverContext"
+import { HoverContextProvider } from "../../../hooks/HoverContextProvider"
 import { Text, TextProps } from "@visx/text"
 import { Area } from "@visx/shape"
 

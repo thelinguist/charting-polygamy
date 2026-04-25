@@ -403,6 +403,44 @@ const historicalStory = {
     ],
 }
 
+export const ConcurrentColorScale: Story = {
+    args: {
+        patriarchTimeline: {
+            name: "John Doe",
+            birth: new Date("1850-01-01"),
+            death: new Date("1960-01-01"),
+            marriages: [
+                { start: new Date("1880-01-01") },
+                { start: new Date("1900-01-01") },
+                { start: new Date("1920-01-01") },
+            ],
+        },
+        timelines: [
+            {
+                name: "Wife One",
+                birth: new Date("1855-01-01"),
+                death: new Date("1910-01-01"),
+                linkedMarriage: { start: new Date("1880-01-01") },
+                otherMarriages: [],
+            },
+            {
+                name: "Wife Two",
+                birth: new Date("1860-01-01"),
+                death: new Date("1930-01-01"),
+                linkedMarriage: { start: new Date("1900-01-01") },
+                otherMarriages: [],
+            },
+            {
+                name: "Wife Three",
+                birth: new Date("1870-01-01"),
+                death: new Date("1960-01-01"),
+                linkedMarriage: { start: new Date("1920-01-01") },
+                otherMarriages: [],
+            },
+        ],
+    },
+}
+
 // accurate data based on apps/ui/public/data/parley-p-pratt.csv
 export const ParleyPratt: Story = {
     args: {

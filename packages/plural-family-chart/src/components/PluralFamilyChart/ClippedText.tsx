@@ -18,9 +18,7 @@ export const ClippedText: React.FC<TextProps & Props> = ({ xStart, xEnd, y, chil
     const clipPathId = React.useId()
 
     return (
-        <Group
-            style={{ cursor: "pointer" }}
-        >
+        <Group style={{ cursor: "pointer" }}>
             <defs>
                 <clipPath id={clipPathId}>
                     <rect
@@ -38,7 +36,7 @@ export const ClippedText: React.FC<TextProps & Props> = ({ xStart, xEnd, y, chil
                 verticalAnchor="start"
                 textAnchor="start"
                 {...rest}
-                clipPath={disableClip ? undefined :`url(#${clipPathId})`}
+                clipPath={disableClip ? undefined : `url(#${clipPathId})`}
             >
                 {children}
             </Text>

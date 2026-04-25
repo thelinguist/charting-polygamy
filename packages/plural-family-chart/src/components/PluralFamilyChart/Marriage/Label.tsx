@@ -5,18 +5,19 @@ interface Props {
     xStart: number
     xEnd: number
     yStart: number
-    isActive?: boolean
+    disableClip?: boolean
     text1: string
     text2: string
+    fill?: string
 }
-export const Label: React.FC<Props> = ({ xStart, xEnd, yStart, isActive, text1, text2 }) => {
+export const Label: React.FC<Props> = ({ xStart, xEnd, yStart, disableClip, text1, text2 }) => {
     // const { activeX } = useHoverContext()
     // const isActive = activeX === xStart
     // if (!!activeX && !isActive) return null
     return (
         <>
             <ClippedText
-                disableClip={isActive}
+                disableClip={disableClip}
                 xStart={xStart + labelMarginStart}
                 xEnd={xEnd}
                 y={yStart + barHeight / 3}
@@ -24,7 +25,7 @@ export const Label: React.FC<Props> = ({ xStart, xEnd, yStart, isActive, text1, 
                 {text1}
             </ClippedText>
             <ClippedText
-                disableClip={isActive}
+                disableClip={disableClip}
                 xStart={xStart + labelMarginStart}
                 xEnd={xEnd}
                 y={yStart + (barHeight * 2) / 3}

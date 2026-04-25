@@ -1,5 +1,5 @@
 export const patriarchColor = "#4db7ff"
-export const patriarchMarriedColor = "#5c0be8"
+export const patriarchMarriedColor = "#7332e5"
 export const strokeColor = "#000"
 export const strokeWidth = 1
 

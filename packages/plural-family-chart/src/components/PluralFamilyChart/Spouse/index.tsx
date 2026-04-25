@@ -1,5 +1,5 @@
 import { PatriarchTimeline, Timeline } from "lib/src/types"
-import { barHeight, otherMarriageColor, spouseMarriedColor } from "../constants"
+import { barHeight, otherMarriageColor, spouseMarriedColor, timelineAnnotationProps } from "../constants"
 import React from "react"
 import { Marriage } from "../Marriage"
 import { PersonTimeline } from "../PersonTimeline"
@@ -12,6 +12,11 @@ interface Props {
     xScale: (date: Date) => number
 }
 export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, yScale }) => {
+    const [expandedIndex, setExpandedIndex] = React.useState<number | null>(null)
+
+    const handleClick = (index: number) => {
+        setExpandedIndex(prev => (prev === index ? null : index))
+    }
     const marriageEnd = Math.min(
         timeline.death.getTime(),
         timeline.linkedMarriage.end?.getTime() || Infinity,
@@ -41,24 +46,89 @@ export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, y
         timeline.linkedMarriage.start.getFullYear() - timeline.birth.getFullYear()
     ).toString()} years old`
 
+    const overlayProps = React.useMemo(() => {
+        if (expandedIndex === null) return null
+        const charWidth = timelineAnnotationProps.fontSize * 0.65
+
+        if (expandedIndex === 0) {
+            const text1 = timeline.linkedMarriage.start.getFullYear().toString()
+            const text2 = marriageAge
+            const xStart = xScale(timeline.linkedMarriage.start)
+            const textXEnd = xStart + Math.max(text1.length, text2.length) * charWidth + 16
+            const expandedXEnd = Math.max(textXEnd, marriageBounds[1].x)
+            return {
+                bounds: [
+                    { x: xStart, y: yStart },
+                    { x: expandedXEnd, y: yStart },
+                    { x: expandedXEnd, y: yEnd },
+                    { x: xStart, y: yEnd },
+                ],
+                fillColor: spouseMarriedColor,
+                text1,
+                text2,
+            }
+        }
+
+        const i = expandedIndex - 1
+        const otherMarriage = timeline.otherMarriages[i]
+        const text1 = otherMarriage.start.getFullYear().toString()
+        const text2 = otherMarriage.spouse || ''
+        const xStart = xScale(otherMarriage.start)
+        const textXEnd = xStart + Math.max(text1.length, text2.length) * charWidth + 16
+        const expandedXEnd = Math.max(textXEnd, otherMarriageBounds[i][1].x)
+        return {
+            bounds: [
+                { x: xStart, y: yStart },
+                { x: expandedXEnd, y: yStart },
+                { x: expandedXEnd, y: yEnd },
+                { x: xStart, y: yEnd },
+            ],
+            fillColor: otherMarriageColor,
+            text1,
+            text2,
+        }
+    }, [expandedIndex, timeline, xScale, yStart, yEnd, marriageAge])
+
+    // TODO sort all marriages by start
+
     return (
-        <PersonTimeline name={timeline.name} yScale={yScale} xScale={xScale} birth={timeline.birth} death={timeline.death}>
+        <PersonTimeline
+            name={timeline.name}
+            yScale={yScale}
+            xScale={xScale}
+            birth={timeline.birth}
+            death={timeline.death}
+        >
             <>
                 <Marriage
                     bounds={marriageBounds}
                     fillColor={spouseMarriedColor}
-                    text1={timeline.linkedMarriage.start.getFullYear()}
+                    text1={timeline.linkedMarriage.start.getFullYear().toString()}
                     text2={marriageAge}
+                    onClick={() => handleClick(0)}
                 />
                 {otherMarriageBounds.map((bounds, i) => (
                     <Marriage
                         key={timeline.otherMarriages[i].spouse || i}
                         bounds={bounds}
                         fillColor={otherMarriageColor}
-                        text1={timeline.otherMarriages[i].start.getFullYear()}
+                        text1={timeline.otherMarriages[i].start.getFullYear().toString()}
                         text2={timeline.otherMarriages[i].spouse}
+                        onClick={() => handleClick(i + 1)}
                     />
                 ))}
+                {overlayProps && (
+                    <Marriage
+                        key="overlay"
+                        bounds={overlayProps.bounds}
+                        fillColor={overlayProps.fillColor}
+                        text1={overlayProps.text1}
+                        text2={overlayProps.text2}
+                        isExpanded
+                        fillOpacity={0.85}
+                        onClick={() => handleClick(expandedIndex!)}
+                    />
+                )}
             </>
         </PersonTimeline>
     )
