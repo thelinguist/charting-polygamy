@@ -28,3 +28,5 @@ export const timelineAnnotationProps = {
 export const barHeight = 50
 
 export const labelMarginStart = 2
+export const charWidthRatio = 0.65
+export const labelPadding = 16

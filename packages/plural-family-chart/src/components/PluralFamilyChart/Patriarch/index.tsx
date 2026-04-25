@@ -1,11 +1,16 @@
 import { PatriarchTimeline, Timeline } from "lib/src/types"
-import { patriarchColor, patriarchMarriedColor, timelineAnnotationProps } from "../constants"
+import { barHeight, patriarchColor, patriarchMarriedColor } from "../constants"
 import React from "react"
 import { PositionScale } from "@visx/shape/lib/types"
 import { scaleLinear } from "@visx/scale"
 import { interpolateHcl } from "@visx/vendor/d3-interpolate"
-import { PatriarchMarriage } from "./PatriarchMarriage"
+import { Marriage } from "../Marriage"
 import { PersonTimeline } from "../PersonTimeline"
+import { useMarriageExpansion } from "../hooks/useMarriageExpansion"
+import { getExpandedXEnd } from "../utils/getExpandedXEnd"
+import { getConcurrentCounts } from "./getConcurrentCounts.ts"
+
+type PatriarchMarriage = PatriarchTimeline["marriages"][number]
 
 interface Props {
     patriarchTimeline: PatriarchTimeline
@@ -13,27 +18,11 @@ interface Props {
     yScale: PositionScale
     xScale: (date: Date) => number
 }
+
 export const Patriarch: React.FC<Props> = ({ patriarchTimeline, timelines, yScale, xScale }) => {
-    const [pinnedIndex, setPinnedIndex] = React.useState<number | null>(null)
-    const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null)
-    const expandedIndex = hoveredIndex ?? pinnedIndex
+    const { expandedIndex, handleClick, setHoveredIndex } = useMarriageExpansion()
 
-    const handleClick = (index: number) => {
-        setPinnedIndex(prev => (prev === index ? null : index))
-    }
-
-    const concurrentCounts = patriarchTimeline.marriages.map(marriage => {
-        const mStart = marriage.start!.getTime()
-        return timelines.filter(timeline => {
-            const spouseStart = timeline.linkedMarriage.start.getTime()
-            const spouseEnd = Math.min(
-                timeline.linkedMarriage.end?.getTime() ?? Infinity,
-                timeline.death.getTime(),
-                patriarchTimeline.death.getTime()
-            )
-            return spouseStart <= mStart && spouseEnd >= mStart
-        }).length
-    })
+    const concurrentCounts = getConcurrentCounts(patriarchTimeline, timelines)
 
     const maxConcurrent = Math.max(...concurrentCounts, 1)
     const sizeColorScale = scaleLinear({
@@ -41,15 +30,30 @@ export const Patriarch: React.FC<Props> = ({ patriarchTimeline, timelines, yScal
         range: [patriarchColor, patriarchMarriedColor],
     }).interpolate(interpolateHcl)
 
-    const expandedXEnd = React.useMemo(() => {
+    const getMarriageEnd = (marriage: PatriarchMarriage) =>
+        Math.min(marriage.end?.getTime() ?? Infinity, patriarchTimeline.death.getTime())
+
+    const getMarriageAge = (marriage: PatriarchMarriage) =>
+        marriage.age || marriage.start!.getFullYear() - patriarchTimeline.birth.getFullYear()
+
+    const getBounds = (marriage: PatriarchMarriage, xEndOverride?: number) => {
+        const x0 = xScale(marriage.start!)
+        const xEnd = xEndOverride ?? xScale(new Date(getMarriageEnd(marriage)))
+        return [
+            { x: x0, y: 0 },
+            { x: xEnd, y: 0 },
+            { x: xEnd, y: barHeight },
+            { x: x0, y: barHeight },
+        ]
+    }
+
+    const overlayXEnd = React.useMemo(() => {
         if (expandedIndex === null) return null
         const marriage = patriarchTimeline.marriages[expandedIndex]
-        const marriageAge = marriage.age || marriage.start!.getFullYear() - patriarchTimeline.birth.getFullYear()
-        const longestText = `${marriageAge} years old`
-        const charWidth = timelineAnnotationProps.fontSize * 0.65
-        const textXEnd = xScale(marriage.start!) + longestText.length * charWidth + 16
-        const originalXEnd = xScale(new Date(Math.min(marriage.end?.getTime() ?? Infinity, patriarchTimeline.death.getTime())))
-        return Math.max(textXEnd, originalXEnd)
+        const text1 = marriage.start!.getFullYear().toString()
+        const text2 = `${getMarriageAge(marriage)} years old`
+        return getExpandedXEnd(xScale(marriage.start!), text1, text2, xScale(new Date(getMarriageEnd(marriage))))
+        // eslint-disable-next-line
     }, [expandedIndex, patriarchTimeline, xScale])
 
     return (
@@ -63,26 +67,25 @@ export const Patriarch: React.FC<Props> = ({ patriarchTimeline, timelines, yScal
         >
             <>
                 {patriarchTimeline.marriages.map((marriage, i) => (
-                    <PatriarchMarriage
+                    <Marriage
                         key={i}
-                        xScale={xScale}
+                        bounds={getBounds(marriage)}
                         fillColor={sizeColorScale(concurrentCounts[i])}
-                        patriarchTimeline={patriarchTimeline}
-                        marriage={marriage}
+                        text1={marriage.start!.getFullYear().toString()}
+                        text2={`${getMarriageAge(marriage)} years old`}
                         onClick={() => handleClick(i)}
                         onMouseEnter={() => setHoveredIndex(i)}
                         onMouseLeave={() => setHoveredIndex(null)}
                     />
                 ))}
                 {expandedIndex !== null && (
-                    <PatriarchMarriage
+                    <Marriage
                         key="overlay"
-                        xScale={xScale}
+                        bounds={getBounds(patriarchTimeline.marriages[expandedIndex], overlayXEnd!)}
                         fillColor={sizeColorScale(concurrentCounts[expandedIndex])}
-                        patriarchTimeline={patriarchTimeline}
-                        marriage={patriarchTimeline.marriages[expandedIndex]}
+                        text1={patriarchTimeline.marriages[expandedIndex].start!.getFullYear().toString()}
+                        text2={`${getMarriageAge(patriarchTimeline.marriages[expandedIndex])} years old`}
                         isExpanded
-                        expandedXEnd={expandedXEnd!}
                         fillOpacity={0.85}
                         onClick={() => handleClick(expandedIndex)}
                         onMouseEnter={() => setHoveredIndex(expandedIndex)}

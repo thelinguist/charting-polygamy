@@ -445,6 +445,6 @@ export const ConcurrentColorScale: Story = {
 export const ParleyPratt: Story = {
     args: {
         patriarchTimeline: historicalStory.rootTimeline,
-        timelines: historicalStory.wives
+        timelines: historicalStory.wives,
     },
 }

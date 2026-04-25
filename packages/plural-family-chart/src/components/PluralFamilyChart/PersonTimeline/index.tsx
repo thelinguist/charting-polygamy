@@ -23,15 +23,7 @@ interface Props {
     xScale: (date: Date) => number
     children?: JSX.Element | JSX.Element[]
 }
-export const PersonTimeline: React.FC<Props> = ({
-    birth,
-    death,
-    name,
-    isPatriarch,
-    yScale,
-    xScale,
-    children,
-}) => {
+export const PersonTimeline: React.FC<Props> = ({ birth, death, name, isPatriarch, yScale, xScale, children }) => {
     // @ts-expect-error idk what the type should be for ordinal scales
     const yStart = yScale(name)
     const yEnd = yStart + barHeight
