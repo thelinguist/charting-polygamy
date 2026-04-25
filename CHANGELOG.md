@@ -1,3 +1,19 @@
+# [1.5.0](https://github.com/thelinguist/charting-polygamy/compare/v1.4.0...v1.5.0) (2026-04-25)
+
+
+### Bug Fixes
+
+* build export fixed. react 19 ([d48ea2c](https://github.com/thelinguist/charting-polygamy/commit/d48ea2c0fdbcad6c79fd1902078e19f06f159d1e))
+* imports ([11c6b59](https://github.com/thelinguist/charting-polygamy/commit/11c6b5912530ba1bddfcacf2b2c491b5987e1cc0))
+* include new component ([8cad679](https://github.com/thelinguist/charting-polygamy/commit/8cad6794aef0ccbe13b4d02fe6f5781e3d20c33c))
+
+
+### Features
+
+* allow mouse hover ([639df26](https://github.com/thelinguist/charting-polygamy/commit/639df261dae89f7bb404bb56506a38d39d31a21d))
+* new chart component ([#14](https://github.com/thelinguist/charting-polygamy/issues/14)) ([70f8ece](https://github.com/thelinguist/charting-polygamy/commit/70f8ece16b60812731a7b9b1a456196c42f444e1))
+* working expandable marriages ([0ee7050](https://github.com/thelinguist/charting-polygamy/commit/0ee70500c4f906d6abc575db2edd91b595aeaa2e))
+
 # [1.4.0](https://github.com/thelinguist/charting-polygamy/compare/v1.3.1...v1.4.0) (2023-12-31)
 
 ### Features
