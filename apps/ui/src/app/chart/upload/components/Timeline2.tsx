@@ -60,11 +60,7 @@ const Timeline2Inner: React.FC<Props> = ({ name, patriarchTimeline, timelines })
                 <h2>{name}</h2>
             </div>
             <div ref={containerRef}>
-                <PluralFamilyChart
-                    width={width}
-                    patriarchTimeline={patriarchTimeline}
-                    timelines={timelines}
-                />
+                <PluralFamilyChart width={width} patriarchTimeline={patriarchTimeline} timelines={timelines} />
             </div>
         </div>
     )
