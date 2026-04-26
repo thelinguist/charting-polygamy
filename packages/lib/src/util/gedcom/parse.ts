@@ -13,8 +13,8 @@ export const parseGedcom = (fileContents: string, patriarchToFind?: string): Pat
 
     // deduplicating required cuz for each family the patriarch facts are added.
     // An improvement would be to make a list of identities to get, and get them after getting the relationship facts
-    return Object.keys(data).map(name => ({
-        facts: dedupeFacts<FactRecord>(data[name].families.flat()),
-        patriarchName: name,
+    return Object.keys(data).map(id => ({
+        facts: dedupeFacts<FactRecord>(data[id].families.flat()),
+        patriarchName: data[id].name,
     }))
 }

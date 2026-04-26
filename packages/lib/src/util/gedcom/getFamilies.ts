@@ -11,6 +11,7 @@ import {
 
 interface PatriarchData {
     patriarch: GedcomIndividual
+    name: string
     families: FactRecord[][]
 }
 
@@ -41,9 +42,11 @@ export const getFamilies = (database: GedcomDatabase, patriarchToFind?: string):
             console.warn(`the family of ${patriarchName}, ${id}, has no wife, skipping`)
             continue
         }
-        if (patriarchName && !patriarchData[patriarchName]) {
-            patriarchData[patriarchName] = {
+        const patriarchId = patriarch.data.xref_id
+        if (!patriarchData[patriarchId]) {
+            patriarchData[patriarchId] = {
                 patriarch,
+                name: patriarchName,
                 families: [],
             }
         }
@@ -79,7 +82,7 @@ export const getFamilies = (database: GedcomDatabase, patriarchToFind?: string):
             })
         }
 
-        patriarchData[patriarchName].families.push(factsAboutFamily)
+        patriarchData[patriarchId].families.push(factsAboutFamily)
     }
     return patriarchData
 }

@@ -18,23 +18,24 @@ export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, y
     const { expandedIndex, handleClick, setHoveredIndex } = useMarriageExpansion()
 
     const linkedStart = timeline.linkedMarriage.start
-    if (!linkedStart) return null
 
-    const marriageEnd = Math.min(
-        timeline.death?.getTime() ?? Infinity,
-        timeline.linkedMarriage.end?.getTime() ?? Infinity,
-        patriarchTimeline.death?.getTime() ?? Infinity
-    )
     // @ts-expect-error idk what the type should be for ordinal scales
     const yStart: number = yScale(timeline.name) ?? 0
     const yEnd = yStart + barHeight
 
-    const marriageBounds = [
-        { x: xScale(linkedStart), y: yStart },
-        { x: xScale(new Date(marriageEnd)), y: yStart },
-        { x: xScale(new Date(marriageEnd)), y: yEnd },
-        { x: xScale(linkedStart), y: yEnd },
-    ]
+    const marriageBounds = linkedStart ? (() => {
+        const marriageEnd = Math.min(
+            timeline.death?.getTime() ?? Infinity,
+            timeline.linkedMarriage.end?.getTime() ?? Infinity,
+            patriarchTimeline.death?.getTime() ?? Infinity
+        )
+        return [
+            { x: xScale(linkedStart), y: yStart },
+            { x: xScale(new Date(marriageEnd)), y: yStart },
+            { x: xScale(new Date(marriageEnd)), y: yEnd },
+            { x: xScale(linkedStart), y: yEnd },
+        ]
+    })() : null
 
     const otherMarriageBounds = timeline.otherMarriages.map(marriage => [
         { x: xScale(marriage.start), y: yStart },
@@ -43,15 +44,15 @@ export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, y
         { x: xScale(marriage.start), y: yEnd },
     ])
 
-    const marriageAge = timeline.birth
+    const marriageAge = linkedStart && timeline.birth
         ? `${(linkedStart.getFullYear() - timeline.birth.getFullYear()).toString()} years old`
         : ""
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const overlayProps = React.useMemo(() => {
         if (expandedIndex === null) return null
 
         if (expandedIndex === 0) {
+            if (!linkedStart || !marriageBounds) return null
             const text1 = linkedStart.getFullYear().toString()
             const text2 = marriageAge
             const xStart = xScale(linkedStart)
@@ -87,7 +88,7 @@ export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, y
             text1,
             text2,
         }
-    }, [expandedIndex, timeline, xScale, yStart, yEnd, marriageAge])
+    }, [expandedIndex, timeline, xScale, yStart, yEnd, marriageAge, linkedStart, marriageBounds, otherMarriageBounds])
 
     return (
         <PersonTimeline
@@ -98,15 +99,17 @@ export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, y
             death={timeline.death}
         >
             <>
-                <Marriage
-                    bounds={marriageBounds}
-                    fillColor={spouseMarriedColor}
-                    text1={linkedStart.getFullYear().toString()}
-                    text2={marriageAge}
-                    onClick={() => handleClick(0)}
-                    onMouseEnter={() => setHoveredIndex(0)}
-                    onMouseLeave={() => setHoveredIndex(null)}
-                />
+                {linkedStart && marriageBounds && (
+                    <Marriage
+                        bounds={marriageBounds}
+                        fillColor={spouseMarriedColor}
+                        text1={linkedStart.getFullYear().toString()}
+                        text2={marriageAge}
+                        onClick={() => handleClick(0)}
+                        onMouseEnter={() => setHoveredIndex(0)}
+                        onMouseLeave={() => setHoveredIndex(null)}
+                    />
+                )}
                 {otherMarriageBounds.map((bounds, i) => (
                     <Marriage
                         key={timeline.otherMarriages[i].spouse || i}

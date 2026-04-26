@@ -1,6 +1,5 @@
-import { KnowledgeTree, LifeEventEnum } from "../types"
-import { isAfter, isBefore, isSameDay } from "date-fns"
-import { UserIntervention } from "./user-intervention"
+import { KnowledgeTree } from "../types"
+import { isBefore } from "date-fns"
 import { getConfig } from "./config"
 
 // TODO write tests for when no divorce, when husband dies, and when she leaves one man and marries another then another before the man she left dies
