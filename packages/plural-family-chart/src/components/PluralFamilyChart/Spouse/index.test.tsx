@@ -63,7 +63,12 @@ describe("Spouse", () => {
             linkedMarriage: { end: new Date("1853-03-07") } as any,
         }
         const { container } = wrap(
-            <Spouse patriarchTimeline={patriarch} timeline={noStartWife} xScale={xScale} yScale={yScale as PositionScale} />
+            <Spouse
+                patriarchTimeline={patriarch}
+                timeline={noStartWife}
+                xScale={xScale}
+                yScale={yScale as PositionScale}
+            />
         )
         expect(container.querySelector("#spouse-Jane\\ Doe")).toBeTruthy()
     })
@@ -74,20 +79,71 @@ describe("Spouse", () => {
             linkedMarriage: { end: new Date("1853-03-07") } as any,
         }
         const { queryByText } = wrap(
-            <Spouse patriarchTimeline={patriarch} timeline={noStartWife} xScale={xScale} yScale={yScale as PositionScale} />
+            <Spouse
+                patriarchTimeline={patriarch}
+                timeline={noStartWife}
+                xScale={xScale}
+                yScale={yScale as PositionScale}
+            />
         )
         expect(queryByText("1841")).toBeNull()
+    })
+
+    describe("dim prop", () => {
+        it("renders at full opacity when dim is false", () => {
+            const { container } = wrap(
+                <Spouse
+                    patriarchTimeline={patriarch}
+                    timeline={wife}
+                    xScale={xScale}
+                    yScale={yScale as PositionScale}
+                    dim={false}
+                />
+            )
+            const wrapper = container.querySelector('g[style*="transition"]')
+            expect(wrapper?.getAttribute("opacity")).toBe("1")
+        })
+
+        it("renders at full opacity when dim is omitted", () => {
+            const { container } = wrap(
+                <Spouse
+                    patriarchTimeline={patriarch}
+                    timeline={wife}
+                    xScale={xScale}
+                    yScale={yScale as PositionScale}
+                />
+            )
+            const wrapper = container.querySelector('g[style*="transition"]')
+            expect(wrapper?.getAttribute("opacity")).toBe("1")
+        })
+
+        it("renders at reduced opacity when dim is true", () => {
+            const { container } = wrap(
+                <Spouse
+                    patriarchTimeline={patriarch}
+                    timeline={wife}
+                    xScale={xScale}
+                    yScale={yScale as PositionScale}
+                    dim={true}
+                />
+            )
+            const wrapper = container.querySelector('g[style*="transition"]')
+            expect(wrapper?.getAttribute("opacity")).toBe("0.15")
+        })
     })
 
     it("renders other marriages", () => {
         const wifeWithOther: Timeline = {
             ...wife,
-            otherMarriages: [
-                { start: new Date("1900-07-01"), end: new Date("1910-07-01"), spouse: "Other Male" },
-            ],
+            otherMarriages: [{ start: new Date("1900-07-01"), end: new Date("1910-07-01"), spouse: "Other Male" }],
         }
         const { getByText } = wrap(
-            <Spouse patriarchTimeline={patriarch} timeline={wifeWithOther} xScale={xScale} yScale={yScale as PositionScale} />
+            <Spouse
+                patriarchTimeline={patriarch}
+                timeline={wifeWithOther}
+                xScale={xScale}
+                yScale={yScale as PositionScale}
+            />
         )
         expect(getByText("1900")).toBeTruthy()
         expect(getByText("Other Male")).toBeTruthy()

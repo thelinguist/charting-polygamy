@@ -12,6 +12,7 @@ import { Spouse } from "./Spouse"
 import { BadData } from "./BadData"
 import { TooSmall } from "./TooSmall"
 import { TimelineAxis } from "./TimelineAxis"
+import { useMarriageExpansion } from "./hooks/useMarriageExpansion"
 
 interface Props {
     width?: number
@@ -32,6 +33,8 @@ export const PluralFamilyChart: React.FC<Props> = ({
     margin = defaultMargin,
 }) => {
     // const useAnimatedComponents = usePrefersReducedMotion()
+    const { expandedIndex, handleClick, setHoveredIndex } = useMarriageExpansion()
+
     const dataErrors = checkPersonDetails(patriarchTimeline)
     if (dataErrors) return <BadData />
 
@@ -78,14 +81,18 @@ export const PluralFamilyChart: React.FC<Props> = ({
                     timelines={timelines}
                     yScale={yScale}
                     xScale={xScale}
+                    expandedIndex={expandedIndex}
+                    handleClick={handleClick}
+                    setHoveredIndex={setHoveredIndex}
                 />
-                {timelines.map(timeline => (
+                {timelines.map((timeline, index) => (
                     <Spouse
                         key={timeline.name}
                         patriarchTimeline={patriarchTimeline}
                         timeline={timeline}
                         yScale={yScale}
                         xScale={xScale}
+                        dim={expandedIndex !== null && expandedIndex !== index}
                     />
                 ))}
             </Group>

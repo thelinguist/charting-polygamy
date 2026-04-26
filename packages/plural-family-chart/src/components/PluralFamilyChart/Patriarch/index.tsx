@@ -6,7 +6,6 @@ import { scaleLinear } from "@visx/scale"
 import { interpolateHcl } from "@visx/vendor/d3-interpolate"
 import { Marriage } from "../Marriage"
 import { PersonTimeline } from "../PersonTimeline"
-import { useMarriageExpansion } from "../hooks/useMarriageExpansion"
 import { getExpandedXEnd } from "../utils/getExpandedXEnd"
 import { getConcurrentCounts } from "./getConcurrentCounts"
 
@@ -17,11 +16,20 @@ interface Props {
     timelines: Timeline[]
     yScale: PositionScale
     xScale: (date: Date) => number
+    expandedIndex: number | null
+    handleClick: (index: number) => void
+    setHoveredIndex: (index: number | null) => void
 }
 
-export const Patriarch: React.FC<Props> = ({ patriarchTimeline, timelines, yScale, xScale }) => {
-    const { expandedIndex, handleClick, setHoveredIndex } = useMarriageExpansion()
-
+export const Patriarch: React.FC<Props> = ({
+    patriarchTimeline,
+    timelines,
+    yScale,
+    xScale,
+    expandedIndex,
+    handleClick,
+    setHoveredIndex,
+}) => {
     const concurrentCounts = getConcurrentCounts(patriarchTimeline, timelines)
 
     const maxConcurrent = Math.max(...concurrentCounts, 1)

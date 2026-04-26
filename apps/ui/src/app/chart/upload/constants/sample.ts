@@ -36,9 +36,7 @@ export const example3WivesChartData: Record<string, PatriarchData> = {
                 birth: new Date("1837-10-25"),
                 death: new Date("1898-01-08"),
                 linkedMarriage: { start: new Date("1857-03-10"), end: new Date("1858-01-01") },
-                otherMarriages: [
-                    { start: new Date("1858-01-01"), end: new Date("1898-01-08"), spouse: "Other male" },
-                ],
+                otherMarriages: [{ start: new Date("1858-01-01"), end: new Date("1898-01-08"), spouse: "Other male" }],
                 age: 19,
                 gap: 22,
             },

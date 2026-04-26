@@ -18,16 +18,14 @@ export const Timelines = ({ chartData, stats }: Props) => {
             {!Object.keys(chartData).length && (
                 <div className={classNames(styles.chart, styles.placeholder)}>graphs will go here</div>
             )}
-            {Object.keys(chartData).map(name =>
-               (
-                    <Timeline2
-                        key={name}
-                        name={name}
-                        patriarchTimeline={chartData[name].patriarchTimeline}
-                        timelines={chartData[name].timelines}
-                    />
-                )
-            )}
+            {Object.keys(chartData).map(name => (
+                <Timeline2
+                    key={name}
+                    name={name}
+                    patriarchTimeline={chartData[name].patriarchTimeline}
+                    timelines={chartData[name].timelines}
+                />
+            ))}
             {stats ? (
                 <div className={classNames(styles.chart, styles.timeline)}>
                     <h2>Statistics</h2>

@@ -124,7 +124,10 @@ async function readAllChunks(readable: ReadableStream<Uint8Array>): Promise<Uint
     }
     const out = new Uint8Array(chunks.reduce((n, c) => n + c.length, 0))
     let offset = 0
-    for (const chunk of chunks) { out.set(chunk, offset); offset += chunk.length }
+    for (const chunk of chunks) {
+        out.set(chunk, offset)
+        offset += chunk.length
+    }
     return out
 }
 
@@ -141,10 +144,7 @@ async function compress(str: string): Promise<Uint8Array> {
 async function decompress(bytes: Uint8Array): Promise<string> {
     const stream = new DecompressionStream("deflate-raw")
     const writer = stream.writable.getWriter()
-    const [, out] = await Promise.all([
-        writer.write(bytes).then(() => writer.close()),
-        readAllChunks(stream.readable),
-    ])
+    const [, out] = await Promise.all([writer.write(bytes).then(() => writer.close()), readAllChunks(stream.readable)])
     return new TextDecoder().decode(out)
 }
 

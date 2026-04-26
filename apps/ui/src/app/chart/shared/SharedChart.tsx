@@ -9,10 +9,7 @@ import { Timeline2 } from "../upload/components/Timeline2"
 import styles from "../upload/components/TimelineRendering.module.css"
 import { classNames } from "../../../lib"
 
-type DecodeState =
-    | { status: "loading" }
-    | { status: "error" }
-    | { status: "ready"; name: string; data: PatriarchData }
+type DecodeState = { status: "loading" } | { status: "error" } | { status: "ready"; name: string; data: PatriarchData }
 
 function ErrorState({ message }: { message: string }) {
     return (
@@ -28,9 +25,7 @@ function ErrorState({ message }: { message: string }) {
 export function SharedChart() {
     const searchParams = useSearchParams()
     const encoded = searchParams.get("data")
-    const [state, setState] = useState<DecodeState>(
-        encoded ? { status: "loading" } : { status: "error" }
-    )
+    const [state, setState] = useState<DecodeState>(encoded ? { status: "loading" } : { status: "error" })
 
     useEffect(() => {
         if (!encoded) return

@@ -3,8 +3,7 @@ import { parseGedcom } from "./parse"
 import { LifeEventEnum } from "../../types"
 
 // Minimal GEDCOM helper — joins lines with \n and wraps in HEAD/TRLR
-const gedcom = (...lines: string[]) =>
-    ["0 HEAD", ...lines, "0 TRLR"].join("\n")
+const gedcom = (...lines: string[]) => ["0 HEAD", ...lines, "0 TRLR"].join("\n")
 
 const SIMPLE_POLYGAMOUS = gedcom(
     "0 @I1@ INDI",
@@ -172,9 +171,7 @@ describe("parseGedcom", () => {
 
         it("does not share wife facts between same-named patriarchs", () => {
             const result = parseGedcom(DUPLICATE_NAME)
-            const allMarriages = result.flatMap(r =>
-                r.facts.filter(f => f.Event === LifeEventEnum.Marriage)
-            )
+            const allMarriages = result.flatMap(r => r.facts.filter(f => f.Event === LifeEventEnum.Marriage))
             const secondParties = allMarriages.map(f => f["Second Party"])
 
             // Wife One and Wife Two belong to the first John Smith (@I1@)
