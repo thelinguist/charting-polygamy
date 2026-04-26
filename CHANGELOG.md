@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/thelinguist/charting-polygamy/compare/v1.8.0...v1.8.1) (2026-04-26)
+
+
+### Bug Fixes
+
+* p-pratt image formatting ([c4853ad](https://github.com/thelinguist/charting-polygamy/commit/c4853ad7768483951bca688e4094b56d7e141bfe))
+
 # [1.8.0](https://github.com/thelinguist/charting-polygamy/compare/v1.7.0...v1.8.0) (2026-04-26)
 
 
