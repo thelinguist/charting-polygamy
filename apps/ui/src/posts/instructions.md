@@ -32,8 +32,6 @@ You can jump in at one of these points:
 The app will scan the info you provide and identify which men practiced polygamy. It will then generate a chart for each
 one to the best of its ability.
 
-You can also see stats (TODO) on how many men in your lines practiced polygamy.
-
 [get started](upload)
 
 # Questions

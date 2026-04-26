@@ -9,27 +9,23 @@ import { Timeline } from "./Timeline"
 import { Timeline2 } from "./Timeline2"
 
 interface Props {
-    timelines: Record<string, string>
-    chartData?: Record<string, PatriarchData>
+    chartData: Record<string, PatriarchData>
     stats?: Statistics
 }
-export const Timelines = ({ timelines, chartData, stats }: Props) => {
+export const Timelines = ({ chartData, stats }: Props) => {
     return (
         <div>
-            {!Object.keys(timelines).length && (
+            {!Object.keys(chartData).length && (
                 <div className={classNames(styles.chart, styles.placeholder)}>graphs will go here</div>
             )}
-            {Object.keys(timelines).map(name =>
-                chartData?.[name] ? (
+            {Object.keys(chartData).map(name =>
+               (
                     <Timeline2
                         key={name}
                         name={name}
                         patriarchTimeline={chartData[name].patriarchTimeline}
                         timelines={chartData[name].timelines}
-                        timelineFallback={timelines[name]}
                     />
-                ) : (
-                    <Timeline key={name} name={name} timeline={timelines[name]} />
                 )
             )}
             {stats ? (

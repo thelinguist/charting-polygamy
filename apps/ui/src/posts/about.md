@@ -19,7 +19,8 @@ household, and even the shape of the family itself. This project has highlighted
 I read about fled, not being able to stand up to the pressures of that new life. Another set ostracized the youngest
 sister wife, quite literally, convincing the husband to place her alone with her children in a poorly constructed home
 far from town. Another brought home a new sister wife, who he introduced to the other wives only after conducting the
-new marriage. Nonetheless, most of these families thrived and prospered, creating the rich heritage that I am a part of.
+new marriage. Nonetheless, most of these families thrived and prospered, creating the unique heritage that I am a part
+of.
 
 Writing this all off as "it was a different time back then" is quite ignorant of the lives these people lived. They
 faced real decisions, and especially on the Frontier, real consequences. While they did not have the tools, laws, and

@@ -1,29 +1,49 @@
-export const example3Wives = `
-gantt
-    title Patriarch and his wives
-    todayMarker off
-    dateFormat YYYY-MM-DD
-    axisFormat %Y
-    
-    section Patriarch
-    life: 1817-05-03, 1881-07-09
+import { PatriarchData, timelinesToMermaid } from "lib"
 
-    age 25 | 11 years older: milestone,done, 1841-02-28, 1d
-    age 30 | 19 years older: milestone,done, 1846-01-21, 1d
-    age 41 | 22 years older: milestone,done, 1857-03-21, 1d
-    section Female 1
-    life: 1826-01-14, 1891-03-10
-    marriage: crit,1841-02-23, 1881-06-01
-    age 14 | 11 years younger: milestone,done, 1841-02-28, 1d
+export const example3WivesChartData: Record<string, PatriarchData> = {
+    Patriarch: {
+        patriarchTimeline: {
+            name: "Patriarch",
+            birth: new Date("1817-05-03"),
+            death: new Date("1881-07-09"),
+            marriages: [
+                { age: 25, gap: 11, start: new Date("1841-02-23"), end: new Date("1881-06-01") },
+                { age: 30, gap: 19, start: new Date("1846-01-20"), end: new Date("1870-03-16") },
+                { age: 41, gap: 22, start: new Date("1857-03-10"), end: new Date("1858-01-01") },
+            ],
+        },
+        timelines: [
+            {
+                name: "Female 1",
+                birth: new Date("1826-01-14"),
+                death: new Date("1891-03-10"),
+                linkedMarriage: { start: new Date("1841-02-23"), end: new Date("1881-06-01") },
+                otherMarriages: [],
+                age: 14,
+                gap: 11,
+            },
+            {
+                name: "Female 2",
+                birth: new Date("1834-04-07"),
+                death: new Date("1870-03-16"),
+                linkedMarriage: { start: new Date("1846-01-20"), end: new Date("1870-03-16") },
+                otherMarriages: [],
+                age: 11,
+                gap: 19,
+            },
+            {
+                name: "Female 3",
+                birth: new Date("1837-10-25"),
+                death: new Date("1898-01-08"),
+                linkedMarriage: { start: new Date("1857-03-10"), end: new Date("1858-01-01") },
+                otherMarriages: [
+                    { start: new Date("1858-01-01"), end: new Date("1898-01-08"), spouse: "Other male" },
+                ],
+                age: 19,
+                gap: 22,
+            },
+        ],
+    },
+}
 
-    section Female 2
-    life: 1834-04-07, 1870-03-16
-    marriage: crit,1846-01-20, 1870-03-16
-    age 11 | 19 years younger: milestone,done, 1846-01-21, 1d
-
-    section Female 3
-    life: 1837-10-25, 1898-01-08
-    marriage: crit,1857-03-10, 1858-01-01
-    age 19 | 22 years younger: milestone,done, 1857-03-21, 1d
-    marriage to Other male: active, 1858-01-01, 1898-01-08
-`
+export const example3Wives = timelinesToMermaid(example3WivesChartData).Patriarch

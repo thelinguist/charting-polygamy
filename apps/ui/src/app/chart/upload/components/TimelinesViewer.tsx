@@ -6,7 +6,7 @@ import { getTimelines, timelinesToMermaid, PatriarchData } from "lib"
 import { FileTypes, Statistics } from "lib/src/types"
 import { parseFile, classNames } from "../../../../lib"
 import styles from "./TimelineRendering.module.css"
-import { example3Wives } from "../constants/sample"
+import { example3Wives, example3WivesChartData } from "../constants/sample"
 import { UploadButton } from "../../../../components/UploadButton"
 import { Timelines } from "./Timelines"
 
@@ -37,7 +37,8 @@ export const TimelinesViewer = () => {
     }
 
     const runDemo = () => {
-        setTimelines({ example: example3Wives })
+        // setTimelines({ example: example3Wives })
+        setChartData({ ...example3WivesChartData })
     }
 
     return (
@@ -64,7 +65,7 @@ export const TimelinesViewer = () => {
                 Or
                 <button onClick={runDemo}>try the demo</button>
             </div>
-            <Timelines timelines={timelines} chartData={chartData} stats={stats} />
+            <Timelines chartData={chartData} stats={stats} />
         </div>
     )
 }

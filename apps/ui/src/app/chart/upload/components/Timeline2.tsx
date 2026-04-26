@@ -11,7 +11,7 @@ interface Props {
     name: string
     patriarchTimeline: PatriarchTimeline
     timelines: Timeline[]
-    timelineFallback: string
+    timelineFallback?: string
 }
 
 interface ErrorBoundaryState {
@@ -35,7 +35,7 @@ class Timeline2ErrorBoundary extends React.Component<Props, ErrorBoundaryState> 
     }
 
     render() {
-        if (this.state.hasError) {
+        if (this.state.hasError && this.props.timelineFallback) {
             return <TimelineFallback name={this.props.name} timeline={this.props.timelineFallback} />
         }
         return <Timeline2Inner {...this.props} />
