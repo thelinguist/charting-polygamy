@@ -2,7 +2,7 @@
 title: "Parley P Pratt Line"
 ---
 
-| ![Parley P Pratt](/charting-polygamy/parley-p-pratt.svg) |
+| ![Parley P Pratt](/charting-polygamy/parley-p-pratt.png) |
 | :------------------------------------------------------: |
 
 In the Pratt family there were 12 total wives. Notice that **Eleanor Jane McComb McLean** had a husband before ([this

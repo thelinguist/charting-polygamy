@@ -6,9 +6,10 @@ import { getTimelines, timelinesToMermaid, PatriarchData } from "lib"
 import { FileTypes, Statistics } from "lib/src/types"
 import { parseFile, classNames } from "../../../../lib"
 import styles from "./TimelineRendering.module.css"
-import { example3Wives, example3WivesChartData } from "../constants/sample"
+import { example3WivesChartData } from "../constants/sample"
 import { UploadButton } from "../../../../components/UploadButton"
 import { Timelines } from "./Timelines"
+import { ManualEntryForm } from "./ManualEntryForm"
 
 const getFileFormat = (file: File): FileTypes => {
     const ext = file.name.split(".").at(-1)
@@ -23,6 +24,7 @@ export const TimelinesViewer = () => {
     const [timelines, setTimelines] = useState<Record<string, string>>({})
     const [chartData, setChartData] = useState<Record<string, PatriarchData>>({})
     const [stats, setStats] = useState<Statistics>()
+    const [showManualForm, setShowManualForm] = useState(false)
     const onChange: ChangeEventHandler<HTMLInputElement> = async e => {
         e.preventDefault()
         if (e.target.files) {
@@ -41,6 +43,10 @@ export const TimelinesViewer = () => {
         setChartData({ ...example3WivesChartData })
     }
 
+    const handleManualChart = (data: Record<string, PatriarchData> | null) => {
+        if (data) setChartData(data)
+    }
+
     return (
         <div className={styles.timelines}>
             <div className={styles.chart}>
@@ -53,6 +59,7 @@ export const TimelinesViewer = () => {
                             like the one here
                         </Link>
                     </li>
+                    <li>enter family data manually using the form below</li>
                 </ul>
             </div>
             <div className={classNames(styles.chart, styles.uploadInfo)}>
@@ -64,7 +71,16 @@ export const TimelinesViewer = () => {
                 />
                 Or
                 <button onClick={runDemo}>try the demo</button>
+                Or
+                <button onClick={() => setShowManualForm(prev => !prev)}>
+                    {showManualForm ? "hide form" : "enter manually"}
+                </button>
             </div>
+            {showManualForm && (
+                <div className={styles.chart}>
+                    <ManualEntryForm onChart={handleManualChart} />
+                </div>
+            )}
             <Timelines chartData={chartData} stats={stats} />
         </div>
     )

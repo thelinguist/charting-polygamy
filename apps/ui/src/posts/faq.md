@@ -42,12 +42,6 @@ offer the opportunity to others. Women are equal to men, and I condemn ideologie
 I think Mormon Polygamy has been a fascination of the country for a long, long time. I hope everyone feels comfortable
 using this tool, from members of the LDS Church, to plural-family fundamentalists, to Mormon history aficionados.
 
-## I am offended by your project
-
-I'm treading pretty carefully here, so I apologize if my amateur historicity isn't accepted by everyone. I am trying to stay
-neutral on such an interesting and provoking topic, so help me out if I am not meeting my goal. People should be able to
-understand this part of Mormon (and American) culture in the full light of day.
-
 ## How do timelines reveal what life was like for plural families?
 
 Timelines help depict the shape of these families over time, like when there were concurrent wives, how many men
@@ -57,7 +51,7 @@ between husbands, wives, and step-families.
 ## Have you found anything noteworthy using these timelines?
 
 -   Most polygamous men had 3 wives.
--   Of my male mormon ancestors who were eligible to practice polygamy, 40% did practice it.
+-   Of my male Mormon ancestors who were eligible to practice polygamy, 40% did practice it.
 -   Not all women stayed with their polygamous husband until their deaths. This has led me to journals and family
     stories about how this practice challenged the women who participated. This has been a very fascinating aspect to
     this project

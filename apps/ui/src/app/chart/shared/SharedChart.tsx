@@ -51,6 +51,7 @@ export function SharedChart() {
                 name={state.name}
                 patriarchTimeline={state.data.patriarchTimeline}
                 timelines={state.data.timelines}
+                hideShare
             />
             <div className={classNames(styles.chart, styles.cta)}>
                 <p>This chart was generated with Charting Polygamy.</p>

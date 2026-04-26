@@ -1,16 +1,14 @@
 # [1.7.0](https://github.com/thelinguist/charting-polygamy/compare/v1.6.1...v1.7.0) (2026-04-26)
 
-
 ### Features
 
-* hover highlights marriage partner ([089541b](https://github.com/thelinguist/charting-polygamy/commit/089541bb0a0a0bf802ceb06a51adbb5407a2431d))
+-   hover highlights marriage partner ([089541b](https://github.com/thelinguist/charting-polygamy/commit/089541bb0a0a0bf802ceb06a51adbb5407a2431d))
 
 ## [1.6.1](https://github.com/thelinguist/charting-polygamy/compare/v1.6.0...v1.6.1) (2026-04-26)
 
-
 ### Bug Fixes
 
-* now parses gedcom individuals by id always ([e6acc49](https://github.com/thelinguist/charting-polygamy/commit/e6acc4990a024f130246177bd195a6e05dac7d87))
+-   now parses gedcom individuals by id always ([e6acc49](https://github.com/thelinguist/charting-polygamy/commit/e6acc4990a024f130246177bd195a6e05dac7d87))
 
 # [1.6.0](https://github.com/thelinguist/charting-polygamy/compare/v1.5.0...v1.6.0) (2026-04-26)
 

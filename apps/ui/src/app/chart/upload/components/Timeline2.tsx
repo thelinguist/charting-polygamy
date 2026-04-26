@@ -13,6 +13,7 @@ interface Props {
     patriarchTimeline: PatriarchTimeline
     timelines: Timeline[]
     timelineFallback?: string
+    hideShare?: boolean
 }
 
 interface ErrorBoundaryState {
@@ -43,7 +44,7 @@ class Timeline2ErrorBoundary extends React.Component<Props, ErrorBoundaryState> 
     }
 }
 
-const Timeline2Inner: React.FC<Props> = ({ name, patriarchTimeline, timelines }) => {
+const Timeline2Inner: React.FC<Props> = ({ name, patriarchTimeline, timelines, hideShare }) => {
     const containerRef = useRef<HTMLDivElement>(null)
     const [width, setWidth] = useState(800)
     const [copied, setCopied] = useState(false)
@@ -68,9 +69,11 @@ const Timeline2Inner: React.FC<Props> = ({ name, patriarchTimeline, timelines })
         <div className={classNames(styles.chart, styles.timeline)}>
             <div className={styles.header}>
                 <h2>{name}</h2>
-                <div className={styles.actions}>
-                    <button onClick={handleShare}>{copied ? "Copied!" : "Share This Graph"}</button>
-                </div>
+                {!hideShare && (
+                    <div className={styles.actions}>
+                        <button onClick={handleShare}>{copied ? "Copied!" : "Share This Graph"}</button>
+                    </div>
+                )}
             </div>
             <div ref={containerRef}>
                 <PluralFamilyChart width={width} patriarchTimeline={patriarchTimeline} timelines={timelines} />
