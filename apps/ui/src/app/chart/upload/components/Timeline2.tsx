@@ -6,6 +6,7 @@ import { PatriarchTimeline, Timeline } from "lib/src/types"
 import styles from "./TimelineRendering.module.css"
 import { classNames } from "../../../../lib"
 import { Timeline as TimelineFallback } from "./Timeline"
+import { encodePatriarchData } from "../../../../lib/shareUrl"
 
 interface Props {
     name: string
@@ -45,6 +46,7 @@ class Timeline2ErrorBoundary extends React.Component<Props, ErrorBoundaryState> 
 const Timeline2Inner: React.FC<Props> = ({ name, patriarchTimeline, timelines }) => {
     const containerRef = useRef<HTMLDivElement>(null)
     const [width, setWidth] = useState(800)
+    const [copied, setCopied] = useState(false)
 
     useEffect(() => {
         const el = containerRef.current
@@ -54,10 +56,21 @@ const Timeline2Inner: React.FC<Props> = ({ name, patriarchTimeline, timelines })
         return () => observer.disconnect()
     }, [])
 
+    const handleShare = async () => {
+        const encoded = await encodePatriarchData(name, { patriarchTimeline, timelines })
+        const url = `${window.location.origin}/charting-polygamy/chart/shared?data=${encoded}`
+        navigator.clipboard.writeText(url).catch(console.error)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+    }
+
     return (
         <div className={classNames(styles.chart, styles.timeline)}>
             <div className={styles.header}>
                 <h2>{name}</h2>
+                <div className={styles.actions}>
+                    <button onClick={handleShare}>{copied ? "Copied!" : "Share This Graph"}</button>
+                </div>
             </div>
             <div ref={containerRef}>
                 <PluralFamilyChart width={width} patriarchTimeline={patriarchTimeline} timelines={timelines} />

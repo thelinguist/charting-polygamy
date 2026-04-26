@@ -1,5 +1,5 @@
 import { afterAll, describe, expect, it, vi } from "vitest"
-import { createTimeline } from "../createTimeline"
+import { createTimeline } from "./index"
 
 describe("createTimeline step", () => {
     const temp = console.error
