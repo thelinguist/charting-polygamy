@@ -13,7 +13,6 @@ import { ManualEntryForm } from "./ManualEntryForm"
 
 const contactHref = `mailto:${"chartingpolygamy"}@${"noctiluma.com"}`
 
-
 const getFileFormat = (file: File): FileTypes => {
     const ext = file.name.split(".").at(-1)
     if (ext === "ged") return FileTypes.ged
@@ -53,7 +52,8 @@ export const TimelinesViewer = () => {
                 <p>In order to render a chart you will need either:</p>
                 <ul>
                     <li>
-                        a gedcom file (.ged) which you can export from ancestry.com {">"} my tree {">"} tree settings export
+                        a gedcom file (.ged) which you can export from ancestry.com {">"} my tree {">"} tree settings
+                        export
                     </li>
                     <li>
                         a csv file, formatted{" "}
