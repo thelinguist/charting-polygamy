@@ -12,6 +12,8 @@ export * from "./statistics"
 export interface PatriarchalFamily {
     facts: FactRecord[]
     patriarchName: string
+    patriarchId: string
+    relationshipToRoot?: string
 }
 
 export enum FileTypes {

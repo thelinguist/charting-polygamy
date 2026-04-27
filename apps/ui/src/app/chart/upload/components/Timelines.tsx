@@ -24,6 +24,7 @@ export const Timelines = ({ chartData, stats }: Props) => {
                     name={name}
                     patriarchTimeline={chartData[name].patriarchTimeline}
                     timelines={chartData[name].timelines}
+                    relationship={chartData[name].relationshipToRoot}
                 />
             ))}
             {stats ? (

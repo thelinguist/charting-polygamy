@@ -34,6 +34,12 @@
   min-height: 400px;
 }
 
+.relationship {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  margin: 0.1rem 0 0;
+}
+
 .uploadInfo > button {
   min-width: 10em;
   color: rgb(var(--color-surface-mixed-100));

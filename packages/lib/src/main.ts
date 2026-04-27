@@ -24,6 +24,7 @@ interface GetTimelinesProps {
 export interface PatriarchData {
     patriarchTimeline: PatriarchTimeline
     timelines: Timeline[]
+    relationshipToRoot?: string
 }
 
 export interface TimelinesOutput {
@@ -62,6 +63,7 @@ export const getTimelines = ({
                 chartData[family.patriarchName] = {
                     patriarchTimeline: timelines.rootTimeline,
                     timelines: timelines.wives,
+                    relationshipToRoot: family.relationshipToRoot,
                 }
             }
             incrementPatriarchCount()

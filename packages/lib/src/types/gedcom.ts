@@ -67,6 +67,7 @@ export enum GedcomType {
     Source = "SOUR",
     Individual = "INDI",
     FamilySpouseRelation = "FAMS",
+    FamilyChildRelation = "FAMC",
     Sex = "SEX",
     Name = "NAME",
     Birth = "BIRT",
