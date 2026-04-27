@@ -1,3 +1,10 @@
+## [1.8.2](https://github.com/thelinguist/charting-polygamy/compare/v1.8.1...v1.8.2) (2026-04-27)
+
+
+### Bug Fixes
+
+* optimize mobile styling ([0fb8468](https://github.com/thelinguist/charting-polygamy/commit/0fb8468c1fb2ba368e68430c1123da42a48a6bb7))
+
 ## [1.8.1](https://github.com/thelinguist/charting-polygamy/compare/v1.8.0...v1.8.1) (2026-04-26)
 
 
