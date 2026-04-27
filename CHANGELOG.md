@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/thelinguist/charting-polygamy/compare/v1.8.3...v1.9.0) (2026-04-27)
+
+
+### Features
+
+* contact info ([995f2e6](https://github.com/thelinguist/charting-polygamy/commit/995f2e6b3bb3b2cdeeaa6c2973c58d63faaba2ea))
+
 ## [1.8.3](https://github.com/thelinguist/charting-polygamy/compare/v1.8.2...v1.8.3) (2026-04-27)
 
 
