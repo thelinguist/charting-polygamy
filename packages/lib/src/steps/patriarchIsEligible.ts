@@ -3,7 +3,10 @@ import assumptions from "../assumptions"
 
 const latestBirthYear = assumptions.yearLastPracticed - assumptions.ageOfEligibility
 
-// TODO look at location too
+/**
+ * determine if a closer look into the family should be made based on if the patriarch was eligible when polygamy was openly practiced
+ * @param patriarch
+ */
 export const patriarchIsEligible = (patriarch: PersonDetails): boolean => {
     if (!patriarch) {
         return false

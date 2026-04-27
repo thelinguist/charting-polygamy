@@ -2,7 +2,7 @@
 
 import React, { ChangeEventHandler, useState } from "react"
 import Link from "next/link"
-import { getTimelines, timelinesToMermaid, PatriarchData } from "lib"
+import { getTimelines, PatriarchData } from "lib"
 import { FileTypes, Statistics } from "lib/src/types"
 import { parseFile, classNames } from "../../../../lib"
 import styles from "./TimelineRendering.module.css"
@@ -21,7 +21,6 @@ const getFileFormat = (file: File): FileTypes => {
 }
 
 export const TimelinesViewer = () => {
-    const [timelines, setTimelines] = useState<Record<string, string>>({})
     const [chartData, setChartData] = useState<Record<string, PatriarchData>>({})
     const [stats, setStats] = useState<Statistics>()
     const [showManualForm, setShowManualForm] = useState(false)
@@ -33,13 +32,11 @@ export const TimelinesViewer = () => {
             const fileFormat = getFileFormat(file)
             const { chartData: newChartData, stats: newStats } = getTimelines({ fileContents, fileFormat })
             setStats(newStats)
-            setTimelines(timelinesToMermaid(newChartData))
             setChartData(newChartData)
         }
     }
 
     const runDemo = () => {
-        // setTimelines({ example: example3Wives })
         setChartData({ ...example3WivesChartData })
     }
 

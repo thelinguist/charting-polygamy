@@ -50,11 +50,11 @@ between husbands, wives, and step-families.
 
 ## Have you found anything noteworthy using these timelines?
 
--   Most polygamous men had 3 wives.
--   Of my male Mormon ancestors who were eligible to practice polygamy, 40% did practice it.
--   Not all women stayed with their polygamous husband until their deaths. This has led me to journals and family
-    stories about how this practice challenged the women who participated. This has been a very fascinating aspect to
-    this project
+- Most polygamous men had 3 wives.
+- Of my male Mormon ancestors who were eligible to practice polygamy, 40% did practice it.
+- Not all women stayed with their polygamous husband until their deaths. This has led me to journals and family
+  stories about how this practice challenged the women who participated. This has been a very fascinating aspect to
+  this project
 
 ## I want to hear more about you and your experience with this project
 

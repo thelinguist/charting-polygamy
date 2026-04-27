@@ -13,9 +13,10 @@
     "dependencies": {
         "gray-matter": "^4.0.3",
         "lib": "workspace:*",
-        "plural-family-chart": "workspace:*",
+        "lucide-react": "^1.11.0",
         "mermaid": "^10.5.0",
         "next": "15.5.15",
+        "plural-family-chart": "workspace:*",
         "react": "^19.2.5",
         "react-dom": "^19.2.5",
         "remark": "^15.0.1",

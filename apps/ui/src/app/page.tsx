@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { Network, BookMarked, CircleHelp, UserRound } from "lucide-react"
 import styles from "./page.module.css"
 
 export default function Home() {
@@ -12,11 +13,13 @@ export default function Home() {
 
             <div className={styles.grid}>
                 <Link href="/chart/instructions" className={styles.card}>
-                    <h2>
-                        Chart my Tree <span>-&gt;</span>
-                    </h2>
-                    <p>see your ancestry and detect polygamous families</p>
-                    <span>tree icon</span>
+                    <Network size={48} strokeWidth={1.5} style={{ transform: "rotate(180deg)" }} />
+                    <div>
+                        <h2>
+                            Chart my Tree <span>-&gt;</span>
+                        </h2>
+                        <p>see your ancestry and detect polygamous families</p>
+                    </div>
                 </Link>
 
                 <a
@@ -25,25 +28,33 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    <h2>
-                        about polygamy <span>-&gt;</span>
-                    </h2>
-                    <p>Set in the context of polygamy during the Joseph Smith Movement </p>
-                    <span>wiki icon</span>
+                    <BookMarked size={48} strokeWidth={1.5} />
+                    <div>
+                        <h2>
+                            about polygamy <span>-&gt;</span>
+                        </h2>
+                        <p>Set in the context of polygamy during the Joseph Smith Movement </p>
+                    </div>
                 </a>
 
                 <Link href="/chart/faq" className={styles.card}>
-                    <h2>
-                        Project FAQ <span>-&gt;</span>
-                    </h2>
-                    <p>More info on this project</p>
+                    <CircleHelp size={48} strokeWidth={1.5} />
+                    <div>
+                        <h2>
+                            Project FAQ <span>-&gt;</span>
+                        </h2>
+                        <p>More info on this project</p>
+                    </div>
                 </Link>
 
                 <Link href="/chart/about" className={styles.card}>
-                    <h2>
-                        About Me <span>-&gt;</span>
-                    </h2>
-                    <p>about me and how to support this project</p>
+                    <UserRound size={48} strokeWidth={1.5} />
+                    <div>
+                        <h2>
+                            About Me <span>-&gt;</span>
+                        </h2>
+                        <p>about me and how to support this project</p>
+                    </div>
                 </Link>
             </div>
         </>
