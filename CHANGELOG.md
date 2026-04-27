@@ -7,10 +7,9 @@
 
 # [1.8.0](https://github.com/thelinguist/charting-polygamy/compare/v1.7.0...v1.8.0) (2026-04-26)
 
-
 ### Features
 
-* user form ([c7abd5f](https://github.com/thelinguist/charting-polygamy/commit/c7abd5f202dd401a021c79dce65bcf6680360462))
+-   user form ([c7abd5f](https://github.com/thelinguist/charting-polygamy/commit/c7abd5f202dd401a021c79dce65bcf6680360462))
 
 # [1.7.0](https://github.com/thelinguist/charting-polygamy/compare/v1.6.1...v1.7.0) (2026-04-26)
 

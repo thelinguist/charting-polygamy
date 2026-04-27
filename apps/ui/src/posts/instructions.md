@@ -10,8 +10,7 @@ It will gather your family history details (but will not send the data anywhere)
 
 Here is an example of the results:
 
-| ![Plural Family Example](/charting-polygamy/plural-family.png) |
-|:--------------------------------------------------------------:|
+![Plural Family Example](/charting-polygamy/plural-family.png)
 
 ## How to read
 
