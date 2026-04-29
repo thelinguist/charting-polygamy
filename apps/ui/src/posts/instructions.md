@@ -14,9 +14,9 @@ Here is an example of the results:
 
 ## How to read
 
-- The red line indicates the duration of one marriage.
-- The start of each marriage is marked with the age and gap. A negative indicates that person was X years younger than their partner
-- Blue lines indicates a marriage outside the plural family being displayed.[^1]
+- The first timeline is the patriarch of the family, and his marriages are highlighted in blue. The marriages turn more purple as his concurrent wife count accumulates
+- The rest of the timelines are the wives in the family. Bright pink indicates a marriage. Transparent pink indicates a marriage to another man
+- click or hover on a marriage to see the age, year, or spouse's name
 
 [see an actual example of Parley P Pratt](/charting-polygamy/chart/shared?data=jVVdb9sgFP0riGcjAf72W7p1i7plipZJfZj6gBtWe3EgwnRTWuW_T4A_sF01ezUXzrnnnHv9CgUs4Japhp_BlqkDV2CrmNZgp2AATxoWr--XlLCAJMMpwhEiFAZwbz_EKcIxIjEM4BEWP19haz_TFOEc4RwGkMGC4gA-wQIRfAn6itBdjFxF6CrIeB6FCBOESXce2_PMO498hDB198mkgGDHzCuIpwUEYTopWJxTPH0g9AqSCcXMFSRegVWLZq4gcj1SeqWAeF3GExWieM4xjifnHUd8ebgEUDfWEOPqj4qJw6_nBqxZ0_Jzb2eapwiHiGSDnaH9QI1ozdFkYmEnn9ZdJvZZfw3ghqkzWAkBPinZ6jE-uaFrTXd4OUE4QzSa4Xnh4EMaEkRDgyf9oIXUKGgF4POr7QkW8BvTFRNgpzlTooXTgNknB4zIfkj7m3ey5acK7I61rsCdgpcHF-asC3Pf621Tv7CS6wrcKKkrrrQUQ8cksUKlY8eWn5XS79iLO58OllOYJg41myh8L-V-hMoMf8_MPDPYeG6mNzlLqIm4EZ6R8q5aidZcqDP4XJdlO8jTESWDPjumWAXW8rn1haHUOI_DgW2WGBaULtn2Y_y2MLTDi3u8NROCVVxrDnai_sOb8ygRNY9ROpGIIkreAO1Ww5ugYQc6YN7wphZ7BjZM7bnXJEaEunh3eJHBIwv3x1XzH5bELk-jJalryVpyw8VvdqwFWJWl1Bqs68bI3rsTdmqFPfNtJXnJwRjinTxVfNz4NDTv4zFVmd0FJJ23kFwJcO9T0iOb9bB6MuMJ7llz8DFzm2TSY-bYRnuxlrz1eUW2BNtRGBaK_6I_7GumVN2C7_X-iQ-RJm6tIre5u-EztDdSHEbS8UDmfa_fI-0LNYz6F_5Sswp8lH9F60fZ3MIDXJra3TqPcnxlsXQ_nTHKtw1nQipwxwQHm8cP8liCzeNXzrylltpY5yO2HdLFGvf-TtdiTeaV49Vu0zxqqXoinTHdPxnZH94_)
 
