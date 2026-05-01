@@ -48,6 +48,9 @@ const defaultProps = {
     setHoveredIndex: vi.fn(),
 }
 
+const getMarriageDimWrappers = (container: HTMLElement) =>
+    Array.from(container.querySelectorAll<SVGGElement>('g[style*="transition"]'))
+
 describe("Patriarch", () => {
     it("renders a marriage bar for each marriage with a start date", () => {
         const { getByText } = wrap(<Patriarch {...defaultProps} />)
@@ -70,6 +73,33 @@ describe("Patriarch", () => {
             const group = getByText("1860").closest("g[id]")!
             fireEvent.click(group)
             expect(handleClick).toHaveBeenCalledWith(1)
+        })
+    })
+
+    describe("highlightedMarriageStart", () => {
+        it("all marriages at full opacity when prop is not set", () => {
+            const { container } = wrap(<Patriarch {...defaultProps} />)
+            const wrappers = getMarriageDimWrappers(container)
+            expect(wrappers).toHaveLength(2)
+            for (const w of wrappers) expect(w.getAttribute("opacity")).toBe("1")
+        })
+
+        it("dims the non-matching marriage when the first marriage start is highlighted", () => {
+            const { container } = wrap(
+                <Patriarch {...{ ...defaultProps, highlightedMarriageStart: new Date("1845-07-01") }} />
+            )
+            const [first, second] = getMarriageDimWrappers(container)
+            expect(first.getAttribute("opacity")).toBe("1")
+            expect(second.getAttribute("opacity")).toBe("0.15")
+        })
+
+        it("dims the non-matching marriage when the second marriage start is highlighted", () => {
+            const { container } = wrap(
+                <Patriarch {...{ ...defaultProps, highlightedMarriageStart: new Date("1860-07-01") }} />
+            )
+            const [first, second] = getMarriageDimWrappers(container)
+            expect(first.getAttribute("opacity")).toBe("0.15")
+            expect(second.getAttribute("opacity")).toBe("1")
         })
     })
 

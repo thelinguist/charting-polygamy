@@ -12,5 +12,7 @@ export function useMarriageExpansion() {
         setPinnedIndex(prev => (prev === index ? null : index))
     }
 
-    return { expandedIndex, handleClick, setHoveredIndex }
+    const resetPin = () => setPinnedIndex(null)
+
+    return { expandedIndex, handleClick, setHoveredIndex, resetPin }
 }

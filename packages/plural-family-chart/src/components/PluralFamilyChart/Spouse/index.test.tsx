@@ -1,5 +1,5 @@
-import { render } from "@testing-library/react"
-import { describe, expect, it } from "vitest"
+import { render, fireEvent } from "@testing-library/react"
+import { describe, expect, it, vi } from "vitest"
 import { Spouse } from "."
 import { PatriarchTimeline, Timeline } from "lib/src/types"
 import { PositionScale } from "@visx/shape/lib/types"
@@ -34,13 +34,6 @@ describe("Spouse", () => {
             <Spouse patriarchTimeline={patriarch} timeline={wife} xScale={xScale} yScale={yScale as PositionScale} />
         )
         expect(container.querySelector("#spouse-Jane\\ Doe")).toBeTruthy()
-    })
-
-    it("renders the birth year label", () => {
-        const { getByText } = wrap(
-            <Spouse patriarchTimeline={patriarch} timeline={wife} xScale={xScale} yScale={yScale as PositionScale} />
-        )
-        expect(getByText("1826")).toBeTruthy()
     })
 
     it("renders the marriage start year when linkedStart is present", () => {
@@ -129,6 +122,53 @@ describe("Spouse", () => {
             )
             const wrapper = container.querySelector('g[style*="transition"]')
             expect(wrapper?.getAttribute("opacity")).toBe("0.15")
+        })
+    })
+
+    describe("onLinkedMarriage callbacks", () => {
+        it("calls onLinkedMarriageHover(true) on mouseEnter of the linked marriage", () => {
+            const onLinkedMarriageHover = vi.fn()
+            const { getByText } = wrap(
+                <Spouse
+                    patriarchTimeline={patriarch}
+                    timeline={wife}
+                    xScale={xScale}
+                    yScale={yScale as PositionScale}
+                    onLinkedMarriageHover={onLinkedMarriageHover}
+                />
+            )
+            fireEvent.mouseEnter(getByText("1841").closest("g[id]")!)
+            expect(onLinkedMarriageHover).toHaveBeenCalledWith(true)
+        })
+
+        it("calls onLinkedMarriageHover(false) on mouseLeave of the linked marriage", () => {
+            const onLinkedMarriageHover = vi.fn()
+            const { getByText } = wrap(
+                <Spouse
+                    patriarchTimeline={patriarch}
+                    timeline={wife}
+                    xScale={xScale}
+                    yScale={yScale as PositionScale}
+                    onLinkedMarriageHover={onLinkedMarriageHover}
+                />
+            )
+            fireEvent.mouseLeave(getByText("1841").closest("g[id]")!)
+            expect(onLinkedMarriageHover).toHaveBeenCalledWith(false)
+        })
+
+        it("calls onLinkedMarriageClick on click of the linked marriage", () => {
+            const onLinkedMarriageClick = vi.fn()
+            const { getByText } = wrap(
+                <Spouse
+                    patriarchTimeline={patriarch}
+                    timeline={wife}
+                    xScale={xScale}
+                    yScale={yScale as PositionScale}
+                    onLinkedMarriageClick={onLinkedMarriageClick}
+                />
+            )
+            fireEvent.click(getByText("1841").closest("g[id]")!)
+            expect(onLinkedMarriageClick).toHaveBeenCalled()
         })
     })
 

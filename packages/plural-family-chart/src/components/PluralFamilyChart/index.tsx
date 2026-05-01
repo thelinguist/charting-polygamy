@@ -5,7 +5,7 @@ import { barHeight } from "./constants"
 import { scaleOrdinal, scaleUtc } from "@visx/scale"
 import { getMinMax } from "../../utils"
 import { checkPersonDetails, getChartEndDate, getChartStartDate } from "./utils"
-import React from "react"
+import React, { useState } from "react"
 import { Patriarch } from "./Patriarch"
 import { Spouse } from "./Spouse"
 // import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion"
@@ -13,6 +13,7 @@ import { BadData } from "./BadData"
 import { TooSmall } from "./TooSmall"
 import { TimelineAxis } from "./TimelineAxis"
 import { useMarriageExpansion } from "./hooks/useMarriageExpansion"
+import { BrushOverview } from "./BrushOverview"
 
 interface Props {
     width?: number
@@ -27,29 +28,50 @@ export const background = "#eaedff"
 
 export const PluralFamilyChart: React.FC<Props> = ({
     width = 800,
-    minHeight = 600,
+    minHeight = 300,
     patriarchTimeline,
     timelines,
     margin = defaultMargin,
 }) => {
     // const useAnimatedComponents = usePrefersReducedMotion()
-    const { expandedIndex, handleClick, setHoveredIndex } = useMarriageExpansion()
+    const { expandedIndex, handleClick, setHoveredIndex, resetPin } = useMarriageExpansion()
+    const {
+        expandedIndex: expandedSpouseIndex,
+        handleClick: handleSpouseClick,
+        setHoveredIndex: setHoveredSpouseIndex,
+        resetPin: resetSpousePin,
+    } = useMarriageExpansion()
+    const [brushDomain, setBrushDomain] = useState<[Date, Date] | null>(null)
 
     const dataErrors = checkPersonDetails(patriarchTimeline)
     if (dataErrors) return <BadData />
 
     const names = [patriarchTimeline.name, ...timelines.map(timeline => timeline.name)]
+    const personDates = new Map<string, { birth: Date; death: Date }>([
+        [patriarchTimeline.name, { birth: patriarchTimeline.birth, death: patriarchTimeline.death }],
+        ...timelines.map(t => [t.name, { birth: t.birth, death: t.death }] as [string, { birth: Date; death: Date }]),
+    ])
 
     const largestName = names.reduce((acc, name) => (name.length > acc ? name.length : acc), 0)
     const marginLeft = largestName * 9 // todo I should find a way to get the div width (i vs w)
 
     const chartWidth = width - marginLeft - margin.right
     if (chartWidth < 200) return <TooSmall />
-    const actualHeight = Math.max(timelines.length * barHeight + margin.top + margin.bottom, minHeight)
+
+    const mainHeight = Math.max(timelines.length * barHeight + margin.top + margin.bottom, minHeight)
+    const overviewHeight = 50
+    const overviewMargin = 12
+    const actualHeight = mainHeight + overviewMargin + overviewHeight
+
     const timeValues = [getChartStartDate(patriarchTimeline, timelines), getChartEndDate(patriarchTimeline, timelines)]
 
-    const xScale = scaleUtc({
+    const brushXScale = scaleUtc({
         domain: getMinMax(timeValues),
+        range: [0, chartWidth],
+    })
+
+    const xScale = scaleUtc({
+        domain: brushDomain ?? getMinMax(timeValues),
         range: [0, chartWidth],
     })
 
@@ -59,42 +81,90 @@ export const PluralFamilyChart: React.FC<Props> = ({
         range: ranges,
     })
 
+    const clipId = `chart-clip-${patriarchTimeline.name.replace(/\s+/g, "-")}`
+
     return (
-        <svg width={width} height={actualHeight}>
+        <svg width={width} height={actualHeight} onClick={() => { resetPin(); resetSpousePin() }}>
+            <defs>
+                <clipPath id={clipId}>
+                    <rect x={0} y={-margin.top} width={chartWidth} height={mainHeight} />
+                </clipPath>
+            </defs>
             <rect width={width} height={actualHeight} fill={background} rx={14} />
             <Group top={margin.top} left={marginLeft}>
-                <TimelineAxis xScale={xScale} chartWidth={chartWidth} timeValues={timeValues as [Date, Date]} />
                 <AxisLeft
                     scale={yScale}
                     hideTicks
                     tickTransform={`translate(0,${barHeight / 2})`}
                     hideAxisLine
                     tickValues={names}
-                    tickLabelProps={{
-                        verticalAnchor: "middle",
-                        fontSize: 14,
+                    tickComponent={({ x, y, formattedValue }) => {
+                        const dates = personDates.get(formattedValue ?? "")
+                        return (
+                            <text textAnchor="end" fontFamily="sans-serif">
+                                <tspan x={x} y={y} dy="-0.35em" fontSize={14}>{formattedValue}</tspan>
+                                {dates && (
+                                    <tspan x={x} dy="1.3em" fontSize={11} fill="#666">
+                                        {dates.birth.getFullYear()} – {dates.death.getFullYear()}
+                                    </tspan>
+                                )}
+                            </text>
+                        )
                     }}
-                    // animationTrajectory={animationTrajectory}
                 />
-                <Patriarch
-                    patriarchTimeline={patriarchTimeline}
-                    timelines={timelines}
-                    yScale={yScale}
-                    xScale={xScale}
-                    expandedIndex={expandedIndex}
-                    handleClick={handleClick}
-                    setHoveredIndex={setHoveredIndex}
-                />
-                {timelines.map((timeline, index) => (
-                    <Spouse
-                        key={timeline.name}
+                <Group clipPath={`url(#${clipId})`}>
+                    <TimelineAxis
+                        xScale={xScale}
+                        chartWidth={chartWidth}
+                        timeValues={(brushDomain ?? timeValues) as [Date, Date]}
+                    />
+                    <Patriarch
                         patriarchTimeline={patriarchTimeline}
-                        timeline={timeline}
+                        timelines={timelines}
                         yScale={yScale}
                         xScale={xScale}
-                        dim={expandedIndex !== null && expandedIndex !== index}
+                        expandedIndex={expandedIndex ?? (() => {
+                            if (expandedSpouseIndex === null) return null
+                            const start = timelines[expandedSpouseIndex].linkedMarriage.start
+                            const idx = patriarchTimeline.marriages
+                                .filter(m => m.start)
+                                .findIndex(m => m.start!.getTime() === start.getTime())
+                            return idx === -1 ? null : idx
+                        })()}
+                        handleClick={handleClick}
+                        setHoveredIndex={setHoveredIndex}
+                        highlightedMarriageStart={
+                            expandedSpouseIndex !== null
+                                ? timelines[expandedSpouseIndex].linkedMarriage.start
+                                : undefined
+                        }
                     />
-                ))}
+                    {timelines.map((timeline, index) => (
+                        <Spouse
+                            key={timeline.name}
+                            patriarchTimeline={patriarchTimeline}
+                            timeline={timeline}
+                            yScale={yScale}
+                            xScale={xScale}
+                            dim={
+                                (expandedIndex !== null && expandedIndex !== index) ||
+                                (expandedSpouseIndex !== null && expandedSpouseIndex !== index)
+                            }
+                            onLinkedMarriageHover={active => setHoveredSpouseIndex(active ? index : null)}
+                            onLinkedMarriageClick={() => handleSpouseClick(index)}
+                        />
+                    ))}
+                </Group>
+            </Group>
+            <Group top={mainHeight + overviewMargin} left={marginLeft}>
+                <BrushOverview
+                    xScale={brushXScale}
+                    width={chartWidth}
+                    height={overviewHeight}
+                    patriarchTimeline={patriarchTimeline}
+                    timelines={timelines}
+                    onChange={setBrushDomain}
+                />
             </Group>
         </svg>
     )

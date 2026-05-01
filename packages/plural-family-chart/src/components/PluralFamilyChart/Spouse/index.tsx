@@ -13,9 +13,19 @@ interface Props {
     yScale: PositionScale
     xScale: (date: Date) => number
     dim?: boolean
+    onLinkedMarriageHover?: (active: boolean) => void
+    onLinkedMarriageClick?: () => void
 }
 
-export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, yScale, dim }) => {
+export const Spouse: React.FC<Props> = ({
+    patriarchTimeline,
+    timeline,
+    xScale,
+    yScale,
+    dim,
+    onLinkedMarriageHover,
+    onLinkedMarriageClick,
+}) => {
     const { expandedIndex, handleClick, setHoveredIndex } = useMarriageExpansion()
 
     const linkedStart = timeline.linkedMarriage.start
@@ -110,9 +120,18 @@ export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, y
                             fillColor={spouseMarriedColor}
                             text1={linkedStart.getFullYear().toString()}
                             text2={marriageAge}
-                            onClick={() => handleClick(0)}
-                            onMouseEnter={() => setHoveredIndex(0)}
-                            onMouseLeave={() => setHoveredIndex(null)}
+                            onClick={() => {
+                                handleClick(0)
+                                onLinkedMarriageClick?.()
+                            }}
+                            onMouseEnter={() => {
+                                setHoveredIndex(0)
+                                onLinkedMarriageHover?.(true)
+                            }}
+                            onMouseLeave={() => {
+                                setHoveredIndex(null)
+                                onLinkedMarriageHover?.(false)
+                            }}
                         />
                     )}
                     {otherMarriageBounds.map((bounds, i) => (
@@ -136,9 +155,18 @@ export const Spouse: React.FC<Props> = ({ patriarchTimeline, timeline, xScale, y
                             text2={overlayProps.text2}
                             isExpanded
                             fillOpacity={0.85}
-                            onClick={() => handleClick(expandedIndex!)}
-                            onMouseEnter={() => setHoveredIndex(expandedIndex!)}
-                            onMouseLeave={() => setHoveredIndex(null)}
+                            onClick={() => {
+                                handleClick(expandedIndex!)
+                                if (expandedIndex === 0) onLinkedMarriageClick?.()
+                            }}
+                            onMouseEnter={() => {
+                                setHoveredIndex(expandedIndex!)
+                                if (expandedIndex === 0) onLinkedMarriageHover?.(true)
+                            }}
+                            onMouseLeave={() => {
+                                setHoveredIndex(null)
+                                if (expandedIndex === 0) onLinkedMarriageHover?.(false)
+                            }}
                         />
                     )}
                 </>

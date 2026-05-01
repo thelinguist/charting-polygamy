@@ -28,7 +28,7 @@ export const Marriage: React.FC<Props> = ({
 }) => {
     return (
         <Group
-            onClick={onClick}
+            onClick={e => { e.stopPropagation(); onClick?.() }}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             style={{ cursor: "pointer" }}

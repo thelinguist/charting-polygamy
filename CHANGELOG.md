@@ -1,37 +1,32 @@
 # [1.11.0](https://github.com/thelinguist/charting-polygamy/compare/v1.10.0...v1.11.0) (2026-04-29)
 
-
 ### Features
 
-* clarify instructions ([4b94329](https://github.com/thelinguist/charting-polygamy/commit/4b94329159bd6b8b4d4d0c8b583a13a9dcdb03b3))
+- clarify instructions ([4b94329](https://github.com/thelinguist/charting-polygamy/commit/4b94329159bd6b8b4d4d0c8b583a13a9dcdb03b3))
 
 # [1.10.0](https://github.com/thelinguist/charting-polygamy/compare/v1.9.0...v1.10.0) (2026-04-27)
 
-
 ### Features
 
-* add github link ([0de3b04](https://github.com/thelinguist/charting-polygamy/commit/0de3b04d6097c2e48d60f4846ccf70df70ea36e9))
+- add github link ([0de3b04](https://github.com/thelinguist/charting-polygamy/commit/0de3b04d6097c2e48d60f4846ccf70df70ea36e9))
 
 # [1.9.0](https://github.com/thelinguist/charting-polygamy/compare/v1.8.3...v1.9.0) (2026-04-27)
 
-
 ### Features
 
-* contact info ([995f2e6](https://github.com/thelinguist/charting-polygamy/commit/995f2e6b3bb3b2cdeeaa6c2973c58d63faaba2ea))
+- contact info ([995f2e6](https://github.com/thelinguist/charting-polygamy/commit/995f2e6b3bb3b2cdeeaa6c2973c58d63faaba2ea))
 
 ## [1.8.3](https://github.com/thelinguist/charting-polygamy/compare/v1.8.2...v1.8.3) (2026-04-27)
 
-
 ### Bug Fixes
 
-* optimize mobile styling ([4be4087](https://github.com/thelinguist/charting-polygamy/commit/4be4087ea55b1046403d5936c54ae506e2769d11))
+- optimize mobile styling ([4be4087](https://github.com/thelinguist/charting-polygamy/commit/4be4087ea55b1046403d5936c54ae506e2769d11))
 
 ## [1.8.2](https://github.com/thelinguist/charting-polygamy/compare/v1.8.1...v1.8.2) (2026-04-27)
 
-
 ### Bug Fixes
 
-* optimize mobile styling ([0fb8468](https://github.com/thelinguist/charting-polygamy/commit/0fb8468c1fb2ba368e68430c1123da42a48a6bb7))
+- optimize mobile styling ([0fb8468](https://github.com/thelinguist/charting-polygamy/commit/0fb8468c1fb2ba368e68430c1123da42a48a6bb7))
 
 ## [1.8.1](https://github.com/thelinguist/charting-polygamy/compare/v1.8.0...v1.8.1) (2026-04-26)
 
