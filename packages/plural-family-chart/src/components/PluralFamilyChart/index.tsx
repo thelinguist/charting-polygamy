@@ -28,7 +28,7 @@ export const background = "#eaedff"
 
 export const PluralFamilyChart: React.FC<Props> = ({
     width = 800,
-    minHeight = 600,
+    minHeight = 300,
     patriarchTimeline,
     timelines,
     margin = defaultMargin,
