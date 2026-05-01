@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/thelinguist/charting-polygamy/compare/v1.11.0...v1.12.0) (2026-05-01)
+
+
+### Features
+
+* x-axis improvements ([#16](https://github.com/thelinguist/charting-polygamy/issues/16)) ([35aaac6](https://github.com/thelinguist/charting-polygamy/commit/35aaac6c8e8e1a55798cfef29faa7d13fb8e45c5))
+
 # [1.11.0](https://github.com/thelinguist/charting-polygamy/compare/v1.10.0...v1.11.0) (2026-04-29)
 
 ### Features
