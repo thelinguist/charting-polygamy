@@ -34,13 +34,23 @@ export const PluralFamilyChart: React.FC<Props> = ({
     margin = defaultMargin,
 }) => {
     // const useAnimatedComponents = usePrefersReducedMotion()
-    const { expandedIndex, handleClick, setHoveredIndex } = useMarriageExpansion()
+    const { expandedIndex, handleClick, setHoveredIndex, resetPin } = useMarriageExpansion()
+    const {
+        expandedIndex: expandedSpouseIndex,
+        handleClick: handleSpouseClick,
+        setHoveredIndex: setHoveredSpouseIndex,
+        resetPin: resetSpousePin,
+    } = useMarriageExpansion()
     const [brushDomain, setBrushDomain] = useState<[Date, Date] | null>(null)
 
     const dataErrors = checkPersonDetails(patriarchTimeline)
     if (dataErrors) return <BadData />
 
     const names = [patriarchTimeline.name, ...timelines.map(timeline => timeline.name)]
+    const personDates = new Map<string, { birth: Date; death: Date }>([
+        [patriarchTimeline.name, { birth: patriarchTimeline.birth, death: patriarchTimeline.death }],
+        ...timelines.map(t => [t.name, { birth: t.birth, death: t.death }] as [string, { birth: Date; death: Date }]),
+    ])
 
     const largestName = names.reduce((acc, name) => (name.length > acc ? name.length : acc), 0)
     const marginLeft = largestName * 9 // todo I should find a way to get the div width (i vs w)
@@ -74,7 +84,7 @@ export const PluralFamilyChart: React.FC<Props> = ({
     const clipId = `chart-clip-${patriarchTimeline.name.replace(/\s+/g, "-")}`
 
     return (
-        <svg width={width} height={actualHeight}>
+        <svg width={width} height={actualHeight} onClick={() => { resetPin(); resetSpousePin() }}>
             <defs>
                 <clipPath id={clipId}>
                     <rect x={0} y={-margin.top} width={chartWidth} height={mainHeight} />
@@ -88,11 +98,19 @@ export const PluralFamilyChart: React.FC<Props> = ({
                     tickTransform={`translate(0,${barHeight / 2})`}
                     hideAxisLine
                     tickValues={names}
-                    tickLabelProps={{
-                        verticalAnchor: "middle",
-                        fontSize: 14,
+                    tickComponent={({ x, y, formattedValue }) => {
+                        const dates = personDates.get(formattedValue ?? "")
+                        return (
+                            <text textAnchor="end" fontFamily="sans-serif">
+                                <tspan x={x} y={y} dy="-0.35em" fontSize={14}>{formattedValue}</tspan>
+                                {dates && (
+                                    <tspan x={x} dy="1.3em" fontSize={11} fill="#666">
+                                        {dates.birth.getFullYear()} – {dates.death.getFullYear()}
+                                    </tspan>
+                                )}
+                            </text>
+                        )
                     }}
-                    // animationTrajectory={animationTrajectory}
                 />
                 <Group clipPath={`url(#${clipId})`}>
                     <TimelineAxis
@@ -105,9 +123,21 @@ export const PluralFamilyChart: React.FC<Props> = ({
                         timelines={timelines}
                         yScale={yScale}
                         xScale={xScale}
-                        expandedIndex={expandedIndex}
+                        expandedIndex={expandedIndex ?? (() => {
+                            if (expandedSpouseIndex === null) return null
+                            const start = timelines[expandedSpouseIndex].linkedMarriage.start
+                            const idx = patriarchTimeline.marriages
+                                .filter(m => m.start)
+                                .findIndex(m => m.start!.getTime() === start.getTime())
+                            return idx === -1 ? null : idx
+                        })()}
                         handleClick={handleClick}
                         setHoveredIndex={setHoveredIndex}
+                        highlightedMarriageStart={
+                            expandedSpouseIndex !== null
+                                ? timelines[expandedSpouseIndex].linkedMarriage.start
+                                : undefined
+                        }
                     />
                     {timelines.map((timeline, index) => (
                         <Spouse
@@ -116,7 +146,12 @@ export const PluralFamilyChart: React.FC<Props> = ({
                             timeline={timeline}
                             yScale={yScale}
                             xScale={xScale}
-                            dim={expandedIndex !== null && expandedIndex !== index}
+                            dim={
+                                (expandedIndex !== null && expandedIndex !== index) ||
+                                (expandedSpouseIndex !== null && expandedSpouseIndex !== index)
+                            }
+                            onLinkedMarriageHover={active => setHoveredSpouseIndex(active ? index : null)}
+                            onLinkedMarriageClick={() => handleSpouseClick(index)}
                         />
                     ))}
                 </Group>

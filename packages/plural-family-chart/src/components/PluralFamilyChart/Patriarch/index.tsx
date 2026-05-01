@@ -20,6 +20,7 @@ interface Props {
     expandedIndex: number | null
     handleClick: (index: number) => void
     setHoveredIndex: (index: number | null) => void
+    highlightedMarriageStart?: Date
 }
 
 export const Patriarch: React.FC<Props> = ({
@@ -30,6 +31,7 @@ export const Patriarch: React.FC<Props> = ({
     expandedIndex,
     handleClick,
     setHoveredIndex,
+    highlightedMarriageStart,
 }) => {
     const concurrentCounts = getConcurrentCounts(patriarchTimeline, timelines)
 
@@ -58,7 +60,12 @@ export const Patriarch: React.FC<Props> = ({
         if (!marriage?.start) return null
         const text1 = marriage.start.getFullYear().toString()
         const text2 = `${getMarriageAge(marriage, patriarchTimeline)} years old`
-        return getExpandedXEnd(xScale(marriage.start), text1, text2, xScale(new Date(getMarriageEnd(marriage, patriarchTimeline))))
+        return getExpandedXEnd(
+            xScale(marriage.start),
+            text1,
+            text2,
+            xScale(new Date(getMarriageEnd(marriage, patriarchTimeline)))
+        )
         // eslint-disable-next-line
     }, [expandedIndex, patriarchTimeline, xScale])
 
@@ -72,18 +79,24 @@ export const Patriarch: React.FC<Props> = ({
             isPatriarch
         >
             <>
-                {marriages.map((marriage, i) => (
-                    <Marriage
-                        key={i}
-                        bounds={getBounds(marriage)}
-                        fillColor={sizeColorScale(concurrentCounts[i])}
-                        text1={marriage.start!.getFullYear().toString()}
-                        text2={`${getMarriageAge(marriage, patriarchTimeline)} years old`}
-                        onClick={() => handleClick(i)}
-                        onMouseEnter={() => setHoveredIndex(i)}
-                        onMouseLeave={() => setHoveredIndex(null)}
-                    />
-                ))}
+                {marriages.map((marriage, i) => {
+                    const dim =
+                        highlightedMarriageStart !== undefined &&
+                        marriage.start?.getTime() !== highlightedMarriageStart.getTime()
+                    return (
+                        <g key={i} opacity={dim ? 0.15 : 1} style={{ transition: "opacity 0.15s ease" }}>
+                            <Marriage
+                                bounds={getBounds(marriage)}
+                                fillColor={sizeColorScale(concurrentCounts[i])}
+                                text1={marriage.start!.getFullYear().toString()}
+                                text2={`${getMarriageAge(marriage, patriarchTimeline)} years old`}
+                                onClick={() => handleClick(i)}
+                                onMouseEnter={() => setHoveredIndex(i)}
+                                onMouseLeave={() => setHoveredIndex(null)}
+                            />
+                        </g>
+                    )
+                })}
                 {expandedIndex !== null && marriages[expandedIndex]?.start && (
                     <Marriage
                         key="overlay"

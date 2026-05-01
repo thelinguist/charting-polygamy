@@ -27,18 +27,39 @@ const timelines: Timeline[] = [
     },
 ]
 
-// Returns the outermost dim-wrapper <g> for each spouse, in render order
+// Returns only the spouse-row dim wrappers (not patriarch marriage dim wrappers)
 const getSpouseWrappers = (container: HTMLElement) =>
-    Array.from(container.querySelectorAll<SVGGElement>('g[style*="transition"]'))
-
-// Marriage year text appears in both the patriarch row and the spouse row.
-// The patriarch's marriage <g id="..."> is NOT nested inside a dim-wrapper.
-const getPatriarchMarriageGroup = (container: HTMLElement, year: string) => {
-    const candidates = Array.from(container.querySelectorAll("text, tspan")).filter(el => el.textContent === year)
-    return (
-        candidates.map(el => el.closest<SVGGElement>("g[id]")).find(g => g && !g.closest('g[style*="transition"]')) ??
-        null
+    Array.from(container.querySelectorAll<SVGGElement>('g[style*="transition"]')).filter(g =>
+        g.querySelector('[id^="spouse-"]')
     )
+
+// Returns patriarch marriage dim wrappers (g[style*=transition] that don't contain a spouse element)
+const getPatriarchMarriageDimWrappers = (container: HTMLElement) =>
+    Array.from(container.querySelectorAll<SVGGElement>('g[style*="transition"]')).filter(
+        g => !g.querySelector('[id^="spouse-"]')
+    )
+
+// Marriage year text appears in both the patriarch row and spouse rows.
+// Patriarch marriage groups live inside [id^="patriarch-"], so we scope the search there.
+const getPatriarchMarriageGroup = (container: HTMLElement, year: string) => {
+    const patriarchEl = container.querySelector("[id^='patriarch-']")
+    if (!patriarchEl) return null
+    // patriarch-* is now a <g> itself, so go up to its parent to reach the full PersonTimeline container
+    const patriarchContainer = patriarchEl.parentElement
+    if (!patriarchContainer) return null
+    const candidates = Array.from(patriarchContainer.querySelectorAll("text, tspan")).filter(
+        el => el.textContent === year
+    )
+    return candidates.map(el => el.closest<SVGGElement>("g[id]")).find(g => g !== null) ?? null
+}
+
+// Returns the linked-marriage <g id> for the named spouse (skips the whisker group whose id is "spouse-*")
+const getSpouseLinkedMarriageGroup = (container: HTMLElement, spouseName: string) => {
+    const wrapper = getSpouseWrappers(container).find(w =>
+        w.querySelector(`[id="spouse-${spouseName}"]`)
+    )
+    const candidates = Array.from(wrapper?.querySelectorAll<SVGGElement>("g[id]") ?? [])
+    return candidates.find(g => !g.id.startsWith("spouse-")) ?? null
 }
 
 describe("PluralFamilyChart dim behaviour", () => {
@@ -122,5 +143,103 @@ describe("PluralFamilyChart dim behaviour", () => {
         for (const w of wrappers) {
             expect(w.getAttribute("opacity")).toBe("1")
         }
+    })
+})
+
+describe("background click releases pin", () => {
+    it("restores all spouses to full opacity when the background is clicked after a patriarch marriage is pinned", () => {
+        const { container } = render(
+            <PluralFamilyChart width={800} patriarchTimeline={patriarch} timelines={timelines} />
+        )
+
+        const marriageGroup = getPatriarchMarriageGroup(container, "1845")!
+        fireEvent.click(marriageGroup)
+        // confirm it's pinned
+        expect(getSpouseWrappers(container)[1].getAttribute("opacity")).toBe("0.15")
+
+        const bg = container.querySelector("svg")!
+        fireEvent.click(bg)
+
+        for (const w of getSpouseWrappers(container)) {
+            expect(w.getAttribute("opacity")).toBe("1")
+        }
+    })
+
+    it("restores all spouses when the background is clicked after a spouse marriage is pinned", () => {
+        const { container } = render(
+            <PluralFamilyChart width={800} patriarchTimeline={patriarch} timelines={timelines} />
+        )
+
+        fireEvent.click(getSpouseLinkedMarriageGroup(container, "Wife One")!)
+        expect(getSpouseWrappers(container)[1].getAttribute("opacity")).toBe("0.15")
+
+        const bg = container.querySelector("svg")!
+        fireEvent.click(bg)
+
+        for (const w of getSpouseWrappers(container)) {
+            expect(w.getAttribute("opacity")).toBe("1")
+        }
+    })
+})
+
+describe("spouse linkedMarriage hover behaviour", () => {
+    it("dims sibling spouses when Wife One's linked marriage is hovered", () => {
+        const { container } = render(
+            <PluralFamilyChart width={800} patriarchTimeline={patriarch} timelines={timelines} />
+        )
+        fireEvent.mouseEnter(getSpouseLinkedMarriageGroup(container, "Wife One")!)
+        const [wrapperOne, wrapperTwo] = getSpouseWrappers(container)
+        expect(wrapperOne.getAttribute("opacity")).toBe("1")
+        expect(wrapperTwo.getAttribute("opacity")).toBe("0.15")
+    })
+
+    it("dims sibling spouses when Wife Two's linked marriage is hovered", () => {
+        const { container } = render(
+            <PluralFamilyChart width={800} patriarchTimeline={patriarch} timelines={timelines} />
+        )
+        fireEvent.mouseEnter(getSpouseLinkedMarriageGroup(container, "Wife Two")!)
+        const [wrapperOne, wrapperTwo] = getSpouseWrappers(container)
+        expect(wrapperOne.getAttribute("opacity")).toBe("0.15")
+        expect(wrapperTwo.getAttribute("opacity")).toBe("1")
+    })
+
+    it("restores all spouses on mouseLeave", () => {
+        const { container } = render(
+            <PluralFamilyChart width={800} patriarchTimeline={patriarch} timelines={timelines} />
+        )
+        const group = getSpouseLinkedMarriageGroup(container, "Wife One")!
+        fireEvent.mouseEnter(group)
+        fireEvent.mouseLeave(group)
+        for (const w of getSpouseWrappers(container)) expect(w.getAttribute("opacity")).toBe("1")
+    })
+
+    it("dims the patriarch's non-matching marriage when Wife One is hovered", () => {
+        const { container } = render(
+            <PluralFamilyChart width={800} patriarchTimeline={patriarch} timelines={timelines} />
+        )
+        fireEvent.mouseEnter(getSpouseLinkedMarriageGroup(container, "Wife One")!)
+        const [dimWrapper1845, dimWrapper1860] = getPatriarchMarriageDimWrappers(container)
+        expect(dimWrapper1845.getAttribute("opacity")).toBe("1")   // Wife One's marriage — stays bright
+        expect(dimWrapper1860.getAttribute("opacity")).toBe("0.15") // unrelated marriage — dimmed
+    })
+
+    it("dims the patriarch's non-matching marriage when Wife Two is hovered", () => {
+        const { container } = render(
+            <PluralFamilyChart width={800} patriarchTimeline={patriarch} timelines={timelines} />
+        )
+        fireEvent.mouseEnter(getSpouseLinkedMarriageGroup(container, "Wife Two")!)
+        const [dimWrapper1845, dimWrapper1860] = getPatriarchMarriageDimWrappers(container)
+        expect(dimWrapper1845.getAttribute("opacity")).toBe("0.15")
+        expect(dimWrapper1860.getAttribute("opacity")).toBe("1")
+    })
+
+    it("restores patriarch marriages on mouseLeave", () => {
+        const { container } = render(
+            <PluralFamilyChart width={800} patriarchTimeline={patriarch} timelines={timelines} />
+        )
+        const group = getSpouseLinkedMarriageGroup(container, "Wife One")!
+        fireEvent.mouseEnter(group)
+        fireEvent.mouseLeave(group)
+        for (const w of getPatriarchMarriageDimWrappers(container)) expect(w.getAttribute("opacity")).toBe("1")
     })
 })
