@@ -1,4 +1,4 @@
-import { patriarchColor, patriarchMarriedColor, spouseColor, spouseMarriedColor } from "../constants.ts"
+import { patriarchColor, patriarchMarriedColor, spouseColor, spouseMarriedColor } from "../constants"
 
 export const MiniChart = ({ people, xScale, rowHeight, barH, patriarchTimeline, timelines }) => {
     const patriarchDeathMs = patriarchTimeline.death.getTime()
