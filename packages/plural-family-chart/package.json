@@ -17,6 +17,7 @@
         "@visx/annotation": "^3.12.0",
         "@visx/axis": "^3.12.0",
         "@visx/bounds": "^3.12.0",
+        "@visx/brush": "^3.12.0",
         "@visx/curve": "^3.12.0",
         "@visx/gradient": "^3.12.0",
         "@visx/grid": "^3.12.0",
@@ -29,14 +30,14 @@
         "@visx/text": "^3.12.0",
         "@visx/tooltip": "^3.12.0",
         "@visx/vendor": "^3.12.0",
-        "lib": "workspace:*"
+        "lib": "workspace:*",
+        "react-zoom-pan-pinch": "^4.0.3"
     },
     "peerDependencies": {
         "react": ">=19",
         "react-dom": ">=19"
     },
     "devDependencies": {
-        "@testing-library/react": "^16.0.0",
         "@eslint/js": "^9.17.0",
         "@storybook/addon-a11y": "^10.3.5",
         "@storybook/addon-docs": "^10.3.5",
@@ -44,6 +45,7 @@
         "@storybook/addon-onboarding": "^10.3.5",
         "@storybook/addon-vitest": "^10.3.5",
         "@storybook/react-vite": "^10.3.5",
+        "@testing-library/react": "^16.0.0",
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
         "@vitejs/plugin-react": "^4.3.4",
@@ -52,11 +54,11 @@
         "eslint-plugin-react-refresh": "^0.4.16",
         "eslint-plugin-storybook": "^10.3.5",
         "globals": "^15.14.0",
+        "jsdom": "^25.0.0",
         "storybook": "^10.3.5",
         "typescript": "~5.6.2",
         "typescript-eslint": "^8.18.2",
         "vite": "7.3.2",
-        "jsdom": "^25.0.0",
         "vite-plugin-dts": "^4.5.4",
         "vitest": "^4.1.5"
     }
