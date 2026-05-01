@@ -95,7 +95,11 @@ export const PluralFamilyChart: React.FC<Props> = ({
                     // animationTrajectory={animationTrajectory}
                 />
                 <Group clipPath={`url(#${clipId})`}>
-                    <TimelineAxis xScale={xScale} chartWidth={chartWidth} timeValues={(brushDomain ?? timeValues) as [Date, Date]} />
+                    <TimelineAxis
+                        xScale={xScale}
+                        chartWidth={chartWidth}
+                        timeValues={(brushDomain ?? timeValues) as [Date, Date]}
+                    />
                     <Patriarch
                         patriarchTimeline={patriarchTimeline}
                         timelines={timelines}
