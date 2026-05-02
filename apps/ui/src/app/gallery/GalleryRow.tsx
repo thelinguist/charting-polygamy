@@ -12,7 +12,7 @@ interface Props {
     index: number
 }
 
-function ChartPanel({ data }: { data: string}) {
+function ChartPanel({ data }: { data: string }) {
     const containerRef = useRef<HTMLDivElement>(null)
     const [width, setWidth] = useState(800)
 
@@ -52,7 +52,7 @@ export function GalleryRow({ profile, index }: Props) {
                     </div>
                     <div className={styles.rowMetaItem}>
                         <span className={styles.rowMetaLabel}>Wives</span>
-                        <span className={styles.rowMetaValue}>{profile.wifeCount ?? '––'}</span>
+                        <span className={styles.rowMetaValue}>{profile.wifeCount ?? "––"}</span>
                     </div>
                 </div>
                 <span className={`${styles.rowChevron} ${open ? styles.rowChevronOpen : ""}`}>›</span>

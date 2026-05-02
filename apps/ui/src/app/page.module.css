@@ -26,6 +26,30 @@
     margin-top: 36px;
 }
 
+/* Illustrative Patriarch (Figure 01) */
+.figureSection {
+    padding-top: 24px;
+    padding-bottom: 40px;
+}
+
+.figureHeader {
+    margin-bottom: 16px;
+    gap: 24px;
+}
+
+.figureHeading {
+    margin-top: 8px;
+}
+
+.figureCaption {
+    max-width: 40ch;
+    text-align: right;
+}
+
+.figurePlaceholder {
+    height: 320px;
+}
+
 /* How it works */
 .methodEyebrow {
     margin-bottom: 56px;
@@ -54,6 +78,44 @@
     color: var(--ink-mute);
     max-width: 36ch;
     font-size: 16px;
+}
+
+/* Illustrative Approach */
+.approachEyebrow {
+    margin-bottom: 40px;
+}
+
+.approachHeading {
+    max-width: 24ch;
+    margin-bottom: 24px;
+}
+
+.approachLede {
+    max-width: 68ch;
+    margin-bottom: 20px;
+}
+
+.approachBody {
+    color: var(--ink-mute);
+    max-width: 72ch;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* What you'll find */
+.findLede {
+    max-width: 72ch;
+}
+
+.inlineLink {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-underline-offset: 3px;
+}
+
+.inlineLink:hover {
+    text-decoration-color: var(--ink);
 }
 
 /* Gallery callout */

@@ -1,6 +1,7 @@
 import Link from "next/link"
 import styles from "./page.module.css"
 import { PREBAKED_SAMPLE } from "../constants/pre-baked"
+import { IllustrativePatriarch } from "./IllustrativePatriarch"
 
 const STEPS = [
     {
@@ -15,8 +16,8 @@ const STEPS = [
     },
     {
         n: "iii.",
-        t: "Read the chart",
-        d: "Each row is one person. Each colored bar is a marriage. Stacked bars on the patriarch row indicate the polygamous interval.",
+        t: "Discover your ancestors",
+        d: "See the shape of each plural household at a glance — who was married when, how long it lasted, and where lives overlapped. Let the chart surface questions worth chasing.",
     },
 ]
 
@@ -39,8 +40,8 @@ export default function Home() {
                         a family by hand — everything runs in your browser.
                     </p>
                     <div className={`flex gap-12 ${styles.heroCtas}`}>
-                        <Link href="/chart/upload" className="btn btn-primary">
-                            Chart Your Tree →
+                        <Link href="/chart/instructions" className="btn btn-primary">
+                            Get Started →
                         </Link>
                         <Link href="/gallery" className="btn">
                             Browse the Gallery
@@ -48,6 +49,8 @@ export default function Home() {
                     </div>
                 </div>
             </section>
+
+            <IllustrativePatriarch />
 
             <hr className="rule-soft" />
 
@@ -69,6 +72,37 @@ export default function Home() {
                     </div>
                 </div>
             </section>
+
+            <hr className="rule-soft" />
+
+            <section>
+                <div className="shell">
+                    <div className={`flex items-baseline gap-16 ${styles.methodEyebrow}`}>
+                        <span className="eyebrow">№ 003 — Discovery</span>
+                        <hr className="rule" />
+                    </div>
+                    <h1 className={styles.heroHeading}>
+                        What will you <em className={`italic-serif ${styles.heroAccent}`}>uncover</em>?
+                    </h1>
+                    <p className={`lede ${styles.findLede}`}>
+                        Charting a plural family pulls you closer to the ancestors inside it. You start to see what
+                        daily life looked like — how many households a man maintained, how young his wives were, how
+                        long those marriages lasted. Those details surface new questions, and new questions lead to
+                        journals, letters, and records you hadn&#39;t thought to look for.
+                    </p>
+                    <p className={`lede ${styles.findLede}`}>
+                        Take{" "}
+                        <Link href="/chart/pratt" className={styles.inlineLink}>
+                            Parley P. Pratt
+                        </Link>{" "}
+                        as a case study: his chart reveals a wife who divorced a prior husband to marry him, an age gap
+                        of nearly two decades across his wives, and a marriage that ran concurrently with Joseph
+                        Smith&#39;s own sealing to the same woman.
+                    </p>
+                </div>
+            </section>
+
+            <hr className="rule-soft" />
 
             {/* GALLERY CALLOUT */}
             <section className="tight">
@@ -96,7 +130,8 @@ export default function Home() {
                                 >
                                     <span className={styles.prebakedName}>{p.name}</span>
                                     <span>
-                                        {p.born}{p.died ? `-${p.died}` : "—"}
+                                        {p.born}
+                                        {p.died ? `-${p.died}` : "—"}
                                     </span>
                                 </div>
                             ))}

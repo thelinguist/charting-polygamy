@@ -24,12 +24,11 @@ export const PREBAKED_SAMPLE: GalleryPolygamist[] = [
         note: "Brigham Young led the Saints westward to the Salt Lake Valley and openly practiced and defended plural marriage. He is documented to have married approximately 55 women and fathered 56 children. He remained a prominent defender of the practice throughout his presidency.",
         source: {
             href: "https://www.wikitree.com/wiki/Young-93",
-            text: "WikiTree"
+            text: "WikiTree",
         },
     },
     {
-        notability:
-            "Murdered by a wife's former husband, sparking the Mountain Meadows Massacre according to some",
+        notability: "Murdered by a wife's former husband, sparking the Mountain Meadows Massacre according to some",
         name: "Parley P. Pratt",
         born: 1807,
         died: 1857,
@@ -57,8 +56,7 @@ export const PREBAKED: GalleryPolygamist[] = [
         wifeCount: 4,
     },
     {
-        notability:
-            "English king who started a church to marry who he wanted",
+        notability: "English king who started a church to marry who he wanted",
         name: "King Henry VII",
         born: 1491,
         died: 1547,
@@ -72,5 +70,14 @@ export const PREBAKED: GalleryPolygamist[] = [
         born: 1807,
         died: 1898,
         note: "Wilford Woodruff is best known for issuing the 1890 Manifesto, officially ending the Church's sanction of new plural marriages. He himself had nine wives over his lifetime. His declaration marked a major inflection point in Mormon history and its relationship with the United States government.",
+    },
+    {
+        name: "John Menzies MacFarlane",
+        notability: "Famous Judge from Southern Utah during the Pioneer Era",
+        born: 1833,
+        died: 1892,
+        wifeCount: 3,
+        source: "user submitted",
+        data: "hZDLasMwEEV_RcxaA6OH5cculJYSmi9oupAbERtspdjuIjb-9yKZOGlT2u3MMOfcO4GHAranyrOd82Pteraz70-2a6x3wOFjgGL656aEAkSmFApCIYDDIQ5yiWSQNHBooXidoI_jRKOQqAg4WCik4HCEQs38sjcm_KF82SsZ90JeD9IcSawPdBIPpJ7fZg5DE0nBd-M9e6jsMLiuceerZoqkkNRFM5cGKUUR3jVtCHun6b7HmSNXpJGL0Tzyjt717LGpR8ue3bk8fXY37WiDJFGYFatkHCQ_sDfpf8VKWrBLIYEbiaUbKra13rE9vNTjWLs9sM3Btv1qkGQBSNlqoLPQxF3wm3r_NIiNfwE",
     },
 ]

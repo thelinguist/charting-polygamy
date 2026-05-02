@@ -10,9 +10,11 @@ fact has historic value](https://encyclopediaofarkansas.net/entries/parley-p-pra
 thereafter married Parley P Pratt.
 
 You can see that Mr. Pratt's first wife is 10 years older (she has a gap of +10 years). Whereas **Martha Monk** was 18
-years younger than her husband (-18)
+years younger than her husband
 
 While Mary Ann Frost did marry Joseph Smith, in this case she was allowed to remain with her existing husband, Parley P
 Pratt. Therefore, the marriage wasn't terminated, until she got divorced in 1853. This highlights the fact that during
 the Nauvoo period of the Mormon movement, plural marriages sometimes meant that the wife would still live with her
 current husband.
+
+See other interesting families in the [gallery](../gallery)

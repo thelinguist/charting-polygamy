@@ -25,8 +25,8 @@ export default function GalleryPage() {
                         ))}
                     </div>
                     <p className={`footnote ${styles.footnote}`}>
-                        † Dates and wife counts are drawn from secondary historical sources and are approximate. They
-                        are suitable for visualization purposes but should be verified against primary records before
+                        † Dates and wife counts are drawn from historical sources and may be approximate. They are
+                        suitable for visualization purposes but should be verified against primary records before
                         citation.
                     </p>
                 </div>

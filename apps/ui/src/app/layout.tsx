@@ -1,7 +1,8 @@
 import "./globals.css"
 import type { Metadata } from "next"
-import { Cormorant_Garamond, Source_Serif_4, JetBrains_Mono } from "next/font/google"
-import Link from "next/link"
+import { Cormorant_Garamond, JetBrains_Mono, Source_Serif_4 } from "next/font/google"
+import { NavBar } from "../components/NavBar/NavBar"
+import { Footer } from "../components/Footer/Footer"
 
 const cormorant = Cormorant_Garamond({
     subsets: ["latin"],
@@ -41,84 +42,6 @@ export const metadata: Metadata = {
         "plural families",
         "family history",
     ],
-}
-
-function NavBar() {
-    const links = [
-        { label: "Home", href: "/" },
-        { label: "Chart a Tree", href: "/chart/upload" },
-        { label: "Gallery", href: "/gallery" },
-        { label: "About", href: "/chart/about" },
-    ]
-
-    return (
-        <nav className="nav">
-            <Link href="/" className="nav-mark">
-                <span style={{ fontFamily: "var(--mono)", fontSize: 13, color: "var(--c-overlap)" }}>◆</span>
-                <span>Charting Polygamy</span>
-                <span className="nav-mark-glyph">A Family-Tree Study</span>
-            </Link>
-            <div className="nav-links">
-                {links.map(l => (
-                    <Link key={l.href} href={l.href}>
-                        {l.label}
-                    </Link>
-                ))}
-            </div>
-        </nav>
-    )
-}
-
-function Footer() {
-    return (
-        <footer>
-            <div className="footer-grid">
-                <div>
-                    <div className="eyebrow" style={{ marginBottom: 12 }}>
-                        Charting Polygamy
-                    </div>
-                    <div
-                        style={{
-                            fontFamily: "var(--serif)",
-                            fontSize: 22,
-                            lineHeight: 1.3,
-                            maxWidth: "34ch",
-                            color: "var(--ink-mute)",
-                        }}
-                    >
-                        A small research tool for visualizing plural-marriage households in family-history data.
-                    </div>
-                </div>
-                <div>
-                    <div className="eyebrow" style={{ marginBottom: 12 }}>
-                        Sections
-                    </div>
-                    <div className="flex flex-col gap-8 footnote">
-                        <Link href="/" style={{ textDecoration: "none", color: "var(--ink-mute)" }}>
-                            Home
-                        </Link>
-                        <Link href="/chart/upload" style={{ textDecoration: "none", color: "var(--ink-mute)" }}>
-                            Chart a Tree
-                        </Link>
-                        <Link href="/gallery" style={{ textDecoration: "none", color: "var(--ink-mute)" }}>
-                            Gallery
-                        </Link>
-                        <Link href="/chart/about" style={{ textDecoration: "none", color: "var(--ink-mute)" }}>
-                            About
-                        </Link>
-                    </div>
-                </div>
-                <div>
-                    <div className="eyebrow" style={{ marginBottom: 12 }}>
-                        Note
-                    </div>
-                    <p className="footnote" style={{ maxWidth: "32ch" }}>
-                        Data is processed in your browser. Nothing is uploaded to a server.
-                    </p>
-                </div>
-            </div>
-        </footer>
-    )
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

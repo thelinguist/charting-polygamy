@@ -1,0 +1,68 @@
+.page {
+    padding-top: 64px;
+    padding-bottom: 80px;
+}
+
+.eyebrowRow {
+    margin-bottom: 24px;
+}
+
+.heading {
+    margin-bottom: 24px;
+}
+
+.intro {
+    margin-bottom: 48px;
+}
+
+.section {
+    padding: 48px 0;
+}
+
+.sectionHeading {
+    margin-bottom: 20px;
+}
+
+.body {
+    color: var(--ink-mute);
+    margin-bottom: 16px;
+}
+
+.list {
+    color: var(--ink-mute);
+    padding-left: 1.4em;
+    line-height: 1.8;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 0;
+}
+
+.list strong {
+    color: var(--ink);
+}
+
+.ctas {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+}
+
+.qa {
+    margin-bottom: 32px;
+}
+
+.qa:last-child {
+    margin-bottom: 0;
+}
+
+.question {
+    margin-bottom: 8px;
+    font-size: 17px;
+}
+
+.answer {
+    color: var(--ink-mute);
+    line-height: 1.7;
+}
