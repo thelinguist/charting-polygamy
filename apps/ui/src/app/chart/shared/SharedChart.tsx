@@ -22,9 +22,12 @@ function ErrorState({ message }: { message: string }) {
     )
 }
 
-export function SharedChart() {
-    const searchParams = useSearchParams()
-    const encoded = searchParams.get("data")
+interface Props {
+    encoded?: string | null
+    width?: number
+}
+
+export function SharedChart({ encoded, width }: Props) {
     const [state, setState] = useState<DecodeState>(encoded ? { status: "loading" } : { status: "error" })
 
     useEffect(() => {
@@ -52,6 +55,7 @@ export function SharedChart() {
                 patriarchTimeline={state.data.patriarchTimeline}
                 timelines={state.data.timelines}
                 hideShare
+                chartWidth={width}
             />
             <div className={classNames(styles.chart, styles.cta)}>
                 <p>This chart was generated with Charting Polygamy.</p>

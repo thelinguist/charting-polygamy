@@ -1,10 +1,4 @@
-import {
-    barHeight,
-    patriarchColor,
-    spouseColor,
-    strokeColor,
-    strokeWidth,
-} from "../constants"
+import { barHeight, patriarchColor, spouseColor, strokeColor, strokeWidth } from "../constants"
 import React from "react"
 import { PositionScale } from "@visx/shape/lib/types"
 import { HoverContextProvider } from "../../../hooks/HoverContextProvider"

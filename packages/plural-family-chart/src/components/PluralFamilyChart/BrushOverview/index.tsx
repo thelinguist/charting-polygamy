@@ -6,9 +6,9 @@ import { PatriarchTimeline, Timeline } from "lib/src/types"
 import { MiniChart } from "./MiniChart"
 
 const brushStyle = {
-    fill: "#7986cb",
-    fillOpacity: 0.2,
-    stroke: "#7986cb",
+    fill: "#3b4a6b",
+    fillOpacity: 0.15,
+    stroke: "#3b4a6b",
     strokeWidth: 1,
 }
 
@@ -66,7 +66,7 @@ export const BrushOverview: React.FC<Props> = ({ xScale, width, height, patriarc
                         y={(h - 20) / 2}
                         width={8}
                         height={20}
-                        fill="#7986cb"
+                        fill="#3b4a6b"
                         rx={3}
                         style={{ cursor: "ew-resize" }}
                     />

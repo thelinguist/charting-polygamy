@@ -14,6 +14,7 @@ interface Props {
     timelines: Timeline[]
     timelineFallback?: string
     hideShare?: boolean
+    chartWidth?: number
 }
 
 interface ErrorBoundaryState {
@@ -44,9 +45,9 @@ class Timeline2ErrorBoundary extends React.Component<Props, ErrorBoundaryState> 
     }
 }
 
-const Timeline2Inner: React.FC<Props> = ({ name, patriarchTimeline, timelines, hideShare }) => {
+const Timeline2Inner: React.FC<Props> = ({ name, patriarchTimeline, timelines, hideShare, chartWidth }) => {
     const containerRef = useRef<HTMLDivElement>(null)
-    const [width, setWidth] = useState(800)
+    const [width, setWidth] = useState(chartWidth ?? 800)
     const [copied, setCopied] = useState(false)
 
     useEffect(() => {

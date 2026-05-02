@@ -1,80 +1,30 @@
+/* Charting Polygamy — global design tokens
+   Palette: parchment / archival. Deep ink on warm cream, muted indigo
+   for the patriarch, low-chroma earth tones for wives — drawn from
+   academic atlases and bound research journals rather than tech UIs. */
+
 :root {
-    /** CSS DARK THEME PRIMARY COLORS */
-  --color-primary-100: 255, 225, 77;
-  --color-primary-200: 255, 228, 100;
-  --color-primary-300: 255, 231, 121;
-  --color-primary-400: 255, 235, 141;
-  --color-primary-500: 255, 238, 161;
-  --color-primary-600: 255, 241, 180;
-  /** CSS DARK THEME SURFACE COLORS */
-  --color-surface-100: 18, 18, 18;
-  --color-surface-200: 40, 40, 40;
-  --color-surface-300: 63, 63, 63;
-  --color-surface-400: 87, 87, 87;
-  --color-surface-500: 113, 113, 113;
-  --color-surface-600: 139, 139, 139;
-  /** CSS DARK THEME MIXED SURFACE COLORS */
-  --color-surface-mixed-100: 38, 35, 25;
-  --color-surface-mixed-200: 59, 56, 46;
-  --color-surface-mixed-300: 80, 77, 69;
-  --color-surface-mixed-400: 103, 100, 92;
-  --color-surface-mixed-500: 126, 124, 117;
-  --color-surface-mixed-600: 151, 149, 143;
-  /** EXAMPLES */
-  /*color: var(--color-primary-600);*/
-  /*background-color: var(--color-surface-300);*/
+  --bg: #f1ead8;
+  --bg-elev: #e8e0c9;
+  --bg-elev-2: #ddd3b8;
+  --ink: #1f1b14;
+  --ink-mute: #5a5446;
+  --ink-dim: #8a8472;
+  --rule: #b8ad94;
+  --rule-soft: #ccc1a5;
 
-  --max-width: 1100px;
-  --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --c-patriarch: #3b4a6b;
+  --c-patriarch-strong: #2c3856;
+  --c-wife-1: #8c5a3a;
+  --c-overlap: #9a3a20;
 
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 255, 225, 77;
-  --background-end-rgb: 246, 227, 160;
+  /* Fonts injected by next/font via CSS variables */
+  --serif: var(--font-serif-display, 'Georgia'), serif;
+  --serif-text: var(--font-serif-text, 'Georgia'), serif;
+  --mono: var(--font-mono, 'ui-monospace'), monospace;
 
-  --tile-start-rgb: 239, 245, 249;
-  --tile-end-rgb: 228, 232, 233;
-  --tile-border: conic-gradient(
-    #00000080,
-    #00000040,
-    #00000030,
-    #00000020,
-    #00000010,
-    #00000010,
-    #00000080
-  );
-
-  --callout-rgb: 238, 240, 241;
-  --callout-border-rgb: 172, 175, 176;
-  --card-rgb: 180, 185, 188;
-  --card-border-rgb: 131, 134, 135;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: --color-surface-mixed-100;
-    --background-end-rgb: --color-surface-mixed-200;
-
-    --tile-start-rgb: 2, 13, 46;
-    --tile-end-rgb: 2, 5, 19;
-    --tile-border: conic-gradient(
-      #ffffff80,
-      #ffffff40,
-      #ffffff30,
-      #ffffff20,
-      #ffffff10,
-      #ffffff10,
-      #ffffff80
-    );
-
-    --callout-rgb: 20, 20, 20;
-    --callout-border-rgb: 108, 108, 108;
-    --card-rgb: 100, 100, 100;
-    --card-border-rgb: 200, 200, 200;
-  }
+  --pad: 32px;
+  --max: 1280px;
 }
 
 * {
@@ -90,56 +40,258 @@ body {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif-text);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 a {
   color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--ink-dim);
+  text-underline-offset: 3px;
+}
+a:hover {
+  text-decoration-color: var(--ink);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--serif);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+h1 {
+  font-size: clamp(48px, 7vw, 104px);
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+}
+h2 {
+  font-size: clamp(32px, 4vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+h3 {
+  font-size: 28px;
+  line-height: 1.15;
+}
+h4 {
+  font-size: 20px;
+  line-height: 1.25;
 }
 
 button {
   cursor: pointer;
 }
 
-.reader {
-  /*display: grid;*/
-  /*place-items: center;*/
-  max-width: 800px;
-  width: 100%;
+/* Typography utilities */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
 }
 
-button {
-  text-decoration: underline;
-  font-size: 15pt;
-  padding: .5em;
-  margin: 1em;
-  border-radius: var(--border-radius);
-  transition: background 200ms, border 200ms;
+.lede {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--ink);
+  max-width: 60ch;
+}
+.lede em {
+  color: var(--ink-mute);
 }
 
-th img {
-  background-color: rgb(var(--color-surface-mixed-100));
+.footnote {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--ink-dim);
+  line-height: 1.5;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+.italic-serif {
+  font-family: var(--serif);
+  font-style: italic;
+}
+
+/* Layout shell */
+.shell {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+
+/* Dividers */
+.rule {
+  height: 1px;
+  background: var(--rule);
+  border: 0;
+  flex: 1;
+}
+.rule-soft {
+  height: 1px;
+  background: var(--rule-soft);
+  border: 0;
+}
+
+/* Nav */
+.nav {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 22px var(--pad);
+  border-bottom: 1px solid var(--rule-soft);
+  position: sticky;
+  top: 0;
+  background: rgba(241, 234, 216, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 50;
+}
+.nav-mark {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  color: var(--ink);
+}
+.nav-mark-glyph {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-dim);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.nav-links {
+  display: flex;
+  gap: 28px;
+  align-items: baseline;
+}
+.nav-links a {
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  padding-bottom: 4px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
+}
+.nav-links a:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.nav-links a.active {
+  color: var(--ink);
+  border-color: var(--c-overlap);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.btn:hover {
+  border-color: var(--ink);
+  background: var(--bg-elev);
+}
+.btn-primary {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+.btn-primary:hover {
+  background: #000;
+  border-color: #000;
+  color: var(--bg);
+}
+
+/* Cards */
+.card {
+  background: var(--bg-elev);
+  border: 1px solid var(--rule-soft);
+  padding: 24px;
+}
+
+/* Sections */
+section {
+  padding: 96px 0;
+}
+section.tight {
+  padding: 56px 0;
+}
+
+/* Footer */
+footer {
+  margin-top: 120px;
+  padding: 48px var(--pad) 64px;
+  border-top: 1px solid var(--rule-soft);
+}
+.footer-grid {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+}
+
+/* Flex utilities */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.items-baseline { align-items: baseline; }
+.justify-between { justify-content: space-between; }
+.gap-4 { gap: 4px; }
+.gap-8 { gap: 8px; }
+.gap-12 { gap: 12px; }
+.gap-16 { gap: 16px; }
+.gap-24 { gap: 24px; }
+.gap-32 { gap: 32px; }
+.gap-48 { gap: 48px; }
+
+@media (max-width: 768px) {
+  :root {
+    --pad: 20px;
   }
 
-  button {
-    color: rgb(var(--color-primary-100));
-    background: rgba(var(--card-rgb), 0);
-    border: 2px solid rgb(var(--card-border-rgb));
+  .nav-mark-glyph {
+    display: none;
   }
 
-  th img {
-    background-color: unset;
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
+
+  .nav-links {
+    gap: 16px;
+  }
+
 }
-

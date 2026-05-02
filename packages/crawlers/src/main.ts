@@ -6,6 +6,7 @@ const famousPolygamists = {
     BrighamYoung: "Young-93",
     ParleyPPratt: "Pratt-1938",
     HenryMower: "Mower-364",
+    JosephSmith: "Smith-545",
 }
 
 const factsFile = "facts.csv"

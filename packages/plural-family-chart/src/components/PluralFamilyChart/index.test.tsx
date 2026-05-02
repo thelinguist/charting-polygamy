@@ -55,9 +55,7 @@ const getPatriarchMarriageGroup = (container: HTMLElement, year: string) => {
 
 // Returns the linked-marriage <g id> for the named spouse (skips the whisker group whose id is "spouse-*")
 const getSpouseLinkedMarriageGroup = (container: HTMLElement, spouseName: string) => {
-    const wrapper = getSpouseWrappers(container).find(w =>
-        w.querySelector(`[id="spouse-${spouseName}"]`)
-    )
+    const wrapper = getSpouseWrappers(container).find(w => w.querySelector(`[id="spouse-${spouseName}"]`))
     const candidates = Array.from(wrapper?.querySelectorAll<SVGGElement>("g[id]") ?? [])
     return candidates.find(g => !g.id.startsWith("spouse-")) ?? null
 }
@@ -219,7 +217,7 @@ describe("spouse linkedMarriage hover behaviour", () => {
         )
         fireEvent.mouseEnter(getSpouseLinkedMarriageGroup(container, "Wife One")!)
         const [dimWrapper1845, dimWrapper1860] = getPatriarchMarriageDimWrappers(container)
-        expect(dimWrapper1845.getAttribute("opacity")).toBe("1")   // Wife One's marriage — stays bright
+        expect(dimWrapper1845.getAttribute("opacity")).toBe("1") // Wife One's marriage — stays bright
         expect(dimWrapper1860.getAttribute("opacity")).toBe("0.15") // unrelated marriage — dimmed
     })
 

@@ -1,4 +1,4 @@
-import { patriarchColor, patriarchMarriedColor, spouseColor, spouseMarriedColor } from "../constants"
+import { patriarchColor, patriarchMarriedColor, spouseColor, wifeColors } from "../constants"
 
 export const MiniChart = ({ people, xScale, rowHeight, barH, patriarchTimeline, timelines }) => {
     const patriarchDeathMs = patriarchTimeline.death.getTime()
@@ -42,7 +42,17 @@ export const MiniChart = ({ people, xScale, rowHeight, barH, patriarchTimeline, 
                 const y = (i + 1) * rowHeight + (rowHeight - barH) / 2
                 const x = xScale(start) as number
                 const w = Math.max(0, (xScale(new Date(endMs)) as number) - x)
-                return <rect key={timeline.name} x={x} y={y} width={w} height={barH} fill={spouseMarriedColor} rx={1} />
+                return (
+                    <rect
+                        key={timeline.name}
+                        x={x}
+                        y={y}
+                        width={w}
+                        height={barH}
+                        fill={wifeColors[i % wifeColors.length]}
+                        rx={1}
+                    />
+                )
             })}
         </>
     )

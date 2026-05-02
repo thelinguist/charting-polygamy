@@ -1,5 +1,5 @@
 import { PatriarchTimeline, Timeline } from "lib/src/types"
-import { barHeight, otherMarriageColor, spouseMarriedColor } from "../constants"
+import { barHeight, otherMarriageColor, spouseMarriedColor, wifeColors } from "../constants"
 import React from "react"
 import { Marriage } from "../Marriage"
 import { PersonTimeline } from "../PersonTimeline"
@@ -13,6 +13,7 @@ interface Props {
     yScale: PositionScale
     xScale: (date: Date) => number
     dim?: boolean
+    colorIndex?: number
     onLinkedMarriageHover?: (active: boolean) => void
     onLinkedMarriageClick?: () => void
 }
@@ -23,6 +24,7 @@ export const Spouse: React.FC<Props> = ({
     xScale,
     yScale,
     dim,
+    colorIndex = 0,
     onLinkedMarriageHover,
     onLinkedMarriageClick,
 }) => {
@@ -78,7 +80,7 @@ export const Spouse: React.FC<Props> = ({
                     { x: xEnd, y: yEnd },
                     { x: xStart, y: yEnd },
                 ],
-                fillColor: spouseMarriedColor,
+                fillColor: wifeColors[colorIndex % wifeColors.length],
                 text1,
                 text2,
             }
@@ -98,11 +100,24 @@ export const Spouse: React.FC<Props> = ({
                 { x: xEnd, y: yEnd },
                 { x: xStart, y: yEnd },
             ],
-            fillColor: otherMarriageColor,
+            fillColor: "url(#other-marriage-hatch)",
+            strokeDasharray: "4,3" as const,
+            textColor: "#1f1b14",
             text1,
             text2,
         }
-    }, [expandedIndex, timeline, xScale, yStart, yEnd, marriageAge, linkedStart, marriageBounds, otherMarriageBounds])
+    }, [
+        expandedIndex,
+        timeline,
+        xScale,
+        yStart,
+        yEnd,
+        marriageAge,
+        linkedStart,
+        marriageBounds,
+        otherMarriageBounds,
+        colorIndex,
+    ])
 
     return (
         <g opacity={dim ? 0.15 : 1} style={{ transition: "opacity 0.15s ease" }}>
@@ -117,7 +132,7 @@ export const Spouse: React.FC<Props> = ({
                     {linkedStart && marriageBounds && (
                         <Marriage
                             bounds={marriageBounds}
-                            fillColor={spouseMarriedColor}
+                            fillColor={wifeColors[colorIndex % wifeColors.length]}
                             text1={linkedStart.getFullYear().toString()}
                             text2={marriageAge}
                             onClick={() => {
@@ -138,7 +153,9 @@ export const Spouse: React.FC<Props> = ({
                         <Marriage
                             key={timeline.otherMarriages[i].spouse || i}
                             bounds={bounds}
-                            fillColor={otherMarriageColor}
+                            fillColor="url(#other-marriage-hatch)"
+                            strokeDasharray="4,3"
+                            textColor="#1f1b14"
                             text1={timeline.otherMarriages[i].start.getFullYear().toString()}
                             text2={timeline.otherMarriages[i].spouse}
                             onClick={() => handleClick(i + 1)}
@@ -151,6 +168,10 @@ export const Spouse: React.FC<Props> = ({
                             key="overlay"
                             bounds={overlayProps.bounds}
                             fillColor={overlayProps.fillColor}
+                            strokeDasharray={
+                                "strokeDasharray" in overlayProps ? overlayProps.strokeDasharray : undefined
+                            }
+                            textColor={"textColor" in overlayProps ? overlayProps.textColor : undefined}
                             text1={overlayProps.text1}
                             text2={overlayProps.text2}
                             isExpanded

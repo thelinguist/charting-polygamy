@@ -24,7 +24,7 @@ interface Props {
 }
 
 const defaultMargin = { top: 40, left: 125, right: 40, bottom: 100 }
-export const background = "#eaedff"
+export const background = "#f1ead8"
 
 export const PluralFamilyChart: React.FC<Props> = ({
     width = 800,
@@ -84,8 +84,24 @@ export const PluralFamilyChart: React.FC<Props> = ({
     const clipId = `chart-clip-${patriarchTimeline.name.replace(/\s+/g, "-")}`
 
     return (
-        <svg width={width} height={actualHeight} onClick={() => { resetPin(); resetSpousePin() }}>
+        <svg
+            width={width}
+            height={actualHeight}
+            onClick={() => {
+                resetPin()
+                resetSpousePin()
+            }}
+        >
             <defs>
+                <pattern
+                    id="other-marriage-hatch"
+                    patternUnits="userSpaceOnUse"
+                    width="6"
+                    height="6"
+                    patternTransform="rotate(45)"
+                >
+                    <line x1="0" y1="0" x2="0" y2="6" stroke="#b0a794" strokeWidth="1.5" strokeOpacity="0.5" />
+                </pattern>
                 <clipPath id={clipId}>
                     <rect x={0} y={-margin.top} width={chartWidth} height={mainHeight} />
                 </clipPath>
@@ -102,7 +118,9 @@ export const PluralFamilyChart: React.FC<Props> = ({
                         const dates = personDates.get(formattedValue ?? "")
                         return (
                             <text textAnchor="end" fontFamily="sans-serif">
-                                <tspan x={x} y={y} dy="-0.35em" fontSize={14}>{formattedValue}</tspan>
+                                <tspan x={x} y={y} dy="-0.35em" fontSize={14}>
+                                    {formattedValue}
+                                </tspan>
                                 {dates && (
                                     <tspan x={x} dy="1.3em" fontSize={11} fill="#666">
                                         {dates.birth.getFullYear()} – {dates.death.getFullYear()}
@@ -123,14 +141,17 @@ export const PluralFamilyChart: React.FC<Props> = ({
                         timelines={timelines}
                         yScale={yScale}
                         xScale={xScale}
-                        expandedIndex={expandedIndex ?? (() => {
-                            if (expandedSpouseIndex === null) return null
-                            const start = timelines[expandedSpouseIndex].linkedMarriage.start
-                            const idx = patriarchTimeline.marriages
-                                .filter(m => m.start)
-                                .findIndex(m => m.start!.getTime() === start.getTime())
-                            return idx === -1 ? null : idx
-                        })()}
+                        expandedIndex={
+                            expandedIndex ??
+                            (() => {
+                                if (expandedSpouseIndex === null) return null
+                                const start = timelines[expandedSpouseIndex].linkedMarriage.start
+                                const idx = patriarchTimeline.marriages
+                                    .filter(m => m.start)
+                                    .findIndex(m => m.start!.getTime() === start.getTime())
+                                return idx === -1 ? null : idx
+                            })()
+                        }
                         handleClick={handleClick}
                         setHoveredIndex={setHoveredIndex}
                         highlightedMarriageStart={
@@ -146,6 +167,7 @@ export const PluralFamilyChart: React.FC<Props> = ({
                             timeline={timeline}
                             yScale={yScale}
                             xScale={xScale}
+                            colorIndex={index}
                             dim={
                                 (expandedIndex !== null && expandedIndex !== index) ||
                                 (expandedSpouseIndex !== null && expandedSpouseIndex !== index)

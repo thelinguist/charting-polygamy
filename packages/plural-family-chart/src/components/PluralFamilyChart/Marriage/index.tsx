@@ -11,6 +11,8 @@ interface Props {
     fillOpacity?: number
     bounds: { x: number; y: number }[]
     fillColor?: string
+    strokeDasharray?: string
+    textColor?: string
     text1: string
     text2: string
 }
@@ -23,12 +25,17 @@ export const Marriage: React.FC<Props> = ({
     onMouseLeave,
     bounds,
     fillColor,
+    strokeDasharray,
+    textColor = "#fff",
     text1,
     text2,
 }) => {
     return (
         <Group
-            onClick={e => { e.stopPropagation(); onClick?.() }}
+            onClick={e => {
+                e.stopPropagation()
+                onClick?.()
+            }}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             style={{ cursor: "pointer" }}
@@ -43,12 +50,14 @@ export const Marriage: React.FC<Props> = ({
                 strokeWidth={strokeWidth}
                 fill={fillColor}
                 fillOpacity={fillOpacity}
+                strokeDasharray={strokeDasharray}
             />
             <ClippedText
                 disableClip={isExpanded}
                 xStart={bounds[0].x}
                 xEnd={bounds[1].x}
                 y={bounds[0].y + barHeight / 3}
+                fill={textColor}
             >
                 {text1}
             </ClippedText>
@@ -57,6 +66,7 @@ export const Marriage: React.FC<Props> = ({
                 xStart={bounds[0].x}
                 xEnd={bounds[1].x}
                 y={bounds[0].y + (barHeight * 2) / 3}
+                fill={textColor}
             >
                 {text2}
             </ClippedText>
