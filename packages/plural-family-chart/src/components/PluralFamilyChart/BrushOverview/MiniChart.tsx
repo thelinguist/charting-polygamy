@@ -1,4 +1,4 @@
-import { patriarchColor, patriarchMarriedColor, spouseColor, wifeColors } from "../constants"
+import { patriarchMarriedColor, spouseColor, strokeColor, wifeColors } from "../constants"
 
 export const MiniChart = ({ people, xScale, rowHeight, barH, patriarchTimeline, timelines }) => {
     const patriarchDeathMs = patriarchTimeline.death.getTime()
@@ -17,7 +17,7 @@ export const MiniChart = ({ people, xScale, rowHeight, barH, patriarchTimeline, 
                         y={y}
                         width={w}
                         height={barH}
-                        fill={i === 0 ? patriarchColor : spouseColor}
+                        fill={i === 0 ? strokeColor : spouseColor}
                         rx={1}
                     />
                 )

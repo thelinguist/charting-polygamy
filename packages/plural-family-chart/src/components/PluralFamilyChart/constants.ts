@@ -1,6 +1,12 @@
+export enum MarriageKind {
+    Patriarch = "patriarch",
+    Spouse = "spouse",
+    Other = "other",
+}
+
 export const patriarchColor = "#3b4a6b"
 export const patriarchMarriedColor = "#2c3856"
-export const strokeColor = "rgba(31,27,20,0.3)"
+export const strokeColor = "rgba(31,27,20,0.6)"
 export const strokeWidth = 1
 
 export const spouseColor = "#b0a794"
@@ -29,5 +35,5 @@ export const timelineAnnotationProps = {
 export const barHeight = 50
 
 export const labelMarginStart = 2
-export const charWidthRatio = 0.65
+export const charWidthRatio = 0.5
 export const labelPadding = 16
