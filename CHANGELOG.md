@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/thelinguist/charting-polygamy/compare/v1.12.0...v1.13.0) (2026-05-02)
+
+
+### Features
+
+* facelift, better UX, license, claude ([#17](https://github.com/thelinguist/charting-polygamy/issues/17)) ([72fa38a](https://github.com/thelinguist/charting-polygamy/commit/72fa38a48455602c2d86723fab184239fa1c637f))
+
 # [1.12.0](https://github.com/thelinguist/charting-polygamy/compare/v1.11.0...v1.12.0) (2026-05-01)
 
 
