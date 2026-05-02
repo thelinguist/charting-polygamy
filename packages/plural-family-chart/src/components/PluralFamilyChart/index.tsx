@@ -43,8 +43,8 @@ export const PluralFamilyChart: React.FC<Props> = ({
         setHoveredIndex: setHoveredSpouseIndex,
         resetPin: resetSpousePin,
     } = useMarriageExpansion()
-    const [brushDomain, setBrushDomain] = useState<[Date, Date] | null>(
-        () => getMarriageDomain(patriarchTimeline, timelines)
+    const [brushDomain, setBrushDomain] = useState<[Date, Date] | null>(() =>
+        getMarriageDomain(patriarchTimeline, timelines)
     )
 
     const dataErrors = checkPersonDetails(patriarchTimeline)
@@ -121,10 +121,7 @@ export const PluralFamilyChart: React.FC<Props> = ({
                     tickComponent={({ x, y, formattedValue }) => {
                         const dates = personDates.get(formattedValue ?? "")
                         return (
-                            <text
-                                textAnchor="end"
-                                style={{ fontFamily: "var(--font-serif-text, Georgia, serif)" }}
-                            >
+                            <text textAnchor="end" style={{ fontFamily: "var(--font-serif-text, Georgia, serif)" }}>
                                 <tspan x={x} y={y} dy="-0.35em" fontSize={14}>
                                     {formattedValue}
                                 </tspan>

@@ -6,10 +6,7 @@ class MockResizeObserver {
     }
 
     observe(el: Element) {
-        this.callback(
-            [{ contentRect: { width: 800 } } as ResizeObserverEntry],
-            this
-        )
+        this.callback([{ contentRect: { width: 800 } } as ResizeObserverEntry], this)
     }
 
     unobserve() {}

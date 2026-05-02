@@ -2,13 +2,8 @@ import { PatriarchTimeline, Timeline } from "lib/src/types"
 import { patriarchColor } from "./constants"
 
 const PADDING = 0.1
-export const getMarriageDomain = (
-    patriarch: PatriarchTimeline,
-    timelines: Timeline[]
-): [Date, Date] | null => {
-    const starts = patriarch.marriages
-        .map(m => m.start?.getTime())
-        .filter((t): t is number => t !== undefined)
+export const getMarriageDomain = (patriarch: PatriarchTimeline, timelines: Timeline[]): [Date, Date] | null => {
+    const starts = patriarch.marriages.map(m => m.start?.getTime()).filter((t): t is number => t !== undefined)
     if (!starts.length) return null
 
     const ends = patriarch.marriages.map(m => (m.end ?? patriarch.death).getTime())

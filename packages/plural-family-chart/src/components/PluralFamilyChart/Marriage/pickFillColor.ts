@@ -8,7 +8,10 @@ const patriarchColorScale = scaleLinear({
     range: [patriarchColorLight, patriarchColorDark],
 }).interpolate(interpolateHcl)
 
-export function pickFillColor(kind: MarriageKind, colorIndex: number): { fill: string; dasharray?: string; textColor: string } {
+export function pickFillColor(
+    kind: MarriageKind,
+    colorIndex: number
+): { fill: string; dasharray?: string; textColor: string } {
     switch (kind) {
         case MarriageKind.Patriarch:
             return {

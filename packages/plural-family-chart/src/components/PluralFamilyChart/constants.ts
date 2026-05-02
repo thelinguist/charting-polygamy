@@ -6,7 +6,7 @@ export enum MarriageKind {
 
 export const patriarchColor = "#3b4a6b"
 export const patriarchColorLight = "#6375a0" // lighter than base — 1 concurrent wife
-export const patriarchColorDark = "#0d1626"  // near-black navy — 4+ concurrent wives
+export const patriarchColorDark = "#0d1626" // near-black navy — 4+ concurrent wives
 export const strokeColor = "rgba(31,27,20,0.6)"
 export const strokeWidth = 1
 

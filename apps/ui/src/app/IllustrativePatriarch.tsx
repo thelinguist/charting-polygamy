@@ -71,7 +71,12 @@ export function IllustrativePatriarch() {
                     </p>
                 </div>
                 <div ref={containerRef}>
-                    <PluralFamilyChart width={width} patriarchTimeline={patriarchTimeline} timelines={timelines} showBrush={!isMobile} />
+                    <PluralFamilyChart
+                        width={width}
+                        patriarchTimeline={patriarchTimeline}
+                        timelines={timelines}
+                        showBrush={!isMobile}
+                    />
                 </div>
             </div>
         </section>
