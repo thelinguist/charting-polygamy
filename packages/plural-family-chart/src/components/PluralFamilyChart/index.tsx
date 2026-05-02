@@ -4,7 +4,7 @@ import { AxisLeft } from "@visx/axis"
 import { barHeight } from "./constants"
 import { scaleOrdinal, scaleUtc } from "@visx/scale"
 import { getMinMax } from "../../utils"
-import { checkPersonDetails, getChartEndDate, getChartStartDate } from "./utils"
+import { checkPersonDetails, getChartEndDate, getChartStartDate, getMarriageDomain } from "./utils"
 import React, { useState } from "react"
 import { Patriarch } from "./Patriarch"
 import { Spouse } from "./Spouse"
@@ -41,7 +41,9 @@ export const PluralFamilyChart: React.FC<Props> = ({
         setHoveredIndex: setHoveredSpouseIndex,
         resetPin: resetSpousePin,
     } = useMarriageExpansion()
-    const [brushDomain, setBrushDomain] = useState<[Date, Date] | null>(null)
+    const [brushDomain, setBrushDomain] = useState<[Date, Date] | null>(
+        () => getMarriageDomain(patriarchTimeline, timelines)
+    )
 
     const dataErrors = checkPersonDetails(patriarchTimeline)
     if (dataErrors) return <BadData />
@@ -185,6 +187,7 @@ export const PluralFamilyChart: React.FC<Props> = ({
                     height={overviewHeight}
                     patriarchTimeline={patriarchTimeline}
                     timelines={timelines}
+                    initialDomain={brushDomain}
                     onChange={setBrushDomain}
                 />
             </Group>
