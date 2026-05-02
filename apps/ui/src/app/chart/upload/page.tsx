@@ -85,7 +85,7 @@ export default function UploadPage() {
             <section className={styles.headerSection}>
                 <div className="shell">
                     <div className={`flex items-baseline gap-16 ${styles.eyebrowRow}`}>
-                        <span className="eyebrow">№ 003 — The Tool</span>
+                        <span className="eyebrow">№ 004 — The Tool</span>
                         <hr className="rule" />
                     </div>
                     <h2 className={styles.heading}>Chart your own tree.</h2>
@@ -174,7 +174,11 @@ export default function UploadPage() {
                         <div className={styles.resultHeader}>
                             <div>
                                 <div className={`eyebrow ${styles.resultEyebrow}`}>Result</div>
-                                <h3>{stage === "parsing" ? "Parsing…" : "Chart"}</h3>
+                                {stage === "result" && Object.keys(chartData).length > 1 && (
+                                    <p className={styles.resultCount}>
+                                        {Object.keys(chartData).length} polygamous households detected.
+                                    </p>
+                                )}
                             </div>
                         </div>
 

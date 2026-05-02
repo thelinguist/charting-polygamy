@@ -71,6 +71,12 @@
     margin-bottom: 8px;
 }
 
+.resultCount {
+    color: var(--ink-mute);
+    font-size: 14px;
+    margin: 4px 0 0;
+}
+
 .scanBox {
     background: var(--bg-elev);
     border: 1px solid var(--rule-soft);
