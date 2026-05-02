@@ -4,7 +4,7 @@ import React from "react"
 import { Marriage } from "../Marriage"
 import { PersonTimeline } from "../PersonTimeline"
 import { PositionScale } from "@visx/shape/lib/types"
-import { useMarriageExpansion } from "../../../hooks/useMarriageExpansion.ts"
+import { useMarriageExpansion } from "../../../hooks/useMarriageExpansion"
 import { getExpandedXEnd } from "../utils/getExpandedXEnd"
 
 interface Props {

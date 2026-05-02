@@ -3,7 +3,7 @@ import { Area } from "@visx/shape"
 import { Group } from "@visx/group"
 import { barHeight, MarriageKind, strokeColor, strokeWidth } from "../constants"
 import { ClippedText } from "../ClippedText"
-import { pickFillColor } from "./pickFillColor.ts"
+import { pickFillColor } from "./pickFillColor"
 
 interface Props {
     kind: MarriageKind

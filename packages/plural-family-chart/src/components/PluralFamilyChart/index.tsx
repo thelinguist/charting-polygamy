@@ -12,7 +12,7 @@ import { Spouse } from "./Spouse"
 import { BadData } from "./BadData"
 import { TooSmall } from "./TooSmall"
 import { TimelineAxis } from "./TimelineAxis"
-import { useMarriageExpansion } from "../../hooks/useMarriageExpansion.ts"
+import { useMarriageExpansion } from "../../hooks/useMarriageExpansion"
 import { BrushOverview } from "./BrushOverview"
 
 interface Props {
