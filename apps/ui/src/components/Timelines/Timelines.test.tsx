@@ -1,8 +1,9 @@
-import { describe, expect, it } from "vitest"
+import { describe, expect, it, vi } from "vitest"
 import { render, screen } from "@testing-library/react"
 import { Timelines } from "./Timelines"
 import { example3WivesChartData } from "../../app/chart/upload/constants/sample"
 
+vi.mock('../../hooks/useIsMobile.ts', () => ({ useIsMobile: () => false }))
 describe("Timelines", () => {
     it("should render placeholder when no chartData", () => {
         render(<Timelines chartData={{}} />)

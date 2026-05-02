@@ -5,12 +5,14 @@ import { PluralFamilyChart } from "plural-family-chart"
 import { DecodeStatus, useDecodeData } from "../../hooks/useDecodeData"
 import { ChartErrorBoundary } from "../ChartErrorBoundary"
 import styles from "./EncodedChart.module.css"
+import { useIsMobile } from "../../hooks/useIsMobile"
 
 interface Props {
     encodedData: string
 }
 
 export function EncodedChart({ encodedData }: Props) {
+    const isMobile = useIsMobile()
     const { state } = useDecodeData(encodedData)
     const containerRef = useRef<HTMLDivElement>(null)
     const [width, setWidth] = useState<number | null>(null)
@@ -47,6 +49,7 @@ export function EncodedChart({ encodedData }: Props) {
                         width={width}
                         patriarchTimeline={state.data.patriarchTimeline}
                         timelines={state.data.timelines}
+                        showBrush={!isMobile}
                     />
                 </ChartErrorBoundary>
             )}

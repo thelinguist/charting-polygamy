@@ -5,13 +5,12 @@ export enum MarriageKind {
 }
 
 export const patriarchColor = "#3b4a6b"
-export const patriarchMarriedColor = "#2c3856"
+export const patriarchColorLight = "#6375a0" // lighter than base — 1 concurrent wife
+export const patriarchColorDark = "#0d1626"  // near-black navy — 4+ concurrent wives
 export const strokeColor = "rgba(31,27,20,0.6)"
 export const strokeWidth = 1
 
 export const spouseColor = "#b0a794"
-export const spouseMarriedColor = "#8c5a3a" // fallback / first wife
-export const otherMarriageColor = "transparent" // uses hatch pattern
 
 export const wifeColors = ["#8c5a3a", "#6b3f28", "#a37a4a", "#5d4427", "#946545", "#7a4a30"]
 

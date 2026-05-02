@@ -7,6 +7,7 @@ import styles from "./TimelineComponent.module.css"
 import { classNames } from "../../lib"
 import { encodePatriarchData } from "../../lib/shareUrl"
 import { ChartErrorBoundary } from "../ChartErrorBoundary"
+ import { useIsMobile } from "../../hooks/useIsMobile"
 
 interface Props {
     name: string
@@ -20,6 +21,7 @@ interface Props {
 export const TimelineComponent: React.FC<Props> = ({ name, patriarchTimeline, timelines, hideShare, chartWidth }) => {
     const containerRef = useRef<HTMLDivElement>(null)
     const [width, setWidth] = useState(chartWidth ?? 800)
+    const isMobile = useIsMobile()
     const [copied, setCopied] = useState(false)
 
     useEffect(() => {
@@ -50,7 +52,7 @@ export const TimelineComponent: React.FC<Props> = ({ name, patriarchTimeline, ti
             </div>
             <div ref={containerRef}>
                 <ChartErrorBoundary>
-                    <PluralFamilyChart width={width} patriarchTimeline={patriarchTimeline} timelines={timelines} />
+                    <PluralFamilyChart width={width} patriarchTimeline={patriarchTimeline} timelines={timelines} showBrush={!isMobile} />
                 </ChartErrorBoundary>
             </div>
         </div>

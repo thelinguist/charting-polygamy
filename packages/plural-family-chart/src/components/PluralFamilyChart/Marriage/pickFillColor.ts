@@ -1,16 +1,18 @@
 import { scaleLinear } from "@visx/scale"
-import { MarriageKind, patriarchColor, patriarchMarriedColor, wifeColors } from "../constants.ts"
+import { MarriageKind, patriarchColorLight, patriarchColorDark, wifeColors } from "../constants"
 import { interpolateHcl } from "@visx/vendor/d3-interpolate"
 
-const patriarchColorScale = scaleLinear({ domain: [0, 4], range: [patriarchColor, patriarchMarriedColor] }).interpolate(
-    interpolateHcl
-)
+// 1 concurrent wife → light, 4+ concurrent → very dark
+const patriarchColorScale = scaleLinear({
+    domain: [1, 4],
+    range: [patriarchColorLight, patriarchColorDark],
+}).interpolate(interpolateHcl)
 
 export function pickFillColor(kind: MarriageKind, colorIndex: number): { fill: string; dasharray?: string; textColor: string } {
     switch (kind) {
         case MarriageKind.Patriarch:
             return {
-                fill: patriarchColorScale(Math.min(colorIndex, 4)),
+                fill: patriarchColorScale(Math.min(Math.max(colorIndex, 1), 4)),
                 textColor: "#fff",
             }
         case MarriageKind.Spouse:

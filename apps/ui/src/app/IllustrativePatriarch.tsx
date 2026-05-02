@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { PluralFamilyChart } from "plural-family-chart"
 import type { PatriarchTimeline, Timeline } from "lib/src/types"
 import styles from "./page.module.css"
+import { useIsMobile } from "../hooks/useIsMobile"
 
 // this data is made up
 const patriarchTimeline: PatriarchTimeline = {
@@ -45,6 +46,7 @@ const timelines: Timeline[] = [
 ]
 
 export function IllustrativePatriarch() {
+    const isMobile = useIsMobile()
     const containerRef = useRef<HTMLDivElement>(null)
     const [width, setWidth] = useState(800)
 
@@ -69,7 +71,7 @@ export function IllustrativePatriarch() {
                     </p>
                 </div>
                 <div ref={containerRef}>
-                    <PluralFamilyChart width={width} patriarchTimeline={patriarchTimeline} timelines={timelines} />
+                    <PluralFamilyChart width={width} patriarchTimeline={patriarchTimeline} timelines={timelines} showBrush={!isMobile} />
                 </div>
             </div>
         </section>

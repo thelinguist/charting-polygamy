@@ -1,7 +1,10 @@
-import { patriarchMarriedColor, spouseColor, strokeColor, wifeColors } from "../constants"
+import { spouseColor, strokeColor, wifeColors, MarriageKind } from "../constants"
+import { getConcurrentCounts } from "../Patriarch/getConcurrentCounts"
+import { pickFillColor } from "../Marriage/pickFillColor"
 
 export const MiniChart = ({ people, xScale, rowHeight, barH, patriarchTimeline, timelines }) => {
     const patriarchDeathMs = patriarchTimeline.death.getTime()
+    const concurrentCounts = getConcurrentCounts(patriarchTimeline, timelines)
 
     return (
         <>
@@ -29,7 +32,8 @@ export const MiniChart = ({ people, xScale, rowHeight, barH, patriarchTimeline, 
                 const y = (rowHeight - barH) / 2
                 const x = xScale(m.start) as number
                 const w = Math.max(0, (xScale(new Date(endMs)) as number) - x)
-                return <rect key={i} x={x} y={y} width={w} height={barH} fill={patriarchMarriedColor} rx={1} />
+                const { fill } = pickFillColor(MarriageKind.Patriarch, concurrentCounts[i])
+                return <rect key={i} x={x} y={y} width={w} height={barH} fill={fill} rx={1} />
             })}
             {timelines.map((timeline, i) => {
                 const { start, end } = timeline.linkedMarriage

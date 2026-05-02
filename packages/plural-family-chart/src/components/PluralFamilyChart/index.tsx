@@ -21,6 +21,7 @@ interface Props {
     patriarchTimeline: PatriarchTimeline
     timelines: Timeline[]
     margin?: { top: number; right: number; bottom: number; left: number }
+    showBrush?: boolean
 }
 
 const defaultMargin = { top: 40, left: 125, right: 40, bottom: 100 }
@@ -32,6 +33,7 @@ export const PluralFamilyChart: React.FC<Props> = ({
     patriarchTimeline,
     timelines,
     margin = defaultMargin,
+    showBrush = true,
 }) => {
     // const useAnimatedComponents = usePrefersReducedMotion()
     const { expandedIndex, handleClick, setHoveredIndex, resetPin } = useMarriageExpansion()
@@ -63,7 +65,7 @@ export const PluralFamilyChart: React.FC<Props> = ({
     const mainHeight = Math.max(timelines.length * barHeight + margin.top + margin.bottom, minHeight)
     const overviewHeight = 50
     const overviewMargin = 12
-    const actualHeight = mainHeight + overviewMargin + overviewHeight
+    const actualHeight = mainHeight + (showBrush ? overviewMargin + overviewHeight : 0)
 
     const timeValues = [getChartStartDate(patriarchTimeline, timelines), getChartEndDate(patriarchTimeline, timelines)]
 
@@ -183,17 +185,19 @@ export const PluralFamilyChart: React.FC<Props> = ({
                     ))}
                 </Group>
             </Group>
-            <Group top={mainHeight + overviewMargin} left={marginLeft}>
-                <BrushOverview
-                    xScale={brushXScale}
-                    width={chartWidth}
-                    height={overviewHeight}
-                    patriarchTimeline={patriarchTimeline}
-                    timelines={timelines}
-                    initialDomain={brushDomain}
-                    onChange={setBrushDomain}
-                />
-            </Group>
+            {showBrush && (
+                <Group top={mainHeight + overviewMargin} left={marginLeft}>
+                    <BrushOverview
+                        xScale={brushXScale}
+                        width={chartWidth}
+                        height={overviewHeight}
+                        patriarchTimeline={patriarchTimeline}
+                        timelines={timelines}
+                        initialDomain={brushDomain}
+                        onChange={setBrushDomain}
+                    />
+                </Group>
+            )}
         </svg>
     )
 }
