@@ -1,4 +1,4 @@
-import { PatriarchData, timelinesToMermaid } from "lib"
+import { PatriarchData } from "lib"
 
 export const example3WivesChartData: Record<string, PatriarchData> = {
     Patriarch: {
@@ -43,5 +43,3 @@ export const example3WivesChartData: Record<string, PatriarchData> = {
         ],
     },
 }
-
-export const example3Wives = timelinesToMermaid(example3WivesChartData).Patriarch

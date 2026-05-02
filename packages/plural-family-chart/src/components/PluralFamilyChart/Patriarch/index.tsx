@@ -1,9 +1,7 @@
 import { PatriarchTimeline, Timeline } from "lib/src/types"
-import { barHeight, patriarchColor, patriarchMarriedColor } from "../constants"
+import { barHeight, MarriageKind } from "../constants"
 import React from "react"
 import { PositionScale } from "@visx/shape/lib/types"
-import { scaleLinear } from "@visx/scale"
-import { interpolateHcl } from "@visx/vendor/d3-interpolate"
 import { Marriage } from "../Marriage"
 import { PersonTimeline } from "../PersonTimeline"
 import { getExpandedXEnd } from "../utils/getExpandedXEnd"
@@ -34,12 +32,6 @@ export const Patriarch: React.FC<Props> = ({
     highlightedMarriageStart,
 }) => {
     const concurrentCounts = getConcurrentCounts(patriarchTimeline, timelines)
-
-    const maxConcurrent = Math.max(...concurrentCounts, 1)
-    const sizeColorScale = scaleLinear({
-        domain: [0, maxConcurrent],
-        range: [patriarchColor, patriarchMarriedColor],
-    }).interpolate(interpolateHcl)
 
     const getBounds = (marriage: PatriarchMarriage, xEndOverride?: number) => {
         const x0 = xScale(marriage.start!)
@@ -86,8 +78,9 @@ export const Patriarch: React.FC<Props> = ({
                     return (
                         <g key={i} opacity={dim ? 0.15 : 1} style={{ transition: "opacity 0.15s ease" }}>
                             <Marriage
+                                kind={MarriageKind.Patriarch}
+                                colorIndex={concurrentCounts[i]}
                                 bounds={getBounds(marriage)}
-                                fillColor={sizeColorScale(concurrentCounts[i])}
                                 text1={marriage.start!.getFullYear().toString()}
                                 text2={`${getMarriageAge(marriage, patriarchTimeline)} years old`}
                                 onClick={() => handleClick(i)}
@@ -100,12 +93,13 @@ export const Patriarch: React.FC<Props> = ({
                 {expandedIndex !== null && marriages[expandedIndex]?.start && (
                     <Marriage
                         key="overlay"
+                        kind={MarriageKind.Patriarch}
+                        colorIndex={concurrentCounts[expandedIndex]}
                         bounds={getBounds(marriages[expandedIndex], overlayXEnd ?? undefined)}
-                        fillColor={sizeColorScale(concurrentCounts[expandedIndex])}
                         text1={marriages[expandedIndex].start!.getFullYear().toString()}
                         text2={`${getMarriageAge(marriages[expandedIndex], patriarchTimeline)} years old`}
                         isExpanded
-                        fillOpacity={0.85}
+                        fillOpacity={0.9}
                         onClick={() => handleClick(expandedIndex)}
                         onMouseEnter={() => setHoveredIndex(expandedIndex)}
                         onMouseLeave={() => setHoveredIndex(null)}

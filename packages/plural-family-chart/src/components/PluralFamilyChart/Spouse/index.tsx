@@ -1,10 +1,10 @@
 import { PatriarchTimeline, Timeline } from "lib/src/types"
-import { barHeight, otherMarriageColor, spouseMarriedColor } from "../constants"
+import { barHeight, MarriageKind } from "../constants"
 import React from "react"
 import { Marriage } from "../Marriage"
 import { PersonTimeline } from "../PersonTimeline"
 import { PositionScale } from "@visx/shape/lib/types"
-import { useMarriageExpansion } from "../hooks/useMarriageExpansion"
+import { useMarriageExpansion } from "../../../hooks/useMarriageExpansion"
 import { getExpandedXEnd } from "../utils/getExpandedXEnd"
 
 interface Props {
@@ -13,6 +13,7 @@ interface Props {
     yScale: PositionScale
     xScale: (date: Date) => number
     dim?: boolean
+    colorIndex?: number
     onLinkedMarriageHover?: (active: boolean) => void
     onLinkedMarriageClick?: () => void
 }
@@ -23,6 +24,7 @@ export const Spouse: React.FC<Props> = ({
     xScale,
     yScale,
     dim,
+    colorIndex = 0,
     onLinkedMarriageHover,
     onLinkedMarriageClick,
 }) => {
@@ -72,13 +74,14 @@ export const Spouse: React.FC<Props> = ({
             const xStart = xScale(linkedStart)
             const xEnd = getExpandedXEnd(xStart, text1, text2, marriageBounds[1].x)
             return {
+                kind: MarriageKind.Spouse as const,
+                colorIndex,
                 bounds: [
                     { x: xStart, y: yStart },
                     { x: xEnd, y: yStart },
                     { x: xEnd, y: yEnd },
                     { x: xStart, y: yEnd },
                 ],
-                fillColor: spouseMarriedColor,
                 text1,
                 text2,
             }
@@ -92,17 +95,29 @@ export const Spouse: React.FC<Props> = ({
         const xStart = xScale(other.start)
         const xEnd = getExpandedXEnd(xStart, text1, text2, otherMarriageBounds[i][1].x)
         return {
+            kind: MarriageKind.Other as const,
+            colorIndex: i,
             bounds: [
                 { x: xStart, y: yStart },
                 { x: xEnd, y: yStart },
                 { x: xEnd, y: yEnd },
                 { x: xStart, y: yEnd },
             ],
-            fillColor: otherMarriageColor,
             text1,
             text2,
         }
-    }, [expandedIndex, timeline, xScale, yStart, yEnd, marriageAge, linkedStart, marriageBounds, otherMarriageBounds])
+    }, [
+        expandedIndex,
+        timeline,
+        xScale,
+        yStart,
+        yEnd,
+        marriageAge,
+        linkedStart,
+        marriageBounds,
+        otherMarriageBounds,
+        colorIndex,
+    ])
 
     return (
         <g opacity={dim ? 0.15 : 1} style={{ transition: "opacity 0.15s ease" }}>
@@ -116,8 +131,9 @@ export const Spouse: React.FC<Props> = ({
                 <>
                     {linkedStart && marriageBounds && (
                         <Marriage
+                            kind={MarriageKind.Spouse}
+                            colorIndex={colorIndex}
                             bounds={marriageBounds}
-                            fillColor={spouseMarriedColor}
                             text1={linkedStart.getFullYear().toString()}
                             text2={marriageAge}
                             onClick={() => {
@@ -137,8 +153,9 @@ export const Spouse: React.FC<Props> = ({
                     {otherMarriageBounds.map((bounds, i) => (
                         <Marriage
                             key={timeline.otherMarriages[i].spouse || i}
+                            kind={MarriageKind.Other}
+                            colorIndex={i}
                             bounds={bounds}
-                            fillColor={otherMarriageColor}
                             text1={timeline.otherMarriages[i].start.getFullYear().toString()}
                             text2={timeline.otherMarriages[i].spouse}
                             onClick={() => handleClick(i + 1)}
@@ -149,12 +166,13 @@ export const Spouse: React.FC<Props> = ({
                     {overlayProps && (
                         <Marriage
                             key="overlay"
+                            kind={overlayProps.kind}
+                            colorIndex={overlayProps.colorIndex}
                             bounds={overlayProps.bounds}
-                            fillColor={overlayProps.fillColor}
                             text1={overlayProps.text1}
                             text2={overlayProps.text2}
                             isExpanded
-                            fillOpacity={0.85}
+                            fillOpacity={0.9}
                             onClick={() => {
                                 handleClick(expandedIndex!)
                                 if (expandedIndex === 0) onLinkedMarriageClick?.()

@@ -27,9 +27,11 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     const { slug } = await params
     const { title, content } = await fetchPost(slug)
     return (
-        <article className={classNames(styles.container, "reader")}>
-            <title>{title}</title>
-            <PostBody content={content} />
-        </article>
+        <div className="shell">
+            <article className={classNames(styles.container, "reader")}>
+                <title>{title}</title>
+                <PostBody content={content} />
+            </article>
+        </div>
     )
 }

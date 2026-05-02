@@ -5,11 +5,11 @@ import Link from "next/link"
 import { getTimelines, PatriarchData } from "lib"
 import { FileTypes, Statistics } from "lib/src/types"
 import { parseFile, classNames } from "../../../../lib"
-import styles from "./TimelineRendering.module.css"
+import styles from "./TimelinesViewer.module.css"
 import { example3WivesChartData } from "../constants/sample"
 import { UploadButton } from "../../../../components/UploadButton"
-import { Timelines } from "./Timelines"
-import { ManualEntryForm } from "./ManualEntryForm"
+import { Timelines } from "../../../../components/Timelines/Timelines"
+import { ManualEntryForm } from "./ManualEntryForm/ManualEntryForm"
 
 const contactHref = `mailto:${"chartingpolygamy"}@${"noctiluma.com"}`
 

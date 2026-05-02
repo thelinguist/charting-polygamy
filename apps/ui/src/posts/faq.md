@@ -16,8 +16,8 @@ household with multiple mothers/wives and how the shape of that family progresse
 
 ## where to source my family tree?
 
-This is a tricky question. I would recommend familySearch because members of the LDS Church have been diligent at
-documenting these plural families. However, you cannot export your tree for this tool to read. The workaround is to
+I recommend familySearch because members of the LDS Church have been diligent at documenting these plural families.
+However, you cannot export your tree for this tool to read. The workaround is to
 export it to ancestry.com and then download the tree as a gedcom file. Note that you will only get the first 4
 generations into ancestry. So you may need to review some of their hints.
 
@@ -32,7 +32,7 @@ practice. So to put it simply, many Mormon families had one husband and multiple
 
 ## Are you against polygamy?
 
-This is hard to answer because, while I'm only familiar with polygamy during the Mormon movement, [it exists all over
+While I'm only familiar with polygamy during the Mormon movement, [it exists all over
 the world](https://www.pewresearch.org/short-reads/2020/12/07/polygamy-is-rare-around-the-world-and-mostly-confined-to-a-few-regions/).
 I do not practice it or know anyone personally who does. I am just seeking to understand my family history around it and
 offer the opportunity to others. Women are equal to men, and I condemn ideologies and practices to the contrary.
@@ -50,7 +50,7 @@ between husbands, wives, and step-families.
 
 ## Have you found anything noteworthy using these timelines?
 
-- Most polygamous men had 3 wives.
+- Most polygamous men had at least 3 wives.
 - Of my male Mormon ancestors who were eligible to practice polygamy, 40% did practice it.
 - Not all women stayed with their polygamous husband until their deaths. This has led me to journals and family
   stories about how this practice challenged the women who participated. This has been a very fascinating aspect to

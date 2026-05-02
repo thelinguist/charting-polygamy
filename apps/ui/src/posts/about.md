@@ -2,7 +2,7 @@
 title: "about me"
 ---
 
-# Me
+# My Inspiration
 
 I am a Utah "native," with pioneer ancestors 6 generations back in almost all my lines. Some ancestors have had books
 published about their lives, for better and for worse. Of course, these topics get controversial very quickly, but for

@@ -1,10 +1,4 @@
-import {
-    barHeight,
-    patriarchColor,
-    spouseColor,
-    strokeColor,
-    strokeWidth,
-} from "../constants"
+import { barHeight, strokeColor, strokeWidth } from "../constants"
 import React from "react"
 import { PositionScale } from "@visx/shape/lib/types"
 import { HoverContextProvider } from "../../../hooks/HoverContextProvider"
@@ -31,7 +25,6 @@ export const PersonTimeline: React.FC<Props> = ({ birth, death, name, isPatriarc
 
     const x0 = xScale(birth)
     const x1 = xScale(death)
-    const color = isPatriarch ? patriarchColor : spouseColor
 
     return (
         <HoverContextProvider>
@@ -43,7 +36,7 @@ export const PersonTimeline: React.FC<Props> = ({ birth, death, name, isPatriarc
                         y1={yMid}
                         x2={x1}
                         y2={yMid}
-                        stroke={color}
+                        stroke={strokeColor}
                         strokeWidth={isPatriarch ? whiskerStrokeWidth + 1 : whiskerStrokeWidth}
                     />
                     {/* birth cap */}

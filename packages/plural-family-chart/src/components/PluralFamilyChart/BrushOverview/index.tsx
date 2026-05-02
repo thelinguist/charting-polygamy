@@ -6,9 +6,9 @@ import { PatriarchTimeline, Timeline } from "lib/src/types"
 import { MiniChart } from "./MiniChart"
 
 const brushStyle = {
-    fill: "#7986cb",
-    fillOpacity: 0.2,
-    stroke: "#7986cb",
+    fill: "#3b4a6b",
+    fillOpacity: 0.15,
+    stroke: "#3b4a6b",
     strokeWidth: 1,
 }
 
@@ -18,14 +18,27 @@ interface Props {
     height: number
     patriarchTimeline: PatriarchTimeline
     timelines: Timeline[]
+    initialDomain?: [Date, Date] | null
     onChange: (domain: [Date, Date] | null) => void
 }
 
-export const BrushOverview: React.FC<Props> = ({ xScale, width, height, patriarchTimeline, timelines, onChange }) => {
+export const BrushOverview: React.FC<Props> = ({
+    xScale,
+    width,
+    height,
+    patriarchTimeline,
+    timelines,
+    initialDomain,
+    onChange,
+}) => {
     const people = [patriarchTimeline, ...timelines]
     const rowHeight = height / people.length
     const barH = Math.max(3, rowHeight - 4)
     const yScale = scaleLinear({ domain: [0, 1], range: [0, height] })
+
+    const initialBrushPosition = initialDomain
+        ? { start: { x: xScale(initialDomain[0]) }, end: { x: xScale(initialDomain[1]) } }
+        : { start: { x: 0 }, end: { x: width } }
 
     const handleChange = useCallback(
         (bounds: Bounds | null) => {
@@ -56,7 +69,7 @@ export const BrushOverview: React.FC<Props> = ({ xScale, width, height, patriarc
                 handleSize={8}
                 resizeTriggerAreas={["left", "right"]}
                 brushDirection="horizontal"
-                initialBrushPosition={{ start: { x: 0 }, end: { x: width } }}
+                initialBrushPosition={initialBrushPosition as never}
                 onChange={handleChange}
                 onClick={() => onChange(null)}
                 selectedBoxStyle={brushStyle}
@@ -66,7 +79,7 @@ export const BrushOverview: React.FC<Props> = ({ xScale, width, height, patriarc
                         y={(h - 20) / 2}
                         width={8}
                         height={20}
-                        fill="#7986cb"
+                        fill="#3b4a6b"
                         rx={3}
                         style={{ cursor: "ew-resize" }}
                     />
