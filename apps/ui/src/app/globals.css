@@ -220,11 +220,20 @@ button {
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s, box-shadow 0.1s;
 }
 .btn:hover {
   border-color: var(--ink);
   background: var(--bg-elev);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  transition-timing-function: ease-in;
+}
+.btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+  transition-duration: 0.05s;
+  transition-timing-function: ease-in;
 }
 .btn-primary {
   background: var(--ink);
@@ -235,6 +244,19 @@ button {
   background: #000;
   border-color: #000;
   color: var(--bg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+.btn-primary:active {
+  background: #000;
+  transform: translateY(0);
+  box-shadow: none;
+  transition-duration: 0.05s;
+}
+
+.btn:hover span {
+  transform: translateX(20%);
+  transition-duration: 0.1s;
+  transition-timing-function: ease-in;
 }
 
 /* Cards */

@@ -41,7 +41,7 @@ export default function Home() {
                     </p>
                     <div className={`flex gap-12 ${styles.heroCtas}`}>
                         <Link href="/chart/instructions" className="btn btn-primary">
-                            Get Started →
+                            Get Started <span>→</span>
                         </Link>
                         <Link href="/gallery" className="btn">
                             Browse the Gallery
@@ -119,7 +119,7 @@ export default function Home() {
                                 offshoot.
                             </p>
                             <Link href="/gallery" className="btn btn-primary">
-                                Open the Gallery →
+                                Open the Gallery <span>→</span>
                             </Link>
                         </div>
                         <div className={styles.prebaked}>

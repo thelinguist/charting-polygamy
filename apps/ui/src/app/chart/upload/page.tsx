@@ -90,8 +90,8 @@ export default function UploadPage() {
                     </div>
                     <h2 className={styles.heading}>Chart your own tree.</h2>
                     <p className={`lede ${styles.lede}`}>
-                        Drop in a GEDCOM file, paste a CSV, or build a family by hand. The tool
-                        detects men with overlapping marriages and draws each as a stacked timeline.
+                        Drop in a GEDCOM file, paste a CSV, or build a family by hand. The tool detects men with
+                        overlapping marriages and draws each as a stacked timeline.
                     </p>
                 </div>
             </section>
@@ -119,7 +119,7 @@ export default function UploadPage() {
                                 style={{ alignSelf: "flex-start" }}
                                 onClick={() => fileInputRef.current?.click()}
                             >
-                                Choose file →
+                                Choose file <span>→</span>
                             </button>
                         </div>
 
@@ -144,13 +144,10 @@ export default function UploadPage() {
                             <div className={styles.optionMarker}>option 03</div>
                             <h4 className={styles.optionTitle}>Try the demo</h4>
                             <p className={styles.optionDesc}>
-                                Load a sample three-wife household to see what a chart looks like before using your own data.
+                                Load a sample three-wife household to see what a chart looks like before using your own
+                                data.
                             </p>
-                            <button
-                                className="btn"
-                                style={{ alignSelf: "flex-start" }}
-                                onClick={runDemo}
-                            >
+                            <button className="btn" style={{ alignSelf: "flex-start" }} onClick={runDemo}>
                                 Load demo →
                             </button>
                         </div>

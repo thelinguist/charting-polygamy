@@ -37,7 +37,7 @@ export function SharedChart({ encoded, width }: Props) {
     }
 
     return (
-        <div>
+        <div className="shell">
             <TimelineComponent
                 name={state.name}
                 patriarchTimeline={state.data.patriarchTimeline}
@@ -48,10 +48,12 @@ export function SharedChart({ encoded, width }: Props) {
             <div className={classNames(styles.chart, styles.cta)}>
                 <p>This chart was generated with Charting Polygamy.</p>
                 <div>
-                    <Link href="/chart/upload">Upload your own family tree →</Link>
-                </div>
-                <div>
-                    <Link href="/chart/upload">Try the demo →</Link>
+                    <Link href="/chart/upload" className="btn">
+                        Upload your own family tree <span>→</span>
+                    </Link>
+                    <Link href="/chart/upload" className="btn">
+                        Try the demo <span>→</span>
+                    </Link>
                 </div>
             </div>
         </div>
