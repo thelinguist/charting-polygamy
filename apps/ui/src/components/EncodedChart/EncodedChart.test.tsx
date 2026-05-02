@@ -4,6 +4,8 @@ import { EncodedChart } from "./EncodedChart"
 import * as shareUrl from "../../lib/shareUrl"
 import { PatriarchData } from "lib"
 
+vi.mock("../../hooks/useIsMobile.ts", () => ({ useIsMobile: () => false }))
+
 vi.mock("plural-family-chart", () => ({
     PluralFamilyChart: ({ patriarchTimeline }: { patriarchTimeline: { name: string } }) => (
         <figure aria-label={patriarchTimeline.name}>{patriarchTimeline.name}</figure>
