@@ -119,7 +119,10 @@ export const PluralFamilyChart: React.FC<Props> = ({
                     tickComponent={({ x, y, formattedValue }) => {
                         const dates = personDates.get(formattedValue ?? "")
                         return (
-                            <text textAnchor="end" fontFamily="sans-serif">
+                            <text
+                                textAnchor="end"
+                                style={{ fontFamily: "var(--font-serif-text, Georgia, serif)" }}
+                            >
                                 <tspan x={x} y={y} dy="-0.35em" fontSize={14}>
                                     {formattedValue}
                                 </tspan>
