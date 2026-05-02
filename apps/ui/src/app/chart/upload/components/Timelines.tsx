@@ -5,8 +5,7 @@ import styles from "./TimelineRendering.module.css"
 import React from "react"
 import { PatriarchData } from "lib"
 import { Statistics } from "lib/src/types"
-import { Timeline } from "./Timeline"
-import { Timeline2 } from "./Timeline2"
+import { TimelineComponent } from "./TimelineComponent"
 
 interface Props {
     chartData: Record<string, PatriarchData>
@@ -19,7 +18,7 @@ export const Timelines = ({ chartData, stats }: Props) => {
                 <div className={classNames(styles.chart, styles.placeholder)}>graphs will go here</div>
             )}
             {Object.keys(chartData).map(name => (
-                <Timeline2
+                <TimelineComponent
                     key={name}
                     name={name}
                     patriarchTimeline={chartData[name].patriarchTimeline}

@@ -1,15 +1,10 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { useSearchParams } from "next/navigation"
 import Link from "next/link"
-import { PatriarchData } from "lib"
-import { decodePatriarchData } from "../../../lib/shareUrl"
-import { Timeline2 } from "../upload/components/Timeline2"
+import { TimelineComponent } from "../upload/components/TimelineComponent"
 import styles from "../upload/components/TimelineRendering.module.css"
 import { classNames } from "../../../lib"
-
-type DecodeState = { status: "loading" } | { status: "error" } | { status: "ready"; name: string; data: PatriarchData }
+import { DecodeStatus, useDecodeData } from "../../../hooks/useDecodeData"
 
 function ErrorState({ message }: { message: string }) {
     return (
@@ -28,19 +23,12 @@ interface Props {
 }
 
 export function SharedChart({ encoded, width }: Props) {
-    const [state, setState] = useState<DecodeState>(encoded ? { status: "loading" } : { status: "error" })
+    const { state } = useDecodeData(encoded)
 
-    useEffect(() => {
-        if (!encoded) return
-        decodePatriarchData(encoded)
-            .then(({ name, data }) => setState({ status: "ready", name, data }))
-            .catch(() => setState({ status: "error" }))
-    }, [encoded])
-
-    if (state.status === "loading") {
+    if (state.status === DecodeStatus.LOADING) {
         return <div className={classNames(styles.chart, styles.placeholder)}>Loading chart...</div>
     }
-    if (state.status === "error") {
+    if (state.status === DecodeStatus.ERROR) {
         return (
             <ErrorState
                 message={encoded ? "This chart link is invalid or corrupted." : "No chart data found in this link."}
@@ -50,7 +38,7 @@ export function SharedChart({ encoded, width }: Props) {
 
     return (
         <div>
-            <Timeline2
+            <TimelineComponent
                 name={state.name}
                 patriarchTimeline={state.data.patriarchTimeline}
                 timelines={state.data.timelines}

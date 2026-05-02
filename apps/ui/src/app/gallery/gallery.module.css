@@ -114,14 +114,6 @@
     margin-top: 0;
 }
 
-.rowBodyInner {
-    display: grid;
-    grid-template-columns: 1fr 280px;
-    gap: 24px;
-    align-items: start;
-    padding-top: 24px;
-}
-
 .chartPlaceholder {
     background: var(--bg);
     border: 1px solid var(--rule-soft);

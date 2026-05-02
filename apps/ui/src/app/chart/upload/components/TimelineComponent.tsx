@@ -2,11 +2,11 @@
 
 import React, { useEffect, useRef, useState } from "react"
 import { PluralFamilyChart } from "plural-family-chart"
-import { PatriarchTimeline, Timeline } from "lib/src/types"
+import { PatriarchTimeline, type Timeline } from "lib/src/types"
 import styles from "./TimelineRendering.module.css"
 import { classNames } from "../../../../lib"
-import { Timeline as TimelineFallback } from "./Timeline"
 import { encodePatriarchData } from "../../../../lib/shareUrl"
+import { ChartErrorBoundary } from "../../../../components/ChartErrorBoundary"
 
 interface Props {
     name: string
@@ -17,35 +17,7 @@ interface Props {
     chartWidth?: number
 }
 
-interface ErrorBoundaryState {
-    hasError: boolean
-}
-
-class Timeline2ErrorBoundary extends React.Component<Props, ErrorBoundaryState> {
-    constructor(props: Props) {
-        super(props)
-        this.state = { hasError: false }
-    }
-
-    static getDerivedStateFromError(): ErrorBoundaryState {
-        return { hasError: true }
-    }
-
-    componentDidCatch(error: Error) {
-        console.error("Timeline2 error for", this.props.name, error)
-        console.log("patriarchTimeline", this.props.patriarchTimeline)
-        console.log("timelines", this.props.timelines)
-    }
-
-    render() {
-        if (this.state.hasError && this.props.timelineFallback) {
-            return <TimelineFallback name={this.props.name} timeline={this.props.timelineFallback} />
-        }
-        return <Timeline2Inner {...this.props} />
-    }
-}
-
-const Timeline2Inner: React.FC<Props> = ({ name, patriarchTimeline, timelines, hideShare, chartWidth }) => {
+export const TimelineComponent: React.FC<Props> = ({ name, patriarchTimeline, timelines, hideShare, chartWidth }) => {
     const containerRef = useRef<HTMLDivElement>(null)
     const [width, setWidth] = useState(chartWidth ?? 800)
     const [copied, setCopied] = useState(false)
@@ -77,10 +49,10 @@ const Timeline2Inner: React.FC<Props> = ({ name, patriarchTimeline, timelines, h
                 )}
             </div>
             <div ref={containerRef}>
-                <PluralFamilyChart width={width} patriarchTimeline={patriarchTimeline} timelines={timelines} />
+                <ChartErrorBoundary>
+                    <PluralFamilyChart width={width} patriarchTimeline={patriarchTimeline} timelines={timelines} />
+                </ChartErrorBoundary>
             </div>
         </div>
     )
 }
-
-export const Timeline2 = Timeline2ErrorBoundary
