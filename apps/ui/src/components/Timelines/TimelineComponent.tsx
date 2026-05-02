@@ -44,7 +44,7 @@ export const TimelineComponent: React.FC<Props> = ({ name, patriarchTimeline, ti
                 <h2>{name}</h2>
                 {!hideShare && (
                     <div className={styles.actions}>
-                        <button onClick={handleShare}>{copied ? "Copied!" : "Share This Graph"}</button>
+                        <button className="btn btn-primary" onClick={handleShare}>{copied ? "Copied!" : "Share This Graph"}</button>
                     </div>
                 )}
             </div>

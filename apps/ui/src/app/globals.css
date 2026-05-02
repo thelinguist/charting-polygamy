@@ -144,6 +144,10 @@ button {
   border: 0;
 }
 
+.right-float {
+  float: right;
+}
+
 /* Nav */
 .nav {
   display: flex;

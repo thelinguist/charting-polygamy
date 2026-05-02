@@ -43,6 +43,17 @@ export function GalleryRow({ profile, index }: Props) {
                     ) : (
                         <div className={styles.chartPlaceholder}>Chart coming soon</div>
                     )}
+                    {profile.source && (
+                        <p className="footnote right-float">
+                            {typeof profile.source === "object" ? (
+                                <>
+                                    source: <a href={profile.source.href}>{profile.source.text}</a>
+                                </>
+                            ) : (
+                                profile.source
+                            )}
+                        </p>
+                    )}
                 </div>
             )}
         </div>
