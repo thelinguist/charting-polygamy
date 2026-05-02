@@ -1,8 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { TimelineComponent } from "../upload/components/TimelineComponent"
-import styles from "../upload/components/TimelineRendering.module.css"
+import { TimelineComponent } from "../../../components/Timelines/TimelineComponent"
+import styles from "../upload/components/TimelinesViewer.module.css"
 import { classNames } from "../../../lib"
 import { DecodeStatus, useDecodeData } from "../../../hooks/useDecodeData"
 

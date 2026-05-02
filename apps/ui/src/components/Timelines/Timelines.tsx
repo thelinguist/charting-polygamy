@@ -1,7 +1,7 @@
 "use client"
 
-import { classNames } from "../../../../lib"
-import styles from "./TimelineRendering.module.css"
+import { classNames } from "../../lib"
+import styles from "../../app/chart/upload/components/TimelinesViewer.module.css"
 import React from "react"
 import { PatriarchData } from "lib"
 import { Statistics } from "lib/src/types"

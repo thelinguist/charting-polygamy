@@ -3,10 +3,10 @@
 import React, { useEffect, useRef, useState } from "react"
 import { PluralFamilyChart } from "plural-family-chart"
 import { PatriarchTimeline, type Timeline } from "lib/src/types"
-import styles from "./TimelineRendering.module.css"
-import { classNames } from "../../../../lib"
-import { encodePatriarchData } from "../../../../lib/shareUrl"
-import { ChartErrorBoundary } from "../../../../components/ChartErrorBoundary"
+import styles from "./TimelineComponent.module.css"
+import { classNames } from "../../lib"
+import { encodePatriarchData } from "../../lib/shareUrl"
+import { ChartErrorBoundary } from "../ChartErrorBoundary"
 
 interface Props {
     name: string

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest"
 import { render, screen } from "@testing-library/react"
 import { Timelines } from "./Timelines"
-import { example3WivesChartData } from "../constants/sample"
+import { example3WivesChartData } from "../../app/chart/upload/constants/sample"
 
 describe("Timelines", () => {
     it("should render placeholder when no chartData", () => {
