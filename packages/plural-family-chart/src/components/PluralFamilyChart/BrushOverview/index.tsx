@@ -69,7 +69,7 @@ export const BrushOverview: React.FC<Props> = ({
                 handleSize={8}
                 resizeTriggerAreas={["left", "right"]}
                 brushDirection="horizontal"
-                initialBrushPosition={initialBrushPosition}
+                initialBrushPosition={initialBrushPosition as never}
                 onChange={handleChange}
                 onClick={() => onChange(null)}
                 selectedBoxStyle={brushStyle}
