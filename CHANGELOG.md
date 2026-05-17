@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/thelinguist/charting-polygamy/compare/v1.15.0...v1.16.0) (2026-05-17)
+
+
+### Features
+
+* shade polygamy era and mark historical events ([#22](https://github.com/thelinguist/charting-polygamy/issues/22)) ([3ec7d31](https://github.com/thelinguist/charting-polygamy/commit/3ec7d317f5d13bf44357e09ec5570efe186c0771))
+
 # [1.15.0](https://github.com/thelinguist/charting-polygamy/compare/v1.14.0...v1.15.0) (2026-05-17)
 
 ### Features
