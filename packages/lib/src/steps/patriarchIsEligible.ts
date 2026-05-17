@@ -1,7 +1,7 @@
 import { PersonDetails } from "../types"
 import assumptions from "../assumptions"
 
-const latestBirthYear = assumptions.yearLastPracticed - assumptions.ageOfEligibility
+const latestBirthYear = assumptions.polygamyEnd.getFullYear() - assumptions.ageOfEligibility
 
 /**
  * determine if a closer look into the family should be made based on if the patriarch was eligible when polygamy was openly practiced
@@ -12,7 +12,8 @@ export const patriarchIsEligible = (patriarch: PersonDetails): boolean => {
         return false
     }
     if (patriarch.birth?.date && patriarch.death?.date) {
-        const diedBeforePolygamyStarted = patriarch.death.date.getUTCFullYear() < assumptions.yearFirstPracticed
+        const diedBeforePolygamyStarted =
+            patriarch.death.date.getUTCFullYear() < assumptions.polygamyStart.getFullYear()
         const bornAfterPolygamyEnded = patriarch.birth.date.getUTCFullYear() >= latestBirthYear
         return !diedBeforePolygamyStarted && !bornAfterPolygamyEnded
     }

@@ -2,7 +2,7 @@
   "name": "lib",
   "version": "0.0.0",
   "private": true,
-  "main": "src/main.ts",
+  "main": "src/index.ts",
   "scripts": {
     "lint": "eslint .",
     "test": "TZ=UTC vitest",

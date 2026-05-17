@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 // import ParentSize from "@visx/responsive/lib/components/ParentSize"
 
 import { PluralFamilyChart } from "."
+import { DEFAULT_HISTORICAL_EVENTS } from "./constants"
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
     title: "PluralFamilyChart",
@@ -19,6 +20,8 @@ const meta = {
         width: { control: "number" },
         minHeight: { control: "number" },
         patriarchTimeline: { control: "object" },
+        showEraShading: { control: "boolean" },
+        events: { control: "object" },
     },
     // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
     // args: { onClick: fn() },
@@ -446,5 +449,45 @@ export const ParleyPratt: Story = {
     args: {
         patriarchTimeline: historicalStory.rootTimeline,
         timelines: historicalStory.wives,
+    },
+}
+
+export const WithHistoricalAnnotations: Story = {
+    args: {
+        showEraShading: true,
+        events: DEFAULT_HISTORICAL_EVENTS,
+        patriarchTimeline: {
+            name: "Samuel West",
+            birth: new Date("1820-03-15"),
+            death: new Date("1895-07-04"),
+            marriages: [
+                { start: new Date("1843-04-10") },
+                { start: new Date("1854-06-01") },
+                { start: new Date("1862-11-20") },
+            ],
+        },
+        timelines: [
+            {
+                name: "Mary Ann Collins",
+                birth: new Date("1824-08-22"),
+                death: new Date("1891-03-14"),
+                linkedMarriage: { start: new Date("1843-04-10") },
+                otherMarriages: [],
+            },
+            {
+                name: "Eliza Jane Holt",
+                birth: new Date("1836-01-11"),
+                death: new Date("1900-05-07"),
+                linkedMarriage: { start: new Date("1854-06-01") },
+                otherMarriages: [],
+            },
+            {
+                name: "Ruth Caldwell",
+                birth: new Date("1840-09-30"),
+                death: new Date("1910-12-01"),
+                linkedMarriage: { start: new Date("1862-11-20") },
+                otherMarriages: [],
+            },
+        ],
     },
 }

@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest"
 import { computeChartStats } from "./computeChartStats"
 import type { PatriarchData } from "lib"
 import type { Timeline } from "lib/src/types"
+import { assumptions } from "lib/src"
 
 // Minimal valid Timeline factory
 function makeTimeline(marriageStart: Date, marriageEnd: Date): Timeline {
@@ -149,11 +150,10 @@ describe("computeChartStats", () => {
     })
 
     it("does not count a marriage on exactly the ban date as post-ban", () => {
-        const banDate = new Date("1890-09-24")
         const chartData = {
             "John Smith": makePatriarch([
                 makeTimeline(PRE_BAN.start, PRE_BAN.end),
-                makeTimeline(banDate, new Date("1910-01-01")),
+                makeTimeline(assumptions.polygamyEnd, new Date("1910-01-01")),
             ]),
         }
         expect(computeChartStats(chartData).afterBanCount).toBe(0)
