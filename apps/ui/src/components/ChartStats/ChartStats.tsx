@@ -31,12 +31,17 @@ export function ChartStats({ stats }: Props) {
             <div className={`eyebrow ${styles.eyebrow}`}>Statistical summary</div>
             <div className={stats.practicingPercent ? styles.grid : styles.smallGrid}>
                 <StatTile value={stats.polygamistCount} label="men who practiced polygamy" />
-                {stats.practicingPercent ? (
+                {stats.practicingPercent !== undefined && (
                     <StatTile
                         value={`${(stats.practicingPercent * 100).toFixed(0)}%`}
-                        label="percentage of elligible men who practiced polygamy"
+                        label={stats.adjustedPracticingPercent !== undefined ? "of eligible men in this tree practiced polygamy †" : "of eligible men in this tree practiced polygamy"}
+                        sub={
+                            stats.adjustedPracticingPercent !== undefined
+                                ? `≈ ${(stats.adjustedPracticingPercent * 100).toFixed(0)}% est. (ascent-adjusted)`
+                                : undefined
+                        }
                     />
-                ) : null}
+                )}
                 <StatTile value={stats.averageWives.toFixed(1)} label="average wives per patriarch" />
                 <StatTile value={stats.maxWives} label="most wives recorded" sub={stats.maxWivesName} />
                 <StatTile
@@ -45,6 +50,15 @@ export function ChartStats({ stats }: Props) {
                     compound={`${stats.afterBanPercent}%`}
                 />
             </div>
+            {stats.adjustedPracticingPercent !== undefined && (
+                <p className={styles.footnote}>
+                    † The observed rate overstates the historical population rate due to genealogical ascent bias: men
+                    with more wives had proportionally more descendants, and thus appear more frequently in any
+                    descendant-compiled tree. The adjusted figure applies inverse probability weighting using average
+                    wife count as a proxy for reproductive advantage. Historical scholarship estimates 20–30% of
+                    eligible Latter-day Saint men practiced plural marriage during 1852–1890.
+                </p>
+            )}
         </div>
     )
 }

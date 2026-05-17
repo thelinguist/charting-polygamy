@@ -64,6 +64,17 @@
     margin-top: 4px;
 }
 
+.footnote {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule-soft);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-dim);
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+}
+
 @media (max-width: 600px) {
     .block {
         padding: 24px 20px;
