@@ -1,0 +1,78 @@
+.banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 20px 24px;
+    background: var(--bg-elev);
+    border: 1px solid var(--rule-soft);
+    border-left: 3px solid var(--c-patriarch);
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+}
+
+.source {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-dim);
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+.delete {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--c-overlap);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 3px;
+}
+
+.delete:hover {
+    text-decoration-color: var(--c-overlap);
+}
+
+.dismiss {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-dim);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+    text-decoration-color: var(--rule-soft);
+    text-underline-offset: 3px;
+}
+
+.dismiss:hover {
+    color: var(--ink-mute);
+    text-decoration-color: var(--ink-dim);
+}
+
+@media (max-width: 600px) {
+    .banner {
+        flex-direction: column;
+    }
+}

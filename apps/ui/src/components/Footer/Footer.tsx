@@ -1,5 +1,7 @@
 import Link from "next/link"
 
+const buildVersion = process.env.NEXT_PUBLIC_BUILD_VERSION
+
 export function Footer() {
     return (
         <footer>
@@ -60,6 +62,12 @@ export function Footer() {
                         </a>
                         <span style={{ margin: "0 8px", opacity: 0.4 }}>·</span>
                         <span>AGPL-3.0</span>
+                        {buildVersion ? (
+                            <>
+                                <span style={{ margin: "0 8px", opacity: 0.4 }}>·</span>
+                                <span>{buildVersion}</span>
+                            </>
+                        ) : null}
                     </div>
                 </div>
             </div>

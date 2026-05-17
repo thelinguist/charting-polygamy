@@ -1,16 +1,14 @@
 # [1.13.0](https://github.com/thelinguist/charting-polygamy/compare/v1.12.0...v1.13.0) (2026-05-02)
 
-
 ### Features
 
-* facelift, better UX, license, claude ([#17](https://github.com/thelinguist/charting-polygamy/issues/17)) ([72fa38a](https://github.com/thelinguist/charting-polygamy/commit/72fa38a48455602c2d86723fab184239fa1c637f))
+- facelift, better UX, license, claude ([#17](https://github.com/thelinguist/charting-polygamy/issues/17)) ([72fa38a](https://github.com/thelinguist/charting-polygamy/commit/72fa38a48455602c2d86723fab184239fa1c637f))
 
 # [1.12.0](https://github.com/thelinguist/charting-polygamy/compare/v1.11.0...v1.12.0) (2026-05-01)
 
-
 ### Features
 
-* x-axis improvements ([#16](https://github.com/thelinguist/charting-polygamy/issues/16)) ([35aaac6](https://github.com/thelinguist/charting-polygamy/commit/35aaac6c8e8e1a55798cfef29faa7d13fb8e45c5))
+- x-axis improvements ([#16](https://github.com/thelinguist/charting-polygamy/issues/16)) ([35aaac6](https://github.com/thelinguist/charting-polygamy/commit/35aaac6c8e8e1a55798cfef29faa7d13fb8e45c5))
 
 # [1.11.0](https://github.com/thelinguist/charting-polygamy/compare/v1.10.0...v1.11.0) (2026-04-29)
 

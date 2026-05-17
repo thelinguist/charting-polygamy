@@ -6,7 +6,10 @@ import { FileTypes } from "lib/src/types"
 import { parseFile } from "../../../lib"
 import { example3WivesChartData } from "./constants/sample"
 import { ManualEntryForm } from "./components/ManualEntryForm/ManualEntryForm"
+import { SavedDataBanner } from "./components/SavedDataBanner/SavedDataBanner"
 import { Timelines } from "../../../components/Timelines/Timelines"
+import { saveSession } from "../../../lib/chartStorage"
+import { useChartSession } from "../../../hooks/useChartSession"
 import styles from "./upload.module.css"
 
 const SCAN_LINES = [
@@ -47,8 +50,9 @@ const getFileFormat = (file: File): FileTypes => {
 type Stage = "idle" | "parsing" | "result"
 
 export default function UploadPage() {
-    const [chartData, setChartData] = useState<Record<string, PatriarchData>>({})
-    const [stage, setStage] = useState<Stage>("idle")
+    const { initialChartData, showBanner, savedSession, dismissBanner, deleteSession } = useChartSession()
+    const [chartData, setChartData] = useState<Record<string, PatriarchData>>(initialChartData ?? {})
+    const [stage, setStage] = useState<Stage>(initialChartData ? "result" : "idle")
     const [showManual, setShowManual] = useState(false)
     const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -60,6 +64,7 @@ export default function UploadPage() {
         const fileContents = await parseFile(file, console.info)
         const fileFormat = getFileFormat(file)
         const { chartData: newData } = getTimelines({ fileContents, fileFormat })
+        saveSession(newData, "file", file.name)
         setChartData(newData)
         setStage("result")
     }
@@ -74,6 +79,7 @@ export default function UploadPage() {
 
     const handleManual = (data: Record<string, PatriarchData> | null) => {
         if (data) {
+            saveSession(data, "manual")
             setChartData(data)
             setStage("result")
         }
@@ -95,6 +101,19 @@ export default function UploadPage() {
                     </p>
                 </div>
             </section>
+
+            {/* SAVED SESSION BANNER */}
+            {showBanner && savedSession && (
+                <section className="tight">
+                    <div className="shell">
+                        <SavedDataBanner
+                            session={savedSession}
+                            onDelete={deleteSession}
+                            onDismiss={dismissBanner}
+                        />
+                    </div>
+                </section>
+            )}
 
             {/* INPUT OPTIONS */}
             <section className="tight">
