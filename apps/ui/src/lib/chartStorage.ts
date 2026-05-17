@@ -57,6 +57,7 @@ export interface SavedSession {
     fileName?: string
     data: CompactPayload[]
     stats?: Statistics
+    notes?: Record<string, string>
 }
 
 // --- Compact helpers ---
@@ -187,6 +188,18 @@ export function loadSession(): SavedSession | null {
         return isValidSession(parsed) ? parsed : null
     } catch {
         return null
+    }
+}
+
+export function updateSessionNotes(notes: Record<string, string>): void {
+    try {
+        const raw = localStorage.getItem(STORAGE_KEY)
+        if (!raw) return
+        const session = JSON.parse(raw) as SavedSession
+        session.notes = notes
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(session))
+    } catch {
+        // silently swallow
     }
 }
 

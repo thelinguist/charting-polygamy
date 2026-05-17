@@ -16,9 +16,11 @@ interface Props {
     timelineFallback?: string
     hideShare?: boolean
     chartWidth?: number
+    note?: string
+    onNoteChange?: (note: string) => void
 }
 
-export const TimelineComponent: React.FC<Props> = ({ name, patriarchTimeline, timelines, hideShare, chartWidth }) => {
+export const TimelineComponent: React.FC<Props> = ({ name, patriarchTimeline, timelines, hideShare, chartWidth, note, onNoteChange }) => {
     const containerRef = useRef<HTMLDivElement>(null)
     const [width, setWidth] = useState(chartWidth ?? 800)
     const isMobile = useIsMobile()
@@ -62,6 +64,21 @@ export const TimelineComponent: React.FC<Props> = ({ name, patriarchTimeline, ti
                     />
                 </ChartErrorBoundary>
             </div>
+            {onNoteChange !== undefined && (
+                <div className={styles.notes}>
+                    <label className={styles.notesLabel} htmlFor={`notes-${name}`}>
+                        Research notes
+                    </label>
+                    <textarea
+                        id={`notes-${name}`}
+                        className={styles.notesArea}
+                        value={note ?? ""}
+                        onChange={e => onNoteChange(e.target.value)}
+                        placeholder="Jot down interesting discoveries, sources, or observations about this family…"
+                        rows={4}
+                    />
+                </div>
+            )}
         </div>
     )
 }

@@ -4,6 +4,7 @@ import { loadSession, clearSession, deserializeSession, type SavedSession } from
 
 export function useChartSession(): {
     initialChartData: Record<string, PatriarchData> | null
+    initialNotes: Record<string, string>
     showBanner: boolean
     savedSession: SavedSession | null
     dismissBanner: () => void
@@ -17,6 +18,7 @@ export function useChartSession(): {
 
     return {
         initialChartData,
+        initialNotes: savedSession?.notes ?? {},
         showBanner: savedSession !== null && !isDismissed,
         savedSession,
         dismissBanner: () => setIsDismissed(true),

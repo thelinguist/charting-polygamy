@@ -10,8 +10,10 @@ import { TimelineComponent } from "./TimelineComponent"
 interface Props {
     chartData: Record<string, PatriarchData>
     stats?: Statistics
+    notes?: Record<string, string>
+    onNoteChange?: (name: string, note: string) => void
 }
-export const Timelines = ({ chartData, stats }: Props) => {
+export const Timelines = ({ chartData, stats, notes, onNoteChange }: Props) => {
     return (
         <div>
             {!Object.keys(chartData).length && (
@@ -23,6 +25,8 @@ export const Timelines = ({ chartData, stats }: Props) => {
                     name={name}
                     patriarchTimeline={chartData[name].patriarchTimeline}
                     timelines={chartData[name].timelines}
+                    note={notes?.[name]}
+                    onNoteChange={onNoteChange ? note => onNoteChange(name, note) : undefined}
                 />
             ))}
             {stats ? (

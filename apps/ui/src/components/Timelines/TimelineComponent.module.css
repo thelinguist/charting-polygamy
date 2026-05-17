@@ -33,6 +33,46 @@
   min-height: 400px;
 }
 
+.notes {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule-soft);
+}
+
+.notesLabel {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-dim);
+  margin-bottom: 8px;
+}
+
+.notesArea {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--rule-soft);
+  padding: 12px 14px;
+  font-family: var(--serif-text);
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.5;
+  resize: vertical;
+  min-height: 100px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.notesArea:focus {
+  border-color: var(--ink-dim);
+}
+
+.notesArea::placeholder {
+  color: var(--ink-dim);
+  font-style: italic;
+}
+
 @media (max-width: 700px) {
   .chart {
     width: 90vw;
