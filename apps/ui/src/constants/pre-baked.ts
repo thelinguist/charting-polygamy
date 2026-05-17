@@ -66,7 +66,7 @@ export const PREBAKED: GalleryPolygamist[] = [
     },
     {
         name: "Wilford Woodruff",
-        notability: "LDS prophet who renounce polygamy–twice.",
+        notability: "LDS prophet who renounced polygamy–twice.",
         born: 1807,
         died: 1898,
         note: "Wilford Woodruff is best known for issuing the 1890 Manifesto, officially ending the Church's sanction of new plural marriages. He himself had nine wives over his lifetime. His declaration marked a major inflection point in Mormon history and its relationship with the United States government.",

@@ -1,5 +1,5 @@
 import type { PatriarchData } from "lib"
-import type { OtherMarriage, PatriarchTimeline, Timeline } from "lib/src/types"
+import type { OtherMarriage, PatriarchTimeline, Statistics, Timeline } from "lib/src/types"
 
 const STORAGE_KEY = "chart_session_v1"
 
@@ -56,6 +56,7 @@ export interface SavedSession {
     source: "file" | "manual"
     fileName?: string
     data: CompactPayload[]
+    stats?: Statistics
 }
 
 // --- Compact helpers ---
@@ -157,13 +158,19 @@ function isValidSession(raw: unknown): raw is SavedSession {
 
 // --- Public API ---
 
-export function saveSession(data: Record<string, PatriarchData>, source: "file" | "manual", fileName?: string): void {
+export function saveSession(
+    data: Record<string, PatriarchData>,
+    source: "file" | "manual",
+    fileName?: string,
+    stats?: Statistics,
+): void {
     try {
         const session: SavedSession = {
             version: 1,
             savedAt: new Date().toISOString(),
             source,
             ...(fileName ? { fileName } : {}),
+            ...(stats ? { stats } : {}),
             data: serializeChartData(data),
         }
         localStorage.setItem(STORAGE_KEY, JSON.stringify(session))
