@@ -74,7 +74,7 @@ export const TimelineComponent: React.FC<Props> = ({ name, patriarchTimeline, ti
                         className={styles.notesArea}
                         value={note ?? ""}
                         onChange={e => onNoteChange(e.target.value)}
-                        placeholder="Jot down interesting discoveries, sources, or observations about this family…"
+                        placeholder="Jot down interesting discoveries about this family, sources, or note for further research…"
                         rows={4}
                     />
                 </div>
