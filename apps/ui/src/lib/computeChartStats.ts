@@ -27,12 +27,24 @@ export function computeChartStats(chartData: Record<string, PatriarchData>, time
         }
     }
 
+    const averageWives = polygamistCount > 0 ? totalWives / polygamistCount : 0
+    const practicingPercent = timelinesStats
+        ? timelinesStats.polygamousFamilies / timelinesStats.eligiblePatriarchs
+        : undefined
+
+    // Ascent bias correction via inverse probability weighting:
+    // θ = p̂ / (k − p̂·(k−1))
+    // where p̂ = observed rate, k = avg wives (proxy for reproductive advantage)
+    const adjustedPracticingPercent =
+        practicingPercent !== undefined && averageWives > 1
+            ? practicingPercent / (averageWives - practicingPercent * (averageWives - 1))
+            : undefined
+
     return {
         polygamistCount,
-        practicingPercent: timelinesStats
-            ? timelinesStats.polygamousFamilies / timelinesStats.eligiblePatriarchs
-            : undefined,
-        averageWives: polygamistCount > 0 ? totalWives / polygamistCount : 0,
+        practicingPercent,
+        adjustedPracticingPercent,
+        averageWives,
         maxWives,
         maxWivesName,
         afterBanCount,

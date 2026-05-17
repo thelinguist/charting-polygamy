@@ -148,6 +148,64 @@ describe("computeChartStats", () => {
         expect(stats.averageWives).toBe(2)
     })
 
+    it("computes adjustedPracticingPercent when timelinesStats and averageWives > 1", () => {
+        const chartData = {
+            "John Smith": makePatriarch([
+                makeTimeline(PRE_BAN.start, PRE_BAN.end),
+                makeTimeline(PRE_BAN.start, PRE_BAN.end),
+                makeTimeline(PRE_BAN.start, PRE_BAN.end),
+                makeTimeline(PRE_BAN.start, PRE_BAN.end),
+            ]),
+        }
+        // averageWives = 4, p̂ = 0.56 → θ = 0.56 / (4 - 0.56 * 3) ≈ 0.267
+        const stats = computeChartStats(chartData, { polygamousFamilies: 56, eligiblePatriarchs: 100 })
+        expect(stats.practicingPercent).toBeCloseTo(0.56)
+        expect(stats.adjustedPracticingPercent).toBeDefined()
+        expect(stats.adjustedPracticingPercent!).toBeLessThan(stats.practicingPercent!)
+    })
+
+    it("adjustedPracticingPercent spot-check: p̂=0.56, k=3.5 → ≈0.267", () => {
+        // Build a dataset with averageWives = 3.5 (two patriarchs: 3 and 4 wives)
+        const chartData = {
+            "John Smith": makePatriarch([
+                makeTimeline(PRE_BAN.start, PRE_BAN.end),
+                makeTimeline(PRE_BAN.start, PRE_BAN.end),
+                makeTimeline(PRE_BAN.start, PRE_BAN.end),
+            ]),
+            "James Brown": makePatriarch([
+                makeTimeline(PRE_BAN.start, PRE_BAN.end),
+                makeTimeline(PRE_BAN.start, PRE_BAN.end),
+                makeTimeline(PRE_BAN.start, PRE_BAN.end),
+                makeTimeline(PRE_BAN.start, PRE_BAN.end),
+            ]),
+        }
+        // averageWives = 3.5, p̂ = 0.56
+        // θ = 0.56 / (3.5 - 0.56 * 2.5) = 0.56 / (3.5 - 1.4) = 0.56 / 2.1 ≈ 0.267
+        const stats = computeChartStats(chartData, { polygamousFamilies: 56, eligiblePatriarchs: 100 })
+        expect(stats.adjustedPracticingPercent).toBeCloseTo(0.267, 2)
+    })
+
+    it("returns undefined adjustedPracticingPercent when averageWives <= 1", () => {
+        const chartData = {
+            "John Smith": makePatriarch([makeTimeline(PRE_BAN.start, PRE_BAN.end)]),
+        }
+        const stats = computeChartStats(chartData, { polygamousFamilies: 56, eligiblePatriarchs: 100 })
+        expect(stats.adjustedPracticingPercent).toBeUndefined()
+    })
+
+    it("returns undefined adjustedPracticingPercent without timelinesStats", () => {
+        const chartData = {
+            "John Smith": makePatriarch([
+                makeTimeline(PRE_BAN.start, PRE_BAN.end),
+                makeTimeline(PRE_BAN.start, PRE_BAN.end),
+                makeTimeline(PRE_BAN.start, PRE_BAN.end),
+            ]),
+        }
+        const stats = computeChartStats(chartData)
+        expect(stats.practicingPercent).toBeUndefined()
+        expect(stats.adjustedPracticingPercent).toBeUndefined()
+    })
+
     it("does not count a marriage on exactly the ban date as post-ban", () => {
         const banDate = new Date("1890-09-24")
         const chartData = {
