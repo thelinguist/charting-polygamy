@@ -3,14 +3,15 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev",
-        "build": "next build",
-        "start": "next start",
+        "dev": "dotenvx run -- next dev",
+        "build": "dotenvx run -- next build",
+        "start": "dotenvx run -- next start",
         "mockProd": "next build && npx serve@latest out",
         "lint": "next lint",
         "test": "vitest"
     },
     "dependencies": {
+        "@dotenvx/dotenvx": "1.66.0",
         "gray-matter": "^4.0.3",
         "lib": "workspace:*",
         "lucide-react": "^1.11.0",
