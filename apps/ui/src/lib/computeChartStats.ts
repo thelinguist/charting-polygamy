@@ -1,8 +1,7 @@
 import type { PatriarchData } from "lib"
 import type { ChartStats } from "../components/ChartStats/types"
 import { Statistics } from "lib/src/types"
-
-const BAN_DATE = new Date("1890-09-24")
+import { assumptions } from "lib/src"
 
 export function computeChartStats(chartData: Record<string, PatriarchData>, timelinesStats?: Statistics): ChartStats {
     const entries = Object.entries(chartData)
@@ -21,7 +20,7 @@ export function computeChartStats(chartData: Record<string, PatriarchData>, time
             maxWivesName = name
         }
         for (const timeline of data.timelines) {
-            if (timeline.linkedMarriage.start > BAN_DATE) {
+            if (timeline.linkedMarriage.start > assumptions.polygamyEnd) {
                 afterBanCount++
             }
         }

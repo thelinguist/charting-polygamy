@@ -1,3 +1,5 @@
+import { assumptions } from "lib/src"
+
 export enum MarriageKind {
     Patriarch = "patriarch",
     Spouse = "spouse",
@@ -36,3 +38,16 @@ export const barHeight = 50
 export const labelMarginStart = 2
 export const charWidthRatio = 0.5
 export const labelPadding = 16
+
+export interface HistoricalEvent {
+    date: Date
+    label: string
+}
+
+export const DEFAULT_HISTORICAL_EVENTS: HistoricalEvent[] = [
+    // { date: new Date("1843-07-12"), label: "Revelation of Plural Marriage" },
+    { date: new Date("1847-04-01"), label: "Mormon Exodus" },
+    { date: new Date("1857-09-11"), label: "Mountain Meadows Massacre" },
+    { date: assumptions.polygamyEnd, label: "1890 Manifesto" },
+    { date: new Date("1904-04-06"), label: "Second Manifesto" },
+]

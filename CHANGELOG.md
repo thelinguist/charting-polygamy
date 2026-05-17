@@ -1,16 +1,14 @@
 # [1.15.0](https://github.com/thelinguist/charting-polygamy/compare/v1.14.0...v1.15.0) (2026-05-17)
 
-
 ### Features
 
-* tree summary stats ([#19](https://github.com/thelinguist/charting-polygamy/issues/19)) ([20882ed](https://github.com/thelinguist/charting-polygamy/commit/20882ed181a3d91e7e021d6255ffe483546730d9))
+- tree summary stats ([#19](https://github.com/thelinguist/charting-polygamy/issues/19)) ([20882ed](https://github.com/thelinguist/charting-polygamy/commit/20882ed181a3d91e7e021d6255ffe483546730d9))
 
 # [1.14.0](https://github.com/thelinguist/charting-polygamy/compare/v1.13.0...v1.14.0) (2026-05-17)
 
-
 ### Features
 
-* save the trees 🌳 ([#18](https://github.com/thelinguist/charting-polygamy/issues/18)) ([17a87fd](https://github.com/thelinguist/charting-polygamy/commit/17a87fd5d9621420bcd08d1a4501e9e19dc6bf62))
+- save the trees 🌳 ([#18](https://github.com/thelinguist/charting-polygamy/issues/18)) ([17a87fd](https://github.com/thelinguist/charting-polygamy/commit/17a87fd5d9621420bcd08d1a4501e9e19dc6bf62))
 
 # [1.13.0](https://github.com/thelinguist/charting-polygamy/compare/v1.12.0...v1.13.0) (2026-05-02)
 

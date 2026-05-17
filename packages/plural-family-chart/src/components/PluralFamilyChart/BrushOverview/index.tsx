@@ -12,6 +12,9 @@ const brushStyle = {
     strokeWidth: 1,
 }
 
+const ERA_START = new Date("1852-07-29")
+const ERA_END = new Date("1890-09-24")
+
 interface Props {
     xScale: ReturnType<typeof scaleUtc>
     width: number
@@ -20,6 +23,7 @@ interface Props {
     timelines: Timeline[]
     initialDomain?: [Date, Date] | null
     onChange: (domain: [Date, Date] | null) => void
+    showEraShading?: boolean
 }
 
 export const BrushOverview: React.FC<Props> = ({
@@ -30,6 +34,7 @@ export const BrushOverview: React.FC<Props> = ({
     timelines,
     initialDomain,
     onChange,
+    showEraShading = true,
 }) => {
     const people = [patriarchTimeline, ...timelines]
     const rowHeight = height / people.length
@@ -51,8 +56,17 @@ export const BrushOverview: React.FC<Props> = ({
         [onChange]
     )
 
+    const eraShadingRect = (() => {
+        if (!showEraShading) return null
+        const x = xScale(ERA_START) as number
+        const w = (xScale(ERA_END) as number) - x
+        if (w <= 0) return null
+        return <rect x={x} y={0} width={w} height={height} fill="rgba(180,140,70,0.12)" pointerEvents="none" />
+    })()
+
     return (
         <>
+            {eraShadingRect}
             <MiniChart
                 xScale={xScale as Scale}
                 patriarchTimeline={patriarchTimeline}

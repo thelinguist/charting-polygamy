@@ -8,12 +8,14 @@ import { checkPersonDetails, getChartEndDate, getChartStartDate, getMarriageDoma
 import React, { useState } from "react"
 import { Patriarch } from "./Patriarch"
 import { Spouse } from "./Spouse"
-// import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion"
 import { BadData } from "./BadData"
 import { TooSmall } from "./TooSmall"
 import { TimelineAxis } from "./TimelineAxis"
 import { useMarriageExpansion } from "../../hooks/useMarriageExpansion"
 import { BrushOverview } from "./BrushOverview"
+import { EraShading } from "./EraShading"
+import { EventMarkers } from "./EventMarkers"
+import { DEFAULT_HISTORICAL_EVENTS, HistoricalEvent } from "./constants"
 
 interface Props {
     width?: number
@@ -22,6 +24,8 @@ interface Props {
     timelines: Timeline[]
     margin?: { top: number; right: number; bottom: number; left: number }
     showBrush?: boolean
+    showEraShading?: boolean
+    events?: HistoricalEvent[]
 }
 
 const defaultMargin = { top: 40, left: 125, right: 40, bottom: 100 }
@@ -34,7 +38,10 @@ export const PluralFamilyChart: React.FC<Props> = ({
     timelines,
     margin = defaultMargin,
     showBrush = true,
+    showEraShading = true,
+    events,
 }) => {
+    const resolvedEvents = events ?? DEFAULT_HISTORICAL_EVENTS
     // const useAnimatedComponents = usePrefersReducedMotion()
     const { expandedIndex, handleClick, setHoveredIndex, resetPin } = useMarriageExpansion()
     const {
@@ -135,11 +142,20 @@ export const PluralFamilyChart: React.FC<Props> = ({
                     }}
                 />
                 <Group clipPath={`url(#${clipId})`}>
+                    {showEraShading && <EraShading xScale={xScale} marginTop={margin.top} mainHeight={mainHeight} />}
                     <TimelineAxis
                         xScale={xScale}
                         chartWidth={chartWidth}
                         timeValues={(brushDomain ?? timeValues) as [Date, Date]}
                     />
+                    {resolvedEvents.length > 0 && (
+                        <EventMarkers
+                            events={resolvedEvents}
+                            xScale={xScale}
+                            marginTop={margin.top}
+                            mainHeight={mainHeight}
+                        />
+                    )}
                     <Patriarch
                         patriarchTimeline={patriarchTimeline}
                         timelines={timelines}
@@ -192,6 +208,7 @@ export const PluralFamilyChart: React.FC<Props> = ({
                         timelines={timelines}
                         initialDomain={brushDomain}
                         onChange={setBrushDomain}
+                        showEraShading={showEraShading}
                     />
                 </Group>
             )}
