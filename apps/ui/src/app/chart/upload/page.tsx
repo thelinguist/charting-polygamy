@@ -10,6 +10,9 @@ import { SavedDataBanner } from "./components/SavedDataBanner/SavedDataBanner"
 import { Timelines } from "../../../components/Timelines/Timelines"
 import { saveSession } from "../../../lib/chartStorage"
 import { useChartSession } from "../../../hooks/useChartSession"
+import { ChartStats as ChartStatsBlock } from "../../../components/ChartStats/ChartStats"
+import type { ChartStats } from "../../../components/ChartStats/types"
+import { computeChartStats } from "../../../lib/computeChartStats"
 import styles from "./upload.module.css"
 
 const SCAN_LINES = [
@@ -53,6 +56,11 @@ export default function UploadPage() {
     const { initialChartData, showBanner, savedSession, dismissBanner, deleteSession } = useChartSession()
     const [chartData, setChartData] = useState<Record<string, PatriarchData>>(initialChartData ?? {})
     const [stage, setStage] = useState<Stage>(initialChartData ? "result" : "idle")
+    const [chartStats, setChartStats] = useState<ChartStats | null>(() =>
+        initialChartData && Object.keys(initialChartData).length > 0
+            ? computeChartStats(initialChartData, savedSession?.stats)
+            : null,
+    )
     const [showManual, setShowManual] = useState(false)
     const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -63,8 +71,9 @@ export default function UploadPage() {
         setStage("parsing")
         const fileContents = await parseFile(file, console.info)
         const fileFormat = getFileFormat(file)
-        const { chartData: newData } = getTimelines({ fileContents, fileFormat })
-        saveSession(newData, "file", file.name)
+        const { chartData: newData, stats } = getTimelines({ fileContents, fileFormat })
+        saveSession(newData, "file", file.name, stats)
+        setChartStats(Object.keys(newData).length > 0 ? computeChartStats(newData, stats) : null)
         setChartData(newData)
         setStage("result")
     }
@@ -72,7 +81,8 @@ export default function UploadPage() {
     const runDemo = () => {
         setStage("parsing")
         setTimeout(() => {
-            setChartData({ ...example3WivesChartData })
+            const data = { ...example3WivesChartData }
+            setChartData(data)
             setStage("result")
         }, 1200)
     }
@@ -80,6 +90,7 @@ export default function UploadPage() {
     const handleManual = (data: Record<string, PatriarchData> | null) => {
         if (data) {
             saveSession(data, "manual")
+            setChartStats(Object.keys(data).length > 0 ? computeChartStats(data) : null)
             setChartData(data)
             setStage("result")
         }
@@ -90,10 +101,6 @@ export default function UploadPage() {
             {/* HEADER */}
             <section className={styles.headerSection}>
                 <div className="shell">
-                    <div className={`flex items-baseline gap-16 ${styles.eyebrowRow}`}>
-                        <span className="eyebrow">№ 004 — The Tool</span>
-                        <hr className="rule" />
-                    </div>
                     <h2 className={styles.heading}>Chart your own tree.</h2>
                     <p className={`lede ${styles.lede}`}>
                         Drop in a GEDCOM file, paste a CSV, or build a family by hand. The tool detects men with
@@ -106,11 +113,7 @@ export default function UploadPage() {
             {showBanner && savedSession && (
                 <section className="tight">
                     <div className="shell">
-                        <SavedDataBanner
-                            session={savedSession}
-                            onDelete={deleteSession}
-                            onDismiss={dismissBanner}
-                        />
+                        <SavedDataBanner session={savedSession} onDelete={deleteSession} onDismiss={dismissBanner} />
                     </div>
                 </section>
             )}
@@ -187,23 +190,15 @@ export default function UploadPage() {
             {stage !== "idle" && (
                 <section className="tight">
                     <div className="shell">
-                        <div className={styles.resultHeader}>
-                            <div>
-                                <div className={`eyebrow ${styles.resultEyebrow}`}>Result</div>
-                                {stage === "result" && Object.keys(chartData).length > 1 && (
-                                    <p className={styles.resultCount}>
-                                        {Object.keys(chartData).length} polygamous households detected.
-                                    </p>
-                                )}
-                            </div>
-                        </div>
-
                         {stage === "parsing" ? (
                             <div className={styles.scanBox}>
                                 <ScanAnimation />
                             </div>
                         ) : (
-                            <Timelines chartData={chartData} />
+                            <>
+                                {chartStats && <ChartStatsBlock stats={chartStats} />}
+                                <Timelines chartData={chartData} />
+                            </>
                         )}
                     </div>
                 </section>
