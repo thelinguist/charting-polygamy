@@ -14,17 +14,10 @@ const getWifeEffectiveEnd = (
     timelines: Timeline[],
     patriarchTimeline: PatriarchTimeline
 ): number =>
-    timelines.reduce(
-        (min, timeline) => {
-            if (timeline.linkedMarriage.start?.getTime() !== marriage.start?.getTime()) return min
-            return Math.min(
-                min,
-                timeline.linkedMarriage.end?.getTime() ?? Infinity,
-                timeline.death?.getTime() ?? Infinity
-            )
-        },
-        patriarchTimeline.death?.getTime() ?? Infinity
-    )
+    timelines.reduce((min, timeline) => {
+        if (timeline.linkedMarriage.start?.getTime() !== marriage.start?.getTime()) return min
+        return Math.min(min, timeline.linkedMarriage.end?.getTime() ?? Infinity, timeline.death?.getTime() ?? Infinity)
+    }, patriarchTimeline.death?.getTime() ?? Infinity)
 
 interface Props {
     patriarchTimeline: PatriarchTimeline

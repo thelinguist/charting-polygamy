@@ -57,7 +57,7 @@ export const Marriage: FC<Props> = ({
                 fill={fill}
                 fillOpacity={fillOpacity}
                 strokeDasharray={dasharray}
-                style={{ "mixBlendMode": shouldBlend ? "multiply" : undefined}}
+                style={{ mixBlendMode: shouldBlend ? "multiply" : undefined }}
             />
             {kind === MarriageKind.Other && isExpanded && (
                 <rect

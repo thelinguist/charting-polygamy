@@ -1,6 +1,6 @@
 import { wifeColors } from "../../constants"
 
-export const MiniWivesTimelines = ({ timelines, patriarchDeathMs, rowHeight, barH, xScale}) => (
+export const MiniWivesTimelines = ({ timelines, patriarchDeathMs, rowHeight, barH, xScale }) => (
     <>
         {timelines.map((timeline, i) => {
             const { start, end } = timeline.linkedMarriage

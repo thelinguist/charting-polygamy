@@ -11,9 +11,9 @@ export const MiniPersonTimelines = ({ people, xScale, rowHeight, barH }) => (
                 <rect
                     key={person.name}
                     x={x}
-                    y={y+barH/4}
+                    y={y + barH / 4}
                     width={w}
-                    height={barH/2}
+                    height={barH / 2}
                     fill={i === 0 ? strokeColor : spouseColor}
                     rx={1}
                 />
