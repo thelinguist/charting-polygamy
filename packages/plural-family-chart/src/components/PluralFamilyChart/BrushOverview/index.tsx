@@ -20,7 +20,6 @@ interface Props {
     timelines: Timeline[]
     initialDomain?: [Date, Date] | null
     onChange: (domain: [Date, Date] | null) => void
-    showEraShading?: boolean
 }
 
 export const BrushOverview: React.FC<Props> = ({

@@ -40,7 +40,7 @@ const xScale = scaleUtc({ domain: [chartStart, chartEnd], range: [0, width] })
 const defaultProps = {
     xScale,
     width,
-    height: 50,
+    height: 40,
     patriarchTimeline: patriarch,
     timelines,
     onChange: vi.fn(),
