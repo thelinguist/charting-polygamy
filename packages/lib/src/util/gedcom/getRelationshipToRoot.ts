@@ -5,6 +5,7 @@ import { getMatriarchFromFamily, getPatriarchFromFamily } from "./queries"
 export const findRootPersonId = (treeChildren: GedcomTree["children"]): string | undefined => {
     const head = treeChildren.find(r => r.type === GedcomType.Head)
     if (head) {
+        // TODO fix this. There is no root tag. Just do the VERY FIRST INDI
         const rootTag = head.children.find(c => c.type === "_ROOT" || c.type === "_HME")
         if (rootTag?.data?.pointer) return rootTag.data.pointer
     }
@@ -14,6 +15,10 @@ export const findRootPersonId = (treeChildren: GedcomTree["children"]): string |
 
 type Step = { up: boolean; step: boolean }
 
+/**
+ * given a list of visited nodes, return a label for the relationship
+ * @param steps
+ */
 const stepsToRelationshipLabel = (steps: Step[]): string => {
     const isStep = steps.some(s => s.step)
     const prefix = isStep ? "Step-" : ""
@@ -21,6 +26,7 @@ const stepsToRelationshipLabel = (steps: Step[]): string => {
     const upCount = steps.filter(s => s.up).length
     const downCount = steps.filter(s => !s.up).length
 
+    // TODO account for females
     // Direct ancestor (all up)
     if (downCount === 0) {
         if (upCount === 0) return "Root"
@@ -43,6 +49,12 @@ const stepsToRelationshipLabel = (steps: Step[]): string => {
     return `${prefix}Distant Relative`
 }
 
+/**
+ * Make a BINARY TREE by going through the families. one side paternal with father ids, one side maternal with mother ids
+ * @param database
+ * @param rootId
+ * @param targetId
+ */
 export const getRelationshipToRoot = (
     database: GedcomDatabase,
     rootId: string,
@@ -56,7 +68,7 @@ export const getRelationshipToRoot = (
     const MAX_DEPTH = 20
 
     while (queue.length > 0) {
-        const { id, steps } = queue.shift()!
+        const { id, steps } = queue.shift()! // remove first element (and return it)
         if (visited.has(id)) continue
         visited.add(id)
 
@@ -74,6 +86,7 @@ export const getRelationshipToRoot = (
                 const family = database.families[familyId]
                 if (!family) continue
 
+                // PEDI does not exist
                 const isStep = fact.children?.some(
                     (c: any) => c.type === "PEDI" && c.value === "step"
                 ) ?? false
