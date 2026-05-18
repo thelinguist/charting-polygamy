@@ -5,10 +5,26 @@ import { PositionScale } from "@visx/shape/lib/types"
 import { Marriage } from "../Marriage"
 import { PersonTimeline } from "../PersonTimeline"
 import { getExpandedXEnd } from "../utils/getExpandedXEnd"
-import { getConcurrentCounts } from "./getConcurrentCounts"
-import { getMarriageAge, getMarriageEnd } from "./utils"
+import { getMarriageAge } from "./utils"
 
 type PatriarchMarriage = PatriarchTimeline["marriages"][number]
+
+const getWifeEffectiveEnd = (
+    marriage: PatriarchMarriage,
+    timelines: Timeline[],
+    patriarchTimeline: PatriarchTimeline
+): number =>
+    timelines.reduce(
+        (min, timeline) => {
+            if (timeline.linkedMarriage.start?.getTime() !== marriage.start?.getTime()) return min
+            return Math.min(
+                min,
+                timeline.linkedMarriage.end?.getTime() ?? Infinity,
+                timeline.death?.getTime() ?? Infinity
+            )
+        },
+        patriarchTimeline.death?.getTime() ?? Infinity
+    )
 
 interface Props {
     patriarchTimeline: PatriarchTimeline
@@ -31,11 +47,9 @@ export const Patriarch: React.FC<Props> = ({
     setHoveredIndex,
     highlightedMarriageStart,
 }) => {
-    const concurrentCounts = getConcurrentCounts(patriarchTimeline, timelines)
-
     const getBounds = (marriage: PatriarchMarriage, xEndOverride?: number) => {
         const x0 = xScale(marriage.start!)
-        const xEnd = xEndOverride ?? xScale(new Date(getMarriageEnd(marriage, patriarchTimeline)))
+        const xEnd = xEndOverride ?? xScale(new Date(getWifeEffectiveEnd(marriage, timelines, patriarchTimeline)))
         return [
             { x: x0, y: 0 },
             { x: xEnd, y: 0 },
@@ -56,7 +70,7 @@ export const Patriarch: React.FC<Props> = ({
             xScale(marriage.start),
             text1,
             text2,
-            xScale(new Date(getMarriageEnd(marriage, patriarchTimeline)))
+            xScale(new Date(getWifeEffectiveEnd(marriage, timelines, patriarchTimeline)))
         )
         // eslint-disable-next-line
     }, [expandedIndex, patriarchTimeline, xScale])
@@ -71,30 +85,30 @@ export const Patriarch: React.FC<Props> = ({
             isPatriarch
         >
             <>
-                {marriages.map((marriage, i) => {
-                    const dim =
-                        highlightedMarriageStart !== undefined &&
-                        marriage.start?.getTime() !== highlightedMarriageStart.getTime()
-                    return (
-                        <g key={i} opacity={dim ? 0.15 : 1} style={{ transition: "opacity 0.15s ease" }}>
-                            <Marriage
-                                kind={MarriageKind.Patriarch}
-                                colorIndex={concurrentCounts[i]}
-                                bounds={getBounds(marriage)}
-                                text1={marriage.start!.getFullYear().toString()}
-                                text2={`${getMarriageAge(marriage, patriarchTimeline)} years old`}
-                                onClick={() => handleClick(i)}
-                                onMouseEnter={() => setHoveredIndex(i)}
-                                onMouseLeave={() => setHoveredIndex(null)}
-                            />
-                        </g>
-                    )
-                })}
+                <g style={{ isolation: "isolate" }}>
+                    {marriages.map((marriage, i) => {
+                        const dim =
+                            highlightedMarriageStart !== undefined &&
+                            marriage.start?.getTime() !== highlightedMarriageStart.getTime()
+                        return (
+                            <g key={i} opacity={dim ? 0.15 : 1} style={{ transition: "opacity 0.15s ease" }}>
+                                <Marriage
+                                    kind={MarriageKind.Patriarch}
+                                    bounds={getBounds(marriage)}
+                                    text1={marriage.start!.getFullYear().toString()}
+                                    text2={`${getMarriageAge(marriage, patriarchTimeline)} years old`}
+                                    onClick={() => handleClick(i)}
+                                    onMouseEnter={() => setHoveredIndex(i)}
+                                    onMouseLeave={() => setHoveredIndex(null)}
+                                />
+                            </g>
+                        )
+                    })}
+                </g>
                 {expandedIndex !== null && marriages[expandedIndex]?.start && (
                     <Marriage
                         key="overlay"
                         kind={MarriageKind.Patriarch}
-                        colorIndex={concurrentCounts[expandedIndex]}
                         bounds={getBounds(marriages[expandedIndex], overlayXEnd ?? undefined)}
                         text1={marriages[expandedIndex].start!.getFullYear().toString()}
                         text2={`${getMarriageAge(marriages[expandedIndex], patriarchTimeline)} years old`}
