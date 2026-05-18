@@ -1,3 +1,10 @@
+## [1.17.1](https://github.com/thelinguist/charting-polygamy/compare/v1.17.0...v1.17.1) (2026-05-18)
+
+
+### Bug Fixes
+
+* concurrent wife colors ([#23](https://github.com/thelinguist/charting-polygamy/issues/23)) ([c159ae6](https://github.com/thelinguist/charting-polygamy/commit/c159ae659a123c570570cdf9af1dfd80d9125cfd))
+
 # [1.17.0](https://github.com/thelinguist/charting-polygamy/compare/v1.16.0...v1.17.0) (2026-05-18)
 
 
