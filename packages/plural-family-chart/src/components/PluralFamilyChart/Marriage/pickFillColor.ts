@@ -1,11 +1,5 @@
 import { MarriageKind, patriarchColorLight, wifeColors } from "../constants"
 
-// 1 concurrent wife → light, 4+ concurrent → very dark
-// const patriarchColorScale = scaleLinear({
-//     domain: [1, 4],
-//     range: [patriarchColorLight, patriarchColorDark],
-// }).interpolate(interpolateHcl)
-
 export function pickFillColor(
     kind: MarriageKind,
     colorIndex: number
