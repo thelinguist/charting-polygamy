@@ -13,6 +13,7 @@ import { useChartSession } from "../../../hooks/useChartSession"
 import { ChartStats as ChartStatsBlock } from "../../../components/ChartStats/ChartStats"
 import type { ChartStats } from "../../../components/ChartStats/types"
 import { computeChartStats } from "../../../lib/computeChartStats"
+import Link from "next/link"
 import styles from "./upload.module.css"
 
 const SCAN_LINES = [
@@ -59,7 +60,7 @@ export default function UploadPage() {
     const [chartStats, setChartStats] = useState<ChartStats | null>(() =>
         initialChartData && Object.keys(initialChartData).length > 0
             ? computeChartStats(initialChartData, savedSession?.stats)
-            : null,
+            : null
     )
     const [notes, setNotes] = useState<Record<string, string>>(initialNotes)
     const [showManual, setShowManual] = useState(false)
@@ -133,9 +134,12 @@ export default function UploadPage() {
                         {/* Upload */}
                         <div className={`card ${styles.optionCard}`}>
                             <div className={styles.optionMarker}>option 01</div>
-                            <h4 className={styles.optionTitle}>Upload a GEDCOM</h4>
+                            <h4 className={styles.optionTitle}>Upload a GEDCOM or CSV</h4>
                             <p className={styles.optionDesc}>
-                                .ged from Ancestry or FamilySearch. Parsed locally — nothing is sent to a server.
+                                Parsed locally — nothing is sent to a server.{" "}
+                                <Link href="/chart/gedcom-instructions">How to export a GEDCOM</Link>
+                                {" · "}
+                                <Link href="/chart/csv-instructions">CSV format guide</Link>
                             </p>
                             <input
                                 ref={fileInputRef}
@@ -208,9 +212,7 @@ export default function UploadPage() {
                                 <Timelines
                                     chartData={chartData}
                                     notes={notes}
-                                    onNoteChange={(name, note) =>
-                                        setNotes(prev => ({ ...prev, [name]: note }))
-                                    }
+                                    onNoteChange={(name, note) => setNotes(prev => ({ ...prev, [name]: note }))}
                                 />
                             </>
                         )}

@@ -1,6 +1,8 @@
 import styles from "./gallery.module.css"
 import { GalleryRow } from "./GalleryRow"
 import { PREBAKED } from "../../constants/pre-baked"
+import { GalleryContactInfo } from "./GalleryContactInfo"
+
 export default function GalleryPage() {
     return (
         <>
@@ -24,6 +26,11 @@ export default function GalleryPage() {
                             <GalleryRow key={profile.name} profile={profile} index={i} />
                         ))}
                     </div>
+                    <p className={`footnote ${styles.galleryFootnote}`}>
+                        Do you have an interesting family you&#39;d like to see here? Email us your share link:{" "}
+                        <GalleryContactInfo />
+                    </p>
+                    <br />
                     <p className={`footnote ${styles.galleryFootnote}`}>
                         † Dates and wife counts are drawn from historical sources and may be approximate. They are
                         suitable for visualization purposes but should be verified against primary records before

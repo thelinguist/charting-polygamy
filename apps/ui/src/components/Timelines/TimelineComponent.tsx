@@ -20,7 +20,15 @@ interface Props {
     onNoteChange?: (note: string) => void
 }
 
-export const TimelineComponent: React.FC<Props> = ({ name, patriarchTimeline, timelines, hideShare, chartWidth, note, onNoteChange }) => {
+export const TimelineComponent: React.FC<Props> = ({
+    name,
+    patriarchTimeline,
+    timelines,
+    hideShare,
+    chartWidth,
+    note,
+    onNoteChange,
+}) => {
     const containerRef = useRef<HTMLDivElement>(null)
     const [width, setWidth] = useState(chartWidth ?? 800)
     const isMobile = useIsMobile()
@@ -49,7 +57,7 @@ export const TimelineComponent: React.FC<Props> = ({ name, patriarchTimeline, ti
                 {!hideShare && (
                     <div className={styles.actions}>
                         <button className="btn btn-primary" onClick={handleShare}>
-                            {copied ? "Copied!" : "Share This Graph"}
+                            {copied ? "URL Copied!" : "Share This Graph"}
                         </button>
                     </div>
                 )}
