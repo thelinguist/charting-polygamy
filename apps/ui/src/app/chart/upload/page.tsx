@@ -8,7 +8,7 @@ import { example3WivesChartData } from "./constants/sample"
 import { ManualEntryForm } from "./components/ManualEntryForm/ManualEntryForm"
 import { SavedDataBanner } from "./components/SavedDataBanner/SavedDataBanner"
 import { Timelines } from "../../../components/Timelines/Timelines"
-import { saveSession } from "../../../lib/chartStorage"
+import { saveSession, updateSessionNotes } from "../../../lib/chartStorage"
 import { useChartSession } from "../../../hooks/useChartSession"
 import { ChartStats as ChartStatsBlock } from "../../../components/ChartStats/ChartStats"
 import type { ChartStats } from "../../../components/ChartStats/types"
@@ -53,7 +53,7 @@ const getFileFormat = (file: File): FileTypes => {
 type Stage = "idle" | "parsing" | "result"
 
 export default function UploadPage() {
-    const { initialChartData, showBanner, savedSession, dismissBanner, deleteSession } = useChartSession()
+    const { initialChartData, initialNotes, showBanner, savedSession, dismissBanner, deleteSession } = useChartSession()
     const [chartData, setChartData] = useState<Record<string, PatriarchData>>(initialChartData ?? {})
     const [stage, setStage] = useState<Stage>(initialChartData ? "result" : "idle")
     const [chartStats, setChartStats] = useState<ChartStats | null>(() =>
@@ -61,8 +61,14 @@ export default function UploadPage() {
             ? computeChartStats(initialChartData, savedSession?.stats)
             : null,
     )
+    const [notes, setNotes] = useState<Record<string, string>>(initialNotes)
     const [showManual, setShowManual] = useState(false)
     const fileInputRef = useRef<HTMLInputElement>(null)
+
+    useEffect(() => {
+        const id = setTimeout(() => updateSessionNotes(notes), 800)
+        return () => clearTimeout(id)
+    }, [notes])
 
     const handleFile: ChangeEventHandler<HTMLInputElement> = async e => {
         e.preventDefault()
@@ -74,6 +80,7 @@ export default function UploadPage() {
         const { chartData: newData, stats } = getTimelines({ fileContents, fileFormat })
         saveSession(newData, "file", file.name, stats)
         setChartStats(Object.keys(newData).length > 0 ? computeChartStats(newData, stats) : null)
+        setNotes({})
         setChartData(newData)
         setStage("result")
     }
@@ -91,6 +98,7 @@ export default function UploadPage() {
         if (data) {
             saveSession(data, "manual")
             setChartStats(Object.keys(data).length > 0 ? computeChartStats(data) : null)
+            setNotes({})
             setChartData(data)
             setStage("result")
         }
@@ -197,7 +205,13 @@ export default function UploadPage() {
                         ) : (
                             <>
                                 {chartStats && <ChartStatsBlock stats={chartStats} />}
-                                <Timelines chartData={chartData} />
+                                <Timelines
+                                    chartData={chartData}
+                                    notes={notes}
+                                    onNoteChange={(name, note) =>
+                                        setNotes(prev => ({ ...prev, [name]: note }))
+                                    }
+                                />
                             </>
                         )}
                     </div>
