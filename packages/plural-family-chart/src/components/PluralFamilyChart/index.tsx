@@ -70,8 +70,8 @@ export const PluralFamilyChart: React.FC<Props> = ({
     if (chartWidth < 200) return <TooSmall />
 
     const mainHeight = Math.max(timelines.length * barHeight + margin.top + margin.bottom, minHeight)
-    const overviewHeight = 50
-    const overviewMargin = 12
+    const overviewHeight = 40
+    const overviewMargin = 10
     const actualHeight = mainHeight + (showBrush ? overviewMargin + overviewHeight : 0)
 
     const timeValues = [getChartStartDate(patriarchTimeline, timelines), getChartEndDate(patriarchTimeline, timelines)]
@@ -208,7 +208,6 @@ export const PluralFamilyChart: React.FC<Props> = ({
                         timelines={timelines}
                         initialDomain={brushDomain}
                         onChange={setBrushDomain}
-                        showEraShading={showEraShading}
                     />
                 </Group>
             )}

@@ -34,6 +34,7 @@ export const Marriage: FC<Props> = ({
 
     const overlayWidth = bounds[1].x - bounds[0].x
     const overlayHeight = bounds[3] ? bounds[3].y - bounds[0].y : barHeight
+    const shouldBlend = kind === MarriageKind.Patriarch && !isExpanded
 
     return (
         <Group
@@ -56,6 +57,7 @@ export const Marriage: FC<Props> = ({
                 fill={fill}
                 fillOpacity={fillOpacity}
                 strokeDasharray={dasharray}
+                style={{ mixBlendMode: shouldBlend ? "multiply" : undefined }}
             />
             {kind === MarriageKind.Other && isExpanded && (
                 <rect
