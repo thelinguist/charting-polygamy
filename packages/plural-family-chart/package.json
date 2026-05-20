@@ -6,7 +6,7 @@
     "main": "src/index.ts",
     "scripts": {
         "build": "tsc -b && vite build",
-        "lint": "eslint .",
+        "lint": "tsc -b --noEmit && eslint .",
         "preview": "vite preview",
         "test": "vitest",
         "storybook": "storybook dev -p 6006",
@@ -55,7 +55,7 @@
         "globals": "^15.14.0",
         "jsdom": "^25.0.0",
         "storybook": "^10.3.5",
-        "typescript": "~5.6.2",
+        "typescript": "^6.0.3",
         "typescript-eslint": "^8.18.2",
         "vite": "7.3.2",
         "vite-plugin-dts": "^4.5.4",

@@ -39,7 +39,7 @@ offer the opportunity to others. Women are equal to men, and I condemn ideologie
 ## Who is your audience then?
 
 Mormon Polygamy has been a fascination of the country for a long, long time. U.S. President Cleveland brought it
-up in his [first address](https://www.presidency.ucsb.edu/documents/first-annual-message-first-term). Reality shows and 
+up in his [first address](https://www.presidency.ucsb.edu/documents/first-annual-message-first-term). Reality shows and
 documentaries highlight life inside modern-day polygamist families. I hope everyone feels comfortable
 using this tool, from members of the LDS Church, to plural-family fundamentalists, to Mormon history aficionados.
 
