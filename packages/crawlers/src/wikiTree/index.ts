@@ -82,7 +82,7 @@ const crawlPerson = async (
     factset: Record<string, Factoid[]>,
     visited: Set<string>,
     personToExclude?: string,
-    depth = 0,
+    depth = 0
 ) => {
     if (visited.has(slug)) return
     visited.add(slug)
@@ -106,7 +106,11 @@ const crawlPerson = async (
  * @param factset
  * @param personToExclude such as an already discovered patriarch
  */
-const getPatriarchAndWives = async (slug: string, factset: Record<string, Factoid[]> = {}, personToExclude?: string) => {
+const getPatriarchAndWives = async (
+    slug: string,
+    factset: Record<string, Factoid[]> = {},
+    personToExclude?: string
+) => {
     const visited = new Set<string>()
     await crawlPerson(slug, factset, visited, personToExclude)
     return factset

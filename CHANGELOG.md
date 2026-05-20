@@ -1,37 +1,32 @@
 # [1.19.0](https://github.com/thelinguist/charting-polygamy/compare/v1.18.0...v1.19.0) (2026-05-20)
 
-
 ### Features
 
-* include Wilford Woodruff's chart ([#29](https://github.com/thelinguist/charting-polygamy/issues/29)) ([6677a97](https://github.com/thelinguist/charting-polygamy/commit/6677a972b7202a50c38fa994cdc53f8495fba785))
+- include Wilford Woodruff's chart ([#29](https://github.com/thelinguist/charting-polygamy/issues/29)) ([6677a97](https://github.com/thelinguist/charting-polygamy/commit/6677a972b7202a50c38fa994cdc53f8495fba785))
 
 # [1.18.0](https://github.com/thelinguist/charting-polygamy/compare/v1.17.1...v1.18.0) (2026-05-18)
 
-
 ### Features
 
-* instructions ([#24](https://github.com/thelinguist/charting-polygamy/issues/24)) ([1cc5b61](https://github.com/thelinguist/charting-polygamy/commit/1cc5b61de657c83f5e457882412e5eee0dffd723))
+- instructions ([#24](https://github.com/thelinguist/charting-polygamy/issues/24)) ([1cc5b61](https://github.com/thelinguist/charting-polygamy/commit/1cc5b61de657c83f5e457882412e5eee0dffd723))
 
 ## [1.17.1](https://github.com/thelinguist/charting-polygamy/compare/v1.17.0...v1.17.1) (2026-05-18)
 
-
 ### Bug Fixes
 
-* concurrent wife colors ([#23](https://github.com/thelinguist/charting-polygamy/issues/23)) ([c159ae6](https://github.com/thelinguist/charting-polygamy/commit/c159ae659a123c570570cdf9af1dfd80d9125cfd))
+- concurrent wife colors ([#23](https://github.com/thelinguist/charting-polygamy/issues/23)) ([c159ae6](https://github.com/thelinguist/charting-polygamy/commit/c159ae659a123c570570cdf9af1dfd80d9125cfd))
 
 # [1.17.0](https://github.com/thelinguist/charting-polygamy/compare/v1.16.0...v1.17.0) (2026-05-18)
 
-
 ### Features
 
-* notes ([#20](https://github.com/thelinguist/charting-polygamy/issues/20)) ([0d5b4ac](https://github.com/thelinguist/charting-polygamy/commit/0d5b4acd3634cc1f0be2f7598115a877487ea364))
+- notes ([#20](https://github.com/thelinguist/charting-polygamy/issues/20)) ([0d5b4ac](https://github.com/thelinguist/charting-polygamy/commit/0d5b4acd3634cc1f0be2f7598115a877487ea364))
 
 # [1.16.0](https://github.com/thelinguist/charting-polygamy/compare/v1.15.0...v1.16.0) (2026-05-17)
 
-
 ### Features
 
-* shade polygamy era and mark historical events ([#22](https://github.com/thelinguist/charting-polygamy/issues/22)) ([3ec7d31](https://github.com/thelinguist/charting-polygamy/commit/3ec7d317f5d13bf44357e09ec5570efe186c0771))
+- shade polygamy era and mark historical events ([#22](https://github.com/thelinguist/charting-polygamy/issues/22)) ([3ec7d31](https://github.com/thelinguist/charting-polygamy/commit/3ec7d317f5d13bf44357e09ec5570efe186c0771))
 
 # [1.15.0](https://github.com/thelinguist/charting-polygamy/compare/v1.14.0...v1.15.0) (2026-05-17)
 

@@ -144,7 +144,10 @@ async function compress(str: string): Promise<Uint8Array> {
 async function decompress(bytes: Uint8Array): Promise<string> {
     const stream = new DecompressionStream("deflate-raw")
     const writer = stream.writable.getWriter()
-    const [, out] = await Promise.all([writer.write(bytes).then(() => writer.close()), readAllChunks(stream.readable)])
+    const [, out] = await Promise.all([
+        writer.write(bytes as any).then(() => writer.close()),
+        readAllChunks(stream.readable),
+    ])
     return new TextDecoder().decode(out)
 }
 

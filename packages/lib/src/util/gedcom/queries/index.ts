@@ -35,10 +35,6 @@ export const getMatriarchFromFamily = (database, family) => {
     return getPersonFromDatabase(database, wifeRelation)
 }
 
-export const getMarriage = (database, family) => {
-    return family.children.find(fact => fact.type === GedcomType.Marriage)
-}
-
 export const getIndividualName = (individual: GedcomIndividual): string | undefined => {
     const nameRecord = individual.children.find(fact => fact.type === GedcomType.Name)
     if (nameRecord) {
