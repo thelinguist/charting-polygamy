@@ -32,14 +32,15 @@ practice. So to put it simply, many Mormon families had one husband and multiple
 
 ## Are you against polygamy?
 
-While I'm only familiar with polygamy during the Mormon movement, [it exists all over
-the world](https://www.pewresearch.org/short-reads/2020/12/07/polygamy-is-rare-around-the-world-and-mostly-confined-to-a-few-regions/).
+While I'm only familiar with polygamy during the Mormon movement, [it is not a Mormon concept](https://www.pewresearch.org/short-reads/2020/12/07/polygamy-is-rare-around-the-world-and-mostly-confined-to-a-few-regions/).
 I do not practice it or know anyone personally who does. I am just seeking to understand my family history around it and
 offer the opportunity to others. Women are equal to men, and I condemn ideologies and practices to the contrary.
 
 ## Who is your audience then?
 
-I think Mormon Polygamy has been a fascination of the country for a long, long time. I hope everyone feels comfortable
+Mormon Polygamy has been a fascination of the country for a long, long time. U.S. President Cleveland brought it
+up in his [first address](https://www.presidency.ucsb.edu/documents/first-annual-message-first-term). Reality shows and 
+documentaries highlight life inside modern-day polygamist families. I hope everyone feels comfortable
 using this tool, from members of the LDS Church, to plural-family fundamentalists, to Mormon history aficionados.
 
 ## How do timelines reveal what life was like for plural families?
@@ -50,12 +51,10 @@ between husbands, wives, and step-families.
 
 ## Have you found anything noteworthy using these timelines?
 
-- Most polygamous men had at least 3 wives.
-- Of my male Mormon ancestors who were eligible to practice polygamy, 40% did practice it.
+- Most polygamous men had around 3 wives.
+- Of my male Mormon ancestors who were eligible to practice polygamy, 56% did practice it.
 - Not all women stayed with their polygamous husband until their deaths. This has led me to journals and family
   stories about how this practice challenged the women who participated. This has been a very fascinating aspect to
   this project
 
-## I want to hear more about you and your experience with this project
-
-see [the about page](about)
+Also see [the about page](about)

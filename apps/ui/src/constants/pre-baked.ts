@@ -66,10 +66,15 @@ export const PREBAKED: GalleryPolygamist[] = [
     },
     {
         name: "Wilford Woodruff",
-        notability: "LDS prophet who renounced polygamy–twice.",
+        notability: "LDS prophet who renounced polygamy.",
         born: 1807,
         died: 1898,
-        note: "Wilford Woodruff is best known for issuing the 1890 Manifesto, officially ending the Church's sanction of new plural marriages. He himself had nine wives over his lifetime. His declaration marked a major inflection point in Mormon history and its relationship with the United States government.",
+        data: "hVRdaxsxEPwrQk8OnOAk3affEifUhKaUJGBKyYMcK7bInRQkOSUN_u9F0n3obJe8nuZ2Z2Zn9xNKOIcr0bwovQErpTZ6__ICE_hm4fzzf49rOIe4SkuUUpRimMCN_1BXKK1RSmACWzj__QmN_0xLlGYIU5hABuc0TeAWztND0r9nhX_Pu_fav-MjQBXqjgCCR0BOHBNSBUCWewCiU0CGSDoBkDICUFeh55gVAVB8AaAxhxKlJaI4APKgkpIRUHq7cMehDIAsPzwdEmgb75ez--dO8TUHq52wlrdKczBbMG25vjg2vhqMr3KEcSjdtG5uJ8bzKe5wMgrX-o7pD3ApJZjdsudXo-TYEjv_ER5b1hnCKSL5UctolnxwHruQHBKo4lQ4v3BIDz-uaN7gHF6zd7EBt6zlBtwrY-DhybMmVRgvnvJeMK0aITmYXTFtlbwAi722wgwSSO0aYtJLqHHqYnXiWpS2QCzz2tPsRMLw0CHjil7CjWbG7k3PpBOAyyAgJHgQcMf5K5h9Ew030aipX6li8D0nziXfMyYdbQCf4k5IU5Tmse_Rr570D2Z3TIIVXxvLdU86C67TnvKiYVoYw8CSaS1aJgfKNHMh87sWfO400DOUu53kw4oV5yjnFGGC8Ei5GJfRU75slPyrwJK9c2mVBPd7Y3jTwHH5itKNioyrUFYuDSTrSzzuVMsMWImmEawFKyG9-KFAlU7jGqvyBZZc6g9_JJnenIy67H17YJrtwJVWfyaO9bU7x2o_o_rYsVE2nx7csM-47roVfbebtmXgoVXKgtlDK-xuTBatpte7xj4Hp8n6qml_bfFU4jVvxHbn-lr1_CrkNmpdu1NJilFv4fT6CE5ajyf1fOvuEoQr6_XuN0oz8F29C8nAL7WX26Gry1se7z_B_uDgo67RnR6igs-esLIeLOTHFbtcrrm2YMm2XA7nKwuk_eX_Bw",
+        note: "Wilford Woodruff is best known for issuing the 1890 Manifesto, officially ending the Church's sanction of new plural marriages. His declaration marked a major inflection point in Mormon history and its relationship with the United States government.",
+        source: {
+            text: "Wilford Woodruff Papers",
+            href: "https://wilfordwoodruffpapers.org/wives-and-children",
+        },
     },
     {
         name: "John Menzies MacFarlane",
