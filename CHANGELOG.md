@@ -1,3 +1,10 @@
+# [1.19.0](https://github.com/thelinguist/charting-polygamy/compare/v1.18.0...v1.19.0) (2026-05-20)
+
+
+### Features
+
+* include Wilford Woodruff's chart ([#29](https://github.com/thelinguist/charting-polygamy/issues/29)) ([6677a97](https://github.com/thelinguist/charting-polygamy/commit/6677a972b7202a50c38fa994cdc53f8495fba785))
+
 # [1.18.0](https://github.com/thelinguist/charting-polygamy/compare/v1.17.1...v1.18.0) (2026-05-18)
 
 
