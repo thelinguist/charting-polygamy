@@ -94,7 +94,10 @@ export default function InstructionsPage() {
                             <br />
                             Other sources you could use are AncestralQuest and WikiTree.{" "}
                         </p>
-                        <a style={{ fontSize: 10 }} href="https://github.com/thelinguist/charting-polygamy/issues/new">
+                        <a
+                            style={{ fontSize: 10 }}
+                            href="https://github.com/thelinguist/charting-polygamy/blob/main/apps/ui/src/app/chart/instructions/page.tsx"
+                        >
                             Update this page?
                         </a>
                     </div>
@@ -116,6 +119,10 @@ export default function InstructionsPage() {
                             traditions is on the roadmap.
                         </p>
                     </div>
+
+                    <p>
+                        For more questions, see the <a href="/charting-polygamy/chart/faq">FAQ page</a>
+                    </p>
                 </section>
 
                 <p className="footnote" style={{ marginTop: 32 }}>

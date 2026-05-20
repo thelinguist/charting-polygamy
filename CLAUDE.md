@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Charting Polygamy is a project to visualize polygamous marriages. It scans user's ancestral files, formatted csv data, or other methods.
+Charting Polygamy is a project to visualize polygamous marriages. It scans users' ancestral files, formatted csv data, or other methods.
+
+There is a heavy focus on keeping things front-end only for now to promote data privacy but also make it trivial to host.
 
 ## Tech Notes
 

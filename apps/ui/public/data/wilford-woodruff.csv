@@ -1,0 +1,53 @@
+Name,Event,Date,Place,Second Party,Link
+Wilford Woodruff,Birth,"1 Mar 1807","Farmington, Hartford, Connecticut, United States",,
+Wilford Woodruff,Death,2 Sep 1898,"San Francisco, California, United States",,
+Wilford Woodruff,Marriage,13 Apr 1837,"Kirtland, Ohio",Phoebe Whittemore (Carter),Carter-12931
+Wilford Woodruff,Marriage,15 Apr 1846,"Winter Quarters, Douglas, Nebraska, United States",Mary Ann (Jackson),Jackson-13404
+Wilford Woodruff,Marriage,2 Aug 1846 ,"Cutler’s Park, Nebraska",Mary Caroline (Barton) Curtis,Barton-3511
+Wilford Woodruff,Marriage,28 Mar 1852,"Salt Lake City, Utah",Mary Meek (Giles),Giles-3201
+Wilford Woodruff,Marriage,20 Apr 1852,"Great Salt Lake City, Utah Territory",Clarissa Harriman,
+Wilford Woodruff,Marriage,13 Mar 1853,"Salt Lake City, Salt Lake, Utah Territory, United States",Sarah Brown,Brown-36813
+Wilford Woodruff,Marriage,13 Mar 1853,"Salt Lake City, Salt Lake, Utah Territory, United States",Emma Smoot (Smith),Smith-121369
+Wilford Woodruff,Divorce,4 Jun 1853,,"Clarissa Harriman",
+Wilford Woodruff,Marriage,31 Jul 1857,"Salt Lake City, Salt Lake, Utah Territory, United States",Sarah Delight (Stocking),Stocking-335
+Wilford Woodruff,Marriage,10 Mar 1877,"St. George, Utah",Eudora Lovina Young,Young-22320
+Wilford Woodruff,Marriage,2 Aug 1846,"Cutler’s Park, Nebraska",Mary Caroline (Barton) Curtis,Barton-3511
+Phoebe Whittemore (Carter),Birth,"8 Mar 1807","Scarborough, Cumberland, Maine, United States",,
+Phoebe Whittemore (Carter),Death,10 Nov 1885,"Salt Lake City, Salt Lake, Utah, United States",,
+Phoebe Whittemore (Carter),Marriage,13 Apr 1837,"Kirtland, Ohio",Wilford Woodruff,Woodruff-246
+Mary Ann (Jackson),Birth,"18 Feb 1818","Liverpool, Lancashire, England",,
+Mary Ann (Jackson),Death,25 Oct 1894,"Salt Lake, Utah, United States",,
+Mary Ann (Jackson),Marriage,15 Apr 1846,"Winter Quarters, Douglas, Nebraska, United States",Wilford Woodruff,Woodruff-246
+Mary Ann (Jackson),Divorce,1852,,Wilford Woodruff,
+Mary Ann (Jackson),Marriage,1857,,David James Ross,
+Mary Caroline (Barton) Curtis,Birth,"12 Jan 1829","Wilmington New Castle, Delaware, USA",,
+Mary Caroline (Barton) Curtis,Death,10 Aug 1910,"Mackay, Custer, Idaho, USA",,
+Mary Caroline (Barton) Curtis,Marriage,4 Feb 1848,"Iowa Township, Holt, Nebraska, United States",Erastus Curtis,Curtis-2441
+Mary Caroline (Barton) Curtis,Marriage,2 Aug 1846 ,"Cutler’s Park, Nebraska",Wilford Woodruff,Woodruff-246
+Mary Meek (Giles),Birth,6 Sep 1803,,
+Mary Meek (Giles),Death,4 Oct 1852,,
+Mary Meek (Giles),Marriage,28 Mar 1852,"Salt Lake City, Utah",Wilford Woodruff,Woodruff-246
+Sarah Brown,Birth,1 Jan 1834,"Henderson, Jefferson, New York, United States",,
+Sarah Brown,Death,9 May 1909,"Smithfield, Cache, Utah, United States",,
+Sarah Brown,Marriage,13 Mar 1853,"Salt Lake City, Salt Lake, Utah Territory, United States",Wilford Woodruff,Woodruff-246
+Emma Smoot (Smith),Birth,"1 Mar 1838","Adam-Ondi-Ahman, Daviess, Missouri, United States",,
+Emma Smoot (Smith),Death,4 Mar 1912,"Salt Lake City, Salt Lake, Utah, United States",,
+Emma Smoot (Smith),Marriage,13 Mar 1853,"Salt Lake City, Salt Lake, Utah Territory, United States",Wilford Woodruff,Woodruff-246
+Sarah Delight (Stocking),Birth,"26 Jul 1839","Canton, Hartford, Connecticut, United States",,
+Sarah Delight (Stocking),Death,28 May 1906,"Cottonwood, Salt Lake, Utah, United States",,
+Sarah Delight (Stocking),Marriage,31 Jul 1857,"Salt Lake City, Salt Lake, Utah Territory, United States",Wilford Woodruff,Woodruff-246
+Eudora Lovina Young,Birth,12 May 1852,"",,
+Eudora Lovina Young,Death,21 Oct 1921,Salt Lake City,,
+Eudora Lovina Young,Marriage,10 Mar 1877 ,"St. George, Utah",Wilford Woodruff,Woodruff-246
+Eudora Lovina Young,Divorce,Nov 1878,"St. George, Utah",Wilford Woodruff,Woodruff-246
+Eudora Lovina Young,Marriage,1 Mar 1879,,Albert Hagen,
+Mary Meek (Giles),Marriage,1 May 1843,,Nathan Webster,
+Clarissa Harriman,Birth,20 Nov 1834,"Bradford, Essex, Massachusetts, United States",,
+Clarissa Harriman,Death,3 Sep 1903,"Salt Lake City, Utah",,
+Clarissa Harriman,Marriage,20 Apr 1852,"Great Salt Lake City, Utah Territory",Wilford Woodruff,Woodruff-246
+Clarissa Harriman,Divorce,4 Jun 1853,,Wilford Woodruff,Woodruff-246
+Clarissa Harriman,Marriage,11 Dec 1853,,Alonzo Haventon Russell,
+Clarissa Harriman,Divorce,13 Mar 1863,,Alonzo Haventon Russell,
+Clarissa Harriman,Marriage,23 Feb 1867,,Thomas William Winter,
+Clarissa Harriman,Divorce,24 Jan 1878,,Thomas William Winter,
+Clarissa Harriman,Marriage,1880,,Henry Woodard,

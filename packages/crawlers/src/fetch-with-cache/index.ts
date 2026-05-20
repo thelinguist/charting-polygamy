@@ -27,10 +27,12 @@ export const fetchHTMLWithCache = async (url: string, slug: string, options?: {}
             throw new Error(`failed to read ${url} with status ` + res.status + ": " + res.statusText)
         } else {
             const rawHtml = await res.text()
-            await fs.promises.mkdir("caches", { recursive: true })
-            await fs.promises.writeFile(cachePath, rawHtml, {
-                encoding: ENCODING,
-            })
+            if (rawHtml) {
+                await fs.promises.mkdir("caches", { recursive: true })
+                await fs.promises.writeFile(cachePath, rawHtml, {
+                    encoding: ENCODING,
+                })
+            }
             return rawHtml
         }
     }

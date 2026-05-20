@@ -33,21 +33,6 @@ const parseFacts = (rawHtmlString: string, personToExclude?: string): Factoid[] 
                 Link: undefined,
             })
         }
-        if (/^(husband)|(wife)\sof\s/i.test(fact)) {
-            const [secondParty, rest] = fact.replace(/((husband)|(wife))\sof\s/i, "").split(/—\smarried\s/)
-            const [date, place] = rest.replace(" [location unknown]", "").split(/\sin\s/i)
-            const cleanedSecondParty = evenlySpace(secondParty)
-            if (!personToExclude || personToExclude !== cleanedSecondParty) {
-                parsedFacts.push({
-                    Name: person,
-                    Event: LifeEventEnum.Marriage,
-                    Date: date && evenlySpace(date),
-                    Place: place && evenlySpace(place),
-                    "Second Party": cleanedSecondParty,
-                    Link: rows[i].querySelector("a")?.attributes.href?.replace("/wiki/", ""),
-                })
-            }
-        }
         if (/^died\s/i.test(fact)) {
             const [date, place] = fact
                 .replace(/^died\s/i, "")
@@ -64,7 +49,55 @@ const parseFacts = (rawHtmlString: string, personToExclude?: string): Factoid[] 
             })
         }
     }
+    const spouseEls = document.querySelectorAll("#Spouses .spouse")
+    for (const spouseEl of spouseEls) {
+        const fact = spouseEl.textContent.trim()
+        const [secondParty, rest] = fact.replace(/((husband)|(wife))\sof\s/i, "").split(/—\smarried\s/)
+        const [date, place] = (rest ?? "").replace(" [location unknown]", "").split(/\sin\s/i)
+        const cleanedSecondParty = evenlySpace(secondParty)
+        if (!personToExclude || personToExclude !== cleanedSecondParty) {
+            parsedFacts.push({
+                Name: person,
+                Event: LifeEventEnum.Marriage,
+                Date: date && evenlySpace(date),
+                Place: place && evenlySpace(place),
+                "Second Party": cleanedSecondParty,
+                Link: spouseEl.querySelector("a")?.attributes.href?.replace("/wiki/", ""),
+            })
+        }
+    }
     return parsedFacts
+}
+
+const fetchOptions = {
+    headers: {
+        "user-agent": COMMON_USER_AGENT,
+        cookie: `aws-waf-token=${process.env.WIKITREE_WAF_TOKEN}`,
+        referer: "https://www.wikitree.com/wiki/Special:SearchPerson",
+    },
+}
+
+const crawlPerson = async (
+    slug: string,
+    factset: Record<string, Factoid[]>,
+    visited: Set<string>,
+    personToExclude?: string,
+    depth = 0,
+) => {
+    if (visited.has(slug)) return
+    visited.add(slug)
+    const url = `https://www.wikitree.com/wiki/${slug}`
+    const rawHtml = await fetchHTMLWithCache(url, slug, fetchOptions)
+    const facts = parseFacts(rawHtml, personToExclude)
+    factset[facts[0].Name] = facts
+    if (depth === 0) {
+        const marriages = facts.filter(fact => fact.Event === LifeEventEnum.Marriage)
+        for (const marriage of marriages) {
+            if (marriage.Link) {
+                await crawlPerson(marriage.Link, factset, visited, facts[0].Name, depth + 1)
+            }
+        }
+    }
 }
 
 /**
@@ -73,23 +106,9 @@ const parseFacts = (rawHtmlString: string, personToExclude?: string): Factoid[] 
  * @param factset
  * @param personToExclude such as an already discovered patriarch
  */
-const getPatriarchAndWives = async (slug: string, factset = {}, personToExclude?: string) => {
-    const url = `https://wikitree.com/wiki/${slug}`
-    const rawHtml = await fetchHTMLWithCache(url, slug, {
-        headers: {
-            "user-agent": COMMON_USER_AGENT,
-        },
-    })
-    const facts = parseFacts(rawHtml, personToExclude)
-    factset[facts[0].Name] = facts
-    if (!personToExclude) {
-        const marriages = facts.filter(fact => fact.Event === LifeEventEnum.Marriage)
-        for (const marriage of marriages) {
-            if (marriage.Link) {
-                await getPatriarchAndWives(marriage.Link, factset, marriage.Name)
-            }
-        }
-    }
+const getPatriarchAndWives = async (slug: string, factset: Record<string, Factoid[]> = {}, personToExclude?: string) => {
+    const visited = new Set<string>()
+    await crawlPerson(slug, factset, visited, personToExclude)
     return factset
 }
 
