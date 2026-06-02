@@ -1,3 +1,7 @@
+---
+description: Instructs on how to write react code and wha tools to use
+---
+
 # Frontend Development Guide
 
 ## Website (`apps/ui`)
