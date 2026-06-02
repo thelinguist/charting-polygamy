@@ -16,19 +16,18 @@ describe("collectSequentialGaps", () => {
 
     it("pushes the gap between consecutive marriage start years", () => {
         const result: number[] = []
-        // yearsBetween uses a 365.25-day year; Jan-to-Jan boundaries can give n-1.
-        // 1850→1855 = 1826 days → floor(1826/365.25) = 4
-        collectSequentialGaps([marriage(1850), marriage(1855)], result)
-        expect(result).toEqual([4])
+        // 1852→1857 crosses 2 leap years (1852, 1856) = 1827 days.
+        // 1827 / 365.25 = 5.001 → floor = 5 (clean result, no rounding ambiguity)
+        collectSequentialGaps([marriage(1852), marriage(1857)], result)
+        expect(result).toEqual([5])
     })
 
     it("collects gaps for all consecutive pairs", () => {
         const result: number[] = []
-        // 1850→1853 = 1096 days → floor(1096/365.25) = 2 (rounds down due to 365.25)
-        // Wait, actual: 1850:365, 1851:365, 1852:366 = 1096 days → 1096/365.25 = 2.999 → 2
-        // 1853→1858 = 1826 days → floor = 4
-        collectSequentialGaps([marriage(1850), marriage(1853), marriage(1858)], result)
-        expect(result).toEqual([3, 4])
+        // 1848→1852: 1461 days (leap: 1848) → floor(1461/365.25) = 4
+        // 1852→1857: 1827 days (leaps: 1852, 1856) → floor(1827/365.25) = 5
+        collectSequentialGaps([marriage(1848), marriage(1852), marriage(1857)], result)
+        expect(result).toEqual([4, 5])
     })
 
     it("skips pairs where either start date is missing", () => {
