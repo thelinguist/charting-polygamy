@@ -38,7 +38,7 @@ function deserializePayload(data: typeof rawData): Record<string, PatriarchData>
                         birth: new Date(t.b),
                         death: new Date(t.d),
                         linkedMarriage: {
-                            ...(t.lm.s ? { start: new Date(t.lm.s) } : {}),
+                            start: new Date(t.lm.s!),
                             ...(t.lm.e ? { end: new Date(t.lm.e) } : {}),
                         },
                         otherMarriages: (t.om ?? []).map(o => ({

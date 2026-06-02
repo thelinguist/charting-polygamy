@@ -25,7 +25,7 @@ export interface HistogramChartProps {
     xLabel?: string
     sampleN?: number
     tickValues?: number[]
-    tickFormat?: (value: number) => string
+    tickFormat?: (value: { valueOf(): number }) => string
     referenceLines?: ReferenceLineConfig[]
 }
 
@@ -116,7 +116,7 @@ export function HistogramChart({
                     tickStroke={AXIS_COLOR}
                     tickLabelProps={TICK_LABEL_PROPS}
                     {...(tickValues ? { tickValues } : { numTicks: 6 })}
-                    {...(tickFormat ? { tickFormat: (v: number) => tickFormat(v) } : {})}
+                    {...(tickFormat ? { tickFormat } : {})}
                 />
                 <AxisLeft
                     scale={yScale}
