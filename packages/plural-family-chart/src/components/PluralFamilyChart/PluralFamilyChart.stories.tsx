@@ -6,7 +6,7 @@ import { PluralFamilyChart } from "."
 import { DEFAULT_HISTORICAL_EVENTS } from "./constants"
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-    title: "PluralFamilyChart",
+    title: "PluralFamily/PluralFamilyChart",
     // component: () => <ParentSize>{({ width, height }) => <PluralFamilyChart width={width} height={height} />}</ParentSize>,
     component: PluralFamilyChart,
     parameters: {

@@ -43,3 +43,5 @@ local-notes/
 .idea
 
 *.ged
+
+*.csv

@@ -56,6 +56,7 @@ type Stage = "idle" | "parsing" | "result"
 export default function UploadPage() {
     const { initialChartData, initialNotes, showBanner, savedSession, dismissBanner, deleteSession } = useChartSession()
     const [chartData, setChartData] = useState<Record<string, PatriarchData>>(initialChartData ?? {})
+    const [monogamousData, setMonogamousData] = useState<Record<string, PatriarchData>>({})
     const [stage, setStage] = useState<Stage>(initialChartData ? "result" : "idle")
     const [chartStats, setChartStats] = useState<ChartStats | null>(() =>
         initialChartData && Object.keys(initialChartData).length > 0
@@ -78,11 +79,16 @@ export default function UploadPage() {
         setStage("parsing")
         const fileContents = await parseFile(file, console.info)
         const fileFormat = getFileFormat(file)
-        const { chartData: newData, stats } = getTimelines({ fileContents, fileFormat })
+        const {
+            chartData: newData,
+            monogamousData: newMonoData,
+            stats,
+        } = getTimelines({ fileContents, fileFormat, includeMonogamous: true })
         saveSession(newData, "file", file.name, stats)
         setChartStats(Object.keys(newData).length > 0 ? computeChartStats(newData, stats) : null)
         setNotes({})
         setChartData(newData)
+        setMonogamousData(newMonoData)
         setStage("result")
     }
 
@@ -114,6 +120,12 @@ export default function UploadPage() {
                     <p className={`lede ${styles.lede}`}>
                         Drop in a GEDCOM file, paste a CSV, or build a family by hand. The tool detects men with
                         overlapping marriages and draws each as a stacked timeline.
+                    </p>
+                    <p className={`lede ${styles.lede}`}>
+                        <b>You will likely need to review your family tree.</b>There may be missing marriage dates that
+                        cause families to be hidden in the charts below. Sometimes researchers falsely link a child as a
+                        wife or vice versa and there may even be duplicates. Once the tool has identified some plural
+                        families, look into supporting facts such as government records to confirm what you are seeing.
                     </p>
                 </div>
             </section>
@@ -208,7 +220,13 @@ export default function UploadPage() {
                             </div>
                         ) : (
                             <>
-                                {chartStats && <ChartStatsBlock stats={chartStats} />}
+                                {chartStats && (
+                                    <ChartStatsBlock
+                                        stats={chartStats}
+                                        chartData={chartData}
+                                        monogamousData={monogamousData}
+                                    />
+                                )}
                                 <Timelines
                                     chartData={chartData}
                                     notes={notes}

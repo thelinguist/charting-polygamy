@@ -1,4 +1,3 @@
-// @ts-expect-error it's fine
 import type { StorybookConfig } from "@storybook/react-vite"
 
 const config: StorybookConfig = {
