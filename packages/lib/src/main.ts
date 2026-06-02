@@ -19,6 +19,8 @@ interface GetTimelinesProps {
     patriarchName?: string
     allowFemaleConcurrentMarriages?: boolean
     debugMode?: boolean
+    /** When true, non-polygamous families are included in the output as `monogamousData`. */
+    includeMonogamous?: boolean
 }
 
 export interface PatriarchData {
@@ -28,6 +30,8 @@ export interface PatriarchData {
 
 export interface TimelinesOutput {
     chartData: Record<string, PatriarchData>
+    /** Populated when `includeMonogamous` is true. Maps patriarch name to family data for non-polygamous families. */
+    monogamousData: Record<string, PatriarchData>
     stats: Statistics
     errors: any
 }
@@ -38,9 +42,11 @@ export const getTimelines = ({
     patriarchName,
     allowFemaleConcurrentMarriages,
     debugMode,
+    includeMonogamous,
 }: GetTimelinesProps): TimelinesOutput => {
     setConfig({ debugMode, allowFemaleConcurrentMarriages })
     const chartData: Record<string, PatriarchData> = {}
+    const monogamousData: Record<string, PatriarchData> = {}
     const families = getFacts(fileContents, fileFormat, patriarchName)
     for (const family of families) {
         try {
@@ -63,6 +69,11 @@ export const getTimelines = ({
                     patriarchTimeline: timelines.rootTimeline,
                     timelines: timelines.wives,
                 }
+            } else if (includeMonogamous && timelines.wives.length > 0) {
+                monogamousData[family.patriarchName] = {
+                    patriarchTimeline: timelines.rootTimeline,
+                    timelines: timelines.wives,
+                }
             }
             incrementPatriarchCount()
         } catch (e) {
@@ -73,7 +84,7 @@ export const getTimelines = ({
     if (debugMode && !patriarchName) {
         console.log(`\nfound ${Object.keys(chartData).length} polygamous families`)
     }
-    return { chartData, stats: reportStats(), errors: UserIntervention.getIssues() }
+    return { chartData, monogamousData, stats: reportStats(), errors: UserIntervention.getIssues() }
 }
 
 export const timelinesToMermaid = (chartData: Record<string, PatriarchData>): Record<string, string> => {

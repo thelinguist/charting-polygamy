@@ -5,6 +5,7 @@
   "main": "src/main.ts",
   "scripts": {
     "run": "ts-node src/main.ts",
+    "ipums": "ts-node src/ipums/processIpumsExtract.ts",
     "lint": "eslint .",
     "test": "vitest",
     "test:coverage": "vitest run --coverage"

@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep"
+    ],
+    "deny": [
+      "Bash(git push*)",
+      "Bash(git push --force*)",
+      "Bash(git reset --hard*)",
+      "Bash(git checkout -- *)",
+      "Bash(git clean -f*)",
+      "Bash(git clean -fd*)",
+      "Bash(git branch -D*)",
+      "Bash(rm -rf*)",
+      "Bash(rm -r*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pnpm -r exec tsc --noEmit 2>&1 | tail -30"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -41,7 +41,7 @@ export default function InstructionsPage() {
                         </li>
                     </ol>
                     <div className={styles.ctas}>
-                        <Link href="/chart/upload" className="btn btn-primary">
+                        <Link href="/chart/upload" className="btn btn-primary btn-cta">
                             Upload a File →
                         </Link>
                         <Link href="/gallery" className="btn">
@@ -66,6 +66,17 @@ export default function InstructionsPage() {
                         <li>
                             <strong>Hover or click a bar</strong> to see the marriage year, the wife&#39;s age at
                             marriage, and any prior or subsequent partners.
+                        </li>
+                        <li>
+                            A <strong>shaded band</strong> marks the institutional plural marriage era: from 1833
+                            — the earliest documented estimate for Joseph Smith&#39;s first plural union — through 6
+                            April 1890, the date of the Woodruff Manifesto formally but ineffectively ending
+                            Church-sanctioned polygamy. The revelation canonizing plural marriage was recorded in 1843;
+                            the practice was publicly announced in 1852.{" "}
+                            <a href="https://josephsmithspolygamy.org" target="_blank" rel="noopener noreferrer">
+                                josephsmithspolygamy.org
+                            </a>{" "}
+                            provides detailed documentation of the primary sources underlying this timeline.
                         </li>
                     </ul>
                 </section>

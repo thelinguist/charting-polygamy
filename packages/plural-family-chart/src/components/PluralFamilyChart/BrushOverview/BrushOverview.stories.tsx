@@ -4,7 +4,7 @@ import { Group } from "@visx/group"
 import { scaleUtc } from "@visx/scale"
 
 const meta = {
-    title: "BrushOverview",
+    title: "PluralFamily/BrushOverview",
     component: BrushOverview,
     parameters: {
         layout: "centered",

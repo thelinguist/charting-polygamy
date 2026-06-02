@@ -1,0 +1,44 @@
+.root {
+    margin-bottom: 32px;
+}
+
+.rootEmbedded {
+    margin-bottom: 0;
+}
+
+.eyebrow {
+    font-size: 11px;
+    font-family: monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #5a5446;
+    margin-bottom: 20px;
+}
+
+.tileSpan2 {
+    grid-column: 1 / -1;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    gap: 24px;
+}
+
+.tileTitle {
+    font-size: 10px;
+    font-family: monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #5a5446;
+    margin-bottom: 4px;
+}
+
+.description {
+    margin-top: 8px;
+    font-size: 12px;
+    font-family: Georgia, serif;
+    font-style: italic;
+    color: #8a8472;
+    line-height: 1.5;
+}

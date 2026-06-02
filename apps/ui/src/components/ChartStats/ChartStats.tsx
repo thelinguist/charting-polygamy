@@ -1,3 +1,9 @@
+"use client"
+
+import { useState } from "react"
+import { ChevronDown } from "lucide-react"
+import type { PatriarchData } from "lib"
+import { AggregateCharts } from "plural-family-chart"
 import type { ChartStats } from "./types"
 import styles from "./ChartStats.module.css"
 
@@ -23,9 +29,14 @@ function StatTile({ value, label, sub, compound }: StatTileProps) {
 
 interface Props {
     stats: ChartStats
+    chartData?: Record<string, PatriarchData>
+    monogamousData?: Record<string, PatriarchData>
 }
 
-export function ChartStats({ stats }: Props) {
+export function ChartStats({ stats, chartData, monogamousData }: Props) {
+    const [expanded, setExpanded] = useState(false)
+    const hasCharts = chartData != null && Object.keys(chartData).length > 1
+
     return (
         <div className={styles.block}>
             <div className={`eyebrow ${styles.eyebrow}`}>Statistical summary</div>
@@ -45,6 +56,21 @@ export function ChartStats({ stats }: Props) {
                     compound={`${stats.afterBanPercent}%`}
                 />
             </div>
+
+            {hasCharts && (
+                <>
+                    <div className={styles.divider} />
+                    <button className={styles.toggle} onClick={() => setExpanded(v => !v)} aria-expanded={expanded}>
+                        <span>Distribution charts</span>
+                        <ChevronDown size={14} className={expanded ? styles.chevronOpen : styles.chevron} />
+                    </button>
+                    {expanded && (
+                        <div className={styles.chartsArea}>
+                            <AggregateCharts chartData={chartData} monogamousData={monogamousData} hideHeader />
+                        </div>
+                    )}
+                </>
+            )}
         </div>
     )
 }
