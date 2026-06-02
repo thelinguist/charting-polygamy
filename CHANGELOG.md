@@ -1,3 +1,10 @@
+# [1.20.0](https://github.com/thelinguist/charting-polygamy/compare/v1.19.0...v1.20.0) (2026-06-02)
+
+
+### Features
+
+* aggregate graphs; claude configs ([#31](https://github.com/thelinguist/charting-polygamy/issues/31)) ([157501b](https://github.com/thelinguist/charting-polygamy/commit/157501b1dda866241d062217c9cc73b1574a5eaa))
+
 # [1.19.0](https://github.com/thelinguist/charting-polygamy/compare/v1.18.0...v1.19.0) (2026-05-20)
 
 ### Features
