@@ -1,5 +1,6 @@
 import { KnowledgeTree, OtherMarriage } from "../../types"
 import { getMarriageEnd } from "../../util/get-marriage-end"
+import { UserIntervention } from "../../util/user-intervention"
 
 export const getOtherMarriages = (tree: KnowledgeTree, wife: string, rootNode): OtherMarriage[] => {
     const otherMarriages: OtherMarriage[] = []
@@ -9,16 +10,20 @@ export const getOtherMarriages = (tree: KnowledgeTree, wife: string, rootNode): 
             if (!start) {
                 continue
             }
-            const otherMarriage = {
+            const end = getMarriageEnd(tree, wife, otherHusband)
+            if (!end) {
+                UserIntervention.addIssue({
+                    fact: { Name: wife },
+                    issueWith: "Date",
+                    reason: `could not determine end date for marriage between ${wife} and ${otherHusband}`,
+                })
+                continue
+            }
+            otherMarriages.push({
                 start,
                 spouse: otherHusband,
-                end: getMarriageEnd(tree, wife, otherHusband),
-            } as OtherMarriage
-            if (!otherMarriage.end) {
-                console.error(`missing end date for ${wife}->${otherHusband}. marking end date as start date`)
-                otherMarriage.end = start!
-            }
-            otherMarriages.push(otherMarriage)
+                end,
+            })
         }
     }
     return otherMarriages

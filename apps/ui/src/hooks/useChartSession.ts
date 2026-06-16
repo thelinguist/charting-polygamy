@@ -1,10 +1,11 @@
 import { useState } from "react"
-import type { PatriarchData } from "lib"
+import type { MissingFact, PatriarchData } from "lib"
 import { loadSession, clearSession, deserializeSession, type SavedSession } from "../lib/chartStorage"
 
 export function useChartSession(): {
     initialChartData: Record<string, PatriarchData> | null
     initialNotes: Record<string, string>
+    initialInterventions: MissingFact[]
     showBanner: boolean
     savedSession: SavedSession | null
     dismissBanner: () => void
@@ -19,6 +20,7 @@ export function useChartSession(): {
     return {
         initialChartData,
         initialNotes: savedSession?.notes ?? {},
+        initialInterventions: savedSession?.interventions ?? [],
         showBanner: savedSession !== null && !isDismissed,
         savedSession,
         dismissBanner: () => setIsDismissed(true),

@@ -1,4 +1,4 @@
-import type { PatriarchData } from "lib"
+import type { MissingFact, PatriarchData } from "lib"
 import type { OtherMarriage, PatriarchTimeline, Statistics, Timeline } from "lib/src/types"
 
 const STORAGE_KEY = "chart_session_v1"
@@ -58,6 +58,7 @@ export interface SavedSession {
     data: CompactPayload[]
     stats?: Statistics
     notes?: Record<string, string>
+    interventions?: MissingFact[]
 }
 
 // --- Compact helpers ---
@@ -197,6 +198,18 @@ export function updateSessionNotes(notes: Record<string, string>): void {
         if (!raw) return
         const session = JSON.parse(raw) as SavedSession
         session.notes = notes
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(session))
+    } catch {
+        // silently swallow
+    }
+}
+
+export function updateSessionInterventions(interventions: MissingFact[]): void {
+    try {
+        const raw = localStorage.getItem(STORAGE_KEY)
+        if (!raw) return
+        const session = JSON.parse(raw) as SavedSession
+        session.interventions = interventions
         localStorage.setItem(STORAGE_KEY, JSON.stringify(session))
     } catch {
         // silently swallow

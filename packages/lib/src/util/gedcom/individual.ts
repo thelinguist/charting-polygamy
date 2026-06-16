@@ -13,7 +13,7 @@ export const getBirthdate = (individual: GedcomIndividual, name): FactRecord | u
         UserIntervention.addIssue({
             fact,
             issueWith: "Date",
-            reason: "missing marriage date",
+            reason: "missing birth date",
         })
         return
     }

@@ -1,0 +1,116 @@
+/* Outer notes section */
+.wrapper {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule-soft);
+}
+
+.toggle {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-dim);
+    user-select: none;
+    padding: 2px 0;
+}
+
+.toggle::-webkit-details-marker {
+    display: none;
+}
+
+.toggleArrow {
+    display: inline-block;
+    font-size: 8px;
+    transition: transform 0.15s ease;
+}
+
+details[open] .toggleArrow {
+    transform: rotate(90deg);
+}
+
+.issuesBadge {
+    font-size: 10px;
+    letter-spacing: 0.03em;
+    color: color-mix(in srgb, var(--c-overlap) 90%, black);
+    background: color-mix(in srgb, var(--c-overlap) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--c-overlap) 35%, transparent);
+    border-radius: 3px;
+    padding: 1px 6px;
+}
+
+.content {
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Notes textarea */
+.notesArea {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--rule-soft);
+    padding: 12px 14px;
+    font-family: var(--serif-text);
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.5;
+    resize: vertical;
+    min-height: 100px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.notesArea:focus {
+    border-color: var(--ink-dim);
+}
+
+.notesArea::placeholder {
+    color: var(--ink-dim);
+    font-style: italic;
+}
+
+/* Data issues list */
+.issuesList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.issuesList li {
+    padding: 3px 10px;
+    border-left: 2px solid transparent;
+}
+
+.issuesPerson {
+    font-family: var(--mono);
+    font-size: 11px;
+}
+
+/* Actual data problem — amber, needs user action */
+.issuesMissing {
+    color: color-mix(in srgb, var(--c-overlap) 85%, var(--ink));
+    border-left-color: color-mix(in srgb, var(--c-overlap) 60%, transparent) !important;
+}
+
+.issuesMissing .issuesPerson {
+    color: color-mix(in srgb, var(--c-overlap) 70%, var(--ink-dim));
+}
+
+/* Assumption made automatically — dimmed, informational only */
+.issuesAssumption {
+    color: var(--ink-mute);
+    border-left-color: var(--rule-soft) !important;
+}
+
+.issuesAssumption .issuesPerson {
+    color: var(--ink-dim);
+}
