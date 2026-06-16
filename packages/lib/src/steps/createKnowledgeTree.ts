@@ -1,5 +1,6 @@
 import { FactRecord, KnowledgeTree, LifeEventEnum, PersonDetails } from "../types"
 import { addFactoid, parseTextDate } from "../util"
+import { UserIntervention } from "../util/user-intervention"
 
 /**
  * @param {Object[]} facts
@@ -18,7 +19,13 @@ export const createKnowledgeTree = (facts: FactRecord[]) => {
         let date
         try {
             date = dateString ? parseTextDate(dateString, fact) : undefined
-        } catch (e) {}
+        } catch (e) {
+            UserIntervention.addIssue({
+                fact,
+                issueWith: "Date",
+                reason: `Could not parse date string "${dateString}": ${e instanceof Error ? e.message : String(e)}`,
+            })
+        }
         const secondPerson = fact["Second Party"]
         const note = fact.Note
         if (!tree[person]) {

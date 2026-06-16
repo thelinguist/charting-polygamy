@@ -339,6 +339,38 @@ describe("getFamilies", () => {
         })
     })
 
+    describe("empty name records", () => {
+        // A patriarch whose NAME tag has no text (just "//") paired with a valid wife.
+        // The empty name should be treated as missing — the family must be skipped entirely.
+        const EMPTY_NAME_PATRIARCH = gedcom(
+            "0 @I1@ INDI",
+            "1 NAME //",
+            "1 SEX M",
+            "1 FAMS @F1@",
+            "1 FAMS @F2@",
+            "0 @I2@ INDI",
+            "1 NAME Wife One",
+            "1 SEX F",
+            "1 FAMS @F1@",
+            "0 @I3@ INDI",
+            "1 NAME Wife Two",
+            "1 SEX F",
+            "1 FAMS @F2@",
+            "0 @F1@ FAM",
+            "1 HUSB @I1@",
+            "1 WIFE @I2@",
+            "0 @F2@ FAM",
+            "1 HUSB @I1@",
+            "1 WIFE @I3@"
+        )
+
+        it("skips families whose patriarch has an empty name record", () => {
+            const db = makeDatabase(EMPTY_NAME_PATRIARCH)
+            const result = getFamilies(db)
+            expect(Object.keys(result)).toHaveLength(0)
+        })
+    })
+
     describe("duplicate patriarch names", () => {
         it("returns a separate entry for each patriarch even when names are identical", () => {
             const db = makeDatabase(DUPLICATE_NAMES)

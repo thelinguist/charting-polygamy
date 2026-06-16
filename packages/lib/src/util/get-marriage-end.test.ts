@@ -112,4 +112,68 @@ describe("getMarriageEnd", () => {
         // in the tree he dies well after she marries again
         expect(getMarriageEnd(tree, wife, manSheSwooned)).toEqual(new Date(manSheSwoonedDeath))
     })
+
+    it("returns undefined without throwing when both husband and wife have no death date (last marriage)", () => {
+        const noDeathWife = "No Death Wife"
+        const noDeathHusband = "No Death Husband"
+        const noDeathTree: KnowledgeTree = {
+            [noDeathHusband]: {
+                name: noDeathHusband,
+                birth: { date: new Date("1800-01-01") },
+                marriages: {},
+                divorces: {},
+            },
+            [noDeathWife]: {
+                name: noDeathWife,
+                birth: { date: new Date("1800-01-01") },
+                marriages: {
+                    [noDeathHusband]: {
+                        date: new Date("1820-01-01"),
+                        person: noDeathHusband,
+                    },
+                },
+                divorces: {},
+            },
+        }
+        expect(() => getMarriageEnd(noDeathTree, noDeathWife, noDeathHusband)).not.toThrow()
+        expect(getMarriageEnd(noDeathTree, noDeathWife, noDeathHusband)).toBeUndefined()
+    })
+
+    it("returns undefined without throwing when both husband and wife have no death date (allowFemaleConcurrentMarriages: true)", () => {
+        setConfig({ allowFemaleConcurrentMarriages: true })
+        const noDeathWife = "No Death Wife"
+        const noDeathHusband1 = "No Death Husband 1"
+        const noDeathHusband2 = "No Death Husband 2"
+        const noDeathTree: KnowledgeTree = {
+            [noDeathHusband1]: {
+                name: noDeathHusband1,
+                birth: { date: new Date("1800-01-01") },
+                marriages: {},
+                divorces: {},
+            },
+            [noDeathHusband2]: {
+                name: noDeathHusband2,
+                birth: { date: new Date("1800-01-01") },
+                marriages: {},
+                divorces: {},
+            },
+            [noDeathWife]: {
+                name: noDeathWife,
+                birth: { date: new Date("1800-01-01") },
+                marriages: {
+                    [noDeathHusband1]: {
+                        date: new Date("1820-01-01"),
+                        person: noDeathHusband1,
+                    },
+                    [noDeathHusband2]: {
+                        date: new Date("1830-01-01"),
+                        person: noDeathHusband2,
+                    },
+                },
+                divorces: {},
+            },
+        }
+        expect(() => getMarriageEnd(noDeathTree, noDeathWife, noDeathHusband1)).not.toThrow()
+        expect(getMarriageEnd(noDeathTree, noDeathWife, noDeathHusband1)).toBeUndefined()
+    })
 })

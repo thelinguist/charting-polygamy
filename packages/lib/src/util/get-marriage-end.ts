@@ -42,6 +42,7 @@ export const getMarriageEnd = (tree: KnowledgeTree, wife: string, spouse: string
                     return wifesDeath
                 }
                 if (!husbandDeath && !wifesDeath) {
+                    return undefined
                 }
                 return isBefore(wifesDeath!, husbandDeath!) ? wifesDeath : husbandDeath
             }
@@ -60,6 +61,7 @@ export const getMarriageEnd = (tree: KnowledgeTree, wife: string, spouse: string
                     return wifesDeath
                 }
                 if (!husbandDeath && !wifesDeath) {
+                    return undefined
                 }
                 return isBefore(wifesDeath!, husbandDeath!) ? wifesDeath : husbandDeath
             }
