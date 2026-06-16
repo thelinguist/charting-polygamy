@@ -3,11 +3,14 @@
 import React, { useEffect, useRef, useState } from "react"
 import { PluralFamilyChart } from "plural-family-chart"
 import { PatriarchTimeline, type Timeline } from "lib/src/types"
+import { MissingFact } from "lib"
 import styles from "./TimelineComponent.module.css"
+
 import { classNames } from "../../lib"
 import { encodePatriarchData } from "../../lib/shareUrl"
 import { ChartErrorBoundary } from "../ChartErrorBoundary"
 import { useIsMobile } from "../../hooks/useIsMobile"
+import { ResearchAccordion } from "./ResearchAccordion"
 
 interface Props {
     name: string
@@ -18,6 +21,7 @@ interface Props {
     chartWidth?: number
     note?: string
     onNoteChange?: (note: string) => void
+    interventions?: MissingFact[]
 }
 
 export const TimelineComponent: React.FC<Props> = ({
@@ -28,6 +32,7 @@ export const TimelineComponent: React.FC<Props> = ({
     chartWidth,
     note,
     onNoteChange,
+    interventions,
 }) => {
     const containerRef = useRef<HTMLDivElement>(null)
     const [width, setWidth] = useState(chartWidth ?? 800)
@@ -72,21 +77,12 @@ export const TimelineComponent: React.FC<Props> = ({
                     />
                 </ChartErrorBoundary>
             </div>
-            {onNoteChange !== undefined && (
-                <div className={styles.notes}>
-                    <label className={styles.notesLabel} htmlFor={`notes-${name}`}>
-                        Research notes
-                    </label>
-                    <textarea
-                        id={`notes-${name}`}
-                        className={styles.notesArea}
-                        value={note ?? ""}
-                        onChange={e => onNoteChange(e.target.value)}
-                        placeholder="Jot down interesting discoveries about this family, sources, or note for further research…"
-                        rows={4}
-                    />
-                </div>
-            )}
+            <ResearchAccordion
+                name={name}
+                note={note}
+                onNoteChange={onNoteChange}
+                interventions={interventions}
+            />
         </div>
     )
 }

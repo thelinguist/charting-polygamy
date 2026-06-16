@@ -34,7 +34,7 @@ export const parseTextDate = (text: string, existingFact: Partial<FactRecord>, l
             canMakeAssumption: true,
             fact: existingFact,
             issueWith: "Date",
-            reason: `only year specified. assuming jan 1 ${text}`,
+            reason: `only year specified for ${existingFact.Event ?? "Unknown Event"}. assuming jan 1 ${text}`,
         })
         return parse(text, "yyyy", new Date())
     }
@@ -48,7 +48,7 @@ export const parseTextDate = (text: string, existingFact: Partial<FactRecord>, l
             canMakeAssumption: true,
             fact: existingFact,
             issueWith: "Date",
-            reason: `no date specified. assuming 1 ${text}`,
+            reason: `no date specified for ${existingFact.Event ?? "Unknown Event"}. assuming 1 ${text}`,
         })
         return parse(text, "MMMM yyyy", new Date())
     }
@@ -60,7 +60,7 @@ export const parseTextDate = (text: string, existingFact: Partial<FactRecord>, l
             canMakeAssumption: true,
             fact: existingFact,
             issueWith: "Date",
-            reason: `many dates specified: ${oldText}. assuming first one: ${text}`,
+            reason: `many dates specified for ${existingFact.Event ?? "Unknown Event"}: ${oldText}. assuming first one: ${text}`,
         })
     } else if (altDate.test(text)) {
         const oldText = text
@@ -69,7 +69,7 @@ export const parseTextDate = (text: string, existingFact: Partial<FactRecord>, l
             canMakeAssumption: true,
             fact: existingFact,
             issueWith: "Date",
-            reason: `alternative date specified: ${oldText}. assuming first one: ${text}`,
+            reason: `alternate date specified for ${existingFact.Event ?? "Unknown Event"}: ${oldText}. assuming first one: ${text}`,
         })
     }
 

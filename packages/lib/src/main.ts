@@ -1,7 +1,7 @@
 import { FileTypes, PatriarchTimeline, Statistics, Timeline } from "./types"
 import { createKnowledgeTree } from "./steps/createKnowledgeTree"
 import { createTimeline } from "./steps/createTimeline"
-import { charting, setConfig, UserIntervention } from "./util"
+import { charting, setConfig, UserIntervention, MissingFact } from "./util"
 import { getFacts } from "./steps/createDB"
 import { checkIfPolygamous } from "./steps/checkIfPolygamous"
 import {
@@ -28,12 +28,19 @@ export interface PatriarchData {
     timelines: Timeline[]
 }
 
+export interface SkippedFamily {
+    name: string
+    reason: string
+}
+
 export interface TimelinesOutput {
     chartData: Record<string, PatriarchData>
     /** Populated when `includeMonogamous` is true. Maps patriarch name to family data for non-polygamous families. */
     monogamousData: Record<string, PatriarchData>
     stats: Statistics
-    errors: any
+    errors: MissingFact[]
+    /** Families that could not be processed due to errors during parsing or timeline construction. */
+    skippedFamilies: SkippedFamily[]
 }
 
 export const getTimelines = ({
@@ -44,11 +51,14 @@ export const getTimelines = ({
     debugMode,
     includeMonogamous,
 }: GetTimelinesProps): TimelinesOutput => {
+    UserIntervention.reset()
     setConfig({ debugMode, allowFemaleConcurrentMarriages })
     const chartData: Record<string, PatriarchData> = {}
     const monogamousData: Record<string, PatriarchData> = {}
+    const skippedFamilies: SkippedFamily[] = []
     const families = getFacts(fileContents, fileFormat, patriarchName)
     for (const family of families) {
+        const issueCursor = UserIntervention.getIssues().length
         try {
             const patriarchDB = createKnowledgeTree(family.facts)
             const timelines = createTimeline(patriarchDB, family.patriarchName)
@@ -77,14 +87,21 @@ export const getTimelines = ({
             }
             incrementPatriarchCount()
         } catch (e) {
-            console.error(`could not complete chart for ${family.patriarchName}`)
-            console.error(e)
+            console.error(`could not complete chart for ${family.patriarchName}`, e)
+            skippedFamilies.push({
+                name: family.patriarchName,
+                reason: e instanceof Error ? e.message : "Unknown error",
+            })
+        }
+        const allIssues = UserIntervention.getIssues()
+        for (let i = issueCursor; i < allIssues.length; i++) {
+            allIssues[i].patriarch = family.patriarchName
         }
     }
     if (debugMode && !patriarchName) {
         console.log(`\nfound ${Object.keys(chartData).length} polygamous families`)
     }
-    return { chartData, monogamousData, stats: reportStats(), errors: UserIntervention.getIssues() }
+    return { chartData, monogamousData, stats: reportStats(), errors: UserIntervention.getIssues(), skippedFamilies }
 }
 
 export const timelinesToMermaid = (chartData: Record<string, PatriarchData>): Record<string, string> => {

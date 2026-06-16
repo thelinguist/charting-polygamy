@@ -5,13 +5,15 @@ export interface MissingFact {
     issueWith: keyof FactRecord
     canMakeAssumption?: boolean
     reason?: string
+    /** Set retroactively in getTimelines() to associate the issue with a specific patriarch's processing. */
+    patriarch?: string
 }
 
 /**
  * This singleton class should manage any issues that arise that the user should provide more input on.
  * These are assumptions that the program could make or decisions that cannot be made with the given data
  *
- * At the end of the flow the class will provide this list of issues for the user to quickly respond. The program should be able to use these updates
+ * At the end of the flow, the class will provide this list of issues for the user to quickly respond. The program should be able to use these updates
  */
 export class UserIntervention {
     static singleton: UserIntervention

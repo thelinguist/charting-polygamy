@@ -58,8 +58,16 @@ export const getFamilies = (database: GedcomDatabase, patriarchToFind?: string):
 
         const factsAboutFamily: FactRecord[] = []
 
+        // Snapshot before patriarch/matriarch fact-gathering so we can tag new issues with the patriarch name.
+        // processOtherFamilies is excluded from this range — its issues belong to OTHER patriarchs
+        // and will be tagged when those patriarchs are processed in their own loop iteration.
+        const cursorBeforePatriarch = UserIntervention.getIssues().length
         factsAboutFamily.push(...gatherFacts(patriarch, patriarchName, matriarchName, family, true))
+        const cursorAfterPatriarch = UserIntervention.getIssues().length
+
         factsAboutFamily.push(...processOtherFamilies(matriarch, matriarchName, database, id))
+
+        const cursorBeforeMatriarch = UserIntervention.getIssues().length
         factsAboutFamily.push(...gatherFacts(matriarch, matriarchName, patriarchName, family, false))
 
         const marriageRecordMissing = !factsAboutFamily.find(
@@ -80,6 +88,14 @@ export const getFamilies = (database: GedcomDatabase, patriarchToFind?: string):
                 "Second Party": matriarchName,
                 Event: LifeEventEnum.Marriage,
             })
+        }
+
+        const allIssues = UserIntervention.getIssues()
+        for (let i = cursorBeforePatriarch; i < cursorAfterPatriarch; i++) {
+            allIssues[i].patriarch = patriarchName
+        }
+        for (let i = cursorBeforeMatriarch; i < allIssues.length; i++) {
+            allIssues[i].patriarch = patriarchName
         }
 
         patriarchData[patriarchId].families.push(factsAboutFamily)
