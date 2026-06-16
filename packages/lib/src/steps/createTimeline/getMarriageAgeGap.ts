@@ -2,7 +2,6 @@ import { PersonDetails } from "../../types"
 import { differenceInYears } from "date-fns"
 import { UserIntervention } from "../../util"
 
-
 const findExistingBirthDateFact = (person: PersonDetails) =>
     UserIntervention.getIssues().some(
         i => i.fact.Name === person.name && i.reason?.includes(`${person.name}'s birth date`)

@@ -162,9 +162,7 @@ describe("UserIntervention issue collection", () => {
         const { errors } = getTimelines({ fileContents: CLEAN, fileFormat: FileTypes.ged, includeMonogamous: true })
         const issuesWithReasons = errors.filter(e => !!e.reason)
         // May have minor date-format issues but no marriage-missing errors
-        const missingMarriageIssues = issuesWithReasons.filter(e =>
-            e.reason?.includes("no marriage data found")
-        )
+        const missingMarriageIssues = issuesWithReasons.filter(e => e.reason?.includes("no marriage data found"))
         expect(missingMarriageIssues).toHaveLength(0)
     })
 

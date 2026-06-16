@@ -77,12 +77,7 @@ export const TimelineComponent: React.FC<Props> = ({
                     />
                 </ChartErrorBoundary>
             </div>
-            <ResearchAccordion
-                name={name}
-                note={note}
-                onNoteChange={onNoteChange}
-                interventions={interventions}
-            />
+            <ResearchAccordion name={name} note={note} onNoteChange={onNoteChange} interventions={interventions} />
         </div>
     )
 }

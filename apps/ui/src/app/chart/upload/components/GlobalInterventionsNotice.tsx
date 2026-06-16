@@ -17,9 +17,7 @@ export function GlobalInterventionsNotice({ interventions }: Props) {
                 {interventions.map((issue, idx) => (
                     <li key={idx}>
                         {(issue.fact.Name ?? issue.fact["Second Party"]) && (
-                            <span className={styles.skippedName}>
-                                {issue.fact.Name ?? issue.fact["Second Party"]}
-                            </span>
+                            <span className={styles.skippedName}>{issue.fact.Name ?? issue.fact["Second Party"]}</span>
                         )}
                         {(issue.fact.Name ?? issue.fact["Second Party"]) && " — "}
                         {issue.reason}

@@ -10,14 +10,9 @@ export function PatriarchInterventions({ interventions }: Props) {
     return (
         <ul className={styles.issuesList}>
             {interventions.map((issue, idx) => (
-                <li
-                    key={idx}
-                    className={issue.canMakeAssumption ? styles.issuesAssumption : styles.issuesMissing}
-                >
+                <li key={idx} className={issue.canMakeAssumption ? styles.issuesAssumption : styles.issuesMissing}>
                     {(issue.fact.Name ?? issue.fact["Second Party"]) && (
-                        <span className={styles.issuesPerson}>
-                            {issue.fact.Name ?? issue.fact["Second Party"]}
-                        </span>
+                        <span className={styles.issuesPerson}>{issue.fact.Name ?? issue.fact["Second Party"]}</span>
                     )}
                     {(issue.fact.Name ?? issue.fact["Second Party"]) && " — "}
                     {issue.reason}

@@ -17,7 +17,9 @@ export function NoChartsFound({ skippedFamilies }: Props) {
             </p>
             <ul className={styles.emptyStateList}>
                 <li>Your tree contains families outside that time period</li>
-                <li>Marriage date records are missing or incomplete — these are required to detect overlapping marriages</li>
+                <li>
+                    Marriage date records are missing or incomplete — these are required to detect overlapping marriages
+                </li>
                 <li>Your ancestors practiced monogamy, which is entirely common</li>
             </ul>
             <SkippedFamiliesNotice families={skippedFamilies} summary={skippedSummary} />

@@ -15,7 +15,15 @@ import { computeChartStats } from "../../../lib/computeChartStats"
 import { processUploadedFile } from "../../../lib/processUploadedFile"
 
 export default function UploadPage() {
-    const { initialChartData, initialNotes, initialInterventions, showBanner, savedSession, dismissBanner, deleteSession } = useChartSession()
+    const {
+        initialChartData,
+        initialNotes,
+        initialInterventions,
+        showBanner,
+        savedSession,
+        dismissBanner,
+        deleteSession,
+    } = useChartSession()
     const [chartData, setChartData] = useState<Record<string, PatriarchData>>(initialChartData ?? {})
     const [monogamousData, setMonogamousData] = useState<Record<string, PatriarchData>>({})
     const [stage, setStage] = useState<Stage>(initialChartData ? Stage.Result : Stage.Idle)

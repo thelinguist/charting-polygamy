@@ -16,10 +16,7 @@ const makePerson = (
     birth: birthYear !== null ? { date: d(birthYear) } : undefined,
     death: { date: d(deathYear) },
     marriages: Object.fromEntries(
-        Object.entries(marriages).map(([k, v]) => [
-            k,
-            { person: v.person, ...(v.date ? { date: v.date } : {}) },
-        ])
+        Object.entries(marriages).map(([k, v]) => [k, { person: v.person, ...(v.date ? { date: v.date } : {}) }])
     ),
     divorces: {},
 })
@@ -69,7 +66,6 @@ describe("getMarriageAgeGap", () => {
     })
 
     describe("when dates are missing", () => {
-
         it("records an issue naming the missing patriarch birth date", () => {
             const patriarch = makePerson("John", null, 1880, {
                 Mary: { date: d(1845), person: "Mary" },

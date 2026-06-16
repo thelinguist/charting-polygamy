@@ -40,10 +40,7 @@ export function UploadResult({
 
     const globalInterventions = interventions.filter(i => !i.patriarch)
     const interventionsByPatriarch: Record<string, MissingFact[]> = Object.fromEntries(
-        Object.keys(chartData).map(name => [
-            name,
-            interventions.filter(i => i.patriarch === name),
-        ])
+        Object.keys(chartData).map(name => [name, interventions.filter(i => i.patriarch === name)])
     )
 
     return (

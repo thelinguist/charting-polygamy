@@ -6,8 +6,8 @@ export function UploadHeader() {
             <div className="shell">
                 <h2 className={styles.heading}>Chart your own tree.</h2>
                 <p className={`lede ${styles.lede}`}>
-                    Drop in a GEDCOM file, paste a CSV, or build a family by hand. The tool detects men with
-                    overlapping marriages and draws each as a stacked timeline.
+                    Drop in a GEDCOM file, paste a CSV, or build a family by hand. The tool detects men with overlapping
+                    marriages and draws each as a stacked timeline.
                 </p>
                 <p className={`lede ${styles.lede}`}>
                     <b>You will likely need to review your family tree.</b>There may be missing marriage dates that
