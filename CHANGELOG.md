@@ -1,3 +1,10 @@
+## [1.20.1](https://github.com/thelinguist/charting-polygamy/compare/v1.20.0...v1.20.1) (2026-06-16)
+
+
+### Bug Fixes
+
+* robustness ([#32](https://github.com/thelinguist/charting-polygamy/issues/32)) ([4f5cd0a](https://github.com/thelinguist/charting-polygamy/commit/4f5cd0af9834da2901ff4d96ae4408b705e98153))
+
 # [1.20.0](https://github.com/thelinguist/charting-polygamy/compare/v1.19.0...v1.20.0) (2026-06-02)
 
 
