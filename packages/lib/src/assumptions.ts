@@ -17,7 +17,7 @@ const polygamyStart = new Date("1833-01-01")
 const polygamyRevelation = new Date("1843-07-12")
 
 // a second manifesto was issued in 1904 to reiterate the end of the practice
-const polygamyEnd = new Date("1890-04-06")
+const polygamyEnd = new Date("1890-09-24")
 
 export default {
     polygamyStart,

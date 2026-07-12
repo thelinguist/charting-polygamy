@@ -1,15 +1,21 @@
 {
-  "permissions": {
-    "deny": [
-      "Bash(git push*)",
-      "Bash(git push --force*)",
-      "Bash(git reset --hard*)",
-      "Bash(git checkout -- *)",
-      "Bash(git clean -f*)",
-      "Bash(git clean -fd*)",
-      "Bash(git branch -D*)",
-      "Bash(rm -rf*)",
-      "Bash(rm -r*)"
-    ]
-  }
+    "permissions": {
+        "allow": [
+            "WebFetch(domain:www.ca10.uscourts.gov)",
+            "WebFetch(domain:wikitree.com)",
+            "WebFetch(domain:en.wikipedia.org)",
+            "WebFetch(domain:www.ancestry.com)"
+        ],
+        "deny": [
+            "Bash(git push*)",
+            "Bash(git push --force*)",
+            "Bash(git reset --hard*)",
+            "Bash(git checkout -- *)",
+            "Bash(git clean -f*)",
+            "Bash(git clean -fd*)",
+            "Bash(git branch -D*)",
+            "Bash(rm -rf*)",
+            "Bash(rm -r*)"
+        ]
+    }
 }
