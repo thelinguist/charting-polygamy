@@ -1,3 +1,10 @@
+# [1.21.0](https://github.com/thelinguist/charting-polygamy/compare/v1.20.2...v1.21.0) (2026-07-12)
+
+
+### Features
+
+* reynolds family (polygamous conviction that involved supreme court) ([#34](https://github.com/thelinguist/charting-polygamy/issues/34)) ([4720768](https://github.com/thelinguist/charting-polygamy/commit/4720768f755f7a2a5dfee62f6b3129221e3e545e))
+
 ## [1.20.2](https://github.com/thelinguist/charting-polygamy/compare/v1.20.1...v1.20.2) (2026-07-12)
 
 
