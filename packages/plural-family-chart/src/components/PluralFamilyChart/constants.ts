@@ -42,10 +42,11 @@ export const labelPadding = 16
 export interface HistoricalEvent {
     date: Date
     label: string
+    labelSide?: "left" | "right"
 }
 
 export const DEFAULT_HISTORICAL_EVENTS: HistoricalEvent[] = [
-    // { date: new Date("1843-07-12"), label: "Revelation of Plural Marriage" },
+    { date: new Date("1843-07-12"), label: "Revelation of Plural Marriage", labelSide: "left" },
     { date: new Date("1847-04-01"), label: "Mormon Exodus" },
     { date: new Date("1857-09-11"), label: "Mountain Meadows Massacre" },
     { date: assumptions.polygamyEnd, label: "1890 Manifesto" },

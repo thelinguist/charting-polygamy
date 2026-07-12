@@ -40,8 +40,12 @@ export const PREBAKED_SAMPLE: GalleryPolygamist[] = [
         notability: "Arrested in the 21st century for marrying underage girls (as plural wives)",
         name: "Warren Jeffs",
         born: 1955,
-        wifeCount: 78,
+        wifeCount: "~78 (estimated)",
         note: "Warren Jeffs led the Fundamentalist Church of Jesus Christ of Latter-Day Saints, a polygamous sect that broke from the mainline LDS Church. He is serving a life sentence for sexual assault of minors. His case brought renewed public attention to modern fundamentalist polygamous communities.",
+        source: {
+            href: "https://www.ca10.uscourts.gov/sites/ca10/files/opinions/010110138515.pdf",
+            text: "Bistline et al. v. Parker, 10th Cir. (2019)",
+        },
     },
 ]
 
@@ -92,6 +96,19 @@ export const PREBAKED: GalleryPolygamist[] = [
         source: {
             href: "https://en.wikipedia.org/wiki/George_Reynolds_(Mormon)",
             text: "Wikipedia",
+        },
+    },
+    {
+        name: "William Clayton",
+        notability: "Joseph Smith's personal secretary; scribed the revelation authorizing plural marriage",
+        born: 1814,
+        died: 1879,
+        wifeCount: 10,
+        data: "jZTLjpwwEEV_xao1lvykgV3npVE0s0kWs4iy8EwjGoWGyLgVTVr8e-RHY8OAlK3Lt46rbpVv0EMFz23XteqCPnbqzQw9ZPDbQHXbib1ABbSgAlOK6QEyOLmDQ4kpw0RABheoftxgdMc8x5RgUkIGCipGM2igYlN2jwuOicDM5ql9HoIJxYQGQeEERSIQmJSY8lkgi4WgdAK5EFCKGZkFIk8FnLwjxHggEIe8C3wNlESFJK5IGS5IfyFJKXP7Bk78BcF8F0S8kK-ZB5o-UnomTxQHYvtNQ2Nl7i68i9-RIc7L6eeUgemcQ9bfb1dzRk9D6mx8ine25PNBd7FzsXJ28o0n0Vqb-EnpRunaLJMzskqe2J0m3x-LQOPRNUs7du1rjR6UPl3UPq0kO7TdmQo0EYfK0r6qfgPG_hu2M48BxpalfWpVb84KfVFaR5hc9TGZ0QVsd5andCH9MLtGXpvraBT6oNXpNLz-momcr8qjcrO8eRc8gB6SZbCA70qrMzr2PXpWnan1GAnFisC2GzgvUyAUyTaFyWsVehyu7ajQ41vqkShXCL6N2F_HRVV8Zn7u2r_qpXa7pA06tv34Z9DmHLdqXdzOdMxr7UGSxb129vS9QhH20DZNbKBcW8S3LZq_hmUx9m_4Bw",
+        note: "William Clayton was a British convert who became Joseph Smith's personal secretary in Nauvoo. On July 12, 1843, he served as scribe for the revelation on celestial marriage (now D&C 132), placing him at the very origin of LDS plural marriage doctrine. He married ten women in total: his civil wife Ruth Moon (1836), four additional wives sealed in Nauvoo (1843–1846), and five more in Salt Lake City (1850–1870). He is also known for composing the hymn \"Come, Come, Ye Saints.\" His detailed Nauvoo journals are among the most significant primary sources for early Mormon history.",
+        source: {
+            href: "https://history.churchofjesuschrist.org/chd/individual/william-clayton-1814?lang=eng",
+            text: "LDS Church History Biographical Database",
         },
     },
     {
