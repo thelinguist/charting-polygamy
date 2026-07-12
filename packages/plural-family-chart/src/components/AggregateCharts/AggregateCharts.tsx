@@ -105,12 +105,15 @@ export function AggregateCharts({
                 <div>
                     <div className={styles.tileTitle}>Patriarch–wife age gap</div>
                     <AgeGapHistogram
-                        bins={data.ageGapBins}
+                        bins={data.firstAgeGapBins}
                         maxCount={data.maxGapCount}
-                        sampleN={data.ageGapCount}
+                        sampleN={data.firstAgeGapCount}
                         width={tileWidth}
                         fillLight={PALETTE_PER_CHART.ageGapLight}
                         fillDark={PALETTE_PER_CHART.ageGapDark}
+                        subsequentBins={data.subsequentAgeGapBins}
+                        subsequentCount={data.subsequentAgeGapCount}
+                        fillSubsequent={PALETTE_PER_CHART.ageGapSubsequent}
                     />
                     <p className={styles.description}>
                         Age difference between patriarch and wife at the time of marriage, expressed as years the

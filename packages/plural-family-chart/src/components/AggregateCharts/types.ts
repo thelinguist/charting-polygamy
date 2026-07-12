@@ -47,6 +47,10 @@ export interface AggregateData {
     // Chart 3: age gap at marriage (patriarch age - wife age)
     ageGapBins: Bin[]
     ageGapCount: number
+    firstAgeGapBins: Bin[]
+    firstAgeGapCount: number
+    subsequentAgeGapBins: Bin[]
+    subsequentAgeGapCount: number
     // Chart 4: average wife age by ordinal position
     avgAgeByOrder: OrderBucket[]
     // Chart 5: marriages by decade

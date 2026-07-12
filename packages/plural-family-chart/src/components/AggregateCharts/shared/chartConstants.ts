@@ -19,6 +19,9 @@ export const TICK_LABEL_PROPS_LEFT = {
 
 export const AGE_GAP_EDGES = [11, 14, 17, 22, 27, 32, 37, 42, 47]
 
+// 5-year bins for patriarch-wife age gap (patriarch age minus wife age)
+export const AGE_GAP_HISTOGRAM_EDGES = [-20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45]
+
 export const DECADE_MIN = 1840
 export const DECADE_MAX = 1920
 export const DECADE_BIN_WIDTH = 10

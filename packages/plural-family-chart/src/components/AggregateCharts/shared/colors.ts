@@ -27,9 +27,10 @@ export const PALETTE_PER_CHART = {
     // FirstVsSubsequent → sage (first) vs slate (subsequent)
     firstWife: "#5a7a5a",
     subsequentWife: "#6a7a8a",
-    // AgeGap → ochre (positive gap) / deeper ochre (negative)
+    // AgeGap → ochre (first wife) / slate (subsequent wives)
     ageGapLight: "#8a7a3a",
     ageGapDark: "#5a4e22",
+    ageGapSubsequent: "#6a7a8a",
     // FamilySize → slate blue
     familySize: "#5a7090",
     // WifeAgeByOrder → dusty rose
