@@ -7,7 +7,7 @@ interface Props {
 }
 
 export function EraShading({ xScale, marginTop, mainHeight }: Props) {
-    const x = xScale(assumptions.polygamyStart)
+    const x = xScale(assumptions.polygamyRevelation)
     const w = xScale(assumptions.polygamyEnd) - x
     if (w <= 0) return null
     return (

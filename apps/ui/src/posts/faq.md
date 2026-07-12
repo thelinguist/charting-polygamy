@@ -30,11 +30,33 @@ should have multiple wives. There is definitely more to it than that, and I am g
 takeaway is that the Mormon people had to reconcile their entire lives with this practice, so many families adopted the
 practice. So to put it simply, many Mormon families had one husband and multiple wives.
 
+## When did polygamy start in the LDS movement?
+
+The answer depends on which threshold you use, and historians recognize three distinct dates:
+
+- **c. 1833** — The earliest documented plural marriage, between Joseph Smith and Fanny Alger, a teenage member of his household. The exact year is debated (some sources say 1835–36), and it predates any written revelation. It operated on oral instruction alone.
+- **July 12, 1843** — The date William Clayton, Smith's personal secretary, scribed the formal revelation now known as Doctrine & Covenants 132. Notably, Smith dictated this revelation a decade into already-active practice. Emma Smith was informed the same day and, according to Clayton's diary, "said she did not believe a word of it."
+- **August 29, 1852** — The date Brigham Young and Orson Pratt publicly announced the practice to the world from the Salt Lake Tabernacle, nearly two decades after the earliest documented marriage.
+
+The most important nuance is that many plural marriages occurred *before* the doctrine was ever written down. Smith taught the principle privately to a small inner circle as early as 1831–1832, telling them "the time to practice it had not yet come." By the time D&C 132 was recorded in 1843, dozens of plural sealings had already been performed under his direct personal authorization.
+
+For deeper reading, see the [Wikipedia article on the origin of Latter-day Saint polygamy](https://en.wikipedia.org/wiki/Origin_of_Latter_Day_Saint_polygamy).
+
+## When did the LDS Church stop practicing polygamy?
+
+As with the start of the practice, the end came in stages rather than as a single clean break.
+
+- **September 24, 1890 — The First Manifesto** — LDS President Wilford Woodruff issued Official Declaration 1, announcing that the church would no longer sanction new plural marriages. This came under enormous pressure: the Edmunds-Tucker Act of 1887 had dissolved the church's legal corporate structure, seized its assets, and disenfranchised polygamists. Utah's path to statehood (achieved in 1896) was explicitly conditional on ending the practice. Some members continued to enter into plural marriages after 1890, either abroad or through sympathetic church leaders, treating the Manifesto as a legal concession rather than a doctrinal reversal.
+- **April 6, 1904 — The Second Manifesto** — LDS President Joseph F. Smith issued a stricter declaration during the Reed Smoot Senate hearings, in which Congress was investigating whether a practicing polygamist could serve as a U.S. Senator. This manifesto made clear that any church member entering a new plural marriage would be excommunicated. It is widely regarded as the definitive institutional end of the practice, closing the ambiguities left by the 1890 declaration.
+
+After 1904, members who continued to practice polygamy were cut off from the mainline LDS Church. Many formed or joined splinter groups — including the Fundamentalist Church of Jesus Christ of Latter-Day Saints (FLDS), whose leaders such as Warren Jeffs continued the practice into the 21st century.
+
+For further reading, see the Wikipedia articles on the [1890 Manifesto](https://en.wikipedia.org/wiki/1890_Manifesto) and the [Second Manifesto](https://en.wikipedia.org/wiki/Second_Manifesto_(Mormonism)).
+
 ## Are you against polygamy?
 
-While I'm only familiar with polygamy during the Mormon movement, [it is not a Mormon concept](https://www.pewresearch.org/short-reads/2020/12/07/polygamy-is-rare-around-the-world-and-mostly-confined-to-a-few-regions/).
-I do not practice it or know anyone personally who does. I am just seeking to understand my family history around it and
-offer the opportunity to others. Women are equal to men, and I condemn ideologies and practices to the contrary.
+While I'm only familiar with polygamy in a historical sense as a practice during the Mormon movement, [it is not a Mormon concept](https://www.pewresearch.org/short-reads/2020/12/07/polygamy-is-rare-around-the-world-and-mostly-confined-to-a-few-regions/).
+The goal of this project is to understand personal family history and offer that to others. Women are equal to men, and I condemn ideologies and practices to the contrary.
 
 ## Who is your audience then?
 

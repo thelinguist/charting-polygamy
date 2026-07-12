@@ -26,12 +26,13 @@ export function EventMarkers({ events, xScale, marginTop, mainHeight }: Props) {
                             strokeOpacity={0.45}
                         />
                         <text
-                            x={x + 3}
+                            x={event.labelSide === "left" ? x - 3 : x + 3}
                             y={labelY + 3}
                             fontSize={9}
                             fontFamily="var(--font-mono, monospace)"
                             fill="#5a5446"
                             fillOpacity={0.65}
+                            textAnchor={event.labelSide === "left" ? "end" : "start"}
                         >
                             {event.label}
                         </text>
