@@ -57,12 +57,16 @@ export const PREBAKED: GalleryPolygamist[] = [
     },
     {
         notability: "English king who started a church to marry who he wanted",
-        name: "King Henry VII",
+        name: "King Henry VIII",
         born: 1491,
         died: 1547,
-        data: "fVNNa-swEPwrYs9e0MqSv25pKTQ9lMIrvTx68CNqXHDkoiQtIfi_PyS5suVCwSdp1jOzM7qCgQbutbEX9rLdbtnwxu7Mvm_NDjL4OEFz_RXxDxogWRPyAkUFGezcgZIlcgoHB2j-XuHoj3ntcESQQQsNlRnsoUE1Zt-APPdzKgAkeUC9uC-QK8z5dC_9PRUzQHL3A15MgMoDhFwAcuQlkggAJQKAxtcxg1PvtTq_t-2p0_bdaGd3Y9v9YKLbSiEJpCK6daoIeQkZ9Ae3sR9udYobMxiSvRASIcmI5AK5RO5UHj-ggY09dWfLYHz1skXuZfvFObUbYzS7GXp9iSrdP_2XqFRI9UrlYuU6xY2eKw8rwvqb7KE1mv3Rl8NwtjNbFYOZ2EokjkKu2eYAdYoLbCIkhiHT6G14Y7e9_tTHSEgKeY1CREJV-mCLFeGiEDqt5kQYOoShI2n0T62dHbrIKaQ5dbxyCrhaE84F-0mYpC7qmNC0CxkPfOp3u6_W7tjN2e47WDwCuZpzlPmiLQ9DZ9ij_nzve72Yc0JUMjc78HPP3XBojzHbqWw5nzbkHsl_",
-        source: "user submitted",
-        wifeCount: 5,
+        data: "hVLLasMwEPwVsWcvaGXLr1uSS9JSKBR6KTm4REkDjlxsp8UE_3uRE0uOQlLwaTw7szOrE2jI4Xmvd2ypdN2x99VqBQF8t5Cfhn9X8CfkQFFGyGMUKQSwMYCMEuR0Bg6Qf5ygGWCeGR4RBKAGIAyRSxQh9MHIMRChkI4TGw4lU84AhdxxEiSOIppwIm50eGw5BkiQhMdJzmteOAK5QJruE4WXMcsZs_XrPoC2HPKZYhZF-6XqvVas2rJZXewqbRtKJZJAim1DJgIhTyCA8mCq_bchs5KxmWmt2LwqVWflpZEy35W8RMo8-QfljvJPhVbsTXWH6lg7_dTXHwv39O8f5mr9assWpfpRjXUgiTxDIayDTIbeY8_hwVlHB3eHZfVb1BvrIUIvhT33rcedZ3Hr8VrUricSZnLqkJpYXPoO9x_V6DBXTbNXbF5WR926Q3A_ggMGAzv_UtSd90yiLPOnz3tkbnrd_wE",
+        wifeCount: 6,
+        note: "Henry VIII married six women over the course of his reign. His desire to annul his first marriage to Catherine of Aragon, who had failed to produce a male heir, led to England's break with the Roman Catholic Church and the founding of the Church of England. Two of his wives were executed (Anne Boleyn and Catherine Howard), two marriages were annulled (Catherine of Aragon and Anne of Cleves), one wife died shortly after childbirth (Jane Seymour), and one outlived him (Catherine Parr).",
+        source: {
+            href: "https://en.wikipedia.org/wiki/Wives_of_Henry_VIII",
+            text: "Wikipedia",
+        },
     },
     {
         name: "Wilford Woodruff",
