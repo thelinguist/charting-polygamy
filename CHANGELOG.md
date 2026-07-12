@@ -1,3 +1,10 @@
+## [1.20.2](https://github.com/thelinguist/charting-polygamy/compare/v1.20.1...v1.20.2) (2026-07-12)
+
+
+### Bug Fixes
+
+* king henry facts more accurage ([#33](https://github.com/thelinguist/charting-polygamy/issues/33)) ([95a0f33](https://github.com/thelinguist/charting-polygamy/commit/95a0f338898c837fc17a3ffc5d8242107fd9afd6))
+
 ## [1.20.1](https://github.com/thelinguist/charting-polygamy/compare/v1.20.0...v1.20.1) (2026-06-16)
 
 
