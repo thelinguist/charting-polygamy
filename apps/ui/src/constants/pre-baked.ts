@@ -82,6 +82,19 @@ export const PREBAKED: GalleryPolygamist[] = [
         },
     },
     {
+        name: "George Reynolds",
+        notability: "His conviction for bigamy became the first U.S. Supreme Court ruling on religious freedom",
+        born: 1842,
+        died: 1909,
+        wifeCount: 3,
+        data: "hZFPawMhFMS_iszZB-r-ie4tp0Cgl7a3ksO22ibgaknSQ1j87kXBbFpoevQ5zvzmOSNgwMbF44djj-4SorcncHyeMcx_3L1igNStIiFJSHDYPDDCkNAkDDgmDC8zTkXXdyRWpBQ4XBnojqQiqZF41aza8rSpGlNO1Mgbje5ItKT6RVPz0i5xnH3JzMQP4_HC1iGw5y9rXdiP0wLdkzAkTYVeYDj8lCv_C52Jcsp6cv4wsu0YHHt628f3g_P2GtSpXECZZTu10c-gO81rUKmzifHW3ZQa_dW96ctndL_c7-ws7dI3",
+        note: "George Reynolds served as secretary to the LDS Church First Presidency for 44 years. He volunteered as a test case for polygamy laws, leading to Reynolds v. United States (1879) — the first Supreme Court case on the Free Exercise Clause, which established that religious belief is protected but religious practice is not. He was convicted of bigamy and imprisoned from 1876 to 1881. He fathered 32 children across his three marriages.",
+        source: {
+            href: "https://en.wikipedia.org/wiki/George_Reynolds_(Mormon)",
+            text: "Wikipedia",
+        },
+    },
+    {
         name: "John Menzies MacFarlane",
         notability: "Famous judge from Southern Utah during the Pioneer Era",
         born: 1833,
