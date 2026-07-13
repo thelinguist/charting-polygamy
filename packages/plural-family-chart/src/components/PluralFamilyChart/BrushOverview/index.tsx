@@ -2,7 +2,8 @@ import React, { useCallback } from "react"
 import { Brush } from "@visx/brush"
 import type { Bounds, Scale } from "@visx/brush/lib/types"
 import { scaleLinear, scaleUtc } from "@visx/scale"
-import { PatriarchTimeline, Timeline } from "lib/src/types"
+import { PatriarchTimeline } from "lib/src/types"
+import { PartialTimeline } from "../types"
 import { MiniChart } from "./MiniChart"
 
 const brushStyle = {
@@ -17,7 +18,7 @@ interface Props {
     width: number
     height: number
     patriarchTimeline: PatriarchTimeline
-    timelines: Timeline[]
+    timelines: PartialTimeline[]
     initialDomain?: [Date, Date] | null
     onChange: (domain: [Date, Date] | null) => void
 }

@@ -1,3 +1,5 @@
+import { GalleryTags } from "../constants/gallery-tags"
+
 export interface GalleryPolygamist {
     /**
      * one short sentence (clause form) as to why this person is in the list.
@@ -24,6 +26,7 @@ export interface GalleryPolygamist {
      * the source of the data, hyperlinkable when possible
      */
     source?: string | { href: string; text: string }
+    tags?: GalleryTags[]
     /**
      * can be an estimate as a string
      */

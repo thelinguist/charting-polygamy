@@ -1,8 +1,9 @@
-import { PatriarchTimeline, Timeline } from "lib/src/types"
+import { PatriarchTimeline } from "lib/src/types"
+import { PartialTimeline } from "./types"
 import { patriarchColor } from "./constants"
 
 const PADDING = 0.1
-export const getMarriageDomain = (patriarch: PatriarchTimeline, timelines: Timeline[]): [Date, Date] | null => {
+export const getMarriageDomain = (patriarch: PatriarchTimeline, timelines: PartialTimeline[]): [Date, Date] | null => {
     const starts = patriarch.marriages.map(m => m.start?.getTime()).filter((t): t is number => t !== undefined)
     if (!starts.length) return null
 
@@ -22,7 +23,7 @@ export const getMarriageDomain = (patriarch: PatriarchTimeline, timelines: Timel
     ]
 }
 
-export const getChartStartDate = (patriarch: PatriarchTimeline, timelines: Timeline[]): Date => {
+export const getChartStartDate = (patriarch: PatriarchTimeline, timelines: PartialTimeline[]): Date => {
     const births = [patriarch.birth, ...timelines.map(timeline => timeline.birth)].filter(
         (d): d is Date => d instanceof Date
     )
@@ -30,7 +31,7 @@ export const getChartStartDate = (patriarch: PatriarchTimeline, timelines: Timel
     return new Date(Math.min(...births.map(date => date.getTime())))
 }
 
-export const getChartEndDate = (patriarch: PatriarchTimeline, timelines: Timeline[]): Date => {
+export const getChartEndDate = (patriarch: PatriarchTimeline, timelines: PartialTimeline[]): Date => {
     const deaths = [patriarch.death, ...timelines.map(timeline => timeline.death)].filter(
         (d): d is Date => d instanceof Date
     )
@@ -56,7 +57,7 @@ interface TimelineData {
     }[]
 }
 
-export const convertTimelinesToData = (patriarchTimeline: PatriarchTimeline, timelines: Timeline[]): TimelineData[] => {
+export const convertTimelinesToData = (patriarchTimeline: PatriarchTimeline, timelines: PartialTimeline[]): TimelineData[] => {
     const patriarchData = {
         name: patriarchTimeline.name,
         values: [

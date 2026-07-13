@@ -1,4 +1,5 @@
-import { PatriarchTimeline, Timeline } from "lib/src/types"
+import { PatriarchTimeline } from "lib/src/types"
+import { PartialTimeline } from "./types"
 import { Group } from "@visx/group"
 import { AxisLeft } from "@visx/axis"
 import { barHeight } from "./constants"
@@ -21,7 +22,7 @@ interface Props {
     width?: number
     minHeight?: number
     patriarchTimeline: PatriarchTimeline
-    timelines: Timeline[]
+    timelines: PartialTimeline[]
     margin?: { top: number; right: number; bottom: number; left: number }
     showBrush?: boolean
     showEraShading?: boolean
@@ -57,10 +58,10 @@ export const PluralFamilyChart: React.FC<Props> = ({
     const dataErrors = checkPersonDetails(patriarchTimeline)
     if (dataErrors) return <BadData />
 
-    const names = [patriarchTimeline.name, ...timelines.map(timeline => timeline.name)]
-    const personDates = new Map<string, { birth: Date; death: Date }>([
+    const names = [patriarchTimeline.name, ...timelines.map(t => t.name)]
+    const personDates = new Map<string, { birth?: Date; death?: Date }>([
         [patriarchTimeline.name, { birth: patriarchTimeline.birth, death: patriarchTimeline.death }],
-        ...timelines.map(t => [t.name, { birth: t.birth, death: t.death }] as [string, { birth: Date; death: Date }]),
+        ...timelines.map(t => [t.name, { birth: t.birth, death: t.death }] as [string, { birth?: Date; death?: Date }]),
     ])
 
     const largestName = names.reduce((acc, name) => (name.length > acc ? name.length : acc), 0)
@@ -132,9 +133,19 @@ export const PluralFamilyChart: React.FC<Props> = ({
                                 <tspan x={x} y={y} dy="-0.35em" fontSize={14}>
                                     {formattedValue}
                                 </tspan>
-                                {dates && (
+                                {dates?.birth && dates?.death && (
                                     <tspan x={x} dy="1.3em" fontSize={11} fill="#666">
                                         {dates.birth.getFullYear()} – {dates.death.getFullYear()}
+                                    </tspan>
+                                )}
+                                {dates?.birth && !dates?.death && (
+                                    <tspan x={x} dy="1.3em" fontSize={11} fill="#999">
+                                        b. {dates.birth.getFullYear()}
+                                    </tspan>
+                                )}
+                                {!dates?.birth && dates?.death && (
+                                    <tspan x={x} dy="1.3em" fontSize={11} fill="#999">
+                                        d. {dates.death.getFullYear()}
                                     </tspan>
                                 )}
                             </text>

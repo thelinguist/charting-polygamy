@@ -1,4 +1,4 @@
-import { PatriarchTimeline, Timeline } from "lib/src/types"
+import { PatriarchTimeline } from "lib/src/types"
 import { barHeight, MarriageKind } from "../constants"
 import React from "react"
 import { PositionScale } from "@visx/shape/lib/types"
@@ -6,12 +6,13 @@ import { Marriage } from "../Marriage"
 import { PersonTimeline } from "../PersonTimeline"
 import { getExpandedXEnd } from "../utils/getExpandedXEnd"
 import { getMarriageAge } from "./utils"
+import { PartialTimeline } from "../types"
 
 type PatriarchMarriage = PatriarchTimeline["marriages"][number]
 
 const getWifeEffectiveEnd = (
     marriage: PatriarchMarriage,
-    timelines: Timeline[],
+    timelines: PartialTimeline[],
     patriarchTimeline: PatriarchTimeline
 ): number =>
     timelines.reduce((min, timeline) => {
@@ -21,7 +22,7 @@ const getWifeEffectiveEnd = (
 
 interface Props {
     patriarchTimeline: PatriarchTimeline
-    timelines: Timeline[]
+    timelines: PartialTimeline[]
     yScale: PositionScale
     xScale: (date: Date) => number
     expandedIndex: number | null

@@ -452,6 +452,44 @@ export const ParleyPratt: Story = {
     },
 }
 
+export const PartialTimelineSpouse: Story = {
+    args: {
+        patriarchTimeline: {
+            name: "John Doe",
+            birth: new Date("1850-01-01"),
+            death: new Date("1920-01-01"),
+            marriages: [
+                { start: new Date("1872-01-01") },
+                { start: new Date("1880-01-01") },
+                { start: new Date("1888-01-01") },
+                { start: new Date("1896-01-01") },
+            ],
+        },
+        timelines: [
+            {
+                name: "Birth Only Spouse",
+                birth: new Date("1855-01-01"),
+                linkedMarriage: { start: new Date("1872-01-01") },
+            },
+            {
+                name: "No Dates Spouse",
+                linkedMarriage: { start: new Date("1880-01-01") },
+            },
+            {
+                name: "Full Timeline Spouse",
+                birth: new Date("1858-01-01"),
+                death: new Date("1915-01-01"),
+                linkedMarriage: { start: new Date("1888-01-01") },
+            },
+            {
+                name: "Death Only Spouse",
+                death: new Date("1910-01-01"),
+                linkedMarriage: { start: new Date("1896-01-01") },
+            },
+        ],
+    },
+}
+
 export const WithHistoricalAnnotations: Story = {
     args: {
         showEraShading: true,

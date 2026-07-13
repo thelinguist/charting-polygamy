@@ -1,4 +1,5 @@
-import { PatriarchTimeline, Timeline } from "lib/src/types"
+import { PatriarchTimeline } from "lib/src/types"
+import { PartialTimeline } from "../types"
 import { barHeight, MarriageKind } from "../constants"
 import React from "react"
 import { Marriage } from "../Marriage"
@@ -9,7 +10,7 @@ import { getExpandedXEnd } from "../utils/getExpandedXEnd"
 
 interface Props {
     patriarchTimeline: PatriarchTimeline
-    timeline: Timeline
+    timeline: PartialTimeline
     yScale: PositionScale
     xScale: (date: Date) => number
     dim?: boolean
@@ -52,7 +53,7 @@ export const Spouse: React.FC<Props> = ({
           })()
         : null
 
-    const otherMarriageBounds = timeline.otherMarriages.map(marriage => [
+    const otherMarriageBounds = (timeline.otherMarriages ?? []).map(marriage => [
         { x: xScale(marriage.start), y: yStart },
         { x: xScale(marriage.end), y: yStart },
         { x: xScale(marriage.end), y: yEnd },
@@ -61,7 +62,7 @@ export const Spouse: React.FC<Props> = ({
 
     const marriageAge =
         linkedStart && timeline.birth
-            ? `${(linkedStart.getFullYear() - timeline.birth.getFullYear()).toString()} years old`
+            ? `${(linkedStart.getFullYear() - timeline.birth.getFullYear()).toString()} yrs old`
             : ""
 
     const overlayProps = React.useMemo(() => {
@@ -88,7 +89,7 @@ export const Spouse: React.FC<Props> = ({
         }
 
         const i = expandedIndex - 1
-        const other = timeline.otherMarriages[i]
+        const other = (timeline.otherMarriages ?? [])[i]
         if (!other) return null
         const text1 = other.start.getFullYear().toString()
         const text2 = other.spouse || ""
@@ -152,12 +153,12 @@ export const Spouse: React.FC<Props> = ({
                     )}
                     {otherMarriageBounds.map((bounds, i) => (
                         <Marriage
-                            key={timeline.otherMarriages[i].spouse || i}
+                            key={(timeline.otherMarriages ?? [])[i]?.spouse || i}
                             kind={MarriageKind.Other}
                             colorIndex={i}
                             bounds={bounds}
-                            text1={timeline.otherMarriages[i].start.getFullYear().toString()}
-                            text2={timeline.otherMarriages[i].spouse}
+                            text1={(timeline.otherMarriages ?? [])[i].start.getFullYear().toString()}
+                            text2={(timeline.otherMarriages ?? [])[i].spouse}
                             onClick={() => handleClick(i + 1)}
                             onMouseEnter={() => setHoveredIndex(i + 1)}
                             onMouseLeave={() => setHoveredIndex(null)}

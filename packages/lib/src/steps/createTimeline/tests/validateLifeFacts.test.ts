@@ -11,7 +11,6 @@ describe("validateLifeFacts", () => {
     it.each`
         factToDelete
         ${"birth"}
-        ${"death"}
     `(`rejects if no fact for $factToDelete`, ({ factToDelete }) => {
         const tree = {
             Mr: {
@@ -33,7 +32,6 @@ describe("validateLifeFacts", () => {
     it.each`
         factToDelete
         ${"birth"}
-        ${"death"}
     `(`rejects if no date for $factToDelete`, ({ factToDelete }) => {
         const tree = {
             Mr: {

@@ -37,7 +37,7 @@ interface CompactPatriarchTimeline {
 interface CompactTimeline {
     n: string
     b: CompactDate
-    d: CompactDate
+    d?: CompactDate
     lm: CompactLinkedMarriage
     om?: CompactOtherMarriage[]
     a?: number
@@ -97,9 +97,9 @@ function compactTimeline(t: Timeline): CompactTimeline {
     const out: CompactTimeline = {
         n: t.name,
         b: toDateStr(t.birth),
-        d: toDateStr(t.death),
         lm,
     }
+    if (t.death) out.d = toDateStr(t.death)
     if (t.otherMarriages.length > 0) out.om = t.otherMarriages.map(compactOtherMarriage)
     if (t.age !== undefined) out.a = t.age
     if (t.gap !== undefined) out.g = t.gap
@@ -114,7 +114,7 @@ function expandTimeline(t: CompactTimeline): Timeline {
     const out: Timeline = {
         name: t.n,
         birth: fromDateStr(t.b),
-        death: fromDateStr(t.d),
+        death: t.d ? fromDateStr(t.d) : undefined,
         linkedMarriage: linkedMarriage as Timeline["linkedMarriage"],
         otherMarriages: t.om ? t.om.map(expandOtherMarriage) : [],
     }
