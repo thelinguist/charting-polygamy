@@ -1,3 +1,9 @@
+export interface ChildRecord {
+    name: string
+    birth?: Date
+    children?: ChildRecord[] // grandchildren
+}
+
 export interface PatriarchTimeline {
     name: string
     birth: Date
@@ -26,4 +32,5 @@ export interface Timeline extends Omit<PatriarchTimeline, "marriages"> {
     otherMarriages: OtherMarriage[]
     age?: number
     gap?: number
+    children: ChildRecord[]
 }

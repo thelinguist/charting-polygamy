@@ -434,6 +434,123 @@ describe("getWives", () => {
         })
     })
 
+    describe("children", () => {
+        it("defaults to empty array when no childrenByWife provided", () => {
+            const tree = buildTree({
+                John: {
+                    name: "John",
+                    birth: { date: d(1820) },
+                    death: { date: d(1890) },
+                    marriages: {
+                        Mary: { date: d(1845), person: "Mary" },
+                        Jane: { date: d(1850), person: "Jane" },
+                    },
+                    divorces: {},
+                },
+                Mary: {
+                    name: "Mary",
+                    birth: { date: d(1822) },
+                    death: { date: d(1888) },
+                    marriages: { John: { date: d(1845), person: "John" } },
+                    divorces: {},
+                },
+                Jane: {
+                    name: "Jane",
+                    birth: { date: d(1825) },
+                    death: { date: d(1895) },
+                    marriages: { John: { date: d(1850), person: "John" } },
+                    divorces: {},
+                },
+            })
+
+            const timelines = getWives(tree, "John")
+            for (const t of timelines) {
+                expect(t.children).toEqual([])
+            }
+        })
+
+        it("attaches children from childrenByWife to the matching wife", () => {
+            const tree = buildTree({
+                John: {
+                    name: "John",
+                    birth: { date: d(1820) },
+                    death: { date: d(1890) },
+                    marriages: {
+                        Mary: { date: d(1845), person: "Mary" },
+                        Jane: { date: d(1850), person: "Jane" },
+                    },
+                    divorces: {},
+                },
+                Mary: {
+                    name: "Mary",
+                    birth: { date: d(1822) },
+                    death: { date: d(1888) },
+                    marriages: { John: { date: d(1845), person: "John" } },
+                    divorces: {},
+                },
+                Jane: {
+                    name: "Jane",
+                    birth: { date: d(1825) },
+                    death: { date: d(1895) },
+                    marriages: { John: { date: d(1850), person: "John" } },
+                    divorces: {},
+                },
+            })
+
+            const childrenByWife = {
+                Mary: [{ name: "Alice", birth: d(1847) }, { name: "Robert", birth: d(1849) }],
+                Jane: [{ name: "Thomas", birth: d(1852) }],
+            }
+
+            const timelines = getWives(tree, "John", childrenByWife)
+            const mary = timelines.find(t => t.name === "Mary")!
+            const jane = timelines.find(t => t.name === "Jane")!
+
+            expect(mary.children).toHaveLength(2)
+            expect(mary.children.map(c => c.name)).toContain("Alice")
+            expect(jane.children).toHaveLength(1)
+            expect(jane.children[0].name).toBe("Thomas")
+        })
+
+        it("returns empty array for a wife not in childrenByWife", () => {
+            const tree = buildTree({
+                John: {
+                    name: "John",
+                    birth: { date: d(1820) },
+                    death: { date: d(1890) },
+                    marriages: {
+                        Mary: { date: d(1845), person: "Mary" },
+                        Jane: { date: d(1850), person: "Jane" },
+                    },
+                    divorces: {},
+                },
+                Mary: {
+                    name: "Mary",
+                    birth: { date: d(1822) },
+                    death: { date: d(1888) },
+                    marriages: { John: { date: d(1845), person: "John" } },
+                    divorces: {},
+                },
+                Jane: {
+                    name: "Jane",
+                    birth: { date: d(1825) },
+                    death: { date: d(1895) },
+                    marriages: { John: { date: d(1850), person: "John" } },
+                    divorces: {},
+                },
+            })
+
+            const childrenByWife = {
+                Mary: [{ name: "Alice", birth: d(1847) }],
+                // Jane intentionally omitted
+            }
+
+            const timelines = getWives(tree, "John", childrenByWife)
+            const jane = timelines.find(t => t.name === "Jane")!
+            expect(jane.children).toEqual([])
+        })
+    })
+
     describe("age and gap", () => {
         it("calculates age at marriage and age gap between spouses", () => {
             // John born 1820-07-01, Mary born 1825-07-01, married 1845-07-01

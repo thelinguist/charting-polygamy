@@ -61,7 +61,7 @@ export const getTimelines = ({
         const issueCursor = UserIntervention.getIssues().length
         try {
             const patriarchDB = createKnowledgeTree(family.facts)
-            const timelines = createTimeline(patriarchDB, family.patriarchName)
+            const timelines = createTimeline(patriarchDB, family.patriarchName, family.childrenByWife)
 
             let counted = false
             if (patriarchIsEligible(patriarchDB[family.patriarchName])) {

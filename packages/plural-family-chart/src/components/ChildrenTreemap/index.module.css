@@ -1,0 +1,40 @@
+.container {
+    margin-top: 12px;
+}
+
+.header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+}
+
+.title {
+    font-family: monospace;
+    font-size: 13px;
+    font-weight: bold;
+    color: #5a5446;
+}
+
+.subtitle {
+    font-family: monospace;
+    font-size: 11px;
+    color: #8a7a6a;
+}
+
+.toggle {
+    margin-left: auto;
+    font-family: monospace;
+    font-size: 11px;
+    color: #5a5446;
+    background: #e8e0cc;
+    border: 1px solid #c0b090;
+    border-radius: 4px;
+    padding: 2px 8px;
+    cursor: pointer;
+}
+
+.toggle:hover {
+    background: #d8d0bc;
+}

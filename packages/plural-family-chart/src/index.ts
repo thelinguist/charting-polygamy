@@ -3,3 +3,4 @@ export { DEFAULT_HISTORICAL_EVENTS } from "./components/PluralFamilyChart/consta
 export type { HistoricalEvent } from "./components/PluralFamilyChart/constants"
 export { AggregateCharts } from "./components/AggregateCharts"
 export type { AggregateChartsProps } from "./components/AggregateCharts"
+export { ChildrenTreemap } from "./components/ChildrenTreemap"

@@ -117,6 +117,7 @@ function expandTimeline(t: CompactTimeline): Timeline {
         death: fromDateStr(t.d),
         linkedMarriage: linkedMarriage as Timeline["linkedMarriage"],
         otherMarriages: t.om ? t.om.map(expandOtherMarriage) : [],
+        children: [],
     }
     if (t.a !== undefined) out.age = t.a
     if (t.g !== undefined) out.gap = t.g

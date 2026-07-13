@@ -58,6 +58,11 @@ export function computeAggregateData(
                 ageGaps,
                 marriageYears
             )
+            if (wife.age != null && pMarriage?.age != null) {
+                const gap = pMarriage.age - wife.age
+                if (i === 0) firstAgeGaps.push(gap)
+                else subsequentAgeGaps.push(gap)
+            }
             collectScatterPoint(wife, pMarriage, patriarchTimeline.name, scatterPoints)
             if (wifeDidLeave(wife, death)) leftCount++
             else stayedCount++

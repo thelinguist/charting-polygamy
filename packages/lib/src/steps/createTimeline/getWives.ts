@@ -1,10 +1,10 @@
-import { KnowledgeTree, Timeline } from "../../types"
+import { ChildRecord, KnowledgeTree, Timeline } from "../../types"
 import { validateLifeFacts } from "./validateLifeFacts"
 import { getMarriageEnd } from "../../util/get-marriage-end"
 import { getOtherMarriages } from "./getOtherMarriages"
 import { getMarriageAgeGap } from "./getMarriageAgeGap"
 
-export const getWives = (tree: KnowledgeTree, patriarch: string): Timeline[] => {
+export const getWives = (tree: KnowledgeTree, patriarch: string, childrenByWife?: Record<string, ChildRecord[]>): Timeline[] => {
     const timelines: Timeline[] = []
     for (const wife in tree[patriarch].marriages) {
         if (!validateLifeFacts(tree, wife)) {
@@ -32,6 +32,7 @@ export const getWives = (tree: KnowledgeTree, patriarch: string): Timeline[] => 
         timeline.otherMarriages = getOtherMarriages(tree, wife, patriarch).sort(
             (marriageA, marriageB) => marriageA.start.getTime() - marriageB.start.getTime()
         )
+        timeline.children = childrenByWife?.[wife] ?? []
         timelines.push(timeline)
     }
     return timelines

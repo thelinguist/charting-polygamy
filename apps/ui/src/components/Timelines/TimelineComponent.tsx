@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useRef, useState } from "react"
-import { PluralFamilyChart } from "plural-family-chart"
+import { PluralFamilyChart, ChildrenTreemap } from "plural-family-chart"
 import { PatriarchTimeline, type Timeline } from "lib/src/types"
 import { MissingFact } from "lib"
 import styles from "./TimelineComponent.module.css"
@@ -76,6 +76,7 @@ export const TimelineComponent: React.FC<Props> = ({
                         showBrush={!isMobile}
                     />
                 </ChartErrorBoundary>
+                <ChildrenTreemap wives={timelines} patriarchName={name} width={width} />
             </div>
             <ResearchAccordion name={name} note={note} onNoteChange={onNoteChange} interventions={interventions} />
         </div>

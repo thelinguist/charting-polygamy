@@ -94,6 +94,7 @@ export const ManualEntryForm: React.FC<Props> = ({ onChart }) => {
                     end: marriage.end,
                 } as { start: Date; end?: Date },
                 otherMarriages: [] as { start: Date; end: Date; spouse: string }[],
+                children: [] as [],
                 age: marriage.start ? marriage.start.getFullYear() - w.birthDate.getFullYear() : undefined,
                 gap: patriarchBirthDate.getFullYear() - w.birthDate.getFullYear(),
             }

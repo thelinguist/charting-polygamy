@@ -1,11 +1,12 @@
-import { KnowledgeTree, PatriarchTimeline, Timeline } from "../../types"
+import { ChildRecord, KnowledgeTree, PatriarchTimeline, Timeline } from "../../types"
 import { validateLifeFacts } from "./validateLifeFacts"
 import { getMarriageAgeGap } from "./getMarriageAgeGap"
 import { getWives } from "./getWives"
 
 export const createTimeline = (
     tree: KnowledgeTree,
-    patriarch: string
+    patriarch: string,
+    childrenByWife?: Record<string, ChildRecord[]>
 ): { rootTimeline: PatriarchTimeline; wives: Timeline[] } => {
     if (!validateLifeFacts(tree, patriarch)) {
         throw new Error(`could not validate facts for ${patriarch}`)
@@ -35,7 +36,7 @@ export const createTimeline = (
     }
 
     // sort them for collision detection
-    const wives = getWives(tree, patriarch).sort((wifeA, wifeB) => {
+    const wives = getWives(tree, patriarch, childrenByWife).sort((wifeA, wifeB) => {
         if (!wifeA.linkedMarriage.start && !wifeB.linkedMarriage.start) {
             return 0
         }

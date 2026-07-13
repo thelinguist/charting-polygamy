@@ -16,5 +16,6 @@ export const parseGedcom = (fileContents: string, patriarchToFind?: string): Pat
     return Object.keys(data).map(id => ({
         facts: dedupeFacts<FactRecord>(data[id].families.flat()),
         patriarchName: data[id].name,
+        childrenByWife: data[id].childrenByWife,
     }))
 }

@@ -27,6 +27,7 @@ const wives: Timeline[] = [
             end: rootTimeline.death,
         },
         otherMarriages: [],
+        children: [],
     },
 ]
 const polygamist = {
@@ -53,6 +54,7 @@ const polygamistWives: Timeline[] = [
             end: polygamist.death,
         },
         otherMarriages: [],
+        children: [],
     },
 ]
 describe("createChart", () => {

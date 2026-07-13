@@ -25,6 +25,7 @@ const timelines: Timeline[] = [
         death: new Date(1893, 0, 1),
         linkedMarriage: { start: new Date(1845, 0, 1), end: new Date(1891, 0, 1) },
         otherMarriages: [],
+        children: [],
         age: 18,
     },
     {
@@ -33,6 +34,7 @@ const timelines: Timeline[] = [
         death: new Date(1895, 0, 1),
         linkedMarriage: { start: new Date(1851, 0, 1), end: new Date(1891, 0, 1) },
         otherMarriages: [],
+        children: [],
         age: 18,
     },
     {
@@ -41,6 +43,7 @@ const timelines: Timeline[] = [
         death: new Date(1902, 0, 1),
         linkedMarriage: { start: new Date(1858, 0, 1), end: new Date(1891, 0, 1) },
         otherMarriages: [{ start: new Date(1854, 0, 1), end: new Date(1857, 0, 1), spouse: "prior husband" }],
+        children: [],
         age: 22,
     },
 ]

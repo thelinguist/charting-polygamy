@@ -1,4 +1,5 @@
 import { FactRecord } from "./facts"
+import { ChildRecord } from "./timeline"
 
 export * from "./timeline"
 export * from "./facts"
@@ -12,6 +13,7 @@ export * from "./statistics"
 export interface PatriarchalFamily {
     facts: FactRecord[]
     patriarchName: string
+    childrenByWife?: Record<string, ChildRecord[]>
 }
 
 export enum FileTypes {

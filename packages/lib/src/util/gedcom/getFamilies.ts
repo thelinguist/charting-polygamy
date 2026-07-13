@@ -1,6 +1,7 @@
-import { FactRecord, GedcomFamilyRelationFact, GedcomIndividual, GedcomType, LifeEventEnum } from "../../types"
+import { ChildRecord, FactRecord, GedcomFamilyRelationFact, GedcomIndividual, GedcomType, LifeEventEnum } from "../../types"
 import { GedcomDatabase } from "./database"
 import { gatherFacts } from "./individual"
+import { getChildrenForFamily } from "./getChildren"
 import { UserIntervention } from "../user-intervention"
 import {
     getIndividualName,
@@ -13,6 +14,7 @@ interface PatriarchData {
     patriarch: GedcomIndividual
     name: string
     families: FactRecord[][]
+    childrenByWife: Record<string, ChildRecord[]>
 }
 
 export const getFamilies = (database: GedcomDatabase, patriarchToFind?: string): Record<string, PatriarchData> => {
@@ -48,6 +50,7 @@ export const getFamilies = (database: GedcomDatabase, patriarchToFind?: string):
                 patriarch,
                 name: patriarchName,
                 families: [],
+                childrenByWife: {},
             }
         }
         const matriarchName = getIndividualName(matriarch)
@@ -55,6 +58,8 @@ export const getFamilies = (database: GedcomDatabase, patriarchToFind?: string):
             console.warn(`the family ${id} has no name for wife, skipping`)
             continue
         }
+
+        patriarchData[patriarchId].childrenByWife[matriarchName] = getChildrenForFamily(database, family)
 
         const factsAboutFamily: FactRecord[] = []
 
