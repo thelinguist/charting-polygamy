@@ -73,7 +73,7 @@ describe("getWives", () => {
 
             const [mary] = getWives(tree, "John")
             expect(mary.birth.getFullYear()).toBe(1822)
-            expect(mary.death.getFullYear()).toBe(1888)
+            expect(mary.death?.getFullYear()).toBe(1888)
         })
 
         it("sets linkedMarriage.start from the patriarch's marriages record", () => {
@@ -322,7 +322,7 @@ describe("getWives", () => {
             expect(result.map(t => t.name)).toContain("Jane")
         })
 
-        it("skips a wife who has no death date", () => {
+        it("includes a wife who has no death date, with death as undefined", () => {
             const tree = buildTree({
                 John: {
                     name: "John",
@@ -351,7 +351,11 @@ describe("getWives", () => {
             })
 
             const result = getWives(tree, "John")
-            expect(result.map(t => t.name)).not.toContain("Mary")
+            expect(result.map(t => t.name)).toContain("Mary")
+            const mary = result.find(t => t.name === "Mary")!
+            expect(mary.death).toBeUndefined()
+            // marriage ends at patriarch's death
+            expect(mary.linkedMarriage.end?.getFullYear()).toBe(1890)
         })
     })
 

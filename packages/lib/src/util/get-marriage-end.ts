@@ -5,10 +5,6 @@ import { getConfig } from "./config"
 // TODO write tests for when no divorce, when husband dies, and when she leaves one man and marries another then another before the man she left dies
 export const getMarriageEnd = (tree: KnowledgeTree, wife: string, spouse: string) => {
     const wifesDeath = tree[wife].death?.date
-    if (!wifesDeath) {
-        console.error(`missing ${wife} death info, skipping`)
-        return
-    }
 
     if (tree[wife].marriages) {
         // sort marriages by start time.

@@ -1,6 +1,6 @@
 import { KnowledgeTree } from "../../types"
 
-export const validateLifeFacts = (tree: KnowledgeTree, person: string) => {
+export const validateLifeFacts = (tree: KnowledgeTree, person: string, { requireDeath = false } = {}) => {
     if (!tree[person]?.birth?.date) {
         console.error(`${person} does not have a birthdate, skipping`)
         return false
@@ -9,11 +9,11 @@ export const validateLifeFacts = (tree: KnowledgeTree, person: string) => {
         console.error(`${person} does not have a valid birthdate, skipping`)
         return false
     }
-    if (!tree[person]?.death?.date) {
+    if (requireDeath && !tree[person]?.death?.date) {
         console.error(`${person} does not have a death date, skipping`)
         return false
     }
-    if (isNaN(tree[person].death!.date!.getTime())) {
+    if (tree[person]?.death?.date && isNaN(tree[person].death!.date!.getTime())) {
         console.error(`${person} does not have a valid death date, skipping`)
         return false
     }

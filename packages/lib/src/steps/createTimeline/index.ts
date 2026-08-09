@@ -7,7 +7,7 @@ export const createTimeline = (
     tree: KnowledgeTree,
     patriarch: string
 ): { rootTimeline: PatriarchTimeline; wives: Timeline[] } => {
-    if (!validateLifeFacts(tree, patriarch)) {
+    if (!validateLifeFacts(tree, patriarch, { requireDeath: true })) {
         throw new Error(`could not validate facts for ${patriarch}`)
     }
 

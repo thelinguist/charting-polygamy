@@ -15,7 +15,8 @@ export interface OtherMarriage {
     spouse: string
 }
 
-export interface Timeline extends Omit<PatriarchTimeline, "marriages"> {
+export interface Timeline extends Omit<PatriarchTimeline, "marriages" | "death"> {
+    death?: Date
     /**
      * patriarch linked
      */

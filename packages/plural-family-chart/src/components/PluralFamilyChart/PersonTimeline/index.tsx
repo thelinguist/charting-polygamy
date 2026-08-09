@@ -8,8 +8,8 @@ const whiskerStrokeWidth = 2
 
 interface Props {
     name: string
-    birth: Date
-    death: Date
+    birth?: Date
+    death?: Date
     isPatriarch?: boolean
     yScale?: PositionScale // actually ordinal scale
     xScale: (date: Date) => number
@@ -23,26 +23,32 @@ export const PersonTimeline: React.FC<Props> = ({ birth, death, name, isPatriarc
     const capTop = yMid - capHeight / 2
     const capBottom = yMid + capHeight / 2
 
-    const x0 = xScale(birth)
-    const x1 = xScale(death)
+    const x0 = birth ? xScale(birth) : null
+    const x1 = death ? xScale(death) : null
 
     return (
         <HoverContextProvider>
             <g>
                 <g id={isPatriarch ? `patriarch-${name}` : `spouse-${name}`}>
-                    {/* whisker line */}
-                    <line
-                        x1={x0}
-                        y1={yMid}
-                        x2={x1}
-                        y2={yMid}
-                        stroke={strokeColor}
-                        strokeWidth={isPatriarch ? whiskerStrokeWidth + 1 : whiskerStrokeWidth}
-                    />
+                    {/* whisker line — only when both endpoints are known */}
+                    {x0 !== null && x1 !== null && (
+                        <line
+                            x1={x0}
+                            y1={yMid}
+                            x2={x1}
+                            y2={yMid}
+                            stroke={strokeColor}
+                            strokeWidth={isPatriarch ? whiskerStrokeWidth + 1 : whiskerStrokeWidth}
+                        />
+                    )}
                     {/* birth cap */}
-                    <line x1={x0} y1={capTop} x2={x0} y2={capBottom} stroke={strokeColor} strokeWidth={strokeWidth} />
+                    {x0 !== null && (
+                        <line x1={x0} y1={capTop} x2={x0} y2={capBottom} stroke={strokeColor} strokeWidth={strokeWidth} />
+                    )}
                     {/* death cap */}
-                    <line x1={x1} y1={capTop} x2={x1} y2={capBottom} stroke={strokeColor} strokeWidth={strokeWidth} />
+                    {x1 !== null && (
+                        <line x1={x1} y1={capTop} x2={x1} y2={capBottom} stroke={strokeColor} strokeWidth={strokeWidth} />
+                    )}
                 </g>
                 {children}
             </g>

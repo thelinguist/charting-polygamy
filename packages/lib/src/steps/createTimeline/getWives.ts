@@ -13,7 +13,7 @@ export const getWives = (tree: KnowledgeTree, patriarch: string): Timeline[] => 
         const timeline = {
             name: wife,
             birth: tree[wife].birth!.date,
-            death: tree[wife].death!.date,
+            death: tree[wife].death?.date,
             linkedMarriage: {
                 start: tree[patriarch].marriages[wife].date,
                 end: undefined,

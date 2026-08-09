@@ -4,6 +4,7 @@ export const MiniWivesTimelines = ({ timelines, patriarchDeathMs, rowHeight, bar
     <>
         {timelines.map((timeline, i) => {
             const { start, end } = timeline.linkedMarriage
+            if (!start) return null
             const endMs = Math.min(end?.getTime() ?? Infinity, timeline.death?.getTime() ?? Infinity, patriarchDeathMs)
             if (endMs === Infinity) return null
             const y = (i + 1) * rowHeight + (rowHeight - barH) / 2
