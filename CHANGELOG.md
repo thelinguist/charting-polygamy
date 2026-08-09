@@ -1,3 +1,10 @@
+# [1.23.0](https://github.com/thelinguist/charting-polygamy/compare/v1.22.0...v1.23.0) (2026-08-09)
+
+
+### Features
+
+* more fixes via defensive coding. added other church prophets ([#36](https://github.com/thelinguist/charting-polygamy/issues/36)) ([4662be4](https://github.com/thelinguist/charting-polygamy/commit/4662be4f2a89fd1e74c2478a3ef7cb68dbed76b3))
+
 # [1.22.0](https://github.com/thelinguist/charting-polygamy/compare/v1.21.0...v1.22.0) (2026-07-12)
 
 
