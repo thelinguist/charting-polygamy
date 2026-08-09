@@ -62,7 +62,7 @@ export const Spouse: React.FC<Props> = ({
 
     const marriageAge =
         linkedStart && timeline.birth
-            ? `${(linkedStart.getFullYear() - timeline.birth.getFullYear()).toString()} yrs old`
+            ? `${(linkedStart.getFullYear() - timeline.birth.getFullYear()).toString()}y old`
             : ""
 
     const overlayProps = React.useMemo(() => {

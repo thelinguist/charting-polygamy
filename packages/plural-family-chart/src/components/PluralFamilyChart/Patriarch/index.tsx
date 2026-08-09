@@ -59,7 +59,7 @@ export const Patriarch: React.FC<Props> = ({
         const marriage = marriages[expandedIndex]
         if (!marriage?.start) return null
         const text1 = marriage.start.getFullYear().toString()
-        const text2 = `${getMarriageAge(marriage, patriarchTimeline)} years old`
+        const text2 = `${getMarriageAge(marriage, patriarchTimeline)}y old`
         return getExpandedXEnd(
             xScale(marriage.start),
             text1,
@@ -90,7 +90,7 @@ export const Patriarch: React.FC<Props> = ({
                                     kind={MarriageKind.Patriarch}
                                     bounds={getBounds(marriage)}
                                     text1={marriage.start!.getFullYear().toString()}
-                                    text2={`${getMarriageAge(marriage, patriarchTimeline)} years old`}
+                                    text2={`${getMarriageAge(marriage, patriarchTimeline)}y old`}
                                     onClick={() => handleClick(i)}
                                     onMouseEnter={() => setHoveredIndex(i)}
                                     onMouseLeave={() => setHoveredIndex(null)}
@@ -105,7 +105,7 @@ export const Patriarch: React.FC<Props> = ({
                         kind={MarriageKind.Patriarch}
                         bounds={getBounds(marriages[expandedIndex], overlayXEnd ?? undefined)}
                         text1={marriages[expandedIndex].start!.getFullYear().toString()}
-                        text2={`${getMarriageAge(marriages[expandedIndex], patriarchTimeline)} years old`}
+                        text2={`${getMarriageAge(marriages[expandedIndex], patriarchTimeline)}y old`}
                         isExpanded
                         fillOpacity={0.9}
                         onClick={() => handleClick(expandedIndex)}

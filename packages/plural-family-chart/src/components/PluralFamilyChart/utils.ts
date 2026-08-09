@@ -7,7 +7,12 @@ export const getMarriageDomain = (patriarch: PatriarchTimeline, timelines: Parti
     const starts = patriarch.marriages.map(m => m.start?.getTime()).filter((t): t is number => t !== undefined)
     if (!starts.length) return null
 
-    const ends = patriarch.marriages.map(m => (m.end ?? patriarch.death).getTime())
+    const ends = patriarch.marriages
+        .map(m => (m.end ?? patriarch.death)?.getTime())
+        .filter((t): t is number => t !== undefined)
+    if (!ends.length) {
+        return null
+    }
 
     const marriageStart = Math.min(...starts)
     const marriageEnd = Math.max(...ends)

@@ -60,6 +60,15 @@ describe("getMarriageDomain", () => {
         expect(result[0].getTime()).toBe(new Date("1843-07-01").getTime())
     })
 
+    it("returns null when patriarch death is missing and no marriage has an end date", () => {
+        const patriarch = {
+            ...basePatriarch,
+            death: undefined,
+            marriages: [{ start: new Date("1845-07-01") }],
+        } as unknown as PatriarchTimeline
+        expect(getMarriageDomain(patriarch, noTimelines)).toBeNull()
+    })
+
     it("uses patriarch death as the marriage end when end is omitted", () => {
         // Marriage has no end → falls back to patriarch death 1900.
         // Span 1845→1900 = 55 yrs. Padding = 5.5 yrs. Raw: 1839.5 → 1905.5, clamped: 1820 → 1900.

@@ -47,7 +47,7 @@ describe("Spouse", () => {
         const { getByText } = wrap(
             <Spouse patriarchTimeline={patriarch} timeline={wife} xScale={xScale} yScale={yScale as PositionScale} />
         )
-        expect(getByText("15 yrs old")).toBeTruthy()
+        expect(getByText("15y old")).toBeTruthy()
     })
 
     it("renders the life bar even when linkedStart is missing", () => {

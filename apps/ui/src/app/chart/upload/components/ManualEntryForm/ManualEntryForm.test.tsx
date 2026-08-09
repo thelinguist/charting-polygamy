@@ -127,7 +127,7 @@ describe("ManualEntryForm", () => {
 
             const data: PatriarchData = onChart.mock.calls.at(-1)?.[0]["John Doe"]
             expect(data.timelines[0].birth.getFullYear()).toBe(1825)
-            expect(data.timelines[0].death.getFullYear()).toBe(1880)
+            expect(data.timelines[0].death!.getFullYear()).toBe(1880)
             expect(data.timelines[1].birth.getFullYear()).toBe(1835)
         })
 
