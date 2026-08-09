@@ -1,3 +1,10 @@
+# [1.24.0](https://github.com/thelinguist/charting-polygamy/compare/v1.23.0...v1.24.0) (2026-08-09)
+
+
+### Features
+
+* Added Joseph F Smith ([4fa8f7f](https://github.com/thelinguist/charting-polygamy/commit/4fa8f7f0f8b8fa827fa23df79b66fd13b3ce0a9a))
+
 # [1.23.0](https://github.com/thelinguist/charting-polygamy/compare/v1.22.0...v1.23.0) (2026-08-09)
 
 
